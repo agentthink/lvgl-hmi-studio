@@ -1,0 +1,30 @@
+ERC report (2026-09-04T16:58:59, Encoding UTF8)
+Report includes: Errors
+
+***** Sheet /
+
+***** Sheet /P1_POWER/
+
+***** Sheet /P2_SOC_CORE/
+
+***** Sheet /P3_STORAGE/
+
+***** Sheet /P4_LCD_RGB888/
+
+***** Sheet /P5_LCD_POWER_BACKLIGHT/
+
+***** Sheet /P6_RTP_TOUCH/
+
+***** Sheet /P7_USB/
+
+***** Sheet /P8_COMM/
+
+***** Sheet /P9_IO_EXPANSION/
+
+ ** ERC messages: 0  Errors 0  Warnings 0
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters

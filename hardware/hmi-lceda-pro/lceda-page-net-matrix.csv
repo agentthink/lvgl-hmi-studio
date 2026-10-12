@@ -1,0 +1,67 @@
+page,block,component,signal_or_pin,net,value_or_note,status
+P1,POWER_INPUT,J1,1,VIN24_RAW,12-24V DC input,confirmed
+P1,POWER_INPUT,J1,2,GND,Power return,confirmed
+P1,POWER_INPUT,Q1,source-drain,VIN24_F,P-MOS reverse protection,select
+P1,POWER_INPUT,D1,1,VIN24_F,SMCJ24A/SMBJ24A,select
+P1,POWER_INPUT,U1,OUT,VCC5V,Wide-input buck,select
+P1,POWER_INPUT,U2,OUT,VCC3V3,3V3 rail EN_3V3,select
+P1,POWER_INPUT,U3,OUT,VCC1V8,1.8V rail,select
+P1,POWER_INPUT,U4,OUT,VDD0V9,0.9V rail EN_0V9,select
+P1,POWER_INPUT,U5,OUT,VCC1V5,1.5V DRAM rail EN_1V5,select
+P1,POWER_INPUT,TP1,1,VIN24_F,Test point,required
+P1,POWER_INPUT,TP2,1,VCC5V,Test point,required
+P1,POWER_INPUT,TP3,1,VCC3V3,Test point,required
+P2,SOC_CORE,U6,RGB24 pins,LCD_B0..LCD_R7,T113-S3,confirmed mapping
+P2,SOC_CORE,U6,PD18,LCD_DCLK,Pixel clock,confirmed
+P2,SOC_CORE,U6,PD19,LCD_DE,DE mode,confirmed
+P2,SOC_CORE,U6,PD20,LCD_HSYNC,Horizontal sync,confirmed
+P2,SOC_CORE,U6,PD21,LCD_VSYNC,Vertical sync,confirmed
+P2,SOC_CORE,U6,PD22,LCD_BL_PWM,PWM7,Backlight dimming,confirmed
+P2,SOC_CORE,U6,PE9,LCD_RESET,Low-active panel reset,confirmed
+P2,SOC_CORE,U6,TP-X1..TP-Y2,TCH_XP/XN/YP/YN,Internal RTP ADC,confirmed
+P2,SOC_CORE,U6,VCC pins,VCC3V3/VCC1V8/VDD0V9/VCC1V5,Decoupling required,required
+P2,SOC_CORE,X1,1/2,X24M_IN/X24M_OUT,24MHz source,TBD
+P2,SOC_CORE,X2,1/2,X32K_IN/X32K_OUT,32.768kHz RTC,TBD
+P3,STORAGE,U7,CS/SCK/DI/DO,NAND_CS/NAND_CLK/NAND_DI/NAND_DO,W25N01GV,verify mux
+P3,STORAGE,U7,WP/HOLD,NAND_WP/NAND_HOLD,10k pull-up to VCC3V3,required
+P3,STORAGE,J2,SDIO,SD_CMD/SD_CLK/SD_D0..SD_D3,TF card,required
+P3,STORAGE,J2,CD,SD_DET,Card detect,optional
+P4,LCD_RGB888,J3,1/2,VLED_A,Backlight anode,confirmed
+P4,LCD_RGB888,J3,3/4,VLED_K,Backlight cathode,confirmed
+P4,LCD_RGB888,J3,5/36/38/48,GND,Panel ground,confirmed
+P4,LCD_RGB888,J3,6/46,LCD_VCOM,3.15V typical,confirmed
+P4,LCD_RGB888,J3,7,LCD_DVDD,3.3V typical,confirmed
+P4,LCD_RGB888,J3,8,LCD_MODE,Pull high for DE,confirmed
+P4,LCD_RGB888,J3,9/10/11,LCD_DE/LCD_VSYNC/LCD_HSYNC,RGB control,confirmed
+P4,LCD_RGB888,J3,12..19,LCD_B7..LCD_B0,Blue data,confirmed
+P4,LCD_RGB888,J3,20..27,LCD_G7..LCD_G0,Green data,confirmed
+P4,LCD_RGB888,J3,28..35,LCD_R7..LCD_R0,Red data,confirmed
+P4,LCD_RGB888,J3,37,LCD_DCLK,Falling-edge latch,confirmed
+P4,LCD_RGB888,J3,39/40,LCD_SHLR/LCD_UPDN,0R scan selectors,confirmed
+P4,LCD_RGB888,J3,41/42/43,LCD_VGH/LCD_VGL/LCD_AVDD,18/-6/9V typical,confirmed
+P4,LCD_RGB888,J3,44,LCD_RESET,Low-active RC reset,confirmed
+P4,LCD_RGB888,J3,47,LCD_DITH,10k pull-down,confirmed
+P4,LCD_RGB888,J3,45/49/50,NC,No connection,confirmed
+P5,LCD_POWER_BACKLIGHT,U12,outputs,LCD_AVDD/LCD_VGH/LCD_VGL/LCD_VCOM,9/18/-6/3.15V typical,confirmed
+P5,LCD_POWER_BACKLIGHT,U13,LED output,VLED_A/VLED_K,9.6V 180mA typical,confirmed
+P5,LCD_POWER_BACKLIGHT,U13,LED rails,VLED_A/VLED_K,Panel backlight output rails,confirmed
+P5,LCD_POWER_BACKLIGHT,U13,DIM/EN,LCD_BL_PWM/LCD_BL_EN,PWM7 and enable,required
+P5,LCD_POWER_BACKLIGHT,RCS1,CS,LCD_BL_FB,20mA per LED / topology TBD,select
+P6,RTP_TOUCH,J4,1,TCH_YN,Independent RTP FPC pin 1 (Y1/Y-),confirmed from pasted image
+P6,RTP_TOUCH,J4,2,TCH_XP,Independent RTP FPC pin 2 (X1/X+),confirmed from pasted image
+P6,RTP_TOUCH,J4,3,TCH_YP,Independent RTP FPC pin 3 (Y2/Y+),confirmed from pasted image
+P6,RTP_TOUCH,J4,4,TCH_XN,Independent RTP FPC pin 4 (X2/X-),confirmed from pasted image
+P6,RTP_TOUCH,R401..R404,series,TCH_XP/XN/YP/YN,0R debug links,required
+P7,USB,J7,CC1/CC2,GND,5.1k pulldowns UFP,confirmed
+P7,USB,J7,DP/DM,USB0_DP/USB0_DM,USB0 Type-C,required
+P7,USB,J8,DP/DM,USB1_DP/USB1_DM,USB1 Host,required
+P7,USB,U15,OUT,USB1_VBUS,Current-limited host power,select
+P8,COMM,U9,TX/RX,UART3_TXD/UART3_RXD,Isolated RS485,required
+P8,COMM,U9,A/B,RS485_A/RS485_B,SM712 + 120R option,required
+P8,COMM,U10,TX/RX,UART2_TXD/UART2_RXD,RS232 DB9,verify mux
+P8,COMM,U11,RMII,RMII_TXD0/TXD1/TXEN/RXD0/RXD1/CRS_DV,IP101GRI/RTL8201F TBD,select
+P8,COMM,J9,magnetics,ETH_TXP/TXN/RXP/RXN,RJ45 with magnetics,required
+P9,IO_EXPANSION,J10,1..4,UART1_TXD/UART1_RXD/VCC3V3/GND,Debug header,required
+P9,IO_EXPANSION,SW1/2/3,1,RESET_N/FEL_N/USER_KEY,Keys,required
+P9,IO_EXPANSION,LED1/2,1,STATUS_RED/STATUS_GREEN,1k series,required
+P9,IO_EXPANSION,J11,1..24,EXP_GPIO/I2C/UART/CAN/VCC/GND,Expansion header,verify mux

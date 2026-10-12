@@ -1,0 +1,179 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:ctrl="using:HmiEditor.App.Controls"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.AiIconDialog"
+        Width="620" Height="600"
+        MinWidth="480"
+        MinHeight="520"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        Title="{res:Loc win.ai.icon}">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock x:Name="TitleText"
+                               Text="{res:Loc win.ai.icon}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <TextBlock Text="✕" FontSize="12" FontFamily="Segoe UI Symbol, Noto Sans CJK SC"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 窗口内容 -->
+            <DockPanel Grid.Row="1" Margin="16">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Spacing="8" Margin="0,12,0,0">
+            <Button x:Name="CancelBtn" Content="{res:Loc ai.close}"
+                    Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                    BorderThickness="0" Padding="16,6"/>
+            <Button x:Name="GenerateBtn" Content="{res:Loc ai.generate}"
+                    Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                    BorderThickness="0" Padding="16,6"/>
+        </StackPanel>
+
+        <Grid RowDefinitions="Auto,*,Auto,Auto" RowSpacing="8">
+            <!-- 生成模式切换：图标 / 图片 -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="6">
+                <ToggleButton x:Name="IconModeBtn" Content="{res:Loc ai.icon.mode}"
+                              IsChecked="True" FontSize="12"
+                              Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                              BorderThickness="0" Padding="12,4"
+                              Click="OnIconModeClicked"/>
+                <ToggleButton x:Name="ImageModeBtn" Content="{res:Loc ai.image.mode}"
+                              FontSize="12"
+                              Background="{StaticResource HmiBgElevatedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                              BorderThickness="0" Padding="12,4"
+                              Click="OnImageModeClicked"/>
+            </StackPanel>
+
+            <!-- ═══ 图标模式（批量单色图标） ═══ -->
+            <Grid x:Name="IconPanel" Grid.Row="1"
+                  RowDefinitions="Auto,Auto,*" RowSpacing="8">
+                <TextBlock Text="{res:Loc ai.icon.per.line.hint}"
+                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="13" FontWeight="SemiBold"/>
+
+                <!-- 视觉风格变体选择 -->
+                <Grid Grid.Row="1" ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <TextBlock Text="{res:Loc ai.icon.variant.label}"
+                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                               VerticalAlignment="Center"/>
+                    <ComboBox x:Name="VariantCombo" Grid.Column="1" FontSize="12"
+                              Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                              BorderBrush="{StaticResource HmiInputBorderBrush}"/>
+                </Grid>
+
+                <TextBox x:Name="InputBox" Grid.Row="2"
+                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                         BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="13"
+                         TextWrapping="Wrap" AcceptsReturn="True"
+                         PlaceholderText="{res:Loc ai.icon.placeholder}"/>
+            </Grid>
+
+            <!-- ═══ 图片模式（任意尺寸彩色 SVG） ═══ -->
+            <Grid x:Name="ImagePanel" Grid.Row="1" IsVisible="False"
+                  RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="8">
+                <TextBlock Text="{res:Loc ai.image.hint}"
+                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="13" FontWeight="SemiBold"/>
+
+                <!-- 画布尺寸 -->
+                <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="6">
+                    <TextBlock Text="{res:Loc ai.image.size.label}"
+                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{res:Loc ai.image.width.label}"
+                               Foreground="{StaticResource HmiTextMutedBrush}" FontSize="12"
+                               VerticalAlignment="Center"/>
+                    <NumericUpDown x:Name="WidthBox" Grid.Column="2"
+                                   Value="200" Minimum="32" Maximum="1024" Increment="10" ShowButtonSpinner="True"
+                                   Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                   BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="4"
+                                   FontSize="12" Width="92"/>
+                    <TextBlock Grid.Column="3" Text="×"
+                               Foreground="{StaticResource HmiTextMutedBrush}" FontSize="12"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="4" Text="{res:Loc ai.image.height.label}"
+                               Foreground="{StaticResource HmiTextMutedBrush}" FontSize="12"
+                               VerticalAlignment="Center"/>
+                    <NumericUpDown x:Name="HeightBox" Grid.Column="5"
+                                   Value="200" Minimum="32" Maximum="1024" Increment="10" ShowButtonSpinner="True"
+                                   Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                   BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="4"
+                                   FontSize="12" Width="92"/>
+                </Grid>
+
+                <!-- 描述输入 -->
+                <TextBox x:Name="ImageInputBox" Grid.Row="2"
+                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                         BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="13"
+                         TextWrapping="Wrap" AcceptsReturn="True"
+                         PlaceholderText="{res:Loc ai.image.placeholder}"/>
+
+                <!-- 图片预览 -->
+                <Border x:Name="PreviewBorder" Grid.Row="3"
+                        Background="{StaticResource HmiBgPanelBrush}" CornerRadius="4"
+                        BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                        Padding="6" IsVisible="False">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ctrl:SvgImage x:Name="PreviewImage" SvgText="" MaxWidth="300" MaxHeight="260"/>
+                    </ScrollViewer>
+                </Border>
+
+                <!-- 保存/入库操作 -->
+                <StackPanel Grid.Row="4" Orientation="Horizontal" Spacing="6" IsVisible="False">
+                    <Button x:Name="SaveSvgBtn" Content="{res:Loc ai.image.save.svg}"
+                            Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" FontSize="12" Padding="12,4"/>
+                    <Button x:Name="SavePngBtn" Content="{res:Loc ai.image.save.png}"
+                            Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" FontSize="12" Padding="12,4"/>
+                    <Button x:Name="AddToLibraryBtn" Content="{res:Loc ai.image.add.to.library}"
+                            Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" FontSize="12" Padding="12,4"/>
+                </StackPanel>
+            </Grid>
+
+            <ProgressBar x:Name="ProgressBar1" Grid.Row="2"
+                         Minimum="0" Maximum="100"
+                         Foreground="{StaticResource HmiAccentHoverBrush}" Background="{StaticResource HmiBgElevatedBrush}"
+                         IsVisible="False"/>
+            <StackPanel Grid.Row="3" Spacing="4">
+                <TextBlock x:Name="StatusText" Foreground="{StaticResource HmiTextSecondaryBrush}"
+                           FontSize="12" TextWrapping="Wrap"/>
+                <TextBlock x:Name="ResultText" Foreground="{StaticResource HmiTextMutedBrush}"
+                           FontSize="11" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

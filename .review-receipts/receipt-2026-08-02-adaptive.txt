@@ -1,0 +1,41 @@
+═══════════════════════════════════════════════════════════════════
+  PR Review Receipt — I9 Adaptive Layout
+  Date: 2026-08-02
+  Commit: (pending)
+  Files: 11 changed
+═══════════════════════════════════════════════════════════════════
+
+Review anchors:
+  - src/HmiEditor.Core/Services/AdaptiveLayoutCalculator.cs:25 (Compute)
+  - src/HmiEditor.CodeGen/CodeGenerator.cs:677 (GenerateAdaptiveLayout)
+  - src/HmiEditor.App/Controls/DesignCanvas.cs:155 (preview transform)
+  - src/HmiEditor.App/Views/ScreenManagerView.axaml.cs:43 (mode persistence)
+
+Intent verification:
+  Close I9 (multi-resolution / adaptive layout): ScreenAdaptiveMode
+  (None/Fit/Fill), shared pure-function calculator, CodeGen adaptive_layout
+  callback against LVGL display resolution, editor preview + screen-manager
+  mode setting, old-project compatibility. Diff matches intent.
+
+Verdict: READY
+  - Build: 0 errors, 0 new warnings
+  - Tests: 842 passed / 0 failed (18 new AdaptiveLayoutTests)
+  - No debug residue, no TODO/FIXME
+
+Failure-mode pass:
+  - Compatibility: enum default None + new HmiScreen.AdaptiveMode property
+    with default → old .hmi.json deserializes identically (covered by
+    OldProjectWithoutMode test).
+  - Preview render math: transform order verified against calculator's
+    Map() semantics (scale-then-translate on row-vector convention); covered
+    by Compute_Map_ControlRectTransformed.
+  - CodeGen: Fit uses unified scale s, Fill uses independent sx/sy; SVG
+    controls skipped (canvas-owned geometry). None mode emits no adaptive
+    code (no dead weight).
+  - Interaction guard: preview disables canvas editing (IsEnabled=false +
+    ClearSelection), reset on project open/new.
+  - Hallucinated APIs: none — LVGL v9 display resolution API used.
+  - Scope creep: none.
+
+Risk: none outstanding. Override posture: proceed autonomously.
+═══════════════════════════════════════════════════════════════════

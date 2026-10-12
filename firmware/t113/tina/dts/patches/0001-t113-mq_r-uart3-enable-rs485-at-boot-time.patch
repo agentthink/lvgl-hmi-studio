@@ -1,0 +1,55 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: zhishu <dev@zhishu-hmi.local>
+Date: 2026-08-05
+Subject: [PATCH] t113: mq_r: enable UART3 RS485 mode at boot time
+
+F4 Modbus RTU 测试时发现 /dev/ttyS3 上 `ioctl(TIOCSRS485)` 返回 ENOTTY，
+导致应用层无法运行时启用 RS485 半双工模式。
+
+根因分析：
+  Linux 5.4 tty 层 `tty_port_ioctl()` 对 TIOCSRS485 的标准处理要求
+  uart_port.rs485_config 回调存在；Allwinner sunxi-uart 驱动未设置
+  该回调（它用自己的 sw_uart_ioctl 路径处理 TIOCSRS485），因此
+  ioctl 在到达 sunxi-uart 驱动前就被 tty 层以 ENOTTY 拒绝。
+
+  但 sunxi-uart 驱动已支持 dts 属性 `linux,rs485-enabled-at-boot-time`
+  （drivers/tty/serial/sunxi-uart.c:2068）：probe 时设置
+  rs485conf.flags |= SER_RS485_ENABLED，应用 open /dev/ttyS3 时
+  sw_uart_startup() 调用 sw_uart_config_rs485() 写入硬件
+  SUNXI_UART_MCR_MODE_RS485 + SUNXI_UART_RS485_RXBFA 寄存器，
+  启用硬件 RS485 模式（9th-bit NMM 模式，无需 RTS 引脚）。
+
+修复：
+  在 uart3 节点添加 `linux,rs485-enabled-at-boot-time;` 属性。
+  应用层 modbus_rtu.c 的 TIOCSRS485 调用保留作为兼容降级路径
+  （其它平台若支持 TIOCSRS485 则生效），失败时静默降级为全双工。
+
+参考：
+  - drivers/tty/serial/sunxi-uart.c:866  sw_uart_config_rs485()
+  - drivers/tty/serial/sunxi-uart.c:1044 sw_uart_startup() 调用 config_rs485
+  - drivers/tty/serial/sunxi-uart.c:2068 dts 属性解析
+  - Documentation/devicetree/bindings/serial/serial.txt
+
+测试用例：firmware/t113/docs/test-report.md F4
+应用代码：firmware/t113/app/comm/modbus_rtu.c:125
+Signed-off-by: zhishu <dev@zhishu-hmi.local>
+
+---
+ device/config/chips/t113/configs/mq_r/linux-5.4/board.dts | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/device/config/chips/t113/configs/mq_r/linux-5.4/board.dts b/device/config/chips/t113/configs/mq_r/linux-5.4/board.dts
+index 0000000..1111111 100644
+--- a/device/config/chips/t113/configs/mq_r/linux-5.4/board.dts
++++ b/device/config/chips/t113/configs/mq_r/linux-5.4/board.dts
+@@ -547,6 +547,7 @@
+ 	pinctrl-names = "default", "sleep";
+ 	pinctrl-0 = <&uart3_pins_a>;
+ 	pinctrl-1 = <&uart3_pins_b>;
+ 	status = "okay";
++	linux,rs485-enabled-at-boot-time;	/* 启用 UART3 硬件 RS485 模式（T113 sunxi-uart 驱动） */
+ };
+
+ #if CAMERA_OV5640_HAS	/* camera复用GPIOE ,启用时gpio功能需禁用*/
+--
+2.39.2

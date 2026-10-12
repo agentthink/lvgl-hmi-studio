@@ -1,0 +1,47 @@
+[project]
+name = "code-assistant-devkit"
+version = "1.0.0"
+description = "代码助手自助式开发环境与服务体系：技能模块 + 环境模块 + 服务模块"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "pydantic>=2.6",
+    "pyyaml>=6.0",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pyflakes>=3.2",      # 可选：debug_fix 技能的更准静态诊断（无则回退 AST）
+    "coverage>=7.4",      # 可选：unit_test 技能的行/分支覆盖率实测（无则回退）
+    "ruff>=0.6",          # 开发期：lint + 格式化（pre-commit 钩子）
+    "pre-commit>=3.7",    # 开发期：Git 提交钩子
+    "pip-audit>=2.7",    # 开发期：依赖漏洞扫描
+]
+# MCP 集成（可选）：devkit-mcp 需要。注意：mcp 2.x API 不兼容，固定 1.x
+mcp = [
+    "mcp>=1.0,<2.0",
+]
+
+[project.scripts]
+# 安装后可直接使用 devkit-serve 启动服务
+devkit-serve = "services.api.main:run"
+# 命令行工具（Agent/脚本直接调用核心能力，无需服务常驻）
+devkit-cli = "devkit_common.cli:main"
+# MCP Server（供支持 MCP 协议的 Agent 客户端调用）
+devkit-mcp = "services.mcp_server:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+# 只打包三个业务包，不包含 examples/tests
+include = ["skills*", "services*", "devkit_common*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

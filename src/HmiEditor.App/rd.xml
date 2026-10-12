@@ -1,0 +1,31 @@
+<Directives>
+  <Application>
+    <!-- 保留 Avalonia 核心类型（AOT 裁剪保护） -->
+    <Assembly Name="Avalonia.Base" Dynamic="Required All" />
+    <Assembly Name="Avalonia.Controls" Dynamic="Required All" />
+    <Assembly Name="Avalonia.Desktop" Dynamic="Required All" />
+    <Assembly Name="Avalonia.Themes.Fluent" Dynamic="Required All" />
+    <Assembly Name="Avalonia.Markup.Xaml" Dynamic="Required All" />
+    <Assembly Name="Avalonia.Skia" Dynamic="Required All" />
+    <Assembly Name="Avalonia.Win32" Dynamic="Required All" />
+    <Assembly Name="Avalonia.Fonts.Inter" Dynamic="Required All" />
+
+    <!-- 保留 SkiaSharp 原生互操作 -->
+    <Assembly Name="SkiaSharp" Dynamic="Required All" />
+
+    <!-- 保留 CommunityToolkit.Mvvm -->
+    <Assembly Name="CommunityToolkit.Mvvm" Dynamic="Required All" />
+
+    <!-- 保留 HmiEditor 自身类型 -->
+    <Assembly Name="HmiEditor.App" Dynamic="Required All" />
+    <Assembly Name="HmiEditor.Core" Dynamic="Required All" />
+    <Assembly Name="HmiEditor.CodeGen" Dynamic="Required All" />
+    <Assembly Name="HmiEditor.Renderer" Dynamic="Required All" />
+    <Assembly Name="Hmi.Hardware.Contracts" Dynamic="Required All" />
+    <Assembly Name="Hmi.Hardware.Loader" Dynamic="Required All" />
+    <Assembly Name="Hmi.Hardware.Builtin" Dynamic="Required All" />
+    <Assembly Name="Hmi.Communication.Contracts" Dynamic="Required All" />
+    <Assembly Name="Hmi.Communication.Loader" Dynamic="Required All" />
+    <Assembly Name="Hmi.Communication.Builtin" Dynamic="Required All" />
+  </Application>
+</Directives>

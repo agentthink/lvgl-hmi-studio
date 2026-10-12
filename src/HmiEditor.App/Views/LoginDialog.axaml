@@ -1,0 +1,94 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.LoginDialog"
+        Title="{res:Loc login.title}"
+        Width="360"
+        Height="280"
+        MinWidth="320"
+        MinHeight="240"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳：高对比圆角边框 + 标准标题栏（拖拽/关闭/缩放）═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标题栏：ElementRole=TitleBar 提供原生拖拽，CloseButton 供关闭 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc login.title}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 登录表单 -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgWindowBrush}" Padding="20">
+                <StackPanel VerticalAlignment="Center" Spacing="14">
+                    <!-- 标题 -->
+                    <TextBlock Text="{res:Loc login.subtitle}" Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="18" FontWeight="Bold"
+                               HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                    <!-- 用户名 -->
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{res:Loc login.user}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"/>
+                        <TextBox x:Name="TxtUsername" Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                 BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                 Padding="10,8" FontSize="13"/>
+                    </StackPanel>
+                    <!-- 密码 -->
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{res:Loc login.pwd}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"/>
+                        <TextBox x:Name="TxtPassword" Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                 BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                 Padding="10,8" FontSize="13" PasswordChar="●"/>
+                    </StackPanel>
+                    <!-- 错误信息 -->
+                    <TextBlock x:Name="ErrorText" Foreground="{StaticResource HmiDangerBrush}" FontSize="12"
+                               HorizontalAlignment="Center" IsVisible="False"/>
+                    <!-- 按钮 -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button x:Name="BtnLogin" Content="{res:Loc login.btn}"
+                                Grid.Column="0"
+                                Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="0,8" FontSize="14"/>
+                        <Button x:Name="BtnCancel" Content="{res:Loc gen.cancel}"
+                                Grid.Column="1"
+                                Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="0,8" FontSize="14"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

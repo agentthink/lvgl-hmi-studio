@@ -1,0 +1,51 @@
+pin,signal,io,description,remark
+1,VLED_A,P,Backlight LED anode,Confirm LED voltage/current
+2,VLED_A,P,Backlight LED anode,Confirm LED voltage/current
+3,VLED_K,P,Backlight LED cathode,Confirm LED voltage/current
+4,VLED_K,P,Backlight LED cathode,Confirm LED voltage/current
+5,GND,P,Power ground,
+6,LCD_VCOM,I,Common voltage,Confirm target voltage
+7,LCD_DVDD,P,Digital power,Confirm target voltage
+8,LCD_MODE,I,DE/SYNC mode select,Pull high for DE mode
+9,LCD_DE,I,Data enable,
+10,LCD_VSYNC,I,Vertical sync,
+11,LCD_HSYNC,I,Horizontal sync,
+12,LCD_B7,I,Blue MSB,
+13,LCD_B6,I,Blue data,
+14,LCD_B5,I,Blue data,
+15,LCD_B4,I,Blue data,
+16,LCD_B3,I,Blue data,
+17,LCD_B2,I,Blue data,
+18,LCD_B1,I,Blue data,18-bit mode note only
+19,LCD_B0,I,Blue LSB,18-bit mode note only
+20,LCD_G7,I,Green MSB,
+21,LCD_G6,I,Green data,
+22,LCD_G5,I,Green data,
+23,LCD_G4,I,Green data,
+24,LCD_G3,I,Green data,
+25,LCD_G2,I,Green data,
+26,LCD_G1,I,Green data,18-bit mode note only
+27,LCD_G0,I,Green LSB,18-bit mode note only
+28,LCD_R7,I,Red MSB,
+29,LCD_R6,I,Red data,
+30,LCD_R5,I,Red data,
+31,LCD_R4,I,Red data,
+32,LCD_R3,I,Red data,
+33,LCD_R2,I,Red data,
+34,LCD_R1,I,Red data,18-bit mode note only
+35,LCD_R0,I,Red LSB,18-bit mode note only
+36,GND,P,Power ground,
+37,LCD_DCLK,I,Pixel clock,Falling-edge latch
+38,GND,P,Power ground,
+39,LCD_SHLR,I,Left/right selection,Default must follow panel note
+40,LCD_UPDN,I,Up/down selection,Default must follow panel note
+41,LCD_VGH,P,Gate ON voltage,Confirm target voltage
+42,LCD_VGL,P,Gate OFF voltage,Confirm target voltage
+43,LCD_AVDD,P,Analog power,Confirm target voltage
+44,LCD_RESET,I,Global reset,Confirm active-low timing
+45,NC,-,No connection,
+46,LCD_VCOM,I,Common voltage,Connect same LCD_VCOM rail if panel requires
+47,LCD_DITH,I,Dithering enable,Default pull low per panel note
+48,GND,P,Power ground,
+49,NC,-,No connection,
+50,NC,-,No connection,

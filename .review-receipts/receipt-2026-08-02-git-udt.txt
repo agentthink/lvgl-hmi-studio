@@ -1,0 +1,46 @@
+═══════════════════════════════════════════════════════════════════
+  PR Review Receipt — I8 Git Workflow + I4 UDT Pipeline
+  Date: 2026-08-02
+  Commit: (pending)
+  Files: 10 changed
+═══════════════════════════════════════════════════════════════════
+
+Review anchors:
+  - src/HmiEditor.Core/Services/GitWorkflowService.cs:68 (RunGit process wrapper)
+  - src/HmiEditor.App/Views/VariableManagerView.axaml.cs:224 (CreateInstance)
+  - tests/HmiEditor.Core.Tests/GitWorkflowServiceTests.cs:24 (CleanupDir)
+
+Intent verification:
+  I8: git CLI wrapper (detect/init/stage/commit/history/info) + menu/statusbar
+      integration; zero dependency, NativeAOT safe. Diff matches intent.
+  I4: UDT tab in Variable Manager (definition/field CRUD + instantiation),
+      completing define → instance → dot-address binding → runtime tag →
+      CodeGen pipeline. Diff matches intent.
+
+Verdict: READY
+  - Build: 0 errors, 0 new warnings (only pre-existing Scriban NU19xx)
+  - Tests: 792 passed / 0 failed (9 UdtPipelineTests + 8 GitWorkflowServiceTests)
+  - No debug residue, no TODO/FIXME
+
+Failure-mode pass:
+  - Found & fixed during development: CleanupDir self-recursion introduced by
+    mechanical replace → stack overflow in test host; corrected to
+    Directory.Delete. Verified by full-suite run with exit code 0.
+  - Silent assumptions: git CLI availability guarded by IsGitAvailable;
+    git commit message passed via -m to avoid injection.
+  - Hallucinated APIs: none — compiled against real assemblies.
+  - Scope creep: none.
+
+Behavior verification:
+  - UdtPipelineTests: instance creation, delete protection, dot-address
+    resolution, bindable items expansion, runtime tag registration, CodeGen
+    tag emission, JSON round-trip.
+  - GitWorkflowServiceTests: real git CLI init/stage/commit/history/info in
+    isolated temp dirs; idempotent init; non-repo commit error path.
+
+Compatibility:
+  - No model/schema changes; both features are additive (new service + new UI
+    tab). Existing .hmi.json unaffected.
+
+Risk: none outstanding. Override posture: proceed autonomously.
+═══════════════════════════════════════════════════════════════════

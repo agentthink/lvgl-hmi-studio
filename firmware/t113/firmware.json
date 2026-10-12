@@ -1,0 +1,43 @@
+{
+  "id": "allwinner-t113",
+  "name": "T113 7寸 1024×600",
+  "vendor": "Allwinner",
+  "architecture": "ARM Cortex-A7",
+  "version": "1.1.0",
+  "boards": [
+    { "board": "mq_r", "debugUart": "/dev/ttyS1", "rs485Uart": "/dev/ttyS3", "rs485Mode": "hw" },
+    { "board": "bingpi_m2", "name": "WavePI-S6 7寸", "debugUart": "/dev/ttyS3", "rs485Uart": "/dev/ttyS4", "rs485Mode": "gpio", "rs485GpioPin": 200 }
+  ],
+  "display": {
+    "defaultWidth": 1024,
+    "defaultHeight": 600,
+    "colorDepths": [ "RGB565", "ARGB8888" ],
+    "interface": "RGB666",
+    "maxRefreshRate": 60
+  },
+  "resources": {
+    "flashSizeBytes": 16777216,
+    "ramSizeBytes": 134217728,
+    "recommendedLvglHeapBytes": 4194304,
+    "maxTextureSize": 1024
+  },
+  "lvgl": {
+    "defaultColorDepth": 32,
+    "defaultMemorySize": 128,
+    "useDoubleBuffering": true,
+    "enabledFeatures": [ "LV_USE_FREETYPE", "LV_USE_PNG" ],
+    "customDefines": {
+      "LV_COLOR_DEPTH": "32",
+      "LV_MEM_SIZE": "0x400000"
+    }
+  },
+  "toolchain": {
+    "crossCompilerPrefix": "arm-linux-gnueabihf-",
+    "compilerPath": "",
+    "compileFlags": [ "-mcpu=cortex-a7", "-mfpu=neon-vfpv4", "-mfloat-abi=hard" ],
+    "linkerScriptPath": "t113-s3.ld",
+    "libraryDependencies": [ "lvgl", "m", "dl" ]
+  },
+  "communicationInterfaces": [ "Serial", "Ethernet", "CanBus", "WiFi" ],
+  "communicationDrivers": [ "modbus-rtu", "modbus-tcp", "mqtt" ]
+}

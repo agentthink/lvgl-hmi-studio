@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>HmiEditor.Device.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\HmiEditor.Device\HmiEditor.Device.csproj" />
+    <!-- 发布包清单要写"编辑器目标 ↔ 固件"的版本对应，测试用真实内置目标核对
+         （仅测试工程引用，产品侧不因此多一条依赖）。 -->
+    <ProjectReference Include="..\..\src\Hmi.Hardware.Builtin\Hmi.Hardware.Builtin.csproj" />
+    <ProjectReference Include="..\HmiEditor.TestSupport\HmiEditor.TestSupport.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- 临时目录统一走 TestTempDir（探测 + 回退），不要在测试里直接 Path.GetTempPath()。 -->
+    <Using Include="HmiEditor.TestSupport" />
+  </ItemGroup>
+</Project>

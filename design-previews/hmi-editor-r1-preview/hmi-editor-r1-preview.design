@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "id": "image-001",
+      "title": "HMI Editor Phase R1 重构设计预览",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1785387000000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "naturalSize": {
+          "width": 2560,
+          "height": 1440
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/hmi-editor-r1-design-preview.jpg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "freeSize",
+    "projectName": "HMI Editor Phase R1 设计预览"
+  }
+}

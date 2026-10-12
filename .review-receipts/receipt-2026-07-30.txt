@@ -1,0 +1,41 @@
+[2026-07-30T16:12:12] PR-REVIEW RECEIPT
+Verdict: ready
+Anchors: TemplateManager.cs:37, MainWindow.axaml.cs:59, CodeGenerator.cs:461, FaceplateIntegrationTests.cs:108
+Findings: 2 accepted (redundant-create, bundled-assets)
+Blockers: none
+Reviewer: agent-pr-review specialistPR Review Receipt
+=================
+Timestamp: 2026-07-30 16:51:58 (Asia/Shanghai)
+Target commit (pre-commit): e3c7cfb
+Changed file: docs/release-notes-v1.0.0.md (+43/-15)
+
+Specialist: agent-pr-review (compact, doc-only)
+Anchors:
+  - release-notes-v1.0.0.md:5   Avalonia version 11.3 -> 12.1.0 (verified vs csproj)
+  - release-notes-v1.0.0.md:96  test count 66 -> 310 (verified by running 4 test projects)
+  - release-notes-v1.0.0.md:17  new section 2.1 animation editor (verified vs source + commit 1326102)
+
+Intent: sync release notes to actual v1.0.0 state. Intent-match: yes.
+Failure-mode pass: silent-assumption OK, plausible-wrong OK, hallucinated-API OK,
+  deleted-but-used OK, unmotivated-edit OK, scope-creep OK.
+Quality dims: design OK, functionality OK, complexity N/A, tests N/A (doc),
+  naming OK, comments N/A, style OK.
+Blockers: none. Must-fix: none.
+Verdict: ready to commit. Override posture: autonomous (doc-only, no blocker).
+PR Review Receipt (version bump)
+================================
+Timestamp: 2026-07-30 17:08:42 (Asia/Shanghai)
+Target commit (pre-commit): 05ce190
+Changed files: 3 (+22/-4)
+  - .review-receipts/receipt-2026-07-30.txt (append)
+  - docs/release-notes-v1.0.0.md -> release-notes-v2.1.0.md (rename + version id)
+  - src/HmiEditor.Core/VersionInfo.cs (1.0.0 -> 2.1.0)
+
+Specialist: agent-pr-review (compact, mechanical version bump)
+Intent: resolve version-order blocker — bump VersionInfo to 2.1.0 to stay
+  monotonic with existing remote tag v2.0.0 (commit 1fc6701, pushed).
+Intent-match: yes.
+Blocker (from prior PRR): version inversion resolved by adopting scheme A.
+Build verified: dotnet build HmiEditor.Core.csproj exit 0, no errors/warnings.
+Blockers: none. Must-fix: none.
+Verdict: ready to commit. Override posture: autonomous.

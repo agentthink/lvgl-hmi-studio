@@ -1,0 +1,33 @@
+# =============================================================
+# pre-commit 钩子：提交前自动 ruff 修复/格式化 + 基础检查 + pytest
+# 启用：pre-commit install （首次）
+# 手动：pre-commit run --all-files
+# =============================================================
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=512]
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest (skills + services)
+        entry: .venv/bin/python -m pytest -q tests/test_skills.py tests/test_services.py
+        language: system
+        pass_filenames: false
+        types: [python]
+        stages: [pre-commit]

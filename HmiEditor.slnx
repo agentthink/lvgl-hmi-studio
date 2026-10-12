@@ -1,0 +1,27 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Hmi.Communication.Builtin/Hmi.Communication.Builtin.csproj" />
+    <Project Path="src/Hmi.Communication.Contracts/Hmi.Communication.Contracts.csproj" />
+    <Project Path="src/Hmi.Communication.Loader/Hmi.Communication.Loader.csproj" />
+    <Project Path="src/Hmi.Hardware.Builtin/Hmi.Hardware.Builtin.csproj" />
+    <Project Path="src/Hmi.Hardware.Contracts/Hmi.Hardware.Contracts.csproj" />
+    <Project Path="src/Hmi.Hardware.Loader/Hmi.Hardware.Loader.csproj" />
+    <Project Path="src/HmiEditor.AI/HmiEditor.AI.csproj" />
+    <Project Path="src/HmiEditor.App/HmiEditor.App.csproj" />
+    <Project Path="src/HmiEditor.CodeGen/HmiEditor.CodeGen.csproj" />
+    <Project Path="src/HmiEditor.Core/HmiEditor.Core.csproj" />
+    <Project Path="src/HmiEditor.Device/HmiEditor.Device.csproj" />
+    <Project Path="src/HmiEditor.Simulator/HmiEditor.Simulator.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Hmi.Communication.Tests/Hmi.Communication.Tests.csproj" />
+    <Project Path="tests/Hmi.Hardware.Tests/Hmi.Hardware.Tests.csproj" />
+    <Project Path="tests/HmiEditor.AI.Tests/HmiEditor.AI.Tests.csproj" />
+    <Project Path="tests/HmiEditor.App.UiTests/HmiEditor.App.UiTests.csproj" />
+    <Project Path="tests/HmiEditor.Core.Tests/HmiEditor.Core.Tests.csproj" />
+    <Project Path="tests/HmiEditor.Device.Tests/HmiEditor.Device.Tests.csproj" />
+    <Project Path="tests/HmiEditor.RenderTests/HmiEditor.RenderTests.csproj" />
+    <Project Path="tests/HmiEditor.TestSupport/HmiEditor.TestSupport.csproj" />
+    <Project Path="tests/HmiEditor.Simulator.Tests/HmiEditor.Simulator.Tests.csproj" />
+  </Folder>
+</Solution>

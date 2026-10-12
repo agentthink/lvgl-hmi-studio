@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             x:Class="HmiEditor.App.Views.Editors.VariablePicker">
+    <!-- 复合选择器：只读显示框 + 浏览按钮 + 弹出树 -->
+    <Grid ColumnDefinitions="*,Auto">
+        <TextBox x:Name="DisplayField" IsReadOnly="True"
+                 Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                 BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="13"
+                 PlaceholderText="{res:Loc browser.select.var}" />
+        <Button x:Name="BrowseBtn" Grid.Column="1" Content="&#x22EF;"
+                Background="{StaticResource HmiInputBorderBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,2"
+                Margin="2,0,0,0" Cursor="Hand"
+                ToolTip.Tip="{res:Loc var.picker.browse}" />
+        <Popup x:Name="PickerPopup"
+               PlacementTarget="{Binding ElementName=BrowseBtn}"
+               Placement="Bottom"
+               IsLightDismissEnabled="True"
+               HorizontalOffset="0" VerticalOffset="2">
+            <Border Background="{StaticResource HmiBgDeepBrush}" BorderBrush="{StaticResource HmiInputBorderBrush}"
+                    BorderThickness="1" CornerRadius="4" Padding="6" Width="320">
+                <Grid RowDefinitions="Auto,Auto,Auto,*" RowSpacing="4">
+                    <TextBox x:Name="SearchBox" Grid.Row="0"
+                             PlaceholderText="{res:Loc browser.search.hint}"
+                             Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                             BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="13" />
+                    <!-- 智能推荐区域 (AI 绑定推荐) -->
+                    <StackPanel x:Name="RecommendPanel" Grid.Row="1"
+                                IsVisible="False" Spacing="2">
+                        <TextBlock x:Name="RecommendTitle" Text="{res:Loc browser.recommend}"
+                                   Foreground="{StaticResource HmiLinkBrush}" FontSize="11"
+                                   Margin="0,2,0,0"/>
+                        <ItemsControl x:Name="RecommendList">
+                            <ItemsControl.Styles>
+                                <Style Selector="Button">
+                                    <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderBrush}"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Padding" Value="8,4"/>
+                                    <Setter Property="Margin" Value="0,1"/>
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    <Setter Property="FontSize" Value="11"/>
+                                </Style>
+                            </ItemsControl.Styles>
+                        </ItemsControl>
+                    </StackPanel>
+                    <Button x:Name="ClearBtn" Grid.Row="2" Content="{res:Loc browser.clear.binding}"
+                            HorizontalAlignment="Left" FontSize="11"
+                            Background="Transparent" Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            BorderThickness="0" Padding="4,2" Cursor="Hand" />
+                    <TreeView x:Name="VarTree" Grid.Row="3"
+                              Background="Transparent" BorderThickness="0"
+                              MinHeight="180" MaxHeight="340">
+                        <TreeView.Styles>
+                            <Style Selector="TreeViewItem">
+                                <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                                <Setter Property="FontSize" Value="13"/>
+                                <Setter Property="Padding" Value="2,1"/>
+                            </Style>
+                            <Style Selector="TreeViewItem:pointerover">
+                                <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                            </Style>
+                            <Style Selector="TreeViewItem:selected">
+                                <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                            </Style>
+                        </TreeView.Styles>
+                    </TreeView>
+                </Grid>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

@@ -1,0 +1,460 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.AnimationEditorView"
+        Title="{res:Loc win.animation.editor}"
+        Width="900"
+        Height="650"
+        MinWidth="680"
+        MinHeight="500"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc win.animation.editor}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容 -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgWindowBrush}" Padding="12">
+        <Grid ColumnDefinitions="260,*" RowDefinitions="*">
+            <!-- ════════════════════════════════════════ -->
+            <!-- 左栏：动画列表                           -->
+            <!-- ════════════════════════════════════════ -->
+            <Border Background="{StaticResource HmiBgPanelBrush}" CornerRadius="6" Padding="8">
+                <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+                    <!-- 标题栏 -->
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+                        <TextBlock Text="{res:Loc anim.list}"
+                                   Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="14" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <Button x:Name="BtnNewAnimation" Content="{res:Loc anim.add}"
+                                Grid.Column="1"
+                                Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="10,4"
+                                FontSize="11"
+                                ToolTip.Tip="{res:Loc anim.tt.add}"/>
+                    </Grid>
+
+                    <!-- 触发方式筛选 -->
+                    <ComboBox x:Name="CmbTriggerFilter"
+                              Grid.Row="1"
+                              Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                              BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                              Padding="6,3" FontSize="12" Margin="0,0,0,6"
+                              ToolTip.Tip="{res:Loc anim.tt.trigger.filter}"/>
+
+                    <!-- 空状态提示 -->
+                    <TextBlock x:Name="EmptyAnimationHint"
+                               Text="{res:Loc anim.no.anim.hint}"
+                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                               Grid.Row="2" Margin="0,8,0,4"
+                               HorizontalAlignment="Center"
+                               IsHitTestVisible="False"/>
+
+                    <!-- 动画列表 -->
+                    <ListBox x:Name="AnimationList"
+                             Grid.Row="3"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.Styles>
+                            <Style Selector="ListBoxItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,2"/>
+                                <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+                                <Setter Property="CornerRadius" Value="4"/>
+                            </Style>
+                            <Style Selector="ListBoxItem:selected">
+                                <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+                            </Style>
+                        </ListBox.Styles>
+                    </ListBox>
+
+                    <!-- 删除按钮 -->
+                    <Button x:Name="BtnDeleteAnimation" Content="{res:Loc anim.delete}"
+                            Grid.Row="4"
+                            Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                            BorderThickness="0" Padding="10,4"
+                            FontSize="11" Margin="0,6,0,0"
+                            ToolTip.Tip="{res:Loc anim.tt.del}"/>
+                </Grid>
+            </Border>
+
+            <!-- ════════════════════════════════════════ -->
+            <!-- 右栏：动画编辑面板                       -->
+            <!-- ════════════════════════════════════════ -->
+            <Border Grid.Column="1" Background="{StaticResource HmiBgPanelBrush}" CornerRadius="6" Padding="10"
+                    Margin="8,0,0,0">
+                <ScrollViewer Background="Transparent">
+                    <StackPanel Spacing="8">
+                        <!-- ======================== -->
+                        <!-- 基本信息区域              -->
+                        <!-- ======================== -->
+                        <TextBlock Text="{res:Loc anim.basic.info}"
+                                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" FontWeight="Bold"
+                                   Margin="0,0,0,2"/>
+
+                        <!-- 动画名称 -->
+                        <Grid ColumnDefinitions="72,*">
+                            <TextBlock Text="{res:Loc anim.name}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtAnimationName"
+                                     Grid.Column="1"
+                                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                     Padding="6,4" FontSize="12"
+                                     PlaceholderText="{res:Loc anim.name.hint}"
+                                     ToolTip.Tip="{res:Loc anim.tt.name}"/>
+                        </Grid>
+
+                        <!-- 目标控件 -->
+                        <Grid ColumnDefinitions="72,*">
+                            <TextBlock Text="{res:Loc anim.target}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <ComboBox x:Name="CmbTargetControl"
+                                      Grid.Column="1"
+                                      Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                      BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                      Padding="6,4" FontSize="12"
+                                      ToolTip.Tip="{res:Loc anim.tt.target}"/>
+                        </Grid>
+
+                        <!-- 动画属性 -->
+                        <Grid ColumnDefinitions="72,*">
+                            <TextBlock Text="{res:Loc anim.prop}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <ComboBox x:Name="CmbAnimationProperty"
+                                      Grid.Column="1"
+                                      Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                      BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                      Padding="6,4" FontSize="12"
+                                      ToolTip.Tip="{res:Loc anim.tt.prop}"/>
+                        </Grid>
+
+                        <!-- 描述 -->
+                        <Grid ColumnDefinitions="72,*">
+                            <TextBlock Text="{res:Loc anim.desc}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Top" Margin="0,4,0,0"/>
+                            <TextBox x:Name="TxtDescription"
+                                     Grid.Column="1"
+                                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                     Padding="6,4" FontSize="12" Height="48"
+                                     AcceptsReturn="True"
+                                     PlaceholderText="{res:Loc anim.desc.hint}"
+                                     ToolTip.Tip="{res:Loc anim.tt.desc}"/>
+                        </Grid>
+
+                        <!-- 启用 + 触发方式 -->
+                        <Grid ColumnDefinitions="72,Auto,*,Auto">
+                            <TextBlock Text="{res:Loc anim.status}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <CheckBox x:Name="ChkEnabled" Content="{res:Loc recipe.enabled}"
+                                      Grid.Column="1"
+                                      Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                      ToolTip.Tip="{res:Loc anim.tt.enabled}"/>
+                            <TextBlock Text="{res:Loc anim.trigger.mode}" Grid.Column="2"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       Margin="8,0,0,0"/>
+                            <ComboBox x:Name="CmbTrigger"
+                                      Grid.Column="3"
+                                      Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                      BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                      Padding="6,4" FontSize="12" MinWidth="120"
+                                      ToolTip.Tip="{res:Loc anim.tt.trigger}"/>
+                        </Grid>
+
+                        <!-- 分隔线 -->
+                        <Border Height="1" Background="{StaticResource HmiBorderBrush}" Margin="0,4"/>
+
+                        <!-- ======================== -->
+                        <!-- 动画参数配置区域          -->
+                        <!-- ======================== -->
+                        <TextBlock Text="{res:Loc anim.params}"
+                                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" FontWeight="Bold"
+                                   Margin="0,0,0,2"/>
+
+                        <!-- 起始值 / 结束值 -->
+                        <Grid ColumnDefinitions="72,*,20,72,*">
+                            <TextBlock Text="{res:Loc anim.from.val}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtStartValue"
+                                     Grid.Column="1"
+                                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                     Padding="6,4" FontSize="12"
+                                     PlaceholderText="0"
+                                     ToolTip.Tip="{res:Loc anim.tt.from.val}"/>
+                            <TextBlock Text="{res:Loc anim.to.val}" Grid.Column="2"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"
+                                       Margin="4,0,0,0"/>
+                            <TextBox x:Name="TxtEndValue"
+                                     Grid.Column="3"
+                                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                     Padding="6,4" FontSize="12"
+                                     PlaceholderText="255"
+                                     ToolTip.Tip="{res:Loc anim.tt.to.val}"/>
+                        </Grid>
+
+                        <!-- 时长 / 延迟 -->
+                        <Grid ColumnDefinitions="72,*,20,72,*">
+                            <TextBlock Text="{res:Loc anim.duration}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtDuration"
+                                     Grid.Column="1"
+                                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                     Padding="6,4" FontSize="12"
+                                     PlaceholderText="500"
+                                     ToolTip.Tip="{res:Loc anim.tt.duration}"/>
+                            <TextBlock Text="{res:Loc anim.delay}" Grid.Column="2"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"
+                                       Margin="4,0,0,0"/>
+                            <TextBox x:Name="TxtDelay"
+                                     Grid.Column="3"
+                                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                     Padding="6,4" FontSize="12"
+                                     PlaceholderText="0"
+                                     ToolTip.Tip="{res:Loc anim.tt.delay}"/>
+                        </Grid>
+
+                        <!-- 缓动函数 -->
+                        <Grid ColumnDefinitions="72,*">
+                            <TextBlock Text="{res:Loc anim.easing}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <ComboBox x:Name="CmbPathType"
+                                      Grid.Column="1"
+                                      Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                      BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                      Padding="6,4" FontSize="12"
+                                      ToolTip.Tip="{res:Loc anim.tt.easing}"/>
+                        </Grid>
+
+                        <!-- 重复次数 -->
+                        <Grid ColumnDefinitions="72,*">
+                            <TextBlock Text="{res:Loc anim.repeat}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtRepeatCount"
+                                     Grid.Column="1"
+                                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                     Padding="6,4" FontSize="12"
+                                     PlaceholderText="0"
+                                     ToolTip.Tip="{res:Loc anim.tt.repeat}"/>
+                        </Grid>
+
+                        <!-- 分隔线 -->
+                        <Border Height="1" Background="{StaticResource HmiBorderBrush}" Margin="0,4"/>
+
+                        <!-- ======================== -->
+                        <!-- 关键帧编辑区域            -->
+                        <!-- ======================== -->
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="4">
+                            <TextBlock Text="{res:Loc anim.timeline}"
+                                       Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
+                            <Button x:Name="BtnPlayPreview" Content="{res:Loc anim.play.preview}"
+                                    Grid.Column="1"
+                                    Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                    BorderThickness="0" Padding="8,3"
+                                    FontSize="10"
+                                    ToolTip.Tip="{res:Loc anim.tt.play.preview}"/>
+                            <Button x:Name="BtnAddKeyframe" Content="{res:Loc anim.add.keyframe}"
+                                    Grid.Column="2"
+                                    Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                    BorderThickness="0" Padding="8,3"
+                                    FontSize="10"
+                                    ToolTip.Tip="{res:Loc anim.tt.add.keyframe}"/>
+                            <Button x:Name="BtnDeleteKeyframe" Content="{res:Loc anim.del.keyframe}"
+                                    Grid.Column="3"
+                                    Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                    BorderThickness="0" Padding="8,3"
+                                    FontSize="10"
+                                    ToolTip.Tip="{res:Loc anim.tt.del.keyframe}"/>
+                        </Grid>
+
+                        <!-- 可视化时间轴 -->
+                        <Border x:Name="TimelineContainer"
+                                Background="{StaticResource HmiBgDeepBrush}" CornerRadius="4"
+                                BorderThickness="1" BorderBrush="{StaticResource HmiBorderBrush}"
+                                Height="90" Padding="0">
+                            <Grid RowDefinitions="Auto,*">
+                                <!-- 时间刻度标签 -->
+                                <Grid x:Name="TimelineTickGrid"
+                                      Grid.Row="0"
+                                      Height="20"
+                                      Margin="40,2,16,0"/>
+                                <!-- 时间轴轨道 -->
+                                <Border x:Name="TimelineTrackBorder"
+                                        Grid.Row="1"
+                                        Height="60"
+                                        Margin="40,0,16,0"
+                                        Background="Transparent"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- 关键帧参数编辑 -->
+                        <Border x:Name="KeyframeEditPanel"
+                                Background="{StaticResource HmiBgDeepBrush}" CornerRadius="4"
+                                BorderThickness="1" BorderBrush="{StaticResource HmiBorderBrush}"
+                                Padding="8" IsVisible="False">
+                            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="6">
+                                <TextBlock Text="{res:Loc anim.time.pct}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="11"
+                                           VerticalAlignment="Center"/>
+                                <TextBox x:Name="TxtKeyframeTime"
+                                         Grid.Column="1"
+                                         Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                         Padding="4,2" FontSize="11" Width="56"
+                                         PlaceholderText="0-100"
+                                         ToolTip.Tip="{res:Loc anim.tt.kf.time}"/>
+
+                                <TextBlock Text="{res:Loc anim.key.val}" Grid.Column="2"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="11"
+                                           VerticalAlignment="Center"/>
+                                <TextBox x:Name="TxtKeyframeValue"
+                                         Grid.Column="3"
+                                         Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                         Padding="4,2" FontSize="11" Width="60"
+                                         PlaceholderText="{res:Loc anim.val.col}"
+                                         ToolTip.Tip="{res:Loc anim.tt.kf.val}"/>
+
+                                <TextBlock Text="{res:Loc anim.easing.label}" Grid.Column="4"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="11"
+                                           VerticalAlignment="Center"/>
+                                <ComboBox x:Name="CmbKeyframePathType"
+                                          Grid.Column="5"
+                                          Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                          BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                          Padding="4,2" FontSize="11" MinWidth="100"
+                                          ToolTip.Tip="{res:Loc anim.tt.kf.easing}"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- 关键帧列表（表格） -->
+                        <ListBox x:Name="KeyframeList"
+                                 Background="Transparent"
+                                 BorderThickness="1" BorderBrush="{StaticResource HmiBorderBrush}"
+                                 CornerRadius="4" MaxHeight="100"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ListBox.Styles>
+                                <Style Selector="ListBoxItem">
+                                    <Setter Property="Padding" Value="6,3"/>
+                                    <Setter Property="Margin" Value="0,1"/>
+                                    <Setter Property="Background" Value="{StaticResource HmiBgDeepBrush}"/>
+                                    <Setter Property="CornerRadius" Value="2"/>
+                                </Style>
+                                <Style Selector="ListBoxItem:selected">
+                                    <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                </Style>
+                            </ListBox.Styles>
+                        </ListBox>
+
+                        <!-- 表头 -->
+                        <Grid ColumnDefinitions="80,80,120,*,50"
+                              Margin="0,0,0,0" ColumnSpacing="2">
+                            <TextBlock Text="{res:Loc anim.time.col}" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="9"/>
+                            <TextBlock Text="{res:Loc anim.val.col}" Grid.Column="1"
+                                       Foreground="{StaticResource HmiTextMutedBrush}" FontSize="9"/>
+                            <TextBlock Text="{res:Loc anim.easing.col}" Grid.Column="2"
+                                       Foreground="{StaticResource HmiTextMutedBrush}" FontSize="9"/>
+                            <TextBlock Text="{res:Loc anim.note.col}" Grid.Column="3"
+                                       Foreground="{StaticResource HmiTextMutedBrush}" FontSize="9"/>
+                            <TextBlock Text="{res:Loc anim.op.col}" Grid.Column="4"
+                                       Foreground="{StaticResource HmiTextMutedBrush}" FontSize="9"
+                                       HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- 分隔线 -->
+                        <Border Height="1" Background="{StaticResource HmiBorderBrush}" Margin="0,4"/>
+
+                        <!-- ======================== -->
+                        <!-- C 代码预览               -->
+                        <!-- ======================== -->
+                        <TextBlock Text="{res:Loc anim.lvgl.preview}"
+                                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" FontWeight="Bold"/>
+
+                        <!-- 备注信息 -->
+                        <TextBlock x:Name="TxtKeyframeDesc"
+                                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                                   IsVisible="False"/>
+
+                        <!-- C 代码预览区域 -->
+                        <Border Background="{StaticResource HmiBgDeepBrush}" CornerRadius="4"
+                                BorderThickness="1" BorderBrush="{StaticResource HmiBorderBrush}"
+                                Padding="8" MinHeight="80">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                          VerticalScrollBarVisibility="Auto">
+                                <TextBlock x:Name="TxtCCodePreview"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="11"
+                                           FontFamily="Consolas"
+                                           TextWrapping="NoWrap"/>
+                            </ScrollViewer>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

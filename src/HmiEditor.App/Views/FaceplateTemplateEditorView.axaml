@@ -1,0 +1,143 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:fa="using:FluentAvalonia.UI.Controls"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.FaceplateTemplateEditorView"
+        Title="{res:Loc win.faceplate.editor}"
+        Width="720"
+        Height="640"
+        MinWidth="576"
+        MinHeight="512"
+        WindowStartupLocation="CenterOwner">
+
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc win.faceplate.editor}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容 -->
+            <Grid Grid.Row="1" RowDefinitions="Auto,*,Auto" Margin="12">
+
+        <!-- ═══ 模板元信息 ═══ -->
+        <Border Grid.Row="0" Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8" Padding="12,8">
+            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="80,*,80,*" Margin="0,2,0,0">
+                <TextBlock Text="{res:Loc prop.name}" Grid.Row="0" Grid.Column="0"
+                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="13" VerticalAlignment="Center"/>
+                <TextBox x:Name="TxtName" Grid.Row="0" Grid.Column="1"
+                         Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}" BorderBrush="{StaticResource HmiBorderBrush}"
+                         FontSize="13" Padding="6,4" Margin="0,2"
+                         TextChanged="OnMetadataChanged"/>
+                <TextBlock Text="{res:Loc faceplate.template.category}" Grid.Row="0" Grid.Column="2"
+                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="13" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                <TextBox x:Name="TxtCategory" Grid.Row="0" Grid.Column="3"
+                         Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}" BorderBrush="{StaticResource HmiBorderBrush}"
+                         FontSize="13" Padding="6,4" Margin="0,2"
+                         TextChanged="OnMetadataChanged"/>
+
+                <TextBlock Text="{res:Loc recipe.desc}" Grid.Row="1" Grid.Column="0"
+                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="13" VerticalAlignment="Top" Margin="0,4,0,0"/>
+                <TextBox x:Name="TxtDescription" Grid.Row="1" Grid.Column="1"
+                         Grid.ColumnSpan="3"
+                         Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}" BorderBrush="{StaticResource HmiBorderBrush}"
+                         FontSize="13" Padding="6,4" Margin="0,2"
+                         TextWrapping="Wrap" AcceptsReturn="True" Height="50"
+                         TextChanged="OnMetadataChanged"/>
+
+                <TextBlock x:Name="TxtInfo" Grid.Row="2" Grid.Column="0"
+                           Grid.ColumnSpan="4"
+                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11" Margin="0,4,0,0"
+                           TextWrapping="Wrap"/>
+            </Grid>
+        </Border>
+
+        <!-- ═══ 参数编辑区 ═══ -->
+        <Border Grid.Row="1" Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8" Padding="8" Margin="0,8,0,0">
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <!-- 参数列表标题 -->
+                <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto">
+                    <TextBlock Text="{res:Loc faceplate.param.interface}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="13"
+                               FontWeight="SemiBold" VerticalAlignment="Center"/>
+                    <Button x:Name="BtnAddParam" Grid.Column="1"
+                            Content="{res:Loc faceplate.add.param}"
+                            Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}" BorderBrush="{StaticResource HmiLinkBrush}"
+                            Padding="10,4" FontSize="12" Margin="0,0,4,0"
+                            Click="OnAddParamClicked"/>
+                    <Button x:Name="BtnRemoveParam" Grid.Column="2"
+                            Content="{res:Loc faceplate.del.param}"
+                            Background="Transparent" Foreground="{StaticResource HmiDangerBrush}" BorderBrush="{StaticResource HmiInputBorderBrush}"
+                            Padding="10,4" FontSize="12"
+                            Click="OnRemoveParamClicked"/>
+                </Grid>
+
+                <!-- 参数列表 -->
+                <ScrollViewer Grid.Row="1" Margin="0,4,0,0">
+                    <StackPanel x:Name="ParamListPanel" Spacing="4"/>
+                </ScrollViewer>
+
+                <!-- 控件预览摘要 -->
+                <Border Grid.Row="2" Background="{StaticResource HmiBgDeepBrush}" CornerRadius="4" Padding="8,4" Margin="0,4,0,0">
+                    <StackPanel Spacing="2">
+                        <TextBlock x:Name="TxtControlsSummary" Text="{res:Loc faceplate.contains.controls}"
+                                   Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- ═══ 底部按钮 ═══ -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Spacing="8" Margin="0,8,0,0">
+            <Button x:Name="BtnCancel" Content="{res:Loc gen.cancel}"
+                    Background="Transparent" Foreground="{StaticResource HmiTextPrimaryBrush}" BorderBrush="{StaticResource HmiInputBorderBrush}"
+                    Padding="20,6" FontSize="13"
+                    Click="OnCancelClicked"/>
+            <Button x:Name="BtnSave" Content="{res:Loc gen.save}"
+                    Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}" BorderThickness="0"
+                    Padding="20,6" FontSize="13" FontWeight="Medium"
+                    Click="OnSaveClicked"/>
+        </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

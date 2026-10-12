@@ -1,0 +1,32 @@
+page,name,reference,part_or_value,status,notes
+P1,POWER_INPUT,J1,2P terminal,required,12-24V DC input
+P1,POWER_INPUT,Q1,P-MOS reverse protection,required,Confirm Vds and Rds(on)
+P1,POWER_INPUT,F1,2A-3A resettable fuse,required,Select according to input current
+P1,POWER_INPUT,D1,SMCJ24A or SMBJ24A,required,Confirm surge class and standoff
+P1,POWER_INPUT,U1,MP1584EN or TPS5430,TBD,Wide input 5V buck and thermal check
+P1,POWER_INPUT,U2,3V3 buck,TBD,EN_3V3
+P1,POWER_INPUT,U3,1V8 LDO/buck,TBD,RTC/PLL/analog
+P1,POWER_INPUT,U4,0V9 buck,TBD,EN_0V9 after VCC3V3
+P1,POWER_INPUT,U5,1V5 buck,TBD,EN_1V5 after VDD0V9
+P2,SOC_CORE,U6,T113-S3,required,Verify every physical pin against official manual
+P2,SOC_CORE,X1,24MHz crystal/oscillator,TBD,Follow T113 reference design
+P2,SOC_CORE,X2,32.768kHz crystal,TBD,Optional RTC source
+P2,SOC_CORE,SW1,RESET key,required,Active low
+P2,SOC_CORE,SW2,FEL key,required,USB0 recovery
+P3,STORAGE,U7,W25N01GVZEIG or compatible,TBD,Verify SPI0 pin mux and boot straps
+P3,STORAGE,J2,TF card socket,required,SDC0 with series resistor positions
+P4,LCD_RGB888,J3,50P FPC 0.5mm,required,Use lcd-50pin-pinout.csv exactly
+P4,LCD_RGB888,R401-R424,22R/0R series resistor array,TBD,Place near T113 or FPC per SI review
+P5,LCD_POWER_BACKLIGHT,U12,TPS65100/TBD,TBD,Target AVDD 9V VGH 18V VGL -6V VCOM 3.15V confirmed
+P5,LCD_POWER_BACKLIGHT,U13,MT9284/SY7208/TBD,TBD,Target VLED 9.6V 180mA typical confirmed; topology pending
+P5,LCD_POWER_BACKLIGHT,RCS1,Current sense resistor,TBD,Make selectable and testable
+P6,RTP_TOUCH,J4,4P RTP FPC,TBD,Electrical order fixed 1=Y1 2=X1 3=Y2 4=X2; footprint/contact side pending
+P6,RTP_TOUCH,D401,4-channel ESD,TBD,Optional/DNP pending touch FPC mechanics
+P7,USB,J7,USB Type-C,required,USB0 UFP/OTG CC resistors
+P7,USB,J8,USB-A Host,required,USB1 VBUS load switch and ESD
+P8,COMM,U9,Isolated RS485 transceiver,TBD,ADUM1201 + MAX3485 or integrated isolated part
+P8,COMM,U10,RS232 transceiver,TBD,Confirm UART2/UART0 assignment
+P8,COMM,U11,IP101GRI or RTL8201F,TBD,Confirm RMII clock direction and PHY address
+P8,COMM,J9,RJ45 with magnetics,required,EMC/ESD/termination review
+P9,IO_EXPANSION,J10,4P debug header,required,UART1 TX/RX/GND/3V3
+P9,IO_EXPANSION,J11,2x12 expansion header,TBD,Only expose pins after mux review

@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "template": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": {
+          "type": "string",
+          "enum": ["通用", "电机控制", "温控", "阀门", "泵", "仪表", "自定义"]
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": {control_type_enum}
+              },
+              "name": { "type": "string" },
+              "x": { "type": "integer" },
+              "y": { "type": "integer" },
+              "width": { "type": "integer" },
+              "height": { "type": "integer" },
+              "text": { "type": "string" },
+              "bgColor": { "type": "string" },
+              "textColor": { "type": "string" },
+              "radius": { "type": "integer" },
+              "binding": { "type": "string" }
+            },
+            "required": ["type", "name", "x", "y", "width", "height", "text", "bgColor", "textColor", "radius", "binding"],
+            "additionalProperties": false
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "displayName": { "type": "string" },
+              "type": { "type": "string", "enum": {parameter_type_enum} },
+              "defaultValue": { "type": "string" },
+              "description": { "type": "string" }
+            },
+            "required": ["name", "displayName", "type", "defaultValue", "description"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["name", "description", "category", "controls", "parameters"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["template"],
+  "additionalProperties": false
+}

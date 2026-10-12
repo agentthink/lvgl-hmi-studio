@@ -1,0 +1,173 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.AlarmListView"
+        Title="{res:Loc win.alarm.list}"
+        Width="700"
+        Height="500"
+        MinWidth="525"
+        MinHeight="375"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc win.alarm.list}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容 -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgWindowBrush}" Padding="12">
+        <Grid RowDefinitions="Auto,*,Auto">
+            <!-- 顶部工具栏 -->
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="0,0,0,8">
+                <!-- 状态筛选 -->
+                <ComboBox x:Name="CmbStateFilter" SelectedIndex="0"
+                          Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                          BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                          Padding="8,4" FontSize="13" Width="100">
+                    <ComboBoxItem Content="{res:Loc alarm.filter.all}" />
+                    <ComboBoxItem Content="{res:Loc alarm.filter.active}" />
+                    <ComboBoxItem Content="{res:Loc alarm.filter.acked}" />
+                    <ComboBoxItem Content="{res:Loc alarm.filter.cleared}" />
+                </ComboBox>
+
+                <!-- 严重级别筛选 -->
+                <ComboBox x:Name="CmbSeverityFilter" SelectedIndex="0"
+                          Grid.Column="1" Margin="8,0,0,0"
+                          Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                          BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                          Padding="8,4" FontSize="13" Width="110">
+                    <ComboBoxItem Content="{res:Loc alarm.level.all}" />
+                    <ComboBoxItem Content="{res:Loc alarm.level.info}" />
+                    <ComboBoxItem Content="{res:Loc alarm.level.warning}" />
+                    <ComboBoxItem Content="{res:Loc alarm.level.critical}" />
+                    <ComboBoxItem Content="{res:Loc alarm.level.emergency}" />
+                </ComboBox>
+
+                <!-- 右侧按钮 -->
+                <Button x:Name="BtnAcknowledge" Content="{res:Loc alarm.ack.selected}"
+                        Grid.Column="3"
+                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="12,6"
+                        FontSize="13" Margin="0,0,8,0"/>
+
+                <Button x:Name="BtnClearReturned" Content="{res:Loc alarm.clear.cleared}"
+                        Grid.Column="4"
+                        Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                        BorderThickness="0" Padding="12,6"
+                        FontSize="13" Margin="0,0,8,0"/>
+
+                <Button x:Name="BtnExportReport" Content="{res:Loc alarm.report.btn}"
+                        Grid.Column="5"
+                        Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="12,6"
+                        FontSize="13" Margin="0,0,8,0"/>
+
+                <Button x:Name="BtnExportBundle" Content="{res:Loc report.bundle.btn}"
+                        Grid.Column="6"
+                        Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="12,6"
+                        FontSize="13" Margin="0,0,8,0"/>
+
+                <Button x:Name="BtnReportDesigner" Content="{res:Loc report.designer.btn}"
+                        Grid.Column="7"
+                        Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="12,6"
+                        FontSize="13"/>
+            </Grid>
+
+            <!-- 中间：报警列表区域（表头 + 列表） -->
+            <Grid RowDefinitions="Auto,*" Grid.Row="1">
+                <!-- 表头 -->
+                <Border Background="{StaticResource HmiBgPanelBrush}" CornerRadius="4" Padding="8,6" Margin="0,0,0,2">
+                    <Grid ColumnDefinitions="28,100,*,100,80,80">
+                        <TextBlock Text="" Foreground="{StaticResource HmiTextHintBrush}" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc user.mgr.audit.time}" Grid.Column="1" Foreground="{StaticResource HmiTextHintBrush}" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc alarm.name}" Grid.Column="2" Foreground="{StaticResource HmiTextHintBrush}" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc tag.monitor.status}" Grid.Column="3" Foreground="{StaticResource HmiTextHintBrush}" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc alarm.trigger.value}" Grid.Column="4" Foreground="{StaticResource HmiTextHintBrush}" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc alarm.ack.by}" Grid.Column="5" Foreground="{StaticResource HmiTextHintBrush}" FontSize="12" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- 报警列表 -->
+                <ListBox x:Name="AlarmList"
+                         Grid.Row="1"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="0,1"/>
+                            <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                        <Style Selector="ListBoxItem:selected">
+                            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                        </Style>
+                        <Style Selector="ListBoxItem:focus">
+                            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                        </Style>
+                    </ListBox.Styles>
+                </ListBox>
+
+                <!-- 空状态提示 -->
+                <TextBlock x:Name="EmptyHint"
+                           Text="{res:Loc alarm.no.records}"
+                           Foreground="{StaticResource HmiTextHintBrush}" FontSize="14"
+                           Grid.Row="1"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           IsHitTestVisible="False"/>
+            </Grid>
+
+            <!-- 底部状态栏 -->
+            <TextBlock x:Name="StatusText"
+                       Grid.Row="2"
+                       Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                       Margin="0,8,0,0"/>
+        </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

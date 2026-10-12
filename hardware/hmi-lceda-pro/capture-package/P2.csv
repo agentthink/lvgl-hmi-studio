@@ -1,0 +1,12 @@
+page,block,component,signal_or_pin,net,value_or_note,status
+P2,SOC_CORE,U6,RGB24 pins,LCD_B0..LCD_R7,T113-S3,confirmed mapping
+P2,SOC_CORE,U6,PD18,LCD_DCLK,Pixel clock,confirmed
+P2,SOC_CORE,U6,PD19,LCD_DE,DE mode,confirmed
+P2,SOC_CORE,U6,PD20,LCD_HSYNC,Horizontal sync,confirmed
+P2,SOC_CORE,U6,PD21,LCD_VSYNC,Vertical sync,confirmed
+P2,SOC_CORE,U6,PD22,LCD_BL_PWM,PWM7,confirmed
+P2,SOC_CORE,U6,PE9,LCD_RESET,Low-active panel reset,confirmed
+P2,SOC_CORE,U6,TP-X1..TP-Y2,TCH_XP/XN/YP/YN,Internal RTP ADC,confirmed
+P2,SOC_CORE,U6,VCC pins,VCC3V3/VCC1V8/VDD0V9/VCC1V5,Decoupling required,required
+P2,SOC_CORE,X1,1/2,X24M_IN/X24M_OUT,24MHz source,TBD
+P2,SOC_CORE,X2,1/2,X32K_IN/X32K_OUT,32.768kHz RTC,TBD

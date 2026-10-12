@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        x:Class="HmiEditor.App.Views.NavigationFlowView">
+    <Grid RowDefinitions="Auto,*" Background="{StaticResource HmiBgDarkBrush}">
+        <!-- ════════════════════════════════════════ -->
+        <!-- 顶部工具条                                -->
+        <!-- ════════════════════════════════════════ -->
+        <Border Background="{StaticResource HmiBgPanelBrush}" BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" Spacing="8" Margin="10,6">
+                <TextBlock Text="{res:Loc nav.flow.title}"
+                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="14" FontWeight="Bold"
+                           VerticalAlignment="Center" Margin="0,0,12,0"/>
+                <Button x:Name="BtnRefresh" Content="{res:Loc project.refresh}"
+                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="12,5"
+                        FontSize="12"
+                        ToolTip.Tip="{res:Loc nav.flow.tt.rebuild}"/>
+                <Button x:Name="BtnSave" Content="{res:Loc nav.flow.save}"
+                        Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="12,5"
+                        FontSize="12"
+                        ToolTip.Tip="{res:Loc nav.flow.tt.save}"/>
+                <Button x:Name="BtnLoad" Content="{res:Loc nav.flow.load}"
+                        Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="12,5"
+                        FontSize="12"
+                        ToolTip.Tip="{res:Loc nav.flow.tt.load}"/>
+                <TextBlock x:Name="StatusText"
+                           Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                           VerticalAlignment="Center" Margin="12,0,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ════════════════════════════════════════ -->
+        <!-- 画布区域                                  -->
+        <!-- ════════════════════════════════════════ -->
+        <ScrollViewer Grid.Row="1"
+                      Background="{StaticResource HmiBgDarkBrush}"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto">
+            <Canvas x:Name="GraphCanvas" Background="{StaticResource HmiBgDarkBrush}"/>
+        </ScrollViewer>
+
+        <!-- 空状态提示 -->
+        <TextBlock x:Name="EmptyHint"
+                   Text="{res:Loc nav.flow.empty.hint}"
+                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="13"
+                   Grid.Row="1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   IsHitTestVisible="False"/>
+    </Grid>
+</UserControl>

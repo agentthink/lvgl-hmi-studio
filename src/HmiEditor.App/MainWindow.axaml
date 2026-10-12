@@ -1,0 +1,650 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:HmiEditor.App.Views"
+        xmlns:ctrl="using:HmiEditor.App.Controls"
+        xmlns:dock="using:Dock.Avalonia.Controls"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        x:Class="HmiEditor.App.MainWindow"
+        Title="{res:Loc app.title}"
+        Width="1400"
+        Height="900"
+        WindowState="Maximized"
+        Background="{StaticResource HmiBgDarkBrush}">
+
+    <Grid RowDefinitions="36,Auto,Auto,*,Auto"
+          Background="{DynamicResource HmiBgPanelBrush}">
+
+        <!-- ═══ 菜单栏 ═══ -->
+        <Menu Grid.Row="0" Background="{StaticResource HmiBgPanelAltBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}">
+            <MenuItem Header="{res:Loc menu.file}" Foreground="{StaticResource HmiTextPrimaryBrush}">
+                <MenuItem x:Name="MenuNewProject" Header="{res:Loc project.new}" InputGesture="Ctrl+N" />
+                <MenuItem x:Name="MenuOpenProject" Header="{res:Loc project.open}" InputGesture="Ctrl+O" />
+                <MenuItem x:Name="MenuSaveProject" Header="{res:Loc project.save}" InputGesture="Ctrl+S" />
+                <Separator />
+                <MenuItem x:Name="MenuExportCode" Header="{res:Loc project.export.c}" InputGesture="Ctrl+E" />
+                <MenuItem x:Name="MenuCompile" Header="{res:Loc menu.compile}" InputGesture="Ctrl+B" />
+                <MenuItem x:Name="MenuBuildRun" Header="{res:Loc menu.build.run}" InputGesture="Ctrl+Shift+B" />
+                <MenuItem x:Name="MenuDownload" Header="{res:Loc menu.download}" InputGesture="Ctrl+Shift+D" IsEnabled="False" />
+                <MenuItem x:Name="MenuValidateCode" Header="{res:Loc menu.validate.code}" InputGesture="Ctrl+Shift+V" />
+                <MenuItem x:Name="MenuSimulatorExport" Header="{res:Loc menu.export.simulator}" />
+                <Separator />
+                <MenuItem x:Name="MenuExit" Header="{res:Loc project.exit}" InputGesture="Alt+F4" />
+            </MenuItem>
+            <MenuItem Header="{res:Loc menu.edit}" Foreground="{StaticResource HmiTextPrimaryBrush}">
+                <MenuItem x:Name="MenuUndo" Header="{res:Loc project.undo}" InputGesture="Ctrl+Z" IsEnabled="False" />
+                <MenuItem x:Name="MenuRedo" Header="{res:Loc project.redo}" InputGesture="Ctrl+Shift+Z" IsEnabled="False" />
+                <Separator />
+                <MenuItem x:Name="MenuDelete" Header="{res:Loc menu.edit.delete}" />
+                <MenuItem x:Name="MenuSelectAll" Header="{res:Loc project.select.all}" />
+                <Separator />
+                <MenuItem x:Name="MenuCreateTemplate" Header="{res:Loc menu.create.template}" InputGesture="Ctrl+Shift+T" />
+                <MenuItem x:Name="MenuFaceplateEditor" Header="{res:Loc win.faceplate.editor}" />
+            </MenuItem>
+            <MenuItem Header="{res:Loc menu.view}" Foreground="{StaticResource HmiTextPrimaryBrush}">
+                <MenuItem x:Name="MenuScreenManager" Header="{res:Loc win.screen.manager}" InputGesture="Ctrl+M" />
+                <MenuItem x:Name="MenuStyleEditor" Header="{res:Loc menu.view.themeEditor}" InputGesture="Ctrl+T" />
+                <MenuItem x:Name="MenuAnimationEditor" Header="{res:Loc win.animation.editor}" InputGesture="Ctrl+Shift+A" />
+                <Separator />
+                <MenuItem x:Name="MenuZoomIn" Header="{res:Loc project.zoom.in}" />
+                <MenuItem x:Name="MenuZoomOut" Header="{res:Loc project.zoom.out}" />
+                <MenuItem x:Name="MenuZoomReset" Header="{res:Loc project.zoom.reset}" />
+                <Separator />
+                <MenuItem Header="{res:Loc menu.view.theme}">
+                    <MenuItem x:Name="MenuThemeDark" Header="{res:Loc menu.theme.dark}" IsChecked="True">
+                        <MenuItem.Icon>
+                            <PathIcon Data="M12,3A9,9,0,0,0,3,12A9,9,0,0,0,12,21A9,9,0,0,0,21,12A9,9,0,0,0,12,3M12,2A10,10,0,0,1,22,12A10,10,0,0,1,12,22A10,10,0,0,1,2,12A10,10,0,0,1,12,2Z" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MenuThemeOcean" Header="{res:Loc menu.theme.ocean}">
+                        <MenuItem.Icon>
+                            <PathIcon Data="M12,2A10,10,0,0,0,2,12A10,10,0,0,0,12,22A10,10,0,0,0,22,12A10,10,0,0,0,12,2M12,4A8,8,0,0,1,20,12A8,8,0,0,1,12,20A8,8,0,0,1,4,12A8,8,0,0,1,12,4M12,6A6,6,0,0,0,6,12A6,6,0,0,0,12,18A6,6,0,0,0,18,12A6,6,0,0,0,12,6Z" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="MenuThemeLight" Header="{res:Loc menu.theme.light}">
+                        <MenuItem.Icon>
+                            <PathIcon Data="M12,2A10,10,0,0,1,22,12A10,10,0,0,1,12,22A10,10,0,0,1,2,12A10,10,0,0,1,12,2M12,7A5,5,0,0,0,7,12A5,5,0,0,0,12,17A5,5,0,0,0,17,12A5,5,0,0,0,12,7M12,4A8,8,0,0,1,20,12A8,8,0,0,1,12,20A8,8,0,0,1,4,12A8,8,0,0,1,12,4Z" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="{res:Loc menu.panel}" Foreground="{StaticResource HmiTextPrimaryBrush}">
+                    <MenuItem x:Name="MenuPanelToolbox" Header="{res:Loc project.toolbox}" />
+                    <MenuItem x:Name="MenuPanelFaceplate" Header="{res:Loc win.faceplate.lib}" />
+                    <MenuItem x:Name="MenuPanelCanvas" Header="{res:Loc win.design.canvas}" />
+                    <MenuItem x:Name="MenuPanelProjectExplorer" Header="{res:Loc win.project.explorer}" />
+                    <MenuItem x:Name="MenuPanelProperty" Header="{res:Loc project.props}" />
+                    <MenuItem x:Name="MenuPanelLayers" Header="{res:Loc layer.title}" />
+                    <MenuItem x:Name="MenuPanelAssets" Header="{res:Loc asset.title}" />
+                    <MenuItem x:Name="MenuPanelResourceLibrary" Header="{res:Loc menu.panel.resource.library}" />
+                    <MenuItem x:Name="MenuPanelNavigation" Header="{res:Loc nav.flow.title}" />
+                    <MenuItem x:Name="MenuPanelAuditLog" Header="{res:Loc audit.title}" />
+                    <MenuItem x:Name="MenuPanelCrossReference" Header="{res:Loc cross.ref.title}" />
+                    <MenuItem x:Name="MenuPanelAiChat" Header="{res:Loc dock.title.aichat}" />
+                </MenuItem>
+                <Separator />
+                <MenuItem x:Name="MenuReloadPanels" Header="{res:Loc menu.reload.panels}" InputGesture="F5" />
+            </MenuItem>
+            <MenuItem Header="{res:Loc menu.tools}" Foreground="{StaticResource HmiTextPrimaryBrush}">
+                <MenuItem x:Name="MenuProjectSettings" Header="{res:Loc win.project.settings}" InputGesture="Ctrl+Alt+P" />
+                <Separator />
+                <MenuItem x:Name="MenuCommConfig" Header="{res:Loc comm.config.title}" InputGesture="Ctrl+Alt+C" />
+                <MenuItem x:Name="MenuUserManager" Header="{res:Loc win.user.manager}" InputGesture="Ctrl+U" />
+                <MenuItem x:Name="MenuAlarmConfig" Header="{res:Loc alarm.config.title}" InputGesture="Ctrl+Alt+A" />
+                <MenuItem x:Name="MenuAlarmList" Header="{res:Loc alarm.list.title}" InputGesture="Ctrl+L" />
+                <MenuItem x:Name="MenuTrendConfig" Header="{res:Loc trend.config}" InputGesture="Ctrl+R" />
+                <Separator />
+                <MenuItem x:Name="MenuScriptEditor" Header="{res:Loc script.title}" InputGesture="Ctrl+Shift+S" />
+                <MenuItem x:Name="MenuRecipeEditor" Header="{res:Loc recipe.title}" InputGesture="Ctrl+Shift+R" />
+                <MenuItem x:Name="MenuVariableImport" Header="{res:Loc var.import.title}" InputGesture="Ctrl+Alt+V" />
+                <MenuItem x:Name="MenuVariableManager" Header="{res:Loc win.variable.manager}" InputGesture="Ctrl+Shift+M" />
+                <MenuItem x:Name="MenuSimulator" Header="{res:Loc sim.title}" InputGesture="Ctrl+Shift+I" />
+                <MenuItem x:Name="MenuTagMonitor" Header="{res:Loc tag.monitor.title}" />
+                <Separator />
+                <MenuItem x:Name="MenuCrossReference" Header="{res:Loc cross.ref.title}" />
+                <MenuItem x:Name="MenuAuditLog" Header="{res:Loc audit.title}" />
+                <MenuItem x:Name="MenuDeviceManager" Header="{res:Loc device.title}" InputGesture="Ctrl+Alt+D" />
+                <MenuItem x:Name="MenuLogin" Header="{res:Loc login.title}" InputGesture="Ctrl+Shift+L" />
+                <Separator />
+                <MenuItem x:Name="MenuGitInit" Header="{res:Loc menu.git.init}" />
+                <MenuItem x:Name="MenuGitCommit" Header="{res:Loc menu.git.commit}" />
+                <MenuItem x:Name="MenuGitHistory" Header="{res:Loc menu.git.history}" />
+                <MenuItem x:Name="MenuGitRefresh" Header="{res:Loc menu.git.refresh}" />
+            </MenuItem>
+            <MenuItem Header="{res:Loc menu.language}" Foreground="{StaticResource HmiTextPrimaryBrush}">
+                <MenuItem x:Name="MenuLangZhCN" Header="{res:Loc menu.lang.zhCN}" IsChecked="True" />
+                <MenuItem x:Name="MenuLangEnUS" Header="{res:Loc menu.lang.enUS}" />
+            </MenuItem>
+            <MenuItem Header="{res:Loc menu.help}" Foreground="{StaticResource HmiTextPrimaryBrush}">
+                <MenuItem x:Name="MenuAbout" Header="{res:Loc project.about}" />
+                <MenuItem x:Name="MenuDockDiag" Header="{res:Loc menu.dock.diag}" InputGesture="F12" />
+            </MenuItem>
+        </Menu>
+
+        <!-- ═══ CommandBar 工具栏 (Avalonia 原生 CommandBar) ═══ -->
+        <Border Grid.Row="1" Background="{StaticResource HmiBgPanelBrush}">
+            <CommandBar DefaultLabelPosition="Right"
+                        Background="{StaticResource HmiBgPanelBrush}"
+                        Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        HorizontalAlignment="Stretch"
+                        IsDynamicOverflowEnabled="True">
+                <CommandBar.PrimaryCommands>
+
+                    <!-- 文件组 -->
+                    <CommandBarButton x:Name="BtnNewProject" Label="{res:Loc project.new}" ToolTip.Tip="{res:Loc project.new}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconNewProject}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnOpenProject" Label="{res:Loc project.open}" ToolTip.Tip="{res:Loc project.open}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconOpenProject}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnSaveProject" Label="{res:Loc project.save}" ToolTip.Tip="{res:Loc project.save}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconSaveProject}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnExportCode" Label="{res:Loc project.export.c}" ToolTip.Tip="{res:Loc project.export.c}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconExportCode}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+
+                    <CommandBarSeparator/>
+
+                    <!-- 构建与部署组 -->
+                    <CommandBarButton x:Name="BtnCompile" Label="{res:Loc toolbar.compile}" ToolTip.Tip="{res:Loc toolbar.compile.tt}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconCompile}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnBuildRun" Label="{res:Loc toolbar.build.run}" ToolTip.Tip="{res:Loc toolbar.build.run.tt}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconBuildRun}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnDownloadHmi" Label="{res:Loc toolbar.download}" ToolTip.Tip="{res:Loc toolbar.download.tt}" IsEnabled="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconDownloadHmi}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+
+                    <CommandBarSeparator/>
+
+                    <!-- 编辑组 -->
+                    <CommandBarButton x:Name="BtnUndo" Label="{res:Loc project.undo}" ToolTip.Tip="{res:Loc project.undo}" IsEnabled="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconUndo}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnRedo" Label="{res:Loc project.redo}" ToolTip.Tip="{res:Loc project.redo}" IsEnabled="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconRedo}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnCopy" Label="{res:Loc toolbar.copy}" ToolTip.Tip="{res:Loc toolbar.copy.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconCopy}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnPaste" Label="{res:Loc toolbar.paste}" ToolTip.Tip="{res:Loc toolbar.paste.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconPaste}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnDuplicate" Label="{res:Loc toolbar.duplicate}" ToolTip.Tip="{res:Loc toolbar.duplicate.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconDuplicate}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnDeleteControl" Label="{res:Loc menu.edit.delete}" ToolTip.Tip="{res:Loc menu.edit.delete}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconDeleteControl}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+
+                    <!-- 变换组：旋转（左/右 90°）+ 水平/垂直镜像 + 重置 -->
+                    <CommandBarButton x:Name="BtnRotateLeft" Label="{res:Loc toolbar.rotate.left}" ToolTip.Tip="{res:Loc toolbar.rotate.left}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconRotateLeft}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnRotateRight" Label="{res:Loc toolbar.rotate.right}" ToolTip.Tip="{res:Loc toolbar.rotate.right}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconRotateRight}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnMirrorH" Label="{res:Loc toolbar.mirror.h}" ToolTip.Tip="{res:Loc toolbar.mirror.h}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconMirrorH}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnMirrorV" Label="{res:Loc toolbar.mirror.v}" ToolTip.Tip="{res:Loc toolbar.mirror.v}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconMirrorV}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnResetTransform" Label="{res:Loc toolbar.transform.reset}" ToolTip.Tip="{res:Loc toolbar.transform.reset}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconResetTransform}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+
+                    <CommandBarSeparator/>
+
+                    <!-- 视图组 -->
+                    <CommandBarButton x:Name="BtnZoomOut" Label="{res:Loc project.zoom.out}" ToolTip.Tip="{res:Loc project.zoom.out}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconZoomOut}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <ctrl:CommandBarElementContainer>
+                        <TextBlock x:Name="ZoomLevelText" Text="100%"
+                                   Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                   VerticalAlignment="Center" Margin="6,0"/>
+                    </ctrl:CommandBarElementContainer>
+                    <CommandBarButton x:Name="BtnZoomIn" Label="{res:Loc project.zoom.in}" ToolTip.Tip="{res:Loc project.zoom.in}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconZoomIn}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <ctrl:CommandBarElementContainer>
+                        <!-- I9: 自适应分辨率预览 -->
+                        <ComboBox x:Name="CboResolutionPreview" Width="118" FontSize="11"
+                                  VerticalAlignment="Center" Margin="6,0,2,0"
+                                  Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                  BorderBrush="{StaticResource HmiInputBorderBrush}">
+                            <ComboBoxItem Content="{res:Loc cb.resolution.off}" Tag=""/>
+                            <ComboBoxItem Content="{res:Loc cb.resolution.800x480}" Tag="800x480"/>
+                            <ComboBoxItem Content="{res:Loc cb.resolution.1024x600}" Tag="1024x600"/>
+                            <ComboBoxItem Content="{res:Loc cb.resolution.1280x800}" Tag="1280x800"/>
+                            <ComboBoxItem Content="{res:Loc cb.resolution.480x800}" Tag="480x800"/>
+                        </ComboBox>
+                    </ctrl:CommandBarElementContainer>
+                    <CommandBarButton x:Name="BtnNewScreen" Label="{res:Loc toolbar.newScreen}" ToolTip.Tip="{res:Loc toolbar.newScreen}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconNewScreen}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnScreenManager" Label="{res:Loc win.screen.manager}" ToolTip.Tip="{res:Loc win.screen.manager}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconScreenManager}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnReloadPanels" Label="{res:Loc toolbar.reloadPanels}" ToolTip.Tip="{res:Loc toolbar.reloadPanels.tt}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconReloadPanels}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+
+                    <CommandBarSeparator/>
+
+                    <!-- 格式组（上下文：选中控件时显示） -->
+                    <CommandBarButton x:Name="BtnAlignLeft" Label="{res:Loc toolbar.alignLeft}" ToolTip.Tip="{res:Loc toolbar.alignLeft}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconAlignLeft}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnAlignRight" Label="{res:Loc toolbar.alignRight}" ToolTip.Tip="{res:Loc toolbar.alignRight}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconAlignRight}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnAlignTop" Label="{res:Loc toolbar.alignTop}" ToolTip.Tip="{res:Loc toolbar.alignTop.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconAlignTop}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnAlignBottom" Label="{res:Loc toolbar.alignBottom}" ToolTip.Tip="{res:Loc toolbar.alignBottom.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconAlignBottom}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnAlignCenterH" Label="{res:Loc toolbar.alignCenterH}" ToolTip.Tip="{res:Loc toolbar.alignCenterH}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconAlignCenterH}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnAlignCenterV" Label="{res:Loc toolbar.alignCenterV}" ToolTip.Tip="{res:Loc toolbar.alignCenterV}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconAlignCenterV}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnSameSize" Label="{res:Loc toolbar.sameSize}" ToolTip.Tip="{res:Loc toolbar.sameSize.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconSameSize}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnDistributeH" Label="{res:Loc toolbar.distributeH}" ToolTip.Tip="{res:Loc toolbar.distributeH.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconDistributeH}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnDistributeV" Label="{res:Loc toolbar.distributeV}" ToolTip.Tip="{res:Loc toolbar.distributeV.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconDistributeV}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnGroup" Label="{res:Loc toolbar.group}" ToolTip.Tip="{res:Loc toolbar.group.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconGroup}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnUngroup" Label="{res:Loc toolbar.ungroup}" ToolTip.Tip="{res:Loc toolbar.ungroup.tt}" DynamicOverflowOrder="100" IsVisible="False">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconUngroup}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+
+                    <CommandBarSeparator/>
+
+                    <!-- 工具组 -->
+                    <CommandBarButton x:Name="BtnStyleEditor" Label="{res:Loc toolbar.theme}" ToolTip.Tip="{res:Loc menu.view.themeEditor}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconStyleEditor}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnSettings" Label="{res:Loc toolbar.settings}" ToolTip.Tip="{res:Loc toolbar.settings.tt}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconSettings}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnUserManager" Label="{res:Loc win.user.manager}" ToolTip.Tip="{res:Loc win.user.manager}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconUserManager}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnAlarmConfig" Label="{res:Loc alarm.config.title}" ToolTip.Tip="{res:Loc alarm.config.title}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconAlarmConfig}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnTrendConfig" Label="{res:Loc trend.config}" ToolTip.Tip="{res:Loc trend.config}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconTrendConfig}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnScriptEditor" Label="{res:Loc script.title}" ToolTip.Tip="{res:Loc script.title}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconScriptEditor}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnRecipeEditor" Label="{res:Loc recipe.title}" ToolTip.Tip="{res:Loc recipe.title}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconRecipeEditor}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnVariableImport" Label="{res:Loc var.import.title}" ToolTip.Tip="{res:Loc var.import.title}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconVariableImport}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnVariableManager" Label="{res:Loc win.variable.manager}" ToolTip.Tip="{res:Loc win.variable.manager}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconVariableManager}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+                    <CommandBarButton x:Name="BtnSimulator" Label="{res:Loc sim.title}" ToolTip.Tip="{res:Loc sim.title}">
+                        <CommandBarButton.Icon>
+                            <PathIcon Data="{StaticResource IconSimulator}"/>
+                        </CommandBarButton.Icon>
+                    </CommandBarButton>
+
+                </CommandBar.PrimaryCommands>
+            </CommandBar>
+        </Border>
+
+        <!-- ═══ I10: 绘图工具栏（基础画图按钮 + 控件快捷按钮）═══ -->
+        <Border Grid.Row="2" Background="{StaticResource HmiBgPanelAltBrush}"
+                Padding="8,4" BorderThickness="0,0,0,1"
+                BorderBrush="{StaticResource HmiInputBorderBrush}">
+            <Border.Styles>
+                <!-- 绘图工具按钮（互斥单选） -->
+                <Style Selector="ToggleButton">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+                    <Setter Property="Padding" Value="6,3"/>
+                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="Margin" Value="1,0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="MinWidth" Value="30"/>
+                </Style>
+                <Style Selector="ToggleButton:pointerover">
+                    <Setter Property="Background" Value="{StaticResource HmiBgDeepBrush}"/>
+                </Style>
+                <Style Selector="ToggleButton:checked">
+                    <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                    <Setter Property="Foreground" Value="{StaticResource HmiLinkBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource HmiLinkBrush}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <!-- 控件快捷按钮（单击即添加，非互斥） -->
+                <Style Selector="Button.drw-qbtn">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+                    <Setter Property="Padding" Value="6,3"/>
+                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="Margin" Value="1,0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="MinWidth" Value="30"/>
+                </Style>
+                <Style Selector="Button.drw-qbtn:pointerover">
+                    <Setter Property="Background" Value="{StaticResource HmiBgDeepBrush}"/>
+                </Style>
+                <Style Selector="Button.drw-qbtn:pressed">
+                    <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                </Style>
+                <!-- 绘图工具栏图标：PathIcon 模板用 Fill 填充，会把描边线条型图标
+                    渲染成实心色块（矩形/椭圆/按钮框）或空白（直线/折线/文本），
+                    故改用 Path 控件 + Stroke 描边渲染。
+                     ⚠ 几何仍取自单一来源 Assets/Icons.axaml（{StaticResource IconDraw*/IconQuick*}），
+                       **不要内联**：曾经内联过一轮，同一份几何在这两个文件里各存一份，
+                       改一处不改另一处会静默产生视觉分叉，且编译期与运行期都不报错。
+                       守它的判据：DrawingToolbarIcons_ResolveFromTheIconDictionary。 -->
+                <Style Selector="Path">
+                    <Setter Property="Stroke" Value="{StaticResource HmiTextSecondaryBrush}"/>
+                    <Setter Property="StrokeThickness" Value="1.5"/>
+                    <Setter Property="Fill" Value="Transparent"/>
+                    <Setter Property="Stretch" Value="Uniform"/>
+                    <Setter Property="Width" Value="16"/>
+                    <Setter Property="Height" Value="16"/>
+                </Style>
+                <Style Selector="ToggleButton:checked Path">
+                    <Setter Property="Stroke" Value="{StaticResource HmiLinkBrush}"/>
+                </Style>
+            </Border.Styles>
+
+            <DockPanel>
+                <!-- 绘图提示（激活工具时显示） -->
+                <TextBlock x:Name="DrawHintText" DockPanel.Dock="Right"
+                           Text="{res:Loc draw.hint}"
+                           Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                           VerticalAlignment="Center" Margin="8,0,0,0"
+                           IsVisible="False" />
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                    <StackPanel Orientation="Horizontal" Spacing="2">
+
+                        <!-- 绘图工具组 -->
+                        <TextBlock Text="{res:Loc draw.group.shapes}"
+                                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                                   VerticalAlignment="Center" Margin="4,0,6,0"/>
+                        <ToggleButton x:Name="BtnToolSelect" Tag="" IsChecked="True"
+                                      ToolTip.Tip="{res:Loc draw.select}">
+                            <Path Data="{StaticResource IconDrawSelect}"/>
+                        </ToggleButton>
+                        <ToggleButton x:Name="BtnToolRectangle" Tag="Rectangle"
+                                      ToolTip.Tip="{res:Loc draw.rectangle}">
+                            <Path Data="{StaticResource IconDrawRectangle}"/>
+                        </ToggleButton>
+                        <ToggleButton x:Name="BtnToolEllipse" Tag="Ellipse"
+                                      ToolTip.Tip="{res:Loc draw.ellipse}">
+                            <Path Data="{StaticResource IconDrawEllipse}"/>
+                        </ToggleButton>
+                        <ToggleButton x:Name="BtnToolPolyline" Tag="Polyline"
+                                      ToolTip.Tip="{res:Loc draw.polyline}">
+                            <Path Data="{StaticResource IconDrawPolyline}"/>
+                        </ToggleButton>
+                        <ToggleButton x:Name="BtnToolArc" Tag="Arc"
+                                      ToolTip.Tip="{res:Loc draw.arc}">
+                            <Path Data="{StaticResource IconDrawArc}"/>
+                        </ToggleButton>
+                        <ToggleButton x:Name="BtnToolLine" Tag="Line"
+                                      ToolTip.Tip="{res:Loc draw.line}">
+                            <Path Data="{StaticResource IconDrawLine}"/>
+                        </ToggleButton>
+                        <ToggleButton x:Name="BtnToolText" Tag="Label"
+                                      ToolTip.Tip="{res:Loc draw.text}">
+                            <Path Data="{StaticResource IconDrawText}"/>
+                        </ToggleButton>
+
+                        <!-- 分隔线 -->
+                        <Rectangle Width="1" Height="18" Fill="{StaticResource HmiInputBorderBrush}" Margin="6,0"/>
+
+                        <!-- 控件快捷组 -->
+                        <TextBlock Text="{res:Loc draw.group.controls}"
+                                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                                   VerticalAlignment="Center" Margin="4,0,6,0"/>
+                        <Button x:Name="BtnQuickButton" Classes="drw-qbtn" Tag="Button"
+                                ToolTip.Tip="{res:Loc tb.button}">
+                            <Path Data="{StaticResource IconQuickButton}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickLabel" Classes="drw-qbtn" Tag="Label"
+                                ToolTip.Tip="{res:Loc tb.label}">
+                            <Path Data="{StaticResource IconQuickLabel}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickSlider" Classes="drw-qbtn" Tag="Slider"
+                                ToolTip.Tip="{res:Loc tb.slider}">
+                            <Path Data="{StaticResource IconQuickSlider}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickSwitch" Classes="drw-qbtn" Tag="Switch"
+                                ToolTip.Tip="{res:Loc tb.switch}">
+                            <Path Data="{StaticResource IconQuickSwitch}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickCheckBox" Classes="drw-qbtn" Tag="CheckBox"
+                                ToolTip.Tip="{res:Loc tb.checkbox}">
+                            <Path Data="{StaticResource IconQuickCheckBox}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickLed" Classes="drw-qbtn" Tag="Led"
+                                ToolTip.Tip="{res:Loc tb.led}">
+                            <Path Data="{StaticResource IconQuickLed}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickGauge" Classes="drw-qbtn" Tag="Gauge"
+                                ToolTip.Tip="{res:Loc tb.gauge}">
+                            <Path Data="{StaticResource IconQuickGauge}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickBar" Classes="drw-qbtn" Tag="Bar"
+                                ToolTip.Tip="{res:Loc tb.bar}">
+                            <Path Data="{StaticResource IconQuickBar}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickDropdown" Classes="drw-qbtn" Tag="Dropdown"
+                                ToolTip.Tip="{res:Loc tb.dropdown}">
+                            <Path Data="{StaticResource IconQuickDropdown}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickTable" Classes="drw-qbtn" Tag="Table"
+                                ToolTip.Tip="{res:Loc tb.table}">
+                            <Path Data="{StaticResource IconQuickTable}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickImage" Classes="drw-qbtn" Tag="Image"
+                                ToolTip.Tip="{res:Loc tb.image}">
+                            <Path Data="{StaticResource IconQuickImage}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickKnob" Classes="drw-qbtn" Tag="Knob"
+                                ToolTip.Tip="{res:Loc tb.knob}">
+                            <Path Data="{StaticResource IconQuickKnob}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickTextArea" Classes="drw-qbtn" Tag="TextArea"
+                                ToolTip.Tip="{res:Loc tb.textarea}">
+                            <Path Data="{StaticResource IconQuickTextArea}"/>
+                        </Button>
+                        <Button x:Name="BtnQuickKeyboard" Classes="drw-qbtn" Tag="Keyboard"
+                                ToolTip.Tip="{res:Loc tb.keyboard}">
+                            <Path Data="{StaticResource IconQuickKeyboard}"/>
+                        </Button>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+
+        <!-- ═══ 主内容区 (Dock.Avalonia 可停靠布局) ═══ -->
+        <Grid Grid.Row="3">
+            <!-- 主：Dock.Avalonia 可停靠布局（拖拽 / Pin / 自动隐藏 / 布局序列化）。
+                 注意：所有面板 View 只能通过 Dock 的 Context 注入，切勿再放入其他
+                 ContentControl——同一 View 实例同时拥有两个 visual parent 会导致
+                 "already has a visual parent" 崩溃以及面板空白。 -->
+            <dock:DockControl x:Name="DockControl" IsDockingEnabled="True" />
+        </Grid>
+
+        <!-- ═══ 状态栏 ═══ -->
+        <Border x:Name="StatusBarPanel" Grid.Row="4" Background="{StaticResource HmiBgPanelAltBrush}" Padding="8,4">
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                <TextBlock x:Name="StatusText"
+                           Text="{res:Loc project.status.ready}"
+                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" />
+
+                <!-- 编译进度 -->
+                <StackPanel x:Name="CompileBarPanel" Grid.Column="1" Orientation="Horizontal" Spacing="6"
+                            VerticalAlignment="Center" Margin="12,0,0,0"
+                            IsVisible="False">
+                    <TextBlock x:Name="CompileStatusText" Text=""
+                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11" />
+                    <ProgressBar x:Name="CompileBar" Width="120" Height="10"
+                                 Minimum="0" Maximum="100" Value="0"
+                                 CornerRadius="2">
+                        <ProgressBar.Styles>
+                            <Style Selector="ProgressBar">
+                                <Setter Property="Transitions">
+                                    <Transitions>
+                                        <DoubleTransition Property="Value" Duration="0:0:0.3"/>
+                                        <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                                    </Transitions>
+                                </Setter>
+                            </Style>
+                        </ProgressBar.Styles>
+                    </ProgressBar>
+                </StackPanel>
+
+                <TextBlock x:Name="ControlCountText"
+                           Text="{res:Loc status.controls}"
+                           Grid.Column="2"
+                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                           Margin="0,0,16,0" />
+
+                <!-- Flash 仪表盘 -->
+                <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="6"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Flash:" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11" />
+                    <ProgressBar x:Name="FlashBar" Width="80" Height="10"
+                                 Minimum="0" Maximum="100" Value="0"
+                                 CornerRadius="2" />
+                    <TextBlock x:Name="FlashText" Text="0%"
+                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11" />
+                </StackPanel>
+
+                <!-- RAM 仪表盘 -->
+                <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="6"
+                            VerticalAlignment="Center" Margin="16,0,0,0">
+                    <TextBlock Text="RAM:" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11" />
+                    <ProgressBar x:Name="RamBar" Width="80" Height="10"
+                                 Minimum="0" Maximum="100" Value="0"
+                                 CornerRadius="2" />
+                    <TextBlock x:Name="RamText" Text="0%"
+                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11" />
+                </StackPanel>
+
+                <TextBlock x:Name="TargetText" Text="{res:Loc status.target.label}"
+                           Grid.Column="5" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                           Margin="16,0,0,0" />
+
+                <!-- I8: Git 工作流状态 -->
+                <TextBlock x:Name="GitStatusText" Text="{res:Loc status.git.not.ready}"
+                           Grid.Column="6" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                           Margin="16,0,0,0" />
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>

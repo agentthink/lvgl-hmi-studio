@@ -1,0 +1,167 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.DownloadToHmiView"
+        Title="{res:Loc toolbar.download}"
+        Width="720"
+        Height="560"
+        MinWidth="640"
+        MinHeight="480"
+        WindowStartupLocation="CenterOwner">
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc toolbar.download}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <TextBlock Text="✕" FontSize="12" FontFamily="Segoe UI Symbol, Noto Sans CJK SC"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 内容 -->
+            <Grid Grid.Row="1" RowDefinitions="*,130" Margin="12,10,12,12">
+                <Grid Grid.Row="0" RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="280,10,*">
+                    <!-- ── 左：连接设置 ── -->
+                    <Border Grid.Column="0" Grid.RowSpan="4" CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="12">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="{res:Loc device.channel}"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"/>
+                            <ComboBox x:Name="CmbChannelType" SelectedIndex="0" SelectionChanged="OnChannelTypeChanged"
+                                      Foreground="{StaticResource HmiTextPrimaryBrush}">
+                                <ComboBoxItem Content="{res:Loc device.channel.serial}"/>
+                                <ComboBoxItem Content="{res:Loc device.channel.ethernet}"/>
+                            </ComboBox>
+
+                            <Grid x:Name="SerialPanel" ColumnDefinitions="*,Auto" ColumnSpacing="6">
+                                <ComboBox x:Name="CmbPort" Grid.Column="0"
+                                          Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                          PlaceholderText="{res:Loc device.port}"/>
+                                <Button x:Name="BtnRefreshPorts" Grid.Column="1" Padding="8,5"
+                                        Click="OnRefreshPortsClicked"
+                                        ToolTip.Tip="{res:Loc device.refresh.ports}">
+                                    <TextBlock Text="⟳" FontSize="13"/>
+                                </Button>
+                            </Grid>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="6">
+                                <TextBlock Text="{res:Loc device.baudrate}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center"/>
+                                <TextBox x:Name="TxtBaudRate" Grid.Column="1" Text="115200"
+                                         Foreground="{StaticResource HmiTextPrimaryBrush}"/>
+                            </Grid>
+
+                            <StackPanel x:Name="TcpPanel" IsVisible="False" Spacing="6">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="6">
+                                    <TextBlock Text="{res:Loc device.host}"
+                                               Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtHost" Grid.Column="1" Text="192.168.100.100"
+                                             Foreground="{StaticResource HmiTextPrimaryBrush}"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="6">
+                                    <TextBlock Text="{res:Loc device.tcp.port}"
+                                               Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtTcpPort" Grid.Column="1" Text="23"
+                                             Foreground="{StaticResource HmiTextPrimaryBrush}"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <Button x:Name="BtnOpenClose" Content="{res:Loc device.open}"
+                                    Click="OnOpenCloseClicked" HorizontalAlignment="Stretch"/>
+
+                            <Border Height="1" Background="{StaticResource HmiBorderBrush}"/>
+
+                            <TextBlock Text="{res:Loc compile.output.label}"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"/>
+                            <TextBlock x:Name="TxtOutputPath" Text="—" TextWrapping="Wrap" FontSize="11"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}"/>
+                            <TextBlock x:Name="TxtOutputFiles" Text="" TextWrapping="Wrap" FontSize="11"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- ── 右：下载操作 ── -->
+                    <Border Grid.Column="2" Grid.Row="0" CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="14">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="{res:Loc device.swu.path}"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                       IsVisible="False"/>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                <TextBlock Text="{res:Loc download.target.hint}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center"/>
+                                <TextBox x:Name="TxtRemoteDir" Grid.Column="1" Text="/mnt/UDISK/hmi/src"
+                                         Foreground="{StaticResource HmiTextPrimaryBrush}"/>
+                            </Grid>
+
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                <TextBlock Text="{res:Loc download.so.label}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center"/>
+                                <Grid Grid.Column="1" ColumnDefinitions="*,Auto" ColumnSpacing="6">
+                                    <TextBox x:Name="TxtSoPath" Grid.Column="0" IsReadOnly="True"
+                                             Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             PlaceholderText="{res:Loc download.so.watermark}"/>
+                                    <Button x:Name="BtnBrowseSo" Grid.Column="1" Padding="10,5"
+                                            Click="OnBrowseSoClicked"
+                                            Content="{res:Loc download.so.browse}"/>
+                                </Grid>
+                            </Grid>
+                            <TextBlock x:Name="TxtSoHint" TextWrapping="Wrap" FontSize="11"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}"/>
+
+                            <Button x:Name="BtnDownload" Content="{res:Loc toolbar.download}"
+                                    Click="OnDownloadClicked" HorizontalAlignment="Left" Padding="18,7"/>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                <TextBlock Text="{res:Loc device.progress}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center"/>
+                                <ProgressBar x:Name="ProgDownload" Grid.Column="1" Minimum="0" Maximum="100" Value="0" Height="14"/>
+                            </Grid>
+                            <TextBlock x:Name="TxtStatus" Text="" TextWrapping="Wrap"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- ═══ 下部：操作日志 ═══ -->
+                <Border Grid.Row="1" CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="10" Margin="0,10,0,0">
+                    <Grid RowDefinitions="Auto,*">
+                        <TextBlock Grid.Row="0" Text="{res:Loc device.log}"
+                                   Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" Margin="0,0,0,6"/>
+                        <ListBox x:Name="LogBox" Grid.Row="1"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                 FontFamily="Cascadia Mono, Noto Sans CJK SC"
+                                 FontSize="12"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

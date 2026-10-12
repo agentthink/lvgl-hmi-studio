@@ -1,0 +1,27 @@
+# Auto-detect text files and normalize line endings
+* text=auto
+
+# Source code
+*.cs text diff=csharp
+*.axaml text
+*.xaml text
+*.csproj text
+*.props text
+*.slnx text
+*.json text
+*.ps1 text
+*.md text
+*.xml text
+*.yml text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.gif binary
+*.ttf binary
+*.zip binary
+*.exe binary
+*.dll binary
+
+# JS libs (vendored, don't normalize)
+*.min.js binary

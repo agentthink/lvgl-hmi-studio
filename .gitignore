@@ -1,0 +1,102 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.nuget/
+
+## VSTest 默认输出目录。带 --blame-hang / --results-directory 缺省时，VSTest 会把
+## Sequence.xml、转储等落在这里。2026-09-17 排查 testhost 崩溃时发现它没被忽略 ——
+## 跑一次就多出一个未跟踪目录，混进 git status 干扰"工作区是否干净"的判断。
+TestResults/
+
+## Build artifacts
+publish/
+artifacts/
+
+## OS files
+Thumbs.db
+.DS_Store
+
+## Runtime
+.app.pid
+*.log
+
+## Local debug / IDE artifacts
+.dbg/
+.trae/
+# IDE 分享包（zip，~2 MB；2026-10-11 阶段 296 起不再入库，改用 git rm --cached 取消跟踪）
+.trae-html-share-packages/
+*.csx
+debug-*.md
+
+## T113 完整 SDK（几十 GB，不入库）
+firmware/Tina-Linux/
+firmware/Tina-SDK/
+
+## T113 交叉编译产物/测试二进制（保留 .c/.py 源码）
+firmware/t113/app/gt911_test
+firmware/t113/app/gt911_test_dyn
+firmware/t113/app/gt911_test_small
+firmware/t113/app/gt911_test.b64
+
+## PC 模拟测试：LVGL 上游源码库 + 构建产物（仅提交自研代码）
+firmware/t113/host_test/lvgl/
+firmware/t113/host_test/objs/
+firmware/t113/host_test/hmi_settings_test
+firmware/t113/host_test/screenshots/
+
+## 生成工具的手工输出目录（不入库）
+## 说明：sim-output* 覆盖 SimExport 的默认输出与历史上的 sim-output-mock；
+## mock-hmi-out 是 MockHmiGen 的默认输出。正常验收走 scripts/verify.sh ——
+## 它写到 $TMPDIR，不落仓库。留在仓库里的旧产物会让人/AI 审查读到陈旧代码
+## 并得出错误结论（2026-08 已发生过一次）。
+sim-output*/
+mock-hmi-out/
+
+## 项目内工具数据（记忆/会话状态，不入库）
+.workbuddy/
+
+## 测试临时目录兜底（tests 的 TestTempDir 在系统 TMPDIR 空间不足时自动启用）
+.hmi-test-tmp/
+# 临时脚本 / 产物 A/B 输出（勿放 /tmp：会被清且可能是另一个挂载）
+.refactor-tmp/
+
+## Python 缓存与临时工具产物
+__pycache__/
+*.pyc
+.dsh-vision-toolkit/
+*.kicad_prl
+*.lck
+
+## 编辑器/EDA 本地历史与备份
+.history/
+*.eprj2
+*_backup/
+
+## 大体积参考文档（数据手册等，不入库）
+hardware/hmi-lceda-pro/kicad-export/refs/*.pdf
+
+## KiCad 导出打包产物
+hardware/hmi-lceda-pro/kicad-export/*.zip
+
+## CI 工作流文件必须入库（.workflow/*.yml 是真实门禁）。
+## 只忽略本地临时/覆盖文件，不要忽略整个目录，否则门禁形同虚设。
+.workflow/*.local.yml
+.workflow/tmp/
+
+## Avalonia headless 的字体回退产物：跑 HmiEditor.App.UiTests 时由 headless 字体管理器
+## 落在**仓库根**（`Avalonia.Headless.BareMinimum.ttf`，约 1.7 KB，每次运行重生成）。
+## 不是源码、不参与构建，忽略它免得每次跑完测试 `git status` 都多一条噪声。
+Avalonia.Headless.BareMinimum.ttf
+
+## 本地删除保护机制的回收站（safe-delete 在仓库根留下的中间产物）
+.Trash-0/
+
+## docs/archive/ 是历史产物的归档区：其中的文件即使命中上面的本地调试
+## 规则（*.csx、debug-*.md）也具有证据追溯价值，故在此重新纳入追踪。
+!docs/archive/**
+
+# 设备树生成物（③：开发机生成、构建机只消费）—— 见 scripts/gen-device-tree.sh
+firmware/t113/generated/screens.c

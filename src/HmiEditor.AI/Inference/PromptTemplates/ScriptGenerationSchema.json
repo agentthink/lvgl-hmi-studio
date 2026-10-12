@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "script": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string", "enum": {script_category_enum} },
+        "code": { "type": "string" }
+      },
+      "required": ["name", "description", "category", "code"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["script"],
+  "additionalProperties": false
+}

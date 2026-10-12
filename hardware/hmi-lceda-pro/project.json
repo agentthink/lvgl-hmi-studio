@@ -1,0 +1,49 @@
+{
+  "project": "HMI_T113_SZCLX070H_R1",
+  "tool": "LCEDA-Pro",
+  "source_of_truth": {
+    "page_matrix": "lceda-page-net-matrix.csv",
+    "normalized_netlist": "normalized-netlist.csv",
+    "pin_handoff": "lcd-t113-pin-handoff.csv",
+    "lcd_pinout": "lcd-50pin-pinout.csv",
+    "soc_assignment": "t113-lcd-net-assignment.csv",
+    "footprints": "footprints.csv",
+    "release_manifest": "RELEASE-MANIFEST.sha256"
+  },
+  "pages": [
+    {"id":"P1","name":"POWER_INPUT","source":"capture-package/P1.csv"},
+    {"id":"P2","name":"SOC_CORE","source":"capture-package/P2.csv"},
+    {"id":"P3","name":"STORAGE","source":"capture-package/P3.csv"},
+    {"id":"P4","name":"LCD_RGB888","source":"capture-package/P4.csv"},
+    {"id":"P5","name":"LCD_POWER_BACKLIGHT","source":"capture-package/P5.csv"},
+    {"id":"P6","name":"RTP_TOUCH","source":"capture-package/P6.csv"},
+    {"id":"P7","name":"USB","source":"capture-package/P7.csv"},
+    {"id":"P8","name":"COMM","source":"capture-package/P8.csv"},
+    {"id":"P9","name":"IO_EXPANSION","source":"capture-package/P9.csv"}
+  ],
+  "confirmed_design": {
+    "mcu": "T113-S3",
+    "input_voltage": "12-24VDC",
+    "lcd": "SZCLX070H-500-IPS-G-RTP",
+    "resolution": "1024x600",
+    "interface": "RGB888",
+    "lcd_dclk_edge": "falling",
+    "lcd_mode": "DE",
+    "backlight_voltage_typical_v": 9.6,
+    "backlight_current_typical_a": 0.18,
+    "dvdd_v": 3.3,
+    "avdd_v": 9.0,
+    "vgh_v": 18.0,
+    "vgl_v": -6.0,
+    "vcom_v": 3.15,
+    "rtp_pinout": {"1":"TCH_YN","2":"TCH_XP","3":"TCH_YP","4":"TCH_XN"}
+  },
+  "pending_before_pcb": [
+    "RTP FPC mechanical footprint and contact side",
+    "backlight LED series/parallel topology and constant-current controller",
+    "T113 official pin-mux review for non-RGB peripherals",
+    "PHY exact part and RMII clock direction",
+    "all component footprints and manufacturer part numbers",
+    "LCEDA-Pro ERC in the actual project"
+  ]
+}

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>HmiEditor.TestSupport</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <!-- 纯支撑库：不含测试，dotnet test 应跳过它。 -->
+    <IsTestProject>false</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 阶段 130：TestWait 从 Core.Tests 搬进来 ⇒ 本库第一次需要一个包依赖。
+         ⚠ 它是**测试专用**的量具（断言失败要抛 xunit 的 TrueException），
+           而本库只被 4 个测试程序集引用、不被任何产品项目引用 ⇒ 不会把 xunit 带进产物。 -->
+    <PackageReference Include="xunit" />
+  </ItemGroup>
+</Project>

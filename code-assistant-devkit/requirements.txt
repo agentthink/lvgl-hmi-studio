@@ -1,0 +1,16 @@
+# ===== 代码助手开发套件 · 运行时依赖 =====
+# 安装方式：pip install -r requirements.txt
+# 说明：技能模块（skills/）与公共层（devkit_common/）零第三方依赖（纯标准库）；
+#       仅服务模块（services/）需要以下 Web 框架依赖。
+
+fastapi>=0.110          # Web 框架：路由 / 依赖注入 / OpenAPI 文档
+uvicorn[standard]>=0.29 # ASGI 服务器（标准安装含 websockets/http-tools）
+pydantic>=2.6           # 请求/响应模型与校验
+pyyaml>=6.0             # 可选：config/config.yaml 配置解析（缺失时优雅降级）
+httpx>=0.27             # 示例调用脚本（examples/call_all_services.py）
+
+# ---- 开发/测试依赖 ----
+pytest>=8.0             # 测试框架（tests/）
+
+# ---- 可选：MCP 集成（devkit-mcp 需要）----
+# mcp>=1.0,<2.0         # MCP Server（mcp 2.x API 不兼容，固定 1.x；安装：pip install -e '.[mcp]'）

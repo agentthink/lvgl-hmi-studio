@@ -1,0 +1,517 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.SettingsDialog"
+        Title="{res:Loc settings.title}"
+        Width="720"
+        Height="520"
+        MinWidth="620"
+        MinHeight="440"
+        WindowStartupLocation="CenterOwner"
+        FontFamily="Noto Sans CJK SC">
+    <!-- ═══ 无边框圆角窗口外壳 ═══
+         高对比圆角边框清晰界定窗口边界；圆角统一 10px；ClipToBounds 防止内容越出圆角 -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- ═══ 标准标题栏：可拖拽移动窗口 + 右上角关闭 ═══
+                 CornerRadius="10,10,0,0" 使顶部两角与窗口外框圆角对齐，避免左上/右上角出现直角缺口 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc settings.title}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- ═══ 窗口内容区 ═══ -->
+            <Grid Grid.Row="1" ColumnDefinitions="180,4,*" RowDefinitions="*,Auto" Margin="16,12,16,16">
+            <!-- ═══ 左侧：分类导航 ═══ -->
+            <Border CornerRadius="8" Background="{StaticResource HmiBgPanelBrush}" Padding="10">
+                <ListBox x:Name="CategoryList"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         SelectedIndex="0">
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="Padding" Value="12,10"/>
+                            <Setter Property="Margin" Value="0,2"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="CornerRadius" Value="6"/>
+                            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimarySoftBrush}"/>
+                            <Setter Property="FontSize" Value="13"/>
+                        </Style>
+                        <Style Selector="ListBoxItem:pointerover">
+                            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                        </Style>
+                        <Style Selector="ListBoxItem:selected">
+                            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource HmiLinkBrush}"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                        </Style>
+                    </ListBox.Styles>
+                </ListBox>
+            </Border>
+            <GridSplitter Grid.Column="1" Width="4" Background="Transparent"/>
+
+            <!-- ═══ 右侧：Tab 内容区 ═══ -->
+            <Grid x:Name="ContentHost"
+                  Grid.Column="2"
+                  Background="Transparent"
+                  Margin="0,0,0,8">
+                <Panel x:Name="PanelTheme" IsVisible="True">
+                    <ScrollViewer Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8">
+                        <Border Padding="24,20">
+                            <StackPanel Spacing="16">
+                                <TextBlock Text="{res:Loc settings.theme.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{res:Loc settings.theme.desc}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" TextWrapping="Wrap"/>
+
+                                <!-- 主题选择 -->
+                                <TextBlock Text="{res:Loc settings.theme.preset}"
+                                           Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" Margin="0,8,0,4"/>
+                                <WrapPanel ItemSpacing="12">
+                                    <ToggleButton x:Name="BtnThemeDark" Content="{res:Loc settings.theme.dark}"
+                                            Background="{StaticResource HmiBgCardBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                            CornerRadius="8" Padding="16,10" FontSize="13"
+                                            Click="OnThemePresetClicked" Tag="Dark"/>
+                                    <ToggleButton x:Name="BtnThemeLight" Content="{res:Loc settings.theme.light}"
+                                            Background="{StaticResource HmiBgCardBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                            CornerRadius="8" Padding="16,10" FontSize="13"
+                                            Click="OnThemePresetClicked" Tag="Light"/>
+                                    <ToggleButton x:Name="BtnThemeOcean" Content="{res:Loc settings.theme.ocean}"
+                                            Background="{StaticResource HmiBgCardBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                            CornerRadius="8" Padding="16,10" FontSize="13"
+                                            Click="OnThemePresetClicked" Tag="Ocean"/>
+                                </WrapPanel>
+
+                                <!-- 自定义强调色 -->
+                                <TextBlock Text="{res:Loc settings.theme.accent}"
+                                           Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" Margin="0,12,0,4"/>
+                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="8">
+                                    <TextBox x:Name="TxtAccentColor" Grid.Row="0" Grid.Column="0"
+                                             PlaceholderText="#3b82f6"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             CornerRadius="6" BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             Padding="10,8" Margin="0,0,12,0"/>
+                                    <Border x:Name="AccentSwatch" Grid.Row="0" Grid.Column="1"
+                                            Width="32" Height="32" CornerRadius="6"
+                                            Background="{StaticResource HmiAccentBrush}"
+                                            BorderThickness="1" BorderBrush="{StaticResource HmiInputBorderBrush}"
+                                            PointerPressed="OnAccentSwatchClicked" Cursor="Hand"/>
+                                    <TextBlock x:Name="AccentHint" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                               Text="{res:Loc settings.theme.accent.hint}"
+                                               Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </Panel>
+
+                <Panel x:Name="PanelLayout" IsVisible="False">
+                    <ScrollViewer Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8">
+                        <Border Padding="24,20">
+                            <StackPanel Spacing="14">
+                                <TextBlock Text="{res:Loc settings.layout.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{res:Loc settings.layout.desc}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" TextWrapping="Wrap"/>
+
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="190,*,44" RowSpacing="10">
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{res:Loc settings.layout.left.panel}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <NumericUpDown x:Name="NumLeftPanel" Grid.Row="0" Grid.Column="1"
+                                                        Value="17" Minimum="5" Maximum="40" Increment="5"
+                                                        ShowButtonSpinner="True"
+                                                        Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="6"
+                                                        Margin="0,2,8,0"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="%" Foreground="{StaticResource HmiTextMutedBrush}"
+                                               VerticalAlignment="Center" Margin="0,0,0,10"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{res:Loc settings.layout.right.panel}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <NumericUpDown x:Name="NumRightPanel" Grid.Row="1" Grid.Column="1"
+                                                        Value="17" Minimum="5" Maximum="40" Increment="5"
+                                                        ShowButtonSpinner="True"
+                                                        Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="6"
+                                                        Margin="0,2,8,0"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Text="%" Foreground="{StaticResource HmiTextMutedBrush}"
+                                               VerticalAlignment="Center" Margin="0,0,0,10"/>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{res:Loc settings.layout.bottom.panel}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <NumericUpDown x:Name="NumBottomPanel" Grid.Row="2" Grid.Column="1"
+                                                        Value="30" Minimum="10" Maximum="60" Increment="5"
+                                                        ShowButtonSpinner="True"
+                                                        Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="6"
+                                                        Margin="0,2,8,0"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="2" Text="%" Foreground="{StaticResource HmiTextMutedBrush}"
+                                               VerticalAlignment="Center" Margin="0,0,0,10"/>
+
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{res:Loc settings.layout.auto.hide}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <CheckBox x:Name="ChkAutoHide" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                                              Content="{res:Loc settings.layout.auto.hide}"
+                                              Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                              VerticalAlignment="Center" Margin="0,2,0,0"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </Panel>
+
+                <Panel x:Name="PanelInteraction" IsVisible="False">
+                    <ScrollViewer Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8">
+                        <Border Padding="24,20">
+                            <StackPanel Spacing="14">
+                                <TextBlock Text="{res:Loc settings.interaction.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{res:Loc settings.interaction.desc}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" TextWrapping="Wrap"/>
+
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="160,*,160,*" RowSpacing="10">
+                                    <CheckBox x:Name="ChkAnimations" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                              Content="{res:Loc settings.interaction.animations}"
+                                              Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                              VerticalAlignment="Center" Margin="0,0,0,10"/>
+                                    <CheckBox x:Name="ChkSnapToGrid" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+                                              Content="{res:Loc settings.interaction.snap}"
+                                              Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                              VerticalAlignment="Center" Margin="0,0,0,10"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{res:Loc settings.interaction.grid.size}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <NumericUpDown x:Name="NumGridSize" Grid.Row="1" Grid.Column="1"
+                                                        Value="10" Minimum="1" Maximum="64" Increment="1"
+                                                        ShowButtonSpinner="True"
+                                                        Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="6"
+                                                        Margin="0,2,12,0"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{res:Loc settings.interaction.undo.stack}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <NumericUpDown x:Name="NumUndoStack" Grid.Row="1" Grid.Column="3"
+                                                        Value="100" Minimum="10" Maximum="1000" Increment="10"
+                                                        ShowButtonSpinner="True"
+                                                        Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="6"
+                                                        Margin="0,2,0,0"/>
+
+                                    <CheckBox x:Name="ChkShowGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                              Content="{res:Loc settings.interaction.show.grid}"
+                                              Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                              VerticalAlignment="Center" Margin="0,0,0,10"/>
+                                    <CheckBox x:Name="ChkShowRulers" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
+                                              Content="{res:Loc settings.interaction.show.rulers}"
+                                              Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                              VerticalAlignment="Center" Margin="0,0,0,10"/>
+
+                                    <CheckBox x:Name="ChkLivePreview" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                              Content="{res:Loc settings.interaction.live.preview}"
+                                              Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                              VerticalAlignment="Center" Margin="0,0,0,10"/>
+                                    <CheckBox x:Name="ChkAutoSave" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"
+                                              Content="{res:Loc settings.interaction.auto.save}"
+                                              Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                              VerticalAlignment="Center" Margin="0,0,0,10"/>
+
+                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{res:Loc settings.interaction.auto.save.interval}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <NumericUpDown x:Name="NumAutoSaveInterval" Grid.Row="4" Grid.Column="1"
+                                                        Value="60" Minimum="10" Maximum="3600" Increment="60"
+                                                        ShowButtonSpinner="True"
+                                                        Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="6"
+                                                        Margin="0,2,12,0"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="2" Text="s" Foreground="{StaticResource HmiTextMutedBrush}"
+                                               VerticalAlignment="Center" Margin="0,0,0,10"/>
+                                    <!-- 吸附步长与网格点是两个数：点是 10、吸附是 5 是本项目的手感，
+                                         合成一个数会连带改掉拖拽精度。 -->
+                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{res:Loc settings.interaction.snap.step}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <NumericUpDown x:Name="NumSnapStep" Grid.Row="5" Grid.Column="1"
+                                                        Value="5" Minimum="1" Maximum="64" Increment="1"
+                                                        ShowButtonSpinner="True"
+                                                        Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="6"
+                                                        Margin="0,2,12,0"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"
+                                               Text="{res:Loc settings.interaction.snap.step.hint}"
+                                               Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                                               TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,0,10"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </Panel>
+
+                <Panel x:Name="PanelDisplay" IsVisible="False">
+                    <ScrollViewer Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8">
+                        <Border Padding="24,20">
+                            <StackPanel Spacing="14">
+                                <TextBlock Text="{res:Loc settings.display.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{res:Loc settings.display.desc}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" TextWrapping="Wrap"/>
+
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="160,*,160,*" RowSpacing="10">
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{res:Loc settings.display.default.font}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CmbDefaultFont" Grid.Row="0" Grid.Column="1"
+                                              Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              CornerRadius="6" BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                              Padding="10,8" Margin="0,2,12,0"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{res:Loc settings.display.font.step}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <NumericUpDown x:Name="NumFontStep" Grid.Row="0" Grid.Column="3"
+                                                        Value="2" Minimum="1" Maximum="10" Increment="1"
+                                                        ShowButtonSpinner="True"
+                                                        Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="6"
+                                                        Margin="0,2,0,0"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{res:Loc settings.display.canvas.bg}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtCanvasBgColor" Grid.Row="1" Grid.Column="1"
+                                             PlaceholderText="#131c31"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             CornerRadius="6" BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             Padding="10,8" Margin="0,2,12,0"/>
+                                    <Border x:Name="CanvasBgSwatch" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                            Width="32" Height="32" CornerRadius="6"
+                                            Background="{StaticResource HmiBgDeepBrush}"
+                                            BorderThickness="1" BorderBrush="{StaticResource HmiInputBorderBrush}"
+                                            PointerPressed="OnCanvasBgSwatchClicked" Cursor="Hand" VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{res:Loc settings.display.preview.res}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CmbPreviewRes" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                                              Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              CornerRadius="6" BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                              Padding="10,8" Margin="0,2,0,0"/>
+
+                                    <CheckBox x:Name="ChkToolTips" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                              Content="{res:Loc settings.display.tooltips}"
+                                              Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                              VerticalAlignment="Center" Margin="0,0,0,10"/>
+                                    <CheckBox x:Name="ChkPreviewOverlay" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"
+                                              Content="{res:Loc settings.display.preview.overlay}"
+                                              Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                              VerticalAlignment="Center" Margin="0,0,0,10"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </Panel>
+
+                <!-- ═══ 项目浏览器：右键增强菜单配置（管理员可自定义菜单项）═══ -->
+                <Panel x:Name="PanelExplorer" IsVisible="False">
+                    <ScrollViewer Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8">
+                        <Border Padding="24,20">
+                            <StackPanel Spacing="12">
+                                <TextBlock Text="{res:Loc settings.explorer.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{res:Loc settings.explorer.desc}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" TextWrapping="Wrap"/>
+
+                                <CheckBox x:Name="ChkExplorerCtx" Content="{res:Loc explorer.enabled}"
+                                          Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="13" Margin="0,8,0,0"/>
+                                <TextBlock Text="{res:Loc explorer.menu.items}"
+                                           Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" Margin="0,8,0,4"/>
+
+                                <CheckBox x:Name="ChkCtxCreate" Content="{res:Loc explorer.ctx.new}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"/>
+                                <CheckBox x:Name="ChkCtxOpen" Content="{res:Loc explorer.ctx.open}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"/>
+                                <CheckBox x:Name="ChkCtxStartup" Content="{res:Loc explorer.ctx.startup}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"/>
+                                <CheckBox x:Name="ChkCtxPublic" Content="{res:Loc explorer.ctx.public}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"/>
+                                <CheckBox x:Name="ChkCtxRename" Content="{res:Loc explorer.ctx.rename}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"/>
+                                <CheckBox x:Name="ChkCtxDuplicate" Content="{res:Loc explorer.ctx.duplicate}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"/>
+                                <CheckBox x:Name="ChkCtxDelete" Content="{res:Loc explorer.ctx.delete}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"/>
+                                <CheckBox x:Name="ChkCtxCopyPaste" Content="{res:Loc explorer.ctx.copy}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"/>
+                                <CheckBox x:Name="ChkCtxMoveLayer" Content="{res:Loc explorer.ctx.move.up}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"/>
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </Panel>
+
+                <!-- 模拟器设置 -->
+                <Panel x:Name="PanelSimulator" IsVisible="False">
+                    <ScrollViewer Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8">
+                        <Border Padding="24,20">
+                            <StackPanel Spacing="14">
+                                <TextBlock Text="{res:Loc settings.simulator.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{res:Loc settings.simulator.desc}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" TextWrapping="Wrap"/>
+
+                                <TextBlock Text="{res:Loc settings.simulator.lvgl.dir}"
+                                           Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" Margin="0,8,0,4"/>
+                                <TextBox x:Name="TxtLvglDir"
+                                         PlaceholderText="{res:Loc settings.simulator.lvgl.hint}"
+                                         Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         CornerRadius="6" BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                         Padding="10,8"/>
+
+                                <TextBlock Text="{res:Loc settings.simulator.work.dir}"
+                                           Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" Margin="0,8,0,4"/>
+                                <TextBox x:Name="TxtSimWorkDir"
+                                         PlaceholderText="{res:Loc settings.simulator.work.hint}"
+                                         Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         CornerRadius="6" BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                         Padding="10,8"/>
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </Panel>
+
+                <!-- 真机部署 (T113) 设置 -->
+                <Panel x:Name="PanelAutoExport" IsVisible="False">
+                    <ScrollViewer Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8">
+                        <Border Padding="24,20">
+                            <StackPanel Spacing="14">
+                                <TextBlock Text="{res:Loc settings.autoexport.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{res:Loc settings.autoexport.desc}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" TextWrapping="Wrap"/>
+
+                                <CheckBox x:Name="ChkAutoExport"
+                                          Content="{res:Loc settings.autoexport.enabled}"
+                                          Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                          VerticalAlignment="Center"/>
+
+                                <Grid ColumnDefinitions="160,*" RowDefinitions="Auto,Auto" RowSpacing="10">
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{res:Loc settings.autoexport.interval}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <NumericUpDown x:Name="NumAutoExportInterval" Grid.Row="0" Grid.Column="1"
+                                                   Value="30" Minimum="1" Maximum="1440" Increment="5"
+                                                   ShowButtonSpinner="True"
+                                                   Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                   BorderBrush="{StaticResource HmiInputBorderBrush}" CornerRadius="6"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{res:Loc settings.autoexport.directory}"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" VerticalAlignment="Center"/>
+                                    <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="*,Auto">
+                                        <TextBox x:Name="TxtAutoExportDirectory" Grid.Column="0"
+                                                 PlaceholderText="{res:Loc settings.autoexport.directory.hint}"
+                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                 CornerRadius="6" BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                                 Padding="10,8"/>
+                                        <Button x:Name="BtnPickAutoExportDirectory" Grid.Column="1"
+                                                Content="{res:Loc settings.autoexport.browse}"
+                                                Background="{StaticResource HmiBgElevatedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                BorderThickness="0" Padding="14,6" CornerRadius="6" Margin="8,0,0,0"/>
+                                    </Grid>
+                                </Grid>
+
+                                <!-- 诚实边界写在这里：应用没运行就不会导；报表包始终全列 -->
+                                <TextBlock Text="{res:Loc settings.autoexport.hint}"
+                                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </Panel>
+
+                <Panel x:Name="PanelDevice" IsVisible="False">
+                    <ScrollViewer Background="{StaticResource HmiBgPanelBrush}" CornerRadius="8">
+                        <Border Padding="24,20">
+                            <StackPanel Spacing="14">
+                                <TextBlock Text="{res:Loc settings.device.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{res:Loc settings.device.desc}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" TextWrapping="Wrap"/>
+
+                                <TextBlock Text="{res:Loc settings.device.sdk.dir}"
+                                           Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" Margin="0,8,0,4"/>
+                                <TextBox x:Name="TxtT113SdkRoot"
+                                         PlaceholderText="{res:Loc settings.device.sdk.hint}"
+                                         Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         CornerRadius="6" BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                         Padding="10,8"/>
+
+                                <TextBlock Text="{res:Loc settings.device.toolchain.dir}"
+                                           Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" Margin="0,8,0,4"/>
+                                <TextBox x:Name="TxtT113Toolchain"
+                                         PlaceholderText="{res:Loc settings.device.toolchain.hint}"
+                                         Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         CornerRadius="6" BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                         Padding="10,8"/>
+                            </StackPanel>
+                        </Border>
+                    </ScrollViewer>
+                </Panel>
+            </Grid>
+
+            <!-- ═══ 底部：操作按钮 ═══ -->
+            <Grid Grid.Row="1" Grid.Column="2"
+                  ColumnDefinitions="*,Auto,Auto,Auto">
+                <!-- 「尚未生效」图例：本页有灰显项时才显示（由 MarkNotYetEffectiveFields 控制） -->
+                <TextBlock x:Name="NotEffectiveLegend" Grid.Column="0"
+                           Text="{res:Loc settings.not.effective.legend}"
+                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                           TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,12,0"
+                           IsVisible="False"/>
+                <Button x:Name="BtnOk" Grid.Column="1" Content="{res:Loc gen.ok}"
+                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="20,6" CornerRadius="6"
+                        Margin="4,0"/>
+                <Button x:Name="BtnCancel" Grid.Column="2" Content="{res:Loc gen.cancel}"
+                        Background="{StaticResource HmiBgElevatedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="20,6" CornerRadius="6"
+                        Margin="4,0"/>
+                <Button x:Name="BtnApply" Grid.Column="3" Content="{res:Loc gen.apply}"
+                        Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="20,6" CornerRadius="6"
+                        Margin="4,0"/>
+            </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

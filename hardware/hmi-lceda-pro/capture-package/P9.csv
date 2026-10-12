@@ -1,0 +1,5 @@
+page,block,component,signal_or_pin,net,value_or_note,status
+P9,IO_EXPANSION,J10,1..4,UART1_TXD/UART1_RXD/VCC3V3/GND,Debug header,required
+P9,IO_EXPANSION,SW1/2/3,1,RESET_N/FEL_N/USER_KEY,Keys,required
+P9,IO_EXPANSION,LED1/2,1,STATUS_RED/STATUS_GREEN,1k series,required
+P9,IO_EXPANSION,J11,1..24,EXP_GPIO/I2C/UART/CAN/VCC/GND,Expansion header,verify mux

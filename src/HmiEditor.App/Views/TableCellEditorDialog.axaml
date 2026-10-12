@@ -1,0 +1,78 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.TableCellEditorDialog"
+        Width="760" Height="540"
+        MinWidth="560"
+        MinHeight="400"
+        WindowStartupLocation="CenterOwner"
+        CanResize="True"
+        Title="{res:Loc prop.table.cells.title}">
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc prop.table.cells.title}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button Grid.Column="1" Width="40" Height="36" Padding="0"
+                            Background="Transparent" BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <TextBlock Text="✕" FontSize="12" FontFamily="Segoe UI Symbol, Noto Sans CJK SC"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <DockPanel Grid.Row="1" Margin="16,12,16,12">
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal"
+                            HorizontalAlignment="Right" Spacing="8" Margin="0,12,0,0">
+                    <Button x:Name="CancelBtn" Content="{res:Loc gen.cancel}"
+                            Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" Padding="16,6" Click="OnCancelClicked"/>
+                    <Button x:Name="OkBtn" Content="{res:Loc gen.confirm}"
+                            Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" Padding="16,6" Click="OnOkClicked"/>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Top" Spacing="8">
+                    <DockPanel>
+                        <Button x:Name="InsertVarBtn" DockPanel.Dock="Right"
+                                Content="{res:Loc prop.table.cells.insert}"
+                                Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="12,6" FontSize="12" Margin="8,0,0,0"
+                                Click="OnInsertVariableClicked"/>
+                        <ComboBox x:Name="VariableCombo"
+                                  Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                  BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="13"
+                                  MinHeight="30"/>
+                    </DockPanel>
+                    <TextBlock Text="{res:Loc prop.table.cells.hint}"
+                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                              Background="{StaticResource HmiBgPanelBrush}" CornerRadius="6" Padding="8">
+                    <StackPanel x:Name="MatrixHost" Spacing="0"/>
+                </ScrollViewer>
+            </DockPanel>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

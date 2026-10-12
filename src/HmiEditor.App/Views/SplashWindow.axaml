@@ -1,0 +1,228 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:vm="using:HmiEditor.App.Views"
+        x:Class="HmiEditor.App.Views.SplashWindow"
+        Title="{res:Loc app.title}"
+        Width="720"
+        Height="520"
+        MinWidth="600"
+        MinHeight="440"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        WindowDecorations="None"
+        Background="Transparent"
+        ShowInTaskbar="True">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*,Auto">
+            <!-- ═══ 标题栏 ═══ -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc app.title}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- ═══ 主内容区 ═══ -->
+            <ScrollViewer Grid.Row="1"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="40,32,40,24" Spacing="28">
+                    <!-- ── Logo 与版本 ── -->
+                    <StackPanel HorizontalAlignment="Center" Spacing="8">
+                        <Border Width="64" Height="64"
+                                CornerRadius="16"
+                                Background="{StaticResource HmiAccentBrush}"
+                                HorizontalAlignment="Center">
+                            <TextBlock Text="HMI"
+                                       FontSize="20" FontWeight="Bold"
+                                       Foreground="White"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="{res:Loc splash.subtitle}"
+                                   FontSize="22" FontWeight="Bold"
+                                   Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="VersionText"
+                                   Text="v1.0.0"
+                                   FontSize="12"
+                                   Foreground="{StaticResource HmiTextMutedBrush}"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- ── 主操作卡片 ── -->
+                    <UniformGrid Columns="2" Rows="1">
+                        <!-- 新建工程 -->
+                        <Border x:Name="CardNewProject"
+                                Margin="0,0,6,0"
+                                CornerRadius="12"
+                                Background="{StaticResource HmiBgCardBrush}"
+                                BorderBrush="{StaticResource HmiBorderBrush}"
+                                BorderThickness="1.5"
+                                Padding="24,20"
+                                Cursor="Hand"
+                                PointerPressed="OnNewProjectClicked">
+                            <StackPanel Spacing="10" HorizontalAlignment="Center">
+                                <Border Width="48" Height="48"
+                                        CornerRadius="12"
+                                        Background="#1e3a5f"
+                                        HorizontalAlignment="Center">
+                                    <Path Data="M12,3 L12,21 M3,12 L21,12"
+                                          Width="24" Height="24"
+                                          Stretch="Uniform"
+                                          Stroke="{StaticResource HmiAccentBrush}"
+                                          StrokeThickness="2"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="{res:Loc splash.new.project}"
+                                           FontSize="16" FontWeight="SemiBold"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="{res:Loc splash.new.project.hint}"
+                                           FontSize="12"
+                                           Foreground="{StaticResource HmiTextHintBrush}"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- 打开工程 -->
+                        <Border x:Name="CardOpenProject"
+                                Margin="6,0,0,0"
+                                CornerRadius="12"
+                                Background="{StaticResource HmiBgCardBrush}"
+                                BorderBrush="{StaticResource HmiBorderBrush}"
+                                BorderThickness="1.5"
+                                Padding="24,20"
+                                Cursor="Hand"
+                                PointerPressed="OnOpenProjectClicked">
+                            <StackPanel Spacing="10" HorizontalAlignment="Center">
+                                <Border Width="48" Height="48"
+                                        CornerRadius="12"
+                                        Background="#1e3a5f"
+                                        HorizontalAlignment="Center">
+                                    <Path Data="M4,6 L4,18 L20,18 L20,8 L12,8 L10,6 Z"
+                                          Width="24" Height="24"
+                                          Stretch="Uniform"
+                                          Stroke="{StaticResource HmiAccentBrush}"
+                                          StrokeThickness="2"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="{res:Loc splash.open.project}"
+                                           FontSize="16" FontWeight="SemiBold"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="{res:Loc splash.open.project.hint}"
+                                           FontSize="12"
+                                           Foreground="{StaticResource HmiTextHintBrush}"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+
+                    <!-- ── 最近打开 ── -->
+                    <StackPanel x:Name="RecentSection" Spacing="6" IsVisible="False">
+                        <TextBlock Text="{res:Loc splash.recent}"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{StaticResource HmiTextSecondaryBrush}"
+                                   Margin="0,0,0,4"/>
+                        <ItemsControl x:Name="RecentList">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:RecentProjectItem">
+                                    <Border CornerRadius="8"
+                                            Background="{StaticResource HmiBgInputBrush}"
+                                            BorderBrush="{StaticResource HmiInputBorderBrush}"
+                                            BorderThickness="1"
+                                            Padding="12,10"
+                                            Margin="0,0,0,4"
+                                            Cursor="Hand"
+                                            PointerPressed="OnRecentProjectClicked">
+                                        <Grid ColumnDefinitions="Auto,*,Auto">
+                                            <Path Grid.Column="0"
+                                                  Data="M4,6 L4,18 L20,18 L20,8 L12,8 L10,6 Z"
+                                                  Width="16" Height="16"
+                                                  Stretch="Uniform"
+                                                  Stroke="{StaticResource HmiTextSecondaryBrush}"
+                                                  StrokeThickness="1.5"
+                                                  VerticalAlignment="Center"/>
+                                            <StackPanel Grid.Column="1" Spacing="2" Margin="10,0,0,0">
+                                                <TextBlock Text="{Binding FileName}"
+                                                           FontSize="13" FontWeight="SemiBold"
+                                                           Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                                <TextBlock Text="{Binding Directory}"
+                                                           FontSize="11"
+                                                           Foreground="{StaticResource HmiTextMutedBrush}"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="2"
+                                                       Text="{Binding ModifiedText}"
+                                                       FontSize="11"
+                                                       Foreground="{StaticResource HmiTextHintBrush}"
+                                                       VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ═══ 底部状态栏 ═══ -->
+            <Border Grid.Row="2"
+                    Background="{StaticResource HmiBgDeepBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,1,0,0"
+                    Padding="16,8">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock x:Name="StatusText"
+                               Text="{res:Loc status.ready}"
+                               FontSize="11"
+                               Foreground="{StaticResource HmiTextMutedBrush}"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1"
+                               Text="© 2026 zhishu-hmi"
+                               FontSize="11"
+                               Foreground="{StaticResource HmiTextMutedBrush}"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

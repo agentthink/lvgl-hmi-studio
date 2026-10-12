@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>HmiEditor.Device</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- 仅为 AppPaths（应用数据根 / 临时根的唯一来源）。
+         本程序集原为零依赖叶子；这一条引用不引入环（Core 自身不引用任何项目），
+         换来的是"中间产物落点"不再由 Device 自己各写一份 Path.GetTempPath()。 -->
+    <ProjectReference Include="..\HmiEditor.Core\HmiEditor.Core.csproj" />
+    <!-- 发布包清单要写"编辑器目标 ↔ 固件"的版本对应（登记表 §4 第 29 项），
+         硬件目标契约（IHardwareTarget / LvglConfig）是编辑器那一侧的事实源。
+         Contracts 自身只依赖 Core，不引入环。 -->
+    <ProjectReference Include="..\Hmi.Hardware.Contracts\Hmi.Hardware.Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="HmiEditor.Device.Tests" />
+  </ItemGroup>
+</Project>

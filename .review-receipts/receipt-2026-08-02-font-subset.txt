@@ -1,0 +1,42 @@
+═══════════════════════════════════════════════════════════════════
+  PR Review Receipt — I12 Font Subsetting
+  Date: 2026-08-02
+  Commit: (pending)
+  Files: 8 changed
+═══════════════════════════════════════════════════════════════════
+
+Review anchors:
+  - src/HmiEditor.Core/Services/FontSubsetAnalyzer.cs:50 (ScanProject)
+  - src/HmiEditor.Core/Services/FontSubsetAnalyzer.cs:130 (EstimateSubsetBytes)
+  - src/HmiEditor.App/Views/FontSubsetView.axaml.cs:34 (dialog)
+  - src/HmiEditor.App/Views/AssetManagerView.axaml.cs:205 (font import)
+
+Intent verification:
+  Close I12 (font subsetting): scan project's real character set,
+  estimate LVGL embedded-font Flash footprint, export lv_font_conv input,
+  and wire real font import into the asset panel. Boundary explicitly
+  keeps TTF→C glyph conversion in lv_font_conv (industry standard) to
+  preserve zero third-party dependency. Diff matches intent.
+
+Verdict: READY
+  - Build: 0 errors, 0 new warnings
+  - Tests: 876 passed / 0 failed (17 new FontSubsetTests)
+  - No debug residue, no TODO/FIXME
+
+Failure-mode pass:
+  - Character scan covers all on-screen text sources: control Text,
+    variable Name/Unit/SimulatedValue, UDT definition + field names.
+    Dedup via HashSet; classification ASCII/CJK/fullwidth handled.
+  - Size model differentiates ASCII (0.55×font width) vs CJK (full-width)
+    bitmap footprints; verified monotonic in font size and CJK > ASCII.
+  - Export is one-char-per-line (no escaping ambiguity for lv_font_conv);
+    empty project writes empty file.
+  - UI: double-tap routing distinguishes SVG vs Font assets; font import
+    validates nothing beyond file existence (size recorded).
+  - Test expectation arithmetic verified against real char counts
+    (13 unique = 8 CJK + 5 ASCII incl. space).
+  - Hallucinated APIs: none; lv_font_conv CLI flags are standard.
+  - Scope creep: none.
+
+Risk: none outstanding. Override posture: proceed autonomously.
+═══════════════════════════════════════════════════════════════════

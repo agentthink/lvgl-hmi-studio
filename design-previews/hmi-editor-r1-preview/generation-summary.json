@@ -1,0 +1,20 @@
+{
+  "skillProvenance": {
+    "name": "solo-design",
+    "version": "2026.07.22.00.00.00",
+    "version_source": "skill-release-manifest.json",
+    "runtime_skill_dir": "c:\\Users\\23491\\.trae-cn\\builtin\\design\\default\\skills\\solo-design",
+    "recorded_at": "2026-07-30T13:00:00+08:00"
+  },
+  "operation": "create-image-project",
+  "assetCount": 1,
+  "assets": [
+    {
+      "filename": "hmi-editor-r1-design-preview.jpg",
+      "title": "HMI Editor Phase R1 重构设计预览",
+      "deliverableType": "UI mockup preview",
+      "intendedAspect": "landscape 16:9",
+      "status": "generated"
+    }
+  ]
+}

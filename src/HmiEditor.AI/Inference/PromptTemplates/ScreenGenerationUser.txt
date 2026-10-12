@@ -1,0 +1,12 @@
+请根据以下描述创建 HMI 屏幕：
+
+【用户需求】
+{user_input}
+
+【项目中已有的变量列表】（用于 variableBindingId，仅可引用这些变量名）
+{variable_list}
+
+【当前项目主题信息】（用于 bgColor/textColor 参考）
+{theme_info}
+
+请生成屏幕定义 JSON。

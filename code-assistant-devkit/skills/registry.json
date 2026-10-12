@@ -1,0 +1,157 @@
+{
+  "version": "1.0.0",
+  "description": "代码助手技能注册表（能力清单）：定义每项技能的适用场景、输入输出、触发条件与调用关系。",
+  "skills": [
+    {
+      "name": "codegen",
+      "display_name": "代码生成",
+      "description": "根据需求描述或函数规格生成 Python / C# 源码",
+      "module_path": "skills.codegen.skill_codegen",
+      "class_name": "CodeGenSkill",
+      "scenarios": [
+        "从零实现一个新功能模块",
+        "按函数规格（函数名/参数/返回）生成骨架代码",
+        "生成工具函数或模板代码（HTTP 客户端、排序、文件读写等）"
+      ],
+      "triggers": [
+        "生成", "生成代码", "生成函数", "实现", "编写", "写一个", "写个", "新建", "create", "implement", "generate", "写代码"
+      ],
+      "inputs": {
+        "request": "需求描述文本（与 spec 二选一）",
+        "spec": "函数规格 dict：function_name/params/returns/docstring（与 request 二选一）",
+        "language": "目标语言：python / csharp（默认 python）",
+        "filename": "生成文件的建议文件名（可选）"
+      },
+      "outputs": {
+        "code": "生成的源码",
+        "language": "语言",
+        "filename": "文件名",
+        "notes": "使用说明列表"
+      },
+      "required_inputs": [],
+      "dependencies": [],
+      "suggested_next": ["unit_test", "doc_writing"],
+      "version": "1.0.0"
+    },
+    {
+      "name": "debug_fix",
+      "display_name": "调试修复",
+      "description": "对源码做语法/静态诊断，定位根因并给出（或自动应用）修复",
+      "module_path": "skills.debug_fix.skill_debug_fix",
+      "class_name": "DebugFixSkill",
+      "scenarios": [
+        "用户上报报错信息/traceback 需要定位根因",
+        "源码存在语法错误或未定义名称等静态问题",
+        "修复完成后需要回归验证"
+      ],
+      "triggers": [
+        "报错", "错误", "bug", "修复", "修一下", "异常", "traceback", "崩溃", "failed", "error"
+      ],
+      "inputs": {
+        "source": "待诊断的源码（必填）",
+        "error": "错误信息/traceback（可选，用于根因定位）",
+        "filename": "文件名（可选，仅影响报告展示）"
+      },
+      "outputs": {
+        "root_cause": "根因分析",
+        "diagnosis": "诊断详情",
+        "fixed_code": "修复后的代码（无法自动修复时为原文）",
+        "auto_fixed": "是否应用了自动修复",
+        "issues": "发现的问题列表"
+      },
+      "required_inputs": ["source"],
+      "dependencies": [],
+      "post_checks": ["unit_test"],
+      "suggested_next": ["unit_test", "doc_writing"],
+      "version": "1.0.0"
+    },
+    {
+      "name": "unit_test",
+      "display_name": "单元测试",
+      "description": "自动生成单元测试（unittest 框架）并执行，返回通过/失败统计",
+      "module_path": "skills.unit_test.skill_unit_test",
+      "class_name": "UnitTestSkill",
+      "scenarios": [
+        "验证新生成代码的正确性",
+        "修复/优化后的回归测试",
+        "为已有函数补充测试用例"
+      ],
+      "triggers": [
+        "测试", "单测", "单元测试", "验证", "用例", "回归", "test", "unittest", "冒烟"
+      ],
+      "inputs": {
+        "source": "被测源码（必填）",
+        "cases": "示例用例（可选）[{'function': 'add', 'args': [1, 2], 'expected': 3}, ...]",
+        "framework": "测试框架，默认 unittest"
+      },
+      "outputs": {
+        "test_code": "生成的测试代码",
+        "passed": "通过用例数",
+        "failed": "失败用例数",
+        "output": "测试执行输出摘要"
+      },
+      "required_inputs": ["source"],
+      "dependencies": [],
+      "suggested_next": ["doc_writing"],
+      "version": "1.0.0"
+    },
+    {
+      "name": "doc_writing",
+      "display_name": "文档编写",
+      "description": "从源码或内容生成 Markdown 文档（README/API/变更记录）",
+      "module_path": "skills.doc_writing.skill_doc_writing",
+      "class_name": "DocWritingSkill",
+      "scenarios": [
+        "为项目/模块生成 README",
+        "为接口生成 API 文档",
+        "生成变更记录（changelog）"
+      ],
+      "triggers": [
+        "文档", "说明", "注释", "readme", "doc", "documentation", "写文档", "说明文档"
+      ],
+      "inputs": {
+        "source": "源码（可选，自动抽取函数签名）",
+        "content": "纯文本内容（可选，直接排版为文档）",
+        "doc_type": "文档类型：README/api/changelog（默认 README）",
+        "output_dir": "保存目录（可选，写入 document.md）"
+      },
+      "outputs": {
+        "document": "生成的 Markdown 文档",
+        "doc_type": "文档类型",
+        "path": "保存路径（若指定 output_dir）"
+      },
+      "required_inputs": [],
+      "dependencies": [],
+      "suggested_next": [],
+      "version": "1.0.0"
+    },
+    {
+      "name": "perf_opt",
+      "display_name": "性能优化",
+      "description": "AST 级性能分析：复杂度估算、循环内字符串拼接等反模式识别、优化建议",
+      "module_path": "skills.perf_opt.skill_perf_opt",
+      "class_name": "PerfOptSkill",
+      "scenarios": [
+        "定位耗时/卡顿代码",
+        "评估函数时间复杂度",
+        "识别循环内字符串拼接、低效 append 等反模式"
+      ],
+      "triggers": [
+        "性能", "优化", "慢", "耗时", "内存", "卡顿", "perf", "optimize", "benchmark", "加速"
+      ],
+      "inputs": {
+        "source": "待分析源码（必填）"
+      },
+      "outputs": {
+        "complexity": "各函数复杂度估算",
+        "report": "问题报告列表（位置/严重度/建议）",
+        "suggestions": "优化建议摘要"
+      },
+      "required_inputs": ["source"],
+      "dependencies": [],
+      "post_checks": ["unit_test"],
+      "suggested_next": ["unit_test"],
+      "version": "1.0.0"
+    }
+  ]
+}

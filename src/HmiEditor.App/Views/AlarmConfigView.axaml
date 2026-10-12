@@ -1,0 +1,330 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.AlarmConfigView"
+        Title="{res:Loc win.alarm.config}"
+        Width="800"
+        Height="600"
+        MinWidth="600"
+        MinHeight="450"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc win.alarm.config}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容 -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgWindowBrush}" Padding="12">
+        <Grid ColumnDefinitions="220,4,*">
+            <!-- ═══ 左侧：报警组列表 ═══ -->
+            <Border CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="12">
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <!-- 顶栏：标题 + 添加组 -->
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,8">
+                        <TextBlock Text="{res:Loc alarm.group.list}"
+                                   Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <Button x:Name="BtnAddGroup" Content="{res:Loc alarm.add.group}"
+                                Grid.Column="1"
+                                Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="10,4" FontSize="12"/>
+                    </Grid>
+
+                    <!-- 组列表 -->
+                    <ListBox x:Name="GroupList"
+                             Grid.Row="1"
+                             Background="Transparent"
+                             BorderThickness="0">
+                        <ListBox.Styles>
+                            <Style Selector="ListBoxItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,2"/>
+                                <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                                <Setter Property="CornerRadius" Value="4"/>
+                            </Style>
+                            <Style Selector="ListBoxItem:selected">
+                                <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+                            </Style>
+                        </ListBox.Styles>
+                    </ListBox>
+
+                    <!-- 删除组 -->
+                    <Button x:Name="BtnDeleteGroup" Content="{res:Loc alarm.delete.group}"
+                            Grid.Row="2" Margin="0,8,0,0"
+                            Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                            BorderThickness="0" Padding="10,6" FontSize="12"/>
+                </Grid>
+            </Border>
+
+            <!-- 分隔条 -->
+            <Rectangle Grid.Column="1" Fill="{StaticResource HmiBgElevatedBrush}" Width="4"/>
+
+            <!-- ═══ 右侧：报警配置 ═══ -->
+            <Border Grid.Column="2" CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="12">
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <!-- 顶栏：标题 + 报警操作按钮 -->
+                    <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,0,0,8">
+                        <TextBlock x:Name="RightTitle"
+                                   Text="{res:Loc alarm.config.title}"
+                                   Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <Button x:Name="BtnAddAlarm" Content="{res:Loc alarm.add}"
+                                Grid.Column="1"
+                                Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="10,4" FontSize="12"
+                                Margin="0,0,4,0"/>
+                        <Button x:Name="BtnDeleteAlarm" Content="{res:Loc alarm.delete}"
+                                Grid.Column="2"
+                                Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                BorderThickness="0" Padding="10,4" FontSize="12"/>
+                    </Grid>
+
+                    <!-- 中间区域：报警列表 + 编辑面板（占位，由 code-behind 构建） -->
+                    <Grid x:Name="RightContent" Grid.Row="1">
+                        <!-- 空状态提示 -->
+                        <TextBlock x:Name="EmptyHint"
+                                   Text="{res:Loc alarm.select.group.hint}"
+                                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="14"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   IsHitTestVisible="False"/>
+
+                        <!-- 报警列表 -->
+                        <ListBox x:Name="AlarmList"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Margin="0,0,0,8"
+                                 IsVisible="False">
+                            <ListBox.Styles>
+                                <Style Selector="ListBoxItem">
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin" Value="0,2"/>
+                                    <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                                    <Setter Property="CornerRadius" Value="4"/>
+                                </Style>
+                                <Style Selector="ListBoxItem:selected">
+                                    <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+                                </Style>
+                            </ListBox.Styles>
+                        </ListBox>
+
+                        <!-- 编辑面板 -->
+                        <ScrollViewer x:Name="EditPanel"
+                                      Background="{StaticResource HmiBgInputBrush}"
+                                      CornerRadius="6"
+                                      Padding="16"
+                                      IsVisible="False">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                                <!-- ── Section: 基本信息 ── -->
+                                <TextBlock Text="{res:Loc alarm.basic.info}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="13" FontWeight="SemiBold"
+                                           Margin="0,0,0,8"/>
+
+                                <!-- 名称 -->
+                                <Grid Grid.Row="1" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.name}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtAlarmName" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 描述 -->
+                                <Grid Grid.Row="2" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.desc}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtAlarmDescription" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 严重级别 -->
+                                <Grid Grid.Row="3" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.severity}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CboSeverity" Grid.Column="1"
+                                              Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                              CornerRadius="4" Padding="8,4" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 启用 -->
+                                <CheckBox x:Name="ChkEnabled" Grid.Row="4"
+                                          Content="{res:Loc alarm.enabled}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"
+                                          Margin="80,0,0,4"/>
+
+                                <!-- 需要确认 -->
+                                <CheckBox x:Name="ChkRequiresAck" Grid.Row="5"
+                                          Content="{res:Loc alarm.need.ack}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"
+                                          Margin="80,0,0,8"/>
+
+                                <!-- ── 分隔线 ── -->
+                                <Rectangle Grid.Row="6" Fill="{StaticResource HmiInputBorderBrush}" Height="1" Margin="0,4,0,8"/>
+
+                                <!-- ── Section: 触发条件 ── -->
+                                <TextBlock Text="{res:Loc alarm.trigger}"
+                                           Grid.Row="7"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="13" FontWeight="SemiBold"
+                                           Margin="0,0,0,8"/>
+
+                                <!-- 变量 -->
+                                <Grid Grid.Row="8" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.variable}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CboVariableId" Grid.Column="1"
+                                              Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                              CornerRadius="4" Padding="8,4" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 条件类型 -->
+                                <Grid Grid.Row="9" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.cond.type}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CboConditionType" Grid.Column="1"
+                                              Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                              CornerRadius="4" Padding="8,4" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 阈值（HighLimit/LowLimit/Deviation 时显示） -->
+                                <Grid x:Name="RowThreshold" Grid.Row="10" ColumnDefinitions="80,*" Margin="0,0,0,6" IsVisible="False">
+                                    <TextBlock Text="{res:Loc alarm.threshold}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtThreshold" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 死区 -->
+                                <Grid Grid.Row="11" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.deadband}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtDeadband" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 延迟 (ms) -->
+                                <Grid Grid.Row="12" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.delay}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtDelayMs" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 位偏移（BitTrigger 时显示） -->
+                                <Grid x:Name="RowBitOffset" Grid.Row="13" ColumnDefinitions="80,*" Margin="0,0,0,6" IsVisible="False">
+                                    <TextBlock Text="{res:Loc alarm.bit.offset}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtBitOffset" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 期望值（StateChange/Deviation 时显示） -->
+                                <!-- ── Section: ISA-18.2 职责（登记 §2-#11 切片㊀；阶段 266）── -->
+                                <Rectangle Grid.Row="15" Fill="{StaticResource HmiInputBorderBrush}" Height="1" Margin="0,4,0,8"/>
+
+                                <TextBlock Grid.Row="16" Text="{res:Loc alarm.philosophy.section}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="13" FontWeight="SemiBold"
+                                           Margin="0,0,0,8"/>
+
+                                <Grid Grid.Row="17" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.cause}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtAlarmCause" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <Grid Grid.Row="18" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.response}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtAlarmResponse" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <Grid Grid.Row="19" ColumnDefinitions="80,*" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc alarm.consequence}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtAlarmConsequence" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <!-- 允许响应时间（ISA-18.2 切片㈡；阶段 292）。**可空**：留空 ⇒ 用严重度默认值，
+                                     优先级 = f(严重度, 它) 由 Core 的 AlarmPriority 推导（面板不重复算）。 -->
+                                <Grid Grid.Row="20" ColumnDefinitions="80,*" Margin="0,0,0,6"
+                                      ToolTip.Tip="{res:Loc alarm.allowed.response.hint}">
+                                    <TextBlock Text="{res:Loc alarm.allowed.response}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtAllowedResponseMs" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+
+                                <Grid x:Name="RowExpectedValue" Grid.Row="14" ColumnDefinitions="80,*" Margin="0,0,0,6" IsVisible="False">
+                                    <TextBlock Text="{res:Loc alarm.expected.val}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtExpectedValue" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                             CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                </Grid>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <!-- 底部状态 -->
+                    <TextBlock x:Name="StatusText"
+                               Grid.Row="2"
+                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                               Margin="0,4,0,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

@@ -1,0 +1,81 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.ReportRangeDialog"
+        Title="{res:Loc report.range.title}"
+        Width="340" Height="440"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ ChromeWindow 契约：Content 是 Border、其 Child 是 Grid ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc report.range.title}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center" Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose" Grid.Column="1" Width="40" Height="36" Padding="0"
+                            Background="Transparent" BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}" CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}" Width="10" Height="10" Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}" StrokeThickness="1.5"
+                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Padding="14">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="{res:Loc report.range.hint}"
+                               Foreground="{StaticResource HmiTextMutedBrush}" FontSize="12"
+                               TextWrapping="Wrap" Margin="0,0,0,8"/>
+                    <Grid DockPanel.Dock="Bottom" ColumnDefinitions="*,Auto,Auto" Margin="0,12,0,0">
+                        <Button x:Name="BtnCancel" Grid.Column="1" Content="{res:Loc gen.cancel}"
+                                Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="14,4" FontSize="12"/>
+                        <Button x:Name="BtnOk" Grid.Column="2" Content="{res:Loc gen.ok}"
+                                Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="14,4" FontSize="12" Margin="8,0,0,0"/>
+                    </Grid>
+                    <StackPanel Spacing="8">
+                        <StackPanel x:Name="ChoiceList" Spacing="4"/>
+                        <!-- ═══ 自定义起止日期（阶段 180）：只在选中「自定义」时显示 ═══
+                             两个 DatePicker 的选中值是带偏移的时刻 —— 偏移一路留到 Core 的
+                             口径里（当地 00:00 / 当天最后一刻），否则"按本地日期挑的"会被当成 UTC。 -->
+                        <Border x:Name="CustomPanel" IsVisible="False"
+                                Background="{StaticResource HmiBgInputBrush}"
+                                BorderBrush="{StaticResource HmiInputBorderBrush}"
+                                BorderThickness="1" CornerRadius="6" Padding="10,8">
+                            <StackPanel Spacing="6">
+                                <TextBlock x:Name="LblFrom"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}"
+                                           FontSize="12"/>
+                                <DatePicker x:Name="FromPicker" HorizontalAlignment="Stretch" FontSize="12"/>
+                                <TextBlock x:Name="LblTo"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}"
+                                           FontSize="12"/>
+                                <DatePicker x:Name="ToPicker" HorizontalAlignment="Stretch" FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

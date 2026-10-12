@@ -1,0 +1,49 @@
+═══════════════════════════════════════════════════════════════════
+  PR Review Receipt — I1/I3/I2/I5 Mainstream-Gap Closure
+  Date: 2026-08-02
+  Commit: (pending)
+  Files: 25 changed, +1955, -46
+═══════════════════════════════════════════════════════════════════
+
+Review anchors:
+  - src/HmiEditor.Core/Services/ExpressionEngine.cs:513 (ToCExpression)
+  - src/HmiEditor.Core/Services/ScriptSandboxExecutor.cs:464 (PrepareLuaForSandbox)
+  - src/HmiEditor.App/Views/PropertyPanelView.axaml.cs:280 (OnExpressionInputChanged)
+  - src/HmiEditor.App/Views/AuditLogView.axaml.cs:29 (Attach + UI-thread posting)
+
+Intent verification:
+  Close the four remaining P0 semi-closed gaps from the 2026-08-02 incremental
+  gap analysis: I1 (expression binding), I3 (audit log), I2 (cross-reference
+  panel), I5 (script debug run). Diff matches intent: 4 core services extended,
+  3 new Core services, 4 new App views, 3 new test files, 3 views wired into
+  dock factory / menus / project loading.
+
+Verdict: READY
+  - Build: 0 errors, 0 new warnings (existing Scriban NU1902-1904 + TagMonitorView
+    AVLN3001 pre-date this change)
+  - Tests: 758 passed / 0 failed (11 new ScriptDebugRunTests, 18 new
+    ExpressionBindingTests, 6 new AuditLogStoreTests)
+  - No debug residue, no TODO/FIXME, no out-of-scope edits
+
+Failure-mode pass:
+  - Silent assumptions: none — expression fallback returns null on syntax error;
+    audit file write failure degrades to in-memory only
+  - Plausible-but-wrong: none — Lua→sandbox regexes verified by tests
+  - Hallucinated APIs: none — all APIs compiled against real assemblies
+  - Deleted-but-used: no deletions of used code (46 deletions are replaced logic)
+  - Scope creep: none — .app.pid excluded via .gitignore (runtime artifact)
+
+Behavior verification:
+  - ExpressionBindingTests: 18 cases, all fail-without-change
+  - AuditLogStoreTests: 6 cases (roundtrip, corrupt lines, dedupe, login persist)
+  - ScriptDebugRunTests: 11 cases (translation, else branch, external source,
+    seeding, end-to-end Timer template)
+
+Code quality: design OK, functionality OK, complexity OK, tests OK,
+  naming OK, comments OK, style OK (matches existing conventions).
+
+Public-surface impact: VariableBindingData.Kind/Expression are additive with
+  defaults (Variable kind) — old .hmi.json loads unchanged; FF2/FF3 compatible.
+
+Risk: none outstanding. Override posture: proceed autonomously.
+═══════════════════════════════════════════════════════════════════

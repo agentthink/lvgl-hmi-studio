@@ -1,0 +1,75 @@
+# ============================================================
+# .editorconfig — 全仓统一编辑器与代码风格
+#
+# 目的：让不同编辑器/IDE 的格式行为一致，减少纯格式噪音进入 diff。
+# 原则：只声明「项目已经实际采用的」风格，并全部标记为 silent/suggestion。
+#      任何 warning 级以上的规则都可能经由已启用的 .NET 分析器
+#      变成构建警告，进而破坏「0 警告」基线，因此这里一律不下重手。
+# 注意：本文件不改变编译语义，也不影响 firmware/ 下第三方 SDK 的构建。
+# ============================================================
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# Markdown 行尾双空格是换行语义，不能删
+[*.{md,markdown}]
+trim_trailing_whitespace = false
+indent_size = 2
+
+[*.{json,yml,yaml,xml,axaml,csproj,props,targets,slnx,config}]
+indent_size = 2
+
+[*.{sh,bash}]
+indent_size = 2
+
+# C / 头文件（firmware 自研代码；第三方 SDK 位于 firmware/Tina-*，已被 .gitignore 排除）
+[*.{c,h}]
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.cs]
+# ── using 与命名空间 ──
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+csharp_using_directive_placement = outside_namespace:silent
+
+# ── 花括号布局（与现有代码一致：Allman） ──
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+
+# ── 缩进与空格 ──
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_after_colon_in_inheritance_clause = true
+
+# ── 声明风格（现有代码均为显式类型，var 仅用于显而易见处） ──
+csharp_style_var_for_built_in_types = false:silent
+csharp_style_var_when_type_is_apparent = true:silent
+csharp_style_var_elsewhere = false:silent
+
+# ── 现代语法偏好（提示级，不做强制） ──
+csharp_style_namespace_declarations = file_scoped:suggestion
+csharp_prefer_braces = when_multiline:silent
+csharp_style_expression_bodied_methods = when_on_single_line:silent
+csharp_style_expression_bodied_properties = when_on_single_line:silent
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_style_prefer_pattern_matching = true:suggestion
+csharp_style_prefer_not_pattern = true:suggestion
+
+# ── 代码质量：保持现状，不新增噪音 ──
+dotnet_style_namespace_match_folder = false:silent
+dotnet_diagnostic.IDE0005.severity = suggestion

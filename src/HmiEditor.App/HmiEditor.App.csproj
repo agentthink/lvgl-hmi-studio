@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>HmiEditor.App</RootNamespace>
+    <OutputType>WinExe</OutputType>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+    <!-- CommunityToolkit.Mvvm 于 2026-09-13 移除：全仓 0 处使用（无 ObservableObject/
+         RelayCommand/[ObservableProperty]），仅声明会误导后来者以为本项目采用 MVVM。
+         是否会真正引入 MVVM 见 docs/adr/ADR-2026-09-13-ui-mvvm-decision.md。
+         注意 Dock.Model.Mvvm 保留 —— 它是 Dock 面板基类的必需依赖，与 MVVM 框架无关。 -->
+    <PackageReference Include="Dock.Avalonia" />
+    <PackageReference Include="Dock.Avalonia.Themes.Fluent" />
+    <PackageReference Include="Dock.Model" />
+    <PackageReference Include="Dock.Model.Mvvm" />
+    <PackageReference Include="FluentAvaloniaUI" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HmiEditor.AI\HmiEditor.AI.csproj" />
+    <ProjectReference Include="..\HmiEditor.Core\HmiEditor.Core.csproj" />
+    <ProjectReference Include="..\HmiEditor.Device\HmiEditor.Device.csproj" />
+    <ProjectReference Include="..\HmiEditor.CodeGen\HmiEditor.CodeGen.csproj" />
+    <!-- HmiEditor.Scripting 于 2026-09-20 下架：App 从不使用它（全仓 0 条 using），
+         其中唯一有价值的 Lua 语法解析已迁入 HmiEditor.Core 的 LuaSyntaxValidator。
+         见 docs/2026-09-20-lua-syntax-validation.md。 -->
+    <ProjectReference Include="..\HmiEditor.Simulator\HmiEditor.Simulator.csproj" />
+    <ProjectReference Include="..\Hmi.Hardware.Loader\Hmi.Hardware.Loader.csproj" />
+    <ProjectReference Include="..\Hmi.Hardware.Builtin\Hmi.Hardware.Builtin.csproj" />
+    <ProjectReference Include="..\Hmi.Communication.Loader\Hmi.Communication.Loader.csproj" />
+    <ProjectReference Include="..\Hmi.Communication.Builtin\Hmi.Communication.Builtin.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <RdXmlFile Include="rd.xml" />
+
+    <!-- Assets/Icons.axaml（图标资源字典：顶栏/绘图工具栏/Toolbox 的几何图标）
+         **刻意不在这里声明**。Avalonia 的默认 glob 已经收走它 ——
+         AvaloniaBuildTasks.props：
+             <AvaloniaXaml Include="**\*.axaml" ... />
+         （只判 $(EnableDefaultItems)；Avalonia 12 里根本没有
+          EnableDefaultAvaloniaItems 这个属性，别去设它。）
+         而 AvaloniaBuildTasks.targets 的 GenerateAvaloniaResources target 会把
+         @(AvaloniaXaml) 折进 @(AvaloniaResource)：
+             <AvaloniaResource Include="@(AvaloniaXaml)" />
+         所以这里再声明一次，同一条路径就会在 @(AvaloniaResource) 里出现两次，
+         中间产物 obj/<cfg>/net10.0/Avalonia/resources 的索引区里就会有两条
+         /Assets/Icons.axaml。运行时
+             Avalonia.Platform.Internal.AssemblyDescriptor
+         用 index.ToDictionary(GetPathRooted, ...) 装这份索引，重复键会抛
+             ArgumentException: An item with the same key has already been added.
+             Key: /Assets/Icons.axaml
+         症状是 AppBuilder 起不来
+             StandardRuntimePlatformServices.Register <- SetupAppUnsafe，
+         2026-09-17 Release 门禁那 12 条失败就是这个。
+         平时不炸，是因为 XAML 编译步骤会用编译条目（Build:/Populate:/
+         NamespaceInfo:）盖掉原始条目；一旦增量构建把这一步错开（例如单独
+         dotnet build src/HmiEditor.App/HmiEditor.App.csproj），程序集里就可能
+         留下来带重复键的原始目录。拆掉这里的重复声明 = 让重复键在源头不存在。
+         专题（含判据工具与全部读数）：docs/2026-09-17-avalonia-resource-duplicate-key.md。 -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 让 UI 测试能直接验证画布内部实现（如 RenderResourceCache 的键与复用、
+         DesignCanvas.BuildControlTransform 的矩阵语义），不必为了可测而把这些
+         实现细节提升为 public API。 -->
+    <InternalsVisibleTo Include="HmiEditor.App.UiTests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- PDF 报表用 SkiaSharp 的 PDF 后端（MIT 许可）。它本来就在 Avalonia 的 Skia 渲染栈里，
+         这里**显式**声明：依赖"传递引用恰好可用"是隐式前提，显式才是契约。 -->
+    <PackageReference Include="SkiaSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 固件型号定义：每套固件（firmware/*/firmware.json）生成一个固定型号 -->
+    <None Include="..\..\firmware\*\firmware.json" Link="firmware\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

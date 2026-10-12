@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>HmiEditor.CodeGen</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HmiEditor.Core\HmiEditor.Core.csproj" />
+  </ItemGroup>
+
+  <!--
+    追溯性：把生成器自身的版本与 git commit 写进程序集元数据，
+    生成代码头部会带上它（见 CodeGenerator.GeneratorStamp），
+    便于现场用 `git log` 反查某个 .so / 屏幕代码是哪次构建产出的。
+    无 git 或非仓库时退化为 "unknown"，不阻断构建。
+
+    CI 可显式覆盖： dotnet build -p:GitCommit=<short-sha>
+  -->
+  <Target Name="ResolveGitCommit" BeforeTargets="GetAssemblyAttributes">
+    <Exec Command="git rev-parse --short HEAD"
+          ConsoleToMSBuild="true"
+          IgnoreExitCode="true"
+          WorkingDirectory="$(MSBuildProjectDirectory)"
+          Condition="'$(GitCommit)' == ''"
+          StandardOutputImportance="low"
+          StandardErrorImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitCommitRaw" />
+    </Exec>
+    <PropertyGroup>
+      <GitCommit Condition="'$(GitCommitRaw)' != ''">$(GitCommitRaw.Trim())</GitCommit>
+      <GitCommit Condition="'$(GitCommit)' == ''">unknown</GitCommit>
+    </PropertyGroup>
+    <ItemGroup>
+      <AssemblyMetadata Include="GitCommit" Value="$(GitCommit)" />
+    </ItemGroup>
+  </Target>
+</Project>

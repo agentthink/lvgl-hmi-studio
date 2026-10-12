@@ -1,0 +1,32 @@
+# Gitee Go 流水线：仓库质量门禁（构建 + 全量测试 + 固件 host 测试 + 脚本语法）
+# 触发：push 到 main 与 PR；在 Gitee 仓库「流水线」页面启用后生效
+#
+# 设计原则：门禁必须"能失败"。
+#   - 所有步骤走仓库自带的 scripts/ci-gate.sh，脚本内部 set -euo pipefail；
+#   - 不使用 `| tail` 取管道退出码，不使用 `|| true` 掩盖失败；
+#   - CI_REQUIRE_FIRMWARE_TESTS=1 保证缺少 gcc 时也判定失败。
+#
+# 镜像要求：.NET SDK 10.0.100+；如需固件 host 测试再装 gcc。
+version: '1.0'
+name: csharp-gate
+displayName: 仓库质量门禁
+triggers:
+  push:
+    branches:
+      include:
+        - main
+  pull_request:
+    branches:
+      include:
+        - main
+stages:
+  - stage:
+    name: gate
+    displayName: 构建 + 全量测试 + 固件 host 测试
+    steps:
+      - step: build@dotnet
+        name: repo_gate
+        displayName: scripts/ci-gate.sh（语法 / 构建 / 测试 / 固件 host 测试）
+        commands:
+          - chmod +x scripts/ci-gate.sh
+          - CI_REQUIRE_FIRMWARE_TESTS=1 bash scripts/ci-gate.sh

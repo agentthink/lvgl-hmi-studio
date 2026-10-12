@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>HmiEditor.Core.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\HmiEditor.Core\HmiEditor.Core.csproj" />
+    <ProjectReference Include="..\..\src\HmiEditor.CodeGen\HmiEditor.CodeGen.csproj" />
+    <ProjectReference Include="..\..\src\HmiEditor.App\HmiEditor.App.csproj" />
+    <ProjectReference Include="..\HmiEditor.TestSupport\HmiEditor.TestSupport.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- 临时目录统一走 TestTempDir（探测 + 回退），不要在测试里直接 Path.GetTempPath()。 -->
+    <Using Include="HmiEditor.TestSupport" />
+  </ItemGroup>
+</Project>

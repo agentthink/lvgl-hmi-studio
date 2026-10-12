@@ -1,0 +1,31 @@
+# Gitee Go 流水线：devkit 测试 + C# 全仓库体检
+# 触发：push 到 main；在 Gitee 仓库「流水线」页面启用后生效
+#
+# 注意：本流水线的每一步都必须能把构建判失败。
+#   - 不保留 `|| true`；`2>&1 | tail -N` 仅用于收敛日志，pipefail 保证失败仍会上报。
+version: '1.0'
+name: devkit-check
+displayName: devkit 测试与 C# 体检
+triggers:
+  push:
+    branches:
+      include:
+        - main
+stages:
+  - stage:
+    name: test
+    displayName: 测试与体检
+    steps:
+      - step: build@python
+        name: devkit_test
+        displayName: devkit 测试 + C# 体检
+        # 支持 3.6~3.9 及更高版本（按 Gitee Go 环境实际支持调整）
+        pythonVersion: '3.10'
+        commands:
+          - set -euo pipefail
+          - cd code-assistant-devkit
+          - pip install -r requirements.txt -q
+          - pip install -e . -q
+          - python -m pytest -q tests/ 2>&1 | tail -20
+          - echo "===== C# 全仓库体检 ====="
+          - python examples/scan_csharp.py 2>&1 | tail -30

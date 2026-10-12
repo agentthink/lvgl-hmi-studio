@@ -1,0 +1,312 @@
+#!/bin/sh /etc/rc.common
+# zhishu-HMI 运行固件 开机自启脚本（procd 托管 + respawn）
+# 说明：开发板对应文件 /etc/init.d/S97hmiruntime
+#
+# 为何优先用 procd 而非手动 daemon 化：
+#   OTA .so 热加载流程要求 hmi_runtime 被重新拉起（新进程 dlopen 加载 UDISK 新 .so）。
+#   procd_set_param respawn 能在进程死亡后自动重启；
+#   旧的 sh -c 'trap "" HUP; exec ...' & 方式 killall 后无人重启 → OTA 热加载失败。
+# procd respawn 不会重新执行 start()，仅重新 exec 命令；
+# UDISK 挂载/触摸软链等一次性初始化放 start() 中（仅开机执行一次）。
+#
+# 无 procd 的 rootfs（bingpi_m2）：本脚本走 start-stop-daemon 回退，**没有 respawn**，
+# 所以 .so 热 OTA 不能靠 respawn 兜底，而是由 swupdate 的 swu_next=hmi_restart →
+# `/etc/init.d/S97hmiruntime restart` 触发（build.sh 的 fix_swupdate_hmi_restart
+# 给 SDK 的 swupdate_cmd.sh 补上了这条分支；见 docs/flashing-guide.md）。
+
+START=97
+STOP=10
+USE_PROCD=1
+
+HMI_BIN=/usr/bin/hmi_runtime
+HMI_LOG=/var/log/hmi_runtime.log
+HMI_PERSIST_LOG=/mnt/UDISK/hmi_runtime.log   # 持久日志（/var/log 是 tmpfs，重启丢）
+PIDFILE=/var/run/hmi_runtime.pid
+TOUCH_LINK=/dev/input/event2
+GT911_NAME=gt9xxnew_ts   # GT911 电容触摸驱动（内核动态分配 event 节点）
+
+# ── 本机 TLS 终止代理（阶段 303；契约 §4 四条）──
+# 拓扑见 docs/2026-10-01-local-tls-proxy-contract.md §1：
+#   客户端（hmi_runtime）连**回环明文**代理，代理对 broker 走 TLS（psk / ca）。
+PROXY_BIN=/usr/bin/hmi-tls-proxy
+PROXY_PIDFILE=/var/run/hmi_tls_proxy.pid
+PROXY_LOG=/mnt/UDISK/hmi_tls_proxy.log
+COMM_CFG=/mnt/UDISK/hmi/comm_config.ini
+
+# 起代理（**先于** hmi_runtime；见 start_service 里的调用点与注释）。
+# 退出码契约（app/comm/tls_proxy_config.h）：0 可用 / 3 **不需要**（mqtt.tls=off，正常跳过）
+#                                          / 4 **配置非法** ⇒ 不启动 ＋ 审计（代理自己落审计）。
+# ⚠ 三支都**不**改 comm_config.ini、**不**把客户端切去直连 broker —— 那叫自动降级，拍板禁止（§7-2 ①）。
+start_tls_proxy() {
+    [ -x "$PROXY_BIN" ] || return 0
+
+    "$PROXY_BIN" --check --config "$COMM_CFG"
+    case $? in
+        0)  : ;;
+        3)  echo "hmi-tls-proxy: mqtt.tls=off ⇒ 不启动代理（正常）"
+            return 0 ;;
+        *)  echo "hmi-tls-proxy: 配置非法 ⇒ **不启动**（绝不降级为明文；原因见审计）"
+            # 不带 --check 跑一次：走"配置非法"分支，落审计后自行退出（不会进入监听）
+            "$PROXY_BIN" --config "$COMM_CFG" >/dev/null 2>&1
+            return 0 ;;
+    esac
+
+    if procd_available; then
+        procd_open_instance hmi-tls-proxy
+        # 与 hmi_runtime 同款：stderr → UDISK 持久日志（设备无 logd，走 pipe 会全丢）
+        procd_set_param command /bin/sh -c "exec $PROXY_BIN --config $COMM_CFG >>$PROXY_LOG 2>&1"
+        procd_set_param stdout 1
+        procd_set_param stderr 1
+        procd_set_param file "$PROXY_BIN"
+        # 契约 §4 第一条：代理崩了要**自己起来**，否则 MQTT 静默断、远端只看到"设备离线"
+        procd_set_param respawn
+        procd_set_param pidfile "$PROXY_PIDFILE"
+        procd_close_instance
+    else
+        # 非 procd rootfs：没有 respawn（与 hmi_runtime 的回退同款，代价同样写在注释里）
+        if ! pidof hmi-tls-proxy >/dev/null 2>&1; then
+            mkdir -p /var/run
+            start-stop-daemon -S -b -m -p "$PROXY_PIDFILE" -x /bin/sh -- \
+                -c "exec $PROXY_BIN --config $COMM_CFG >>$PROXY_LOG 2>&1"
+            echo "hmi-tls-proxy: started via start-stop-daemon (no procd on this rootfs)"
+        fi
+    fi
+}
+
+# 真 procd 系统 = /sbin/procd 可执行 **且** procd.sh 提供真正的 procd_* 函数。
+# 为何要判两样：本 SDK 的 bingpi_m2 镜像用 busybox init（/sbin/init → busybox），
+# 既无 /sbin/procd 也无 procd.sh，/etc/rc.common 只把 procd_open_instance/
+# procd_close_instance 实现成 `return 0` —— 只判函数是否存在会误判成"有 procd"。
+procd_available() {
+    [ -x /sbin/procd ] && [ -f /lib/functions/procd.sh ]
+}
+
+start_service() {
+    [ -x "$HMI_BIN" ] || {
+        echo "hmi_runtime: binary not found"
+        return 0
+    }
+    [ -e /dev/fb0 ] || sleep 1   # 等待显示驱动就绪
+
+    # ── SSH 服务端（dropbear）──
+    # 为何放在**本脚本**而不是 rc.modules（2026-10-10 实机定位）：
+    #   rc.modules 是被 rcS `source` 的、跑在开机很早的阶段。实测那里无论裸起
+    #   `dropbear -p 22` 还是 `start-stop-daemon -S -b`，开机后 `pidof dropbear`
+    #   都是空（而 host key 的生成命令同样在早期可能拿不到熵 → 预生成失败，
+    #   没有 host key 的 dropbear 会**立即退出**）。本脚本跑在 rc.final 阶段，
+    #   与"成功拉起 hmi_runtime"是同一个上下文，环境已就绪。
+    # 另：本镜像没有 uci，dropbear 自带的 /etc/init.d/dropbear 走 config_load，
+    #   实测报 `uci_load: not found`，用不了 —— 所以直起。
+    # HMI_SSH_AT_BOOT=0 可关闭（保持出厂"登录才起"的姿态）。
+    if [ "${HMI_SSH_AT_BOOT:-1}" = "1" ] && [ -x /usr/sbin/dropbear ]; then
+        if ! pidof dropbear >/dev/null 2>&1; then
+            mkdir -p /etc/dropbear
+            if [ ! -s /etc/dropbear/dropbear_rsa_host_key ]; then
+                # ⚠ 镜像里 /etc/dropbear/dropbear_rsa_host_key 是 dropbear 包 `touch` 出来的
+                # **0 字节占位**（其 Makefile: `touch $(1)/etc/dropbear/dropbear_rsa_host_key`），
+                # 而 dropbearkey **拒绝覆盖已存在的文件** —— 就地生成必然失败：
+                #     Couldn't create new file ...: File exists / Exited: Failed to generate key.
+                # ⇒ 没有 host key，dropbear 起不来（2026-10-10 实机定位：当时 overlay 里
+                #   恰好有手工生成的有效 key 才"看起来是好的"，一 full_erase 刷机就暴露）。
+                # 解法照搬 OpenWrt 原版 dropbear.init：**先写临时路径再 mv 过去**。
+                # -s 2048：dropbearkey(2015.71) 默认只给 1024 位，现代 OpenSSH 会拒。
+                mkdir -p /tmp/dropbear
+                rm -f /tmp/dropbear/dropbear_rsa_host_key
+                /usr/bin/dropbearkey -t rsa -s 2048 -f /tmp/dropbear/dropbear_rsa_host_key >/dev/null 2>&1 \
+                    && mv -f /tmp/dropbear/dropbear_rsa_host_key /etc/dropbear/dropbear_rsa_host_key
+            fi
+            if [ -s /etc/dropbear/dropbear_rsa_host_key ]; then
+                start-stop-daemon -S -b -x /usr/sbin/dropbear -- \
+                    -p 22 -r /etc/dropbear/dropbear_rsa_host_key
+                echo "hmi_runtime: dropbear started (pid $(pidof dropbear))"
+            else
+                echo "hmi_runtime: warning: dropbear host key 生成失败，跳过 SSH"
+            fi
+        fi
+    fi
+
+    # ── adbd 看护 ──
+    # 本镜像（bingpi_m2）没有 procd：rcS 只通过 /etc/init.d/load_script.conf 在开机跑
+    # 一次 `/etc/init.d/adbd "boot" &`，之后 adbd 若退出就**无人拉起**，USB 调试通道
+    # 消失且只能重启板子（实机取证见 hmi_adbd_watchdog.sh 与 docs/flashing-guide.md）。
+    # 这里把那个 30s 轮询的看护循环拉起来（带 pidfile 防重复；/var/run 可能不存在，
+    # 用 -m 前先 mkdir）。
+    if [ -x /usr/bin/hmi_adbd_watchdog.sh ]; then
+        wpid="$(cat /var/run/adbd_watchdog.pid 2>/dev/null)"
+        if [ -z "$wpid" ] || [ ! -d "/proc/$wpid" ]; then
+            mkdir -p /var/run
+            start-stop-daemon -S -b -m -p /var/run/adbd_watchdog.pid \
+                -x /usr/bin/hmi_adbd_watchdog.sh
+            echo "hmi_runtime: adbd watchdog started (pid $(cat /var/run/adbd_watchdog.pid 2>/dev/null))"
+        fi
+    fi
+
+    # ── 放宽内存 overcommit（WavePI-S6 必需） ──
+    # 板子 CommitLimit 仅 ~54MB（cma=48M 占用 + overcommit_ratio=50），
+    # hmi_runtime 的 LVGL 16MB 池 + fb 缓冲 + freetype 使总内存提交超限，
+    # musl 大 malloc(2.4MB) 触发 commit 检查失败 → SIGSEGV（2026-08-19 实机）。
+    # 开机即置 1（always overcommit），hmi_runtime 大分配不再失败。
+    echo 1 > /proc/sys/vm/overcommit_memory 2>/dev/null
+
+    # ── 禁用 SDK 自带 lv_examples demo 自启 ──
+    # SDK 出厂脚本 /etc/init.d/S99swupdate_autorun 会在 S99 阶段无条件启动
+    # `lv_examples 0 &`，抢占 /dev/fb0 把 HMI 界面盖掉（LVGL 官方 demo 页）。
+    # S97 先于 S99 运行，此处把该行注释掉；/etc 是 tmpfs overlay，每次开机
+    # 由 squashfs 重新铺底，故必须每次执行（2026-08-17 实机定位）。
+    if [ -f /etc/init.d/S99swupdate_autorun ]; then
+        sed -i 's/^\(.*lv_examples.*\)$/#\1/' /etc/init.d/S99swupdate_autorun
+        echo "hmi_runtime: S99swupdate_autorun lv_examples disabled"
+    fi
+
+    # ── 动态检测 GT911 真实触摸节点 ──
+    # 固件升级后 GT911 的 event 编号会变化（历史上 event1 → event2）。
+    # 旧版硬编码 TOUCH_SRC=/dev/input/event1 并 ln -sf event1 event2，会把
+    # 音频插口(/dev/input/event1)的链接覆盖到 GT911 真实节点上 → 触摸失效。
+    # 正确做法：
+    #   1) 等待 gt9xxnew_ts 注册（最长 20s，触摸驱动约开机 8s 就绪）
+    #   2) 遍历 /sys/class/input/event*/device/name 定位真实节点
+    #   3) 仅当真实节点 ≠ event2 时才建软链（绝不覆盖 GT911 自身）
+    real_node=""
+    i=0
+    while [ $i -lt 20 ]; do
+        for ev in /sys/class/input/event*; do
+            [ -r "$ev/device/name" ] || continue
+            if [ "$(cat "$ev/device/name" 2>/dev/null)" = "$GT911_NAME" ]; then
+                real_node="/dev/input/${ev##*/}"
+                break 2
+            fi
+        done
+        i=$((i+1))
+        sleep 1
+    done
+
+    if [ -n "$real_node" ]; then
+        if [ "$real_node" != "$TOUCH_LINK" ]; then
+            # 先清除可能存在的错误软链/旧节点，避免创建链接时被占用
+            rm -f "$TOUCH_LINK"
+            ln -sf "$real_node" "$TOUCH_LINK"
+            echo "hmi_runtime: touch $real_node -> $TOUCH_LINK"
+        else
+            echo "hmi_runtime: touch already at $TOUCH_LINK"
+        fi
+    else
+        echo "hmi_runtime: warning: $GT911_NAME not found, touch may not work"
+    fi
+
+    # 挂载 UDISK（UBIFS 可写持久分区）—— OTA 升级的 HMI .so / 资源 / 字体 存放在
+    # /mnt/UDISK/hmi/（root 是 squashfs+tmpfs overlay，写 /usr/lib/hmi 重启即丢，
+    # UDISK 是唯一重启后保留的可写分区）；系统出厂文件在 /usr/lib/hmi/ 作 fallback
+    mkdir -p /mnt/UDISK
+    # 等待 UDISK 挂载完成（UBIFS 卷在系统启动后期才就绪，实测 ~22s；挂载前
+    # mkdir/cp 会落在 RAM overlay 被挂载隐藏，同步与 UDISK 宿主选择都会失效）
+    i=0
+    while [ $i -lt 30 ] && ! grep -q " /mnt/UDISK " /proc/mounts 2>/dev/null; do
+        mount -t jffs2 /dev/by-name/UDISK /mnt/UDISK 2>/dev/null || \
+        mount /dev/by-name/UDISK /mnt/UDISK 2>/dev/null
+        sleep 1
+        i=$((i+1))
+    done
+    if grep -q " /mnt/UDISK " /proc/mounts 2>/dev/null; then
+        echo "hmi_runtime: UDISK ready after ${i}s"
+    else
+        echo "hmi_runtime: WARNING UDISK mount timeout (30s), fallback to /usr/lib/hmi"
+    fi
+    mkdir -p /mnt/UDISK/hmi
+
+    # ── 资产首启同步（squashfs 出厂 → UDISK 持久） ──
+    # 生成代码 IMG_PATH = A:/mnt/UDISK/hmi/assets/<file>（SIM_ASSET_DIR）。
+    # 首次开机（或 OTA 后 UDISK 被清）把镜像内出厂资产拷到 UDISK；已有则跳过，
+    # 保留 OTA 更新的版本。字体不作传输：字体与固件默认字体一致（font_cjk_sc.ttf
+    # 已在 /usr/lib/hmi/fonts），hmi_runtime 直接从 rootfs 加载，不占用 UDISK。
+    mkdir -p /mnt/UDISK/hmi/assets
+    if [ -d /usr/lib/hmi/assets ] && [ -z "$(ls -A /mnt/UDISK/hmi/assets 2>/dev/null)" ]; then
+        cp -f /usr/lib/hmi/assets/* /mnt/UDISK/hmi/assets/ 2>/dev/null
+        echo "hmi_runtime: assets synced to UDISK: $(ls /mnt/UDISK/hmi/assets 2>/dev/null)"
+    fi
+
+    # ── 宿主优先 UDISK（OTA 可更新；系统 /usr/bin 出厂版作 fallback） ──
+    # UDISK 上的 hmi_runtime 由编辑器发布工具/OTA 更新；回退版本与出厂 .so 匹配。
+    if [ -x /mnt/UDISK/hmi/hmi_runtime ]; then
+        HMI_BIN=/mnt/UDISK/hmi/hmi_runtime
+        echo "hmi_runtime: host from UDISK: $HMI_BIN"
+    fi
+
+    # ── 起 TLS 终止代理（**必须在这里**：UDISK 挂好之后、hmi_runtime 之前）──
+    # 为什么在 UDISK 之后：代理读的 comm_config.ini **在 UDISK 上**；早于挂载会读到"没有配置"
+    #   ⇒ 退出码 3（不需要代理）⇒ 代理静默不起 —— 那是最难查的一类故障。
+    # 为什么在 hmi_runtime 之前（契约 §4 第二条）：客户端一起来就按 `mqtt.host=127.0.0.1` 连
+    #   回环代理；顺序反了客户端会先白刷一屏"连不上"，且这一窗内远程命令下发全丢。
+    start_tls_proxy
+
+    # OTA .so 热加载标记：swupdate 写入新 .so 后设 swu_hmi_reload=1 + killall hmi_runtime，
+    # procd respawn 拉起新进程，此处清标记并记录日志（新进程 dlopen 已是新 .so）。
+    # 注意：procd respawn 不重跑 start()，故此标记仅在开机或 /etc/init.d/S97hmiruntime restart 时检测；
+    # 真正的 .so 重载由 screen_manager.c 的 dlopen 优先加载 UDISK 路径实现，不依赖此标记。
+    if [ "$(fw_printenv -n swu_hmi_reload 2>/dev/null)" = "1" ]; then
+        fw_setenv swu_hmi_reload 2>/dev/null
+        echo "hmi_runtime: OTA .so reload detected, starting with updated libhmi_ui.so"
+    fi
+
+    if procd_available; then
+        procd_open_instance
+        # HMI_LOG 走 stderr；procd stdout/stderr → pipe→logd，但设备无 logd 日志全丢。
+        # 重定向 stderr 到 UDISK 持久日志文件（可 OTA/ADB 读取排查；/var/log 是 tmpfs 重启丢）。
+        procd_set_param command /bin/sh -c "exec $HMI_BIN 2>>$HMI_PERSIST_LOG"
+        procd_set_param stdout 1
+        procd_set_param stderr 1
+        procd_set_param file "$HMI_BIN"
+        # respawn：进程退出后自动重启（OTA killall 后拉起新进程加载新 .so；
+        # 崩溃也自动恢复）。procd 自带 respawn threshold 防止崩溃风暴。
+        procd_set_param respawn
+        procd_set_param pidfile "$PIDFILE"
+        procd_close_instance
+    else
+        # ── 非 procd 回退 ──
+        # bingpi_m2（WavePI-S6）镜像里没有**真** procd：/sbin/init → busybox，
+        # 无 /sbin/procd 也无 /lib/functions/procd.sh。于是 /etc/rc.common 的
+        # procd_open_instance/close_instance 只是 `return 0` 的空壳 —— 名字叫 procd、
+        # 但没有进程托管语义：不 respawn、不管 pidfile，oom_score_adj 也不生效。
+        #
+        # ⚠ 更正（2026-10-10 复核 rc.common 源码）：先前注释断言"旧版因为 command 排在
+        # respawn 之前、而空壳 procd_set_param 只在 respawn 已置位时才 exec ⇒ 开机什么都
+        # 不启动"—— **这条推断是错的**。rc.common 的 command 分支里 `exec $@ >/dev/null`
+        # 在 respawn 判断**之外**，即 command **无条件 exec**（/etc/init.d/adbd 正是这个
+        # 形状，而 adbd 确实起来了）。commit 346fbe9 的说明也沿用了那条错误推断。
+        #
+        # 那么为什么仍然走显式回退：它**确定**（不依赖 rc.common 的空壳语义），
+        # 并顺带补上 pidfile 与重复启动守卫。实机验证：新脚本下开机自启 3 次成立
+        # （含两次断电重上电）。
+        # mq_r 镜像有真 procd（/sbin/procd + procd.sh），那边走上面的 procd 分支。
+        # 代价：无 respawn —— 进程退出不会自动重拉。要恢复 respawn/OTA 自愈，
+        # 请在 SDK 打开 CONFIG_PACKAGE_procd=y（见 docs/flashing-guide.md 表 ⑥）。
+        if pidof hmi_runtime >/dev/null 2>&1; then
+            echo "hmi_runtime: already running (pid $(pidof hmi_runtime))"
+            return 0
+        fi
+        # -m 需要目录存在，否则 pidfile 静默不落（/var/run 在部分 rootfs 里没有）
+        mkdir -p /var/run
+        start-stop-daemon -S -b -m -p "$PIDFILE" -x /bin/sh -- \
+            -c "exec $HMI_BIN 2>>$HMI_PERSIST_LOG"
+        echo "hmi_runtime: started via start-stop-daemon (no procd on this rootfs)"
+    fi
+}
+
+# ── 停止钩子：名字必须与 rc.common 的约定一致 ──
+# rc.common 里有 `[ -n "$USE_PROCD" ]` 分支（本脚本 USE_PROCD=1），它在本脚本被
+# source **之后**又把 start/stop 重新定义成：
+#     start() { start_service "$@"; }
+#     stop()  { stop_service "$@"; }
+# ⇒ 只定义同名的 start()/stop() 是**无效**的（会被覆盖掉）。本脚本此前正是如此，
+# 实测 `/etc/init.d/S97hmiruntime stop` 打印 'Not defined "stop_service" functions!!!'
+# 且进程照旧在跑、pidfile 也不清（2026-10-10 实机）。
+# restart 不必自定义：rc.common 的默认实现就是 `trap '' TERM; stop; start`。
+stop_service() {
+    procd_kill hmi_runtime 2>/dev/null
+    killall hmi_runtime 2>/dev/null
+    rm -f "$PIDFILE"
+    # TLS 终止代理（阶段 303）：先停代理再停宿主无所谓，但**必须停** ——
+    # 只停 hmi_runtime 会让代理继续占着回环端口，下一次 start 时它还在监听旧配置。
+    procd_kill hmi-tls-proxy 2>/dev/null
+    killall hmi-tls-proxy 2>/dev/null
+    rm -f "$PROXY_PIDFILE"
+}

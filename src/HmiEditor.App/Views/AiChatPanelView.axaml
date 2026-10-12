@@ -1,0 +1,220 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:HmiEditor.App.Views"
+             xmlns:ctrl="using:HmiEditor.App.Controls"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             x:Class="HmiEditor.App.Views.AiChatPanelView">
+    <DockPanel Background="{StaticResource HmiBgDarkBrush}">
+
+        <!-- ── 配置折叠区 ── -->
+        <Expander DockPanel.Dock="Top"
+                  Header="{res:Loc ai.config.title}"
+                  Margin="0,0,0,6"
+                  Foreground="{StaticResource HmiLinkBrush}"
+                  FontSize="12">
+            <StackPanel Spacing="4" Margin="0,6,0,0">
+                <Grid ColumnDefinitions="70,*">
+                    <TextBlock Text="{res:Loc ai.provider}" Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center" FontSize="11"/>
+                    <ComboBox x:Name="ProviderBox" Grid.Column="1"
+                              Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                              BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"
+                              SelectedIndex="0">
+                        <ComboBoxItem Content="{res:Loc ai.provider.openai}"/>
+                        <ComboBoxItem Content="{res:Loc ai.provider.claude}"/>
+                    </ComboBox>
+                </Grid>
+                <Grid ColumnDefinitions="70,*">
+                    <TextBlock Text="{res:Loc ai.endpoint}" Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center" FontSize="11"/>
+                    <TextBox x:Name="EndpointBox" Grid.Column="1"
+                             Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                             BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="11"
+                             PlaceholderText="{res:Loc ai.endpoint.hint}"/>
+                </Grid>
+                <Grid ColumnDefinitions="70,*">
+                    <TextBlock Text="{res:Loc ai.model}" Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center" FontSize="11"/>
+                    <TextBox x:Name="ModelBox" Grid.Column="1"
+                             Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                             BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="11"
+                             PlaceholderText="{res:Loc ai.model.hint}"/>
+                </Grid>
+                <Grid ColumnDefinitions="70,*">
+                    <TextBlock Text="{res:Loc ai.api.key}" Foreground="{StaticResource HmiTextSecondaryBrush}" VerticalAlignment="Center" FontSize="11"/>
+                    <TextBox x:Name="ApiKeyBox" Grid.Column="1"
+                             Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                             BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="11"
+                             PlaceholderText="{res:Loc ai.api.key.hint}"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,2,0,0">
+                    <Button x:Name="SaveConfigBtn" Content="{res:Loc ai.save.config}"
+                            Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" FontSize="11"
+                            Padding="10,4"/>
+                    <TextBlock x:Name="ConfigStatusText" Foreground="{StaticResource HmiSuccessBrush}"
+                               VerticalAlignment="Center" FontSize="11"/>
+                </StackPanel>
+            </StackPanel>
+        </Expander>
+
+        <!-- ── 操作按钮区(生成结果后出现) ── -->
+        <StackPanel DockPanel.Dock="Bottom" Spacing="4" Margin="0,6,0,0">
+            <StackPanel x:Name="ActionBar" Orientation="Horizontal" Spacing="6" IsVisible="False">
+                <Button x:Name="PreviewBtn" Content="{res:Loc ai.preview}"
+                        Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" FontSize="12" Padding="12,4"/>
+                <Button x:Name="ApplyBtn" Content="{res:Loc ai.apply}"
+                        Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" FontSize="12" Padding="12,4"/>
+                <Button x:Name="CancelBtn" Content="{res:Loc ai.cancel}"
+                        Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" FontSize="12" Padding="12,4"/>
+            </StackPanel>
+            <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="6">
+                <ToggleButton x:Name="AgentModeToggle" IsChecked="True"
+                              Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                              BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="11"
+                              Padding="8,3"
+                              Content="{res:Loc ai.agent.mode}"/>
+                <Button x:Name="NewChatBtn" Grid.Column="1" Content="{res:Loc ai.new.chat}"
+                        Click="OnNewChatClicked"
+                        Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="11"
+                        Padding="8,3"/>
+                <TextBlock Grid.Column="2"
+                           Text="{res:Loc ai.agent.mode.hint}"
+                           Foreground="{StaticResource HmiTextMutedBrush}" VerticalAlignment="Center" FontSize="10"
+                           TextTrimming="CharacterEllipsis"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="6">
+                <TextBox x:Name="InputBox"
+                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                         BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"
+                         MinHeight="56" MaxHeight="120"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         PlaceholderText="{res:Loc ai.input.hint}"/>
+                <!-- 停止按钮：只在有在途请求时出现（Agent 与非 Agent 共用同一条取消链路） -->
+                <Button x:Name="StopBtn" Grid.Column="1" IsVisible="False"
+                        Content="{res:Loc ai.cancel}"
+                        Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" FontSize="12"
+                        Padding="14,4"/>
+                <Button x:Name="SendBtn" Grid.Column="2" Content="{res:Loc ai.send}"
+                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" FontSize="12"
+                        Padding="14,4"/>
+            </Grid>
+        </StackPanel>
+
+        <!-- ── 消息列表 ── -->
+        <ListBox x:Name="MessageList"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="local:ChatEntry">
+                    <Border Background="{StaticResource HmiBgInputBrush}" CornerRadius="4"
+                            BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                            Margin="0,2">
+                        <StackPanel Margin="8,6" Spacing="4">
+                            <SelectableTextBlock Text="{Binding RoleDisplay}"
+                                                 Foreground="{StaticResource HmiLinkBrush}" FontSize="11" FontWeight="SemiBold"/>
+                            <SelectableTextBlock Text="{Binding Content}"
+                                                 Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                                 TextWrapping="Wrap"/>
+                            <!-- 流式正文预览：长任务过程中模型的增量输出实时可见（否则整段调用期间界面是静止的） -->
+                            <Border IsVisible="{Binding HasLivePreview}"
+                                    Background="{StaticResource HmiBgPanelBrush}" CornerRadius="3"
+                                    BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                    Padding="6,4">
+                                <StackPanel Spacing="2">
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <TextBlock Text="{res:Loc ai.streaming.hint}"
+                                                   Foreground="{StaticResource HmiTextMutedBrush}" FontSize="10"/>
+                                        <TextBlock Text="{Binding StreamingStatus}"
+                                                   Foreground="{StaticResource HmiTextMutedBrush}" FontSize="10"/>
+                                    </StackPanel>
+                                    <ScrollViewer MaxHeight="120" VerticalScrollBarVisibility="Auto">
+                                        <SelectableTextBlock Text="{Binding LivePreview}"
+                                                             Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11"
+                                                             TextWrapping="Wrap"/>
+                                    </ScrollViewer>
+                                </StackPanel>
+                            </Border>
+                            <!-- Agent 步骤轨迹 -->
+                            <ItemsControl ItemsSource="{Binding Steps}" IsVisible="{Binding HasSteps}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="local:ChatAgentStep">
+                                        <Border Background="{StaticResource HmiBgPanelBrush}" CornerRadius="3"
+                                                BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                                Margin="0,1">
+                                            <StackPanel Margin="6,4" Spacing="2">
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <SelectableTextBlock Text="{Binding ToolDisplay}"
+                                                                         Foreground="{StaticResource HmiAccentHoverBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                                    <TextBlock Text="✓" Foreground="{StaticResource HmiSuccessBrush}" FontSize="11"
+                                                               IsVisible="{Binding Ok}"/>
+                                                    <TextBlock Text="✕" Foreground="{StaticResource HmiDangerBrush}" FontSize="11"
+                                                               IsVisible="{Binding !Ok}"/>
+                                                </StackPanel>
+                                                <SelectableTextBlock Text="{Binding Arguments}"
+                                                                     Foreground="{StaticResource HmiTextMutedBrush}" FontSize="10"
+                                                                     TextWrapping="Wrap"/>
+                                                <SelectableTextBlock Text="{Binding Result}"
+                                                                     Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="10"
+                                                                     TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <!-- Agent 一键回滚 -->
+                            <Button Content="{res:Loc ai.agent.rollback}"
+                                    IsVisible="{Binding AgentHasChanges}"
+                                    Click="OnRollbackClicked"
+                                    Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                    BorderThickness="0" FontSize="11" Padding="10,3"
+                                    HorizontalAlignment="Left"/>
+                            <!-- 失败重试(复用上次输入) -->
+                            <Button Content="{res:Loc gen.retry}"
+                                    IsVisible="{Binding CanRetry}"
+                                    Click="OnRetryClicked"
+                                    Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                    BorderThickness="0" FontSize="11" Padding="10,3"
+                                    HorizontalAlignment="Left"/>
+                            <!-- 运行中取消 -->
+                            <Button Content="{res:Loc gen.cancel}"
+                                    IsVisible="{Binding IsRunning}"
+                                    Click="OnCancelAgentClicked"
+                                    Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                    BorderThickness="0" FontSize="11" Padding="10,3"
+                                    HorizontalAlignment="Left"/>
+                            <!-- 图片生成预览 -->
+                            <StackPanel IsVisible="{Binding HasImage}" Spacing="4" Margin="0,4,0,0">
+                                <Border Background="{StaticResource HmiBgPanelBrush}" CornerRadius="4"
+                                        BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                        Padding="4" HorizontalAlignment="Left">
+                                    <ctrl:SvgImage SvgText="{Binding ImageSvg}" MaxWidth="200" MaxHeight="200"/>
+                                </Border>
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Button Content="{res:Loc ai.image.save.svg}" Click="OnSaveSvgClicked"
+                                            Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" FontSize="11" Padding="10,3"
+                                            Tag="{Binding}"/>
+                                    <Button Content="{res:Loc ai.image.save.png}" Click="OnSavePngClicked"
+                                            Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" FontSize="11" Padding="10,3"
+                                            Tag="{Binding}"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <SelectableTextBlock Text="{Binding Detail}"
+                                                 Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                                                 TextWrapping="Wrap"
+                                                 IsVisible="{Binding HasDetail}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        </DockPanel>
+</UserControl>

@@ -1,0 +1,6 @@
+page,block,component,signal_or_pin,net,value_or_note,status
+P5,LCD_POWER_BACKLIGHT,U12,outputs,LCD_AVDD/LCD_VGH/LCD_VGL/LCD_VCOM,9/18/-6/3.15V typical,confirmed
+P5,LCD_POWER_BACKLIGHT,U13,LED output,VLED_A/VLED_K,9.6V 180mA typical,confirmed
+P5,LCD_POWER_BACKLIGHT,U13,LED rails,VLED_A/VLED_K,Panel backlight output rails,confirmed
+P5,LCD_POWER_BACKLIGHT,U13,DIM/EN,LCD_BL_PWM/LCD_BL_EN,PWM7 and enable,required
+P5,LCD_POWER_BACKLIGHT,RCS1,CS,LCD_BL_FB,20mA per LED / topology TBD,select

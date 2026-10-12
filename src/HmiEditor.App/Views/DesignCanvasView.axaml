@@ -1,0 +1,89 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:HmiEditor.App.Controls"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             x:Class="HmiEditor.App.Views.DesignCanvasView">
+    <!-- 三层叠加 Canvas 模型 -->
+    <Grid>
+        <!-- 底层：吸附网格点阵
+             GridSize 刻意**不**在这里写死 —— 由 DesignCanvasView.ApplyEditorPreferences()
+             从应用级设置（SettingsService.Interaction.GridSize，默认 10）注入，
+             免得出现"设置里改了、XAML 里又写回一个数"的第二个来源。 -->
+        <controls:SnapGrid x:Name="GridLayer"
+                           DotColor="#3C465A" />
+        <!-- 中层：控件渲染与交互 -->
+        <controls:DesignCanvas x:Name="CanvasLayer"
+                               Adorner="{Binding ElementName=AdornerLayer}" />
+        <!-- 顶层：选中装饰 -->
+        <controls:SelectionAdorner x:Name="AdornerLayer"
+                                   IsHitTestVisible="False"
+                                   HandleSize="8" />
+
+        <!-- R2-T2: 预览模式软键盘（点击输入框时弹出） -->
+        <Border x:Name="SoftKeyboardPanel"
+                IsVisible="False"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,8"
+                Padding="8"
+                Background="#E6202A3C"
+                BorderBrush="{StaticResource HmiInputBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                IsHitTestVisible="True"
+                ZIndex="50">
+            <StackPanel Spacing="4">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <TextBlock x:Name="KbdTargetLabel"
+                               Text="{res:Loc sim.keyboard.target}"
+                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+                <!-- 数字行 -->
+                <UniformGrid x:Name="KbdRowDigits" Columns="10" Rows="1" />
+                <!-- 字母行 1 -->
+                <UniformGrid x:Name="KbdRowTop" Columns="10" Rows="1" />
+                <!-- 字母行 2 -->
+                <UniformGrid x:Name="KbdRowHome" Columns="9" Rows="1" />
+                <!-- 字母行 3 + 功能键 -->
+                <UniformGrid x:Name="KbdRowBottom" Columns="10" Rows="1" />
+                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                    <Button x:Name="KbdSpaceBtn" Content="{res:Loc sim.keyboard.space}"
+                            Width="180" Height="32" FontSize="12"
+                            Click="OnKbdSpaceClicked" />
+                    <Button x:Name="KbdShiftBtn" Content="⇧" Width="48" Height="32" FontSize="14"
+                            Click="OnKbdShiftClicked" />
+                    <Button x:Name="KbdBackspaceBtn" Content="⌫" Width="48" Height="32" FontSize="14"
+                            Click="OnKbdBackspaceClicked" />
+                    <Button x:Name="KbdDoneBtn" Content="{res:Loc sim.keyboard.done}"
+                            Width="64" Height="32" FontSize="12"
+                            Click="OnKbdDoneClicked" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- 提示文字（画布为空时显示） -->
+        <TextBlock x:Name="EmptyHint"
+                   Text="{res:Loc canvas.drag.hint}"
+                   Foreground="{StaticResource HmiTextHintBrush}"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   IsHitTestVisible="False" />
+
+        <!-- R2-T2: 预览模式切换按钮（画布右上角浮动） -->
+        <ToggleButton x:Name="PreviewToggleButton"
+                      Content="{res:Loc gen.preview}"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      Margin="0,8,8,0"
+                      Padding="10,4"
+                      FontSize="12"
+                      Background="{StaticResource HmiBgElevatedBrush}"
+                      Foreground="{StaticResource HmiTextPrimaryBrush}"
+                      BorderBrush="{StaticResource HmiInputBorderBrush}"
+                      BorderThickness="1"
+                      CornerRadius="4"
+                      ToolTip.Tip="{res:Loc canvas.tt.toggle.preview}" />
+    </Grid>
+</UserControl>

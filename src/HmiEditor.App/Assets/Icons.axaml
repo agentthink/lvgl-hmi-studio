@@ -1,0 +1,100 @@
+<!--
+  zhishu-hmi 应用图标资源字典
+
+  收纳 MainWindow CommandBar 顶栏 + 绘图工具栏 + Toolbox 所有 30+ 个手写 PathIcon。
+  目的：消除 XAML 散落的几何字符串，便于视觉统一与维护。
+
+  使用方式：
+    <CommandBarButton.Icon>
+        <PathIcon Data="{StaticResource IconNewProject}"/>
+    </CommandBarButton.Icon>
+
+  命名规则：Icon<语义名>，与 MainWindow 中的按钮 x:Name 对应（去掉 Btn 前缀）。
+-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ═══ 文件组 ═══ -->
+    <StreamGeometry x:Key="IconNewProject">M3,2 H9 L12,5 V14 H3 Z M8,2 V5 H11 M5.5,7.5 H9.5 M7.5,5.5 V9.5</StreamGeometry>
+    <StreamGeometry x:Key="IconOpenProject">M2,4 H6 L7,5 H14 V13 H2 Z M7,6.5 H12.5 V10.5 H7 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconSaveProject">M3,2 H11 L13,4 V14 H3 Z M5,9 H11 V13 H5 Z M9,3 V5 H11</StreamGeometry>
+    <StreamGeometry x:Key="IconExportCode">M3,3 H8 V4 H4 V12 H10 V7 H11 V13 H3 Z M8,8 H14 M11,5 L14,8 L11,11</StreamGeometry>
+
+    <!-- ═══ 构建与部署组 ═══ -->
+    <StreamGeometry x:Key="IconCompile">M7,2 H11 V3 H7 Z M8,3 V5 H10 V3 H8 Z M4,5 H14 V8 H4 Z M5,9 H12 V10 H5 Z M7,12 H13 V13 H7 Z M5,9 C5,9 4.5,10 5,10.5 C5.5,11 6,10.5 6,10.5 M5,5 H6 M6,5 V6 M6.5,5 H7 M5,10 C5,10 4.5,11 5,11.5 C5.5,12 6,11.5 6,11.5</StreamGeometry>
+    <StreamGeometry x:Key="IconBuildRun">M4,3 L14,10 L4,17 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconDownloadHmi">M2,6 H6 L7,5 H13 V12 H2 Z M8,9 H11.5 M10,7.5 L12,9 L10,10.5 M4,15 H12 M3,12 H4 M8,15 H9</StreamGeometry>
+
+    <!-- ═══ 编辑组 ═══ -->
+    <StreamGeometry x:Key="IconUndo">M3,8 C3,5 5,4 8,4 C11,4 13,6 13,9 M3,8 L6,5 M3,8 L6,11</StreamGeometry>
+    <StreamGeometry x:Key="IconRedo">M13,8 C13,5 11,4 8,4 C5,4 3,6 3,9 M13,8 L10,5 M13,8 L10,11</StreamGeometry>
+    <StreamGeometry x:Key="IconCopy">M5,2 H11 V4 H5 Z M3,4 H9 V14 H3 Z M7,6 H13 V16 H7 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconPaste">M5,2 H9 V3 H5 Z M4,3 H8 V4 H4 Z M3,4 H11 V15 H3 Z M6,7 H9 M6,9 H9 M6,11 H8</StreamGeometry>
+    <StreamGeometry x:Key="IconDuplicate">M3,3 H9 V5 H3 Z M3,5 H9 V13 H3 Z M7,1 H13 V3 H7 Z M7,3 H13 V11 H7 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconDeleteControl">M4,5 H12 L11,14 H5 Z M3,5 H13 M6,3 H10 V4 H6 Z M7,7 V12 M9,7 V12</StreamGeometry>
+
+    <!-- ═══ 变换组（旋转/镜像/重置）═══ -->
+    <StreamGeometry x:Key="IconRotateLeft">M4,8 A4,4 0 1,0 8,4 M4,8 L6,5 M4,8 L2,5</StreamGeometry>
+    <StreamGeometry x:Key="IconRotateRight">M12,8 A4,4 0 1,0 8,4 M12,8 L14,5 M12,8 L10,5</StreamGeometry>
+    <StreamGeometry x:Key="IconMirrorH">M2,5 H14 V11 H2 Z M2,8 H14 M5,8 V11 M11,8 V11</StreamGeometry>
+    <StreamGeometry x:Key="IconMirrorV">M5,2 H11 V14 H5 Z M8,2 V14 M8,5 H5 M8,11 H5</StreamGeometry>
+    <StreamGeometry x:Key="IconResetTransform">M8,3 A5,5 0 1,0 13,8 M13,8 L10,8 M13,8 L13,5</StreamGeometry>
+
+    <!-- ═══ 视图组（缩放/屏幕/刷新）═══ -->
+    <StreamGeometry x:Key="IconZoomOut">M7,3 A4,4 0 1,0 7,11 A4,4 0 1,0 7,3 M5,7 H9 M11,11 L14,14</StreamGeometry>
+    <StreamGeometry x:Key="IconZoomIn">M7,3 A4,4 0 1,0 7,11 A4,4 0 1,0 7,3 M5,7 H9 M7,5 V9 M11,11 L14,14</StreamGeometry>
+    <StreamGeometry x:Key="IconNewScreen">M2,3 H14 V11 H2 Z M6,13 H10 M8,11 V13</StreamGeometry>
+    <StreamGeometry x:Key="IconScreenManager">M8,2 L14,5 L8,8 L2,5 Z M2,8.5 L8,11.5 L14,8.5 M2,11.5 L8,14.5 L14,11.5</StreamGeometry>
+    <StreamGeometry x:Key="IconReloadPanels">M8,3 A5,5 0 1,0 13,8 M13,8 L10,8 M13,8 L13,5</StreamGeometry>
+
+    <!-- ═══ 格式组（对齐/分布/组合）═══ -->
+    <StreamGeometry x:Key="IconAlignLeft">M2,2 V14 H3 V2 Z M5,4 H13 V6 H5 Z M5,8 H11 V10 H5 Z M5,12 H13 V14 H5 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconAlignRight">M13,2 V14 H14 V2 Z M3,4 H11 V6 H3 Z M5,8 H11 V10 H5 Z M3,12 H11 V14 H3 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconAlignTop">M2,2 H14 V3 H2 Z M5,5 V13 H7 V5 Z M9,5 V11 H11 V5 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconAlignBottom">M2,13 H14 V14 H2 Z M5,3 V13 H7 V3 Z M9,5 V13 H11 V5 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconAlignCenterH">M7,2 V14 H9 V2 Z M2,4 H6 M10,4 H14 M2,8 H5 M11,8 H14 M2,12 H6 M10,12 H14</StreamGeometry>
+    <StreamGeometry x:Key="IconAlignCenterV">M2,7 H14 V9 H2 Z M5,2 V4 M5,12 V14 M11,2 V4 M11,12 V14</StreamGeometry>
+    <StreamGeometry x:Key="IconSameSize">M2,3 H8 V11 H2 Z M6,5 H14 V13 H6 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconDistributeH">M2,5 H5 V11 H2 Z M6.5,5 H9.5 V11 H6.5 Z M11,5 H14 V11 H11 Z M2,13 H14</StreamGeometry>
+    <StreamGeometry x:Key="IconDistributeV">M5,2 H11 V5 H5 Z M5,6.5 H11 V9.5 H5 Z M5,11 H11 V14 H5 Z M2,2 V14</StreamGeometry>
+    <StreamGeometry x:Key="IconGroup">M2,2 H6 V6 H2 Z M10,2 H14 V6 H10 Z M2,10 H6 V14 H2 Z M10,10 H14 V14 H10 Z M6,4 H10 M4,6 V10 M10,12 H6 M12,10 V6</StreamGeometry>
+    <StreamGeometry x:Key="IconUngroup">M2,2 H6 V6 H2 Z M10,2 H14 V6 H10 Z M2,10 H6 V14 H2 Z M10,10 H14 V14 H10 Z M6,3 L10,5 M3,6 L5,10 M11,10 L13,6 M10,13 L6,11</StreamGeometry>
+
+    <!-- ═══ 工具组（主题/设置/用户/报警/趋势/脚本/配方/变量/模拟）═══ -->
+    <StreamGeometry x:Key="IconStyleEditor">M3,8 A5,5 0 1,0 8,3 C8,5 10,5 10,7 C10,9 8,9 8,12 C5,13 3,11 3,8 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconSettings">M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.33 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.04 4.95,18.95L7.44,17.95C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z</StreamGeometry>
+    <StreamGeometry x:Key="IconUserManager">M8,4 A2,2 0 1,0 8,8 A2,2 0 1,0 8,4 M3,14 C3,11 5,10 8,10 C11,10 13,11 13,14</StreamGeometry>
+    <StreamGeometry x:Key="IconAlarmConfig">M4,12 H12 V8 A4,4 0 0,0 4,8 Z M7,3 H9 V4.5 M6.5,13 H9.5 M6.5,13 A1.5,1.5 0 0,0 9.5,13</StreamGeometry>
+    <StreamGeometry x:Key="IconTrendConfig">M2,12 L5,8 L8,10 L11,5 L14,7 M2,2 V14 H14</StreamGeometry>
+    <StreamGeometry x:Key="IconScriptEditor">M6,5 L3,8 L6,11 M10,5 L13,8 L10,11</StreamGeometry>
+    <StreamGeometry x:Key="IconRecipeEditor">M3,2 H10 L13,5 V14 H3 Z M5,6 H11 M5,8 H11 M5,10 H9 M10,2 V5 H13</StreamGeometry>
+    <StreamGeometry x:Key="IconVariableImport">M8,2 V9 M5,6 L8,9 L11,6 M3,13 H13</StreamGeometry>
+    <StreamGeometry x:Key="IconVariableManager">M3,4 L6,2 H13 V12 L10,14 H3 Z M8,5.2 A1,1 0 1,0 8.1,5.2</StreamGeometry>
+    <StreamGeometry x:Key="IconSimulator">M4,3 L12,8 L4,13 Z</StreamGeometry>
+
+    <!-- ═══ 绘图工具栏（I10 绘图工具 + 控件快捷）═══ -->
+    <!-- 绘图工具 -->
+    <StreamGeometry x:Key="IconDrawSelect">M5,2 L5,15 L9,12 L11.5,17 L13.5,16 L11,11 L15,11 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconDrawRectangle">M4,4 L20,4 L20,20 L4,20 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconDrawEllipse">M12,4 A8,8 0 1 0 12,20 A8,8 0 1 0 12,4 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconDrawPolyline">M4,17 L9,9 L13,13 L20,5</StreamGeometry>
+    <StreamGeometry x:Key="IconDrawArc">M5,13 A7,7 0 1 0 12,6 M12,6 L17,6</StreamGeometry>
+    <StreamGeometry x:Key="IconDrawLine">M4,18 L20,6</StreamGeometry>
+    <StreamGeometry x:Key="IconDrawText">M5,6 L19,6 M7,12 L17,12 M9,18 L15,18</StreamGeometry>
+    <!-- 控件快捷（拖动即创建）-->
+    <StreamGeometry x:Key="IconQuickButton">M4,7 L20,7 L20,17 L4,17 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickLabel">M4,8 L20,8 M4,12 L20,12 M4,16 L14,16</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickSlider">M4,12 L20,12 M14,12 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickSwitch">M6,5 L18,5 A7,7 0 0 1 18,19 L6,19 A7,7 0 0 1 6,5 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickCheckBox">M4,4 L20,4 L20,20 L4,20 Z M7,12 L11,16 L17,8</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickLed">M12,5 A7,7 0 1 0 12,19 A7,7 0 1 0 12,5 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickGauge">M4,15 A8,8 0 0 1 20,15 M12,15 L12,11 L14.5,13</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickBar">M5,19 L5,9 L8,9 L8,19 Z M10,19 L10,5 L13,5 L13,19 Z M15,19 L15,12 L18,12 L18,19 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickDropdown">M4,6 L20,6 L20,16 L4,16 Z M6,19 L12,14 L18,19 Z</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickTable">M4,4 L20,4 L20,20 L4,20 Z M4,10 L20,10 M4,16 L20,16 M10,4 L10,20</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickImage">M4,5 L20,5 L20,19 L4,19 Z M7,16 L11,11 L14,14 L17,9</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickKnob">M12,4 A8,8 0 1 0 12,20 A8,8 0 1 0 12,4 Z M12,12 L16,9</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickTextArea">M6,3 L14,3 L19,8 L19,21 L6,21 Z M14,3 L14,8 L19,8</StreamGeometry>
+    <StreamGeometry x:Key="IconQuickKeyboard">M4,7 L20,7 L20,17 L4,17 Z M6,9.5 L6,11 M9.5,9.5 L9.5,11 M13,9.5 L13,11 M16.5,9.5 L16.5,11 M7,14 L17,14</StreamGeometry>
+
+</ResourceDictionary>

@@ -1,0 +1,496 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.SimulatorView"
+        Title="{res:Loc win.simulator}"
+        Width="1000"
+        Height="700"
+        MinWidth="800"
+        MinHeight="560"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc win.simulator}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容 -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgWindowBrush}" Padding="0">
+        <Grid ColumnDefinitions="320,*">
+            <!-- ════════════════════════════════════════ -->
+            <!-- 左侧：变量仿真配置                       -->
+            <!-- ════════════════════════════════════════ -->
+            <Border Grid.Column="0" Background="{StaticResource HmiBgDeepBrush}" Padding="8">
+                <Grid RowDefinitions="Auto,Auto,*,Auto">
+                    <!-- 标题栏 + 操作按钮 -->
+                    <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,0,0,6">
+                        <TextBlock Text="{res:Loc sim.var.list}"
+                                   Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="14" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <Button x:Name="BtnAddVariable" Content="{res:Loc sim.add.var}"
+                                Grid.Column="1"
+                                Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="8,4"
+                                FontSize="12" Margin="0,0,4,0"
+                                ToolTip.Tip="{res:Loc sim.tt.add.var}"/>
+                        <Button x:Name="BtnDeleteVariable" Content="{res:Loc sim.del.var}"
+                                Grid.Column="2"
+                                Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                BorderThickness="0" Padding="8,4"
+                                FontSize="12"
+                                ToolTip.Tip="{res:Loc sim.tt.del.var}"/>
+                    </Grid>
+
+                    <!-- 变量列表 -->
+                    <ListBox x:Name="VariableList"
+                             Grid.Row="1"
+                             MinHeight="100"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.Styles>
+                            <Style Selector="ListBoxItem">
+                                <Setter Property="Padding" Value="8,6"/>
+                                <Setter Property="Margin" Value="0,1"/>
+                                <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+                                <Setter Property="CornerRadius" Value="4"/>
+                            </Style>
+                            <Style Selector="ListBoxItem:selected">
+                                <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+                            </Style>
+                            <Style Selector="ListBoxItem > ContentPresenter">
+                                <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                            </Style>
+                        </ListBox.Styles>
+                    </ListBox>
+
+                    <!-- 选中变量的编辑面板 -->
+                    <Border Grid.Row="3" Background="{StaticResource HmiBgDeepBrush}" CornerRadius="6" Padding="8" Margin="0,6,0,0">
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="4">
+                            <TextBlock Text="{res:Loc sim.param.edit}"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11"
+                                       Margin="0,0,0,2"/>
+
+                            <!-- 信号类型 -->
+                            <Grid Grid.Row="1" ColumnDefinitions="70,*">
+                                <TextBlock Text="{res:Loc sim.signal.type}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                           VerticalAlignment="Center" ToolTip.Tip="{res:Loc sim.tt.signal.type}"/>
+                                <ComboBox x:Name="SignalTypeCombo"
+                                          Grid.Column="1"
+                                          Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                          BorderBrush="{StaticResource HmiBorderBrush}"
+                                          FontSize="12" Height="26">
+                                    <ComboBoxItem Content="{res:Loc sim.const}" Tag="Constant" ToolTip.Tip="{res:Loc sim.tt.const}"/>
+                                    <ComboBoxItem Content="{res:Loc sim.sine}" Tag="Sine" ToolTip.Tip="{res:Loc sim.tt.sine}"/>
+                                    <ComboBoxItem Content="{res:Loc sim.square}" Tag="Square" ToolTip.Tip="{res:Loc sim.tt.square}"/>
+                                    <ComboBoxItem Content="{res:Loc sim.ramp}" Tag="Ramp" ToolTip.Tip="{res:Loc sim.tt.ramp}"/>
+                                    <ComboBoxItem Content="{res:Loc sim.increment}" Tag="Increment" ToolTip.Tip="{res:Loc sim.tt.increment}"/>
+                                    <ComboBoxItem Content="{res:Loc sim.random}" Tag="Random" ToolTip.Tip="{res:Loc sim.tt.random}"/>
+                                    <ComboBoxItem Content="{res:Loc sim.manual}" Tag="Manual" ToolTip.Tip="{res:Loc sim.tt.manual}"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <!-- 幅度 -->
+                            <Grid Grid.Row="2" ColumnDefinitions="70,*">
+                                <TextBlock Text="{res:Loc sim.amplitude}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                           VerticalAlignment="Center" ToolTip.Tip="{res:Loc sim.tt.amplitude}"/>
+                                <TextBox x:Name="AmplitudeInput"
+                                         Grid.Column="1"
+                                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                         FontSize="12" Height="26" Padding="6,0"
+                                         Text="100"/>
+                            </Grid>
+
+                            <!-- 偏移 -->
+                            <Grid Grid.Row="3" ColumnDefinitions="70,*">
+                                <TextBlock Text="{res:Loc sim.offset}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                           VerticalAlignment="Center" ToolTip.Tip="{res:Loc sim.tt.offset}"/>
+                                <TextBox x:Name="OffsetInput"
+                                         Grid.Column="1"
+                                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                         FontSize="12" Height="26" Padding="6,0"
+                                         Text="0"/>
+                            </Grid>
+
+                            <!-- 频率 -->
+                            <Grid Grid.Row="4" ColumnDefinitions="70,*">
+                                <TextBlock Text="{res:Loc sim.freq}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                           VerticalAlignment="Center" ToolTip.Tip="{res:Loc sim.tt.freq}"/>
+                                <TextBox x:Name="FrequencyInput"
+                                         Grid.Column="1"
+                                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                         FontSize="12" Height="26" Padding="6,0"
+                                         Text="0.1"/>
+                            </Grid>
+
+                            <!-- 最小值 / 最大值 -->
+                            <Grid Grid.Row="5" ColumnDefinitions="70,*,*" ColumnSpacing="4">
+                                <TextBlock Text="{res:Loc sim.range}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                           VerticalAlignment="Center"/>
+                                <TextBox x:Name="MinValueInput"
+                                         Grid.Column="1"
+                                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                         FontSize="12" Height="26" Padding="6,0"
+                                         Text="0" ToolTip.Tip="{res:Loc sim.tt.min.val}"/>
+                                <TextBox x:Name="MaxValueInput"
+                                         Grid.Column="2"
+                                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                         FontSize="12" Height="26" Padding="6,0"
+                                         Text="100" ToolTip.Tip="{res:Loc sim.tt.max.val}"/>
+                            </Grid>
+
+                            <!-- 噪声幅度 -->
+                            <Grid Grid.Row="6" ColumnDefinitions="70,*">
+                                <TextBlock Text="{res:Loc sim.noise}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                           VerticalAlignment="Center" ToolTip.Tip="{res:Loc sim.tt.noise}"/>
+                                <TextBox x:Name="NoiseInput"
+                                         Grid.Column="1"
+                                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                         FontSize="12" Height="26" Padding="6,0"
+                                         Text="0"/>
+                            </Grid>
+
+                            <!-- 手动值 -->
+                            <Grid Grid.Row="7" ColumnDefinitions="70,*">
+                                <TextBlock Text="{res:Loc sim.manual.val}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                           VerticalAlignment="Center" ToolTip.Tip="{res:Loc sim.tt.manual.val}"/>
+                                <TextBox x:Name="ManualValueInput"
+                                         Grid.Column="1"
+                                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                         BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                         FontSize="12" Height="26" Padding="6,0"
+                                         Text="0" IsEnabled="False"/>
+                            </Grid>
+
+                            <!-- 曲线预览（简化波形指示） -->
+                            <Grid Grid.Row="8" ColumnDefinitions="70,*" Margin="0,2,0,0">
+                                <TextBlock Text="{res:Loc sim.wave.hint}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11"
+                                           VerticalAlignment="Center"/>
+                                <TextBlock x:Name="WaveformHint"
+                                           Grid.Column="1"
+                                           Text="{res:Loc sim.wave.const}"
+                                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                                           VerticalAlignment="Center"
+                                           ToolTip.Tip="{res:Loc sim.tt.wave.desc}"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- ════════════════════════════════════════ -->
+            <!-- 右侧：仿真运行面板                       -->
+            <!-- ════════════════════════════════════════ -->
+            <Border Grid.Column="1" Padding="12">
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <!-- ── 顶部：控制栏 ── -->
+                    <Grid ColumnDefinitions="Auto,Auto,*,Auto" Margin="0,0,0,8">
+                        <Button x:Name="BtnStartStop"
+                                Content="{res:Loc sim.start}"
+                                Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="16,6"
+                                FontSize="13" FontWeight="Bold"
+                                ToolTip.Tip="{res:Loc sim.tt.start.stop}">
+                            <!-- 运行态（红色）由 classes:.running 驱动，取代 code-behind 硬改 Background -->
+                            <Button.Styles>
+                                <Style Selector="Button.running">
+                                    <Setter Property="Background" Value="{StaticResource HmiDangerBrush}" />
+                                </Style>
+                            </Button.Styles>
+                        </Button>
+
+                        <TextBlock x:Name="RunTimeText"
+                                   Grid.Column="1"
+                                   Text="{res:Loc sim.running}"
+                                   Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="13"
+                                   VerticalAlignment="Center"
+                                   Margin="16,0,0,0"/>
+
+                        <!-- 仿真倍速 + Tick 间隔 -->
+                        <StackPanel Grid.Column="2" Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" Spacing="6">
+                            <TextBlock Text="{res:Loc sim.clock.multiplier}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <ComboBox x:Name="ClockMultiplierCombo"
+                                      Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                      BorderBrush="{StaticResource HmiBorderBrush}"
+                                      FontSize="12" Width="72" Height="26"
+                                      ToolTip.Tip="{res:Loc sim.tt.clock.multiplier}">
+                                <ComboBoxItem Content="0.5x" Tag="0.5"/>
+                                <ComboBoxItem Content="1x" Tag="1.0" IsSelected="True"/>
+                                <ComboBoxItem Content="2x" Tag="2.0"/>
+                                <ComboBoxItem Content="4x" Tag="4.0"/>
+                                <ComboBoxItem Content="8x" Tag="8.0"/>
+                            </ComboBox>
+                            <TextBlock Text="{res:Loc sim.tick.interval}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <ComboBox x:Name="TickIntervalCombo"
+                                      Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                      BorderBrush="{StaticResource HmiBorderBrush}"
+                                      FontSize="12" Width="90" Height="26"
+                                      ToolTip.Tip="{res:Loc sim.tt.tick.interval}">
+                                <ComboBoxItem Content="50ms" Tag="50"/>
+                                <ComboBoxItem Content="100ms" Tag="100" IsSelected="True"/>
+                                <ComboBoxItem Content="200ms" Tag="200"/>
+                                <ComboBoxItem Content="500ms" Tag="500"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <Button x:Name="BtnReset"
+                                Grid.Column="3"
+                                Content="{res:Loc sim.reset}"
+                                Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="14,6"
+                                FontSize="13" Margin="8,0,0,0"
+                                ToolTip.Tip="{res:Loc sim.tt.reset}"/>
+                    </Grid>
+
+                    <!-- ── 中间：实时值显示表格 ── -->
+                    <Border Grid.Row="1"
+                            Background="{StaticResource HmiBgDeepBrush}"
+                            CornerRadius="6"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource HmiBorderBrush}"
+                            Margin="0,0,0,6">
+                        <Grid RowDefinitions="Auto,*">
+                            <!-- 表头 -->
+                            <Border Background="{StaticResource HmiBgPanelBrush}" Padding="8,6"
+                                    BorderThickness="0,0,0,1" BorderBrush="{StaticResource HmiBorderBrush}">
+                                <Grid ColumnDefinitions="*,120,100,80">
+                                    <TextBlock Text="{res:Loc sim.var.id}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                               FontWeight="SemiBold"/>
+                                    <TextBlock Text="{res:Loc sim.current.val}" Grid.Column="1" Foreground="{StaticResource HmiTextSecondaryBrush}"
+                                               FontSize="12" FontWeight="SemiBold" TextAlignment="Center"/>
+                                    <TextBlock Text="{res:Loc sim.signal.col}" Grid.Column="2" Foreground="{StaticResource HmiTextSecondaryBrush}"
+                                               FontSize="12" FontWeight="SemiBold" TextAlignment="Center"/>
+                                    <TextBlock Text="{res:Loc sim.wave.hint.col}" Grid.Column="3" Foreground="{StaticResource HmiTextSecondaryBrush}"
+                                               FontSize="12" FontWeight="SemiBold" TextAlignment="Center"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- 实时值列表 -->
+                            <ListBox x:Name="RealTimeTable"
+                                     Grid.Row="1"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <ListBox.Styles>
+                                    <Style Selector="ListBoxItem">
+                                        <Setter Property="Padding" Value="8,6"/>
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                        <Setter Property="BorderBrush" Value="{StaticResource HmiBgElevatedBrush}"/>
+                                    </Style>
+                                    <Style Selector="ListBoxItem:pointerover">
+                                        <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+                                    </Style>
+                                    <Style Selector="ListBoxItem > ContentPresenter">
+                                        <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                                    </Style>
+                                </ListBox.Styles>
+                            </ListBox>
+                        </Grid>
+                    </Border>
+
+                    <!-- ── 底部：标签页 ── -->
+                    <TabControl Grid.Row="2" Background="Transparent"
+                                BorderThickness="0"
+                                Height="200">
+                        <TabControl.Styles>
+                            <Style Selector="TabControl > TabStrip > TabStripItem">
+                                <Setter Property="Background" Value="{StaticResource HmiBgDeepBrush}"/>
+                                <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+                                <Setter Property="FontSize" Value="13"/>
+                                <Setter Property="Padding" Value="14,6"/>
+                            </Style>
+                            <Style Selector="TabControl > TabStrip > TabStripItem:selected">
+                                <Setter Property="Background" Value="{StaticResource HmiBgDeepBrush}"/>
+                                <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                            </Style>
+                            <Style Selector="TabControl > TabStrip > TabStripItem:pointerover">
+                                <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+                            </Style>
+                            <Style Selector="TabControl > ContentPresenter">
+                                <Setter Property="Background" Value="{StaticResource HmiBgDeepBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+                                <Setter Property="CornerRadius" Value="0,0,6,6"/>
+                                <Setter Property="Padding" Value="8"/>
+                            </Style>
+                        </TabControl.Styles>
+
+                        <!-- Tab 1: 通讯模拟 -->
+                        <TabItem Header="{res:Loc sim.comm.tab}">
+                            <Grid RowDefinitions="Auto,Auto,*,Auto">
+                                <!-- 连接状态 -->
+                                <Grid ColumnDefinitions="Auto,Auto,Auto,*" Margin="0,0,0,6">
+                                    <Border x:Name="ConnectionStatus"
+                                            Width="10" Height="10" CornerRadius="5"
+                                            Background="{StaticResource HmiSuccessBrush}" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                    <TextBlock x:Name="ConnectionStatusText"
+                                               Text="{res:Loc sim.connected}"
+                                               Foreground="{StaticResource HmiSuccessBrush}" FontSize="12"
+                                               VerticalAlignment="Center" Margin="0,0,16,0"/>
+                                    <Button x:Name="BtnDisconnect"
+                                            Content="{res:Loc sim.disconnect}"
+                                            Grid.Column="2"
+                                            Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                            BorderThickness="0" Padding="10,4"
+                                            FontSize="12" Margin="0,0,4,0"
+                                            ToolTip.Tip="{res:Loc sim.tt.disconnect}"/>
+                                    <Button x:Name="BtnReconnect"
+                                            Content="{res:Loc sim.reconnect}"
+                                            Grid.Column="3"
+                                            Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="10,4"
+                                            FontSize="12" HorizontalAlignment="Left"
+                                            ToolTip.Tip="{res:Loc sim.tt.reconnect}"/>
+                                </Grid>
+
+                                <!-- 写入模式 + 寄存器测试 -->
+                                <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto,*,Auto,Auto,Auto"
+                                      ColumnSpacing="6" Margin="0,0,0,6">
+                                    <TextBlock Text="{res:Loc sim.resp.mode}" Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                               VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="WriteModeCombo"
+                                              Grid.Column="1"
+                                              Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              BorderBrush="{StaticResource HmiBorderBrush}"
+                                              FontSize="12" Width="100" Height="26"
+                                              ToolTip.Tip="{res:Loc sim.tt.write.mode}">
+                                        <ComboBoxItem Content="{res:Loc sim.echo}" Tag="Echo" ToolTip.Tip="{res:Loc sim.tt.echo}"/>
+                                        <ComboBoxItem Content="{res:Loc sim.invert}" Tag="Invert" ToolTip.Tip="{res:Loc sim.tt.invert}"/>
+                                        <ComboBoxItem Content="{res:Loc sim.random}" Tag="Random" ToolTip.Tip="{res:Loc sim.tt.random.resp}"/>
+                                        <ComboBoxItem Content="{res:Loc sim.respond}" Tag="Respond" ToolTip.Tip="{res:Loc sim.tt.respond}"/>
+                                    </ComboBox>
+
+                                    <TextBlock Grid.Column="2" Text="{res:Loc sim.reg.test}" Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                               FontSize="12" VerticalAlignment="Center"
+                                               Margin="8,0,0,0"/>
+
+                                    <TextBox x:Name="RegAddressInput"
+                                             Grid.Column="3"
+                                             Width="60"
+                                             Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                             FontSize="12" Height="26" Padding="6,0"
+                                             PlaceholderText="{res:Loc sim.addr.hint}"
+                                             ToolTip.Tip="{res:Loc sim.tt.reg.addr}"/>
+
+                                    <TextBox x:Name="RegValueInput"
+                                             Grid.Column="4"
+                                             Width="80"
+                                             Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                                             FontSize="12" Height="26" Padding="6,0"
+                                             PlaceholderText="{res:Loc sim.val.hint}"
+                                             ToolTip.Tip="{res:Loc sim.tt.reg.val}"/>
+
+                                    <Button x:Name="BtnReadRegister"
+                                            Grid.Column="5"
+                                            Content="{res:Loc sim.read}"
+                                            Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="10,4"
+                                            FontSize="12"
+                                            ToolTip.Tip="{res:Loc sim.tt.read.reg}"/>
+                                    <Button x:Name="BtnWriteRegister"
+                                            Grid.Column="6"
+                                            Content="{res:Loc sim.write}"
+                                            Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="10,4"
+                                            FontSize="12"
+                                            ToolTip.Tip="{res:Loc sim.tt.write.reg}"/>
+                                </Grid>
+
+                                <!-- 寄存器变更日志 -->
+                                <Border Grid.Row="3" Background="{StaticResource HmiBgDeepBrush}" CornerRadius="4"
+                                        BorderThickness="1" BorderBrush="{StaticResource HmiBorderBrush}" Padding="4">
+                                    <ListBox x:Name="RegisterLogList"
+                                             Background="Transparent"
+                                             BorderThickness="0"
+                                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                        <ListBox.Styles>
+                                            <Style Selector="ListBoxItem">
+                                                <Setter Property="Padding" Value="4,2"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+                                                <Setter Property="FontSize" Value="11"/>
+                                            </Style>
+                                        </ListBox.Styles>
+                                    </ListBox>
+                                </Border>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Tab 2: 仿真日志 -->
+                        <TabItem Header="{res:Loc sim.log.tab}">
+                            <Border Background="{StaticResource HmiBgDeepBrush}" CornerRadius="4"
+                                    BorderThickness="1" BorderBrush="{StaticResource HmiBorderBrush}" Padding="8">
+                                <ScrollViewer x:Name="LogScrollViewer"
+                                              VerticalScrollBarVisibility="Auto"
+                                              HorizontalScrollBarVisibility="Disabled">
+                                    <TextBlock x:Name="LogTextBlock"
+                                               Text="{res:Loc sim.log.hint}"
+                                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                               TextWrapping="Wrap"/>
+                                </ScrollViewer>
+                            </Border>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Border>
+        </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

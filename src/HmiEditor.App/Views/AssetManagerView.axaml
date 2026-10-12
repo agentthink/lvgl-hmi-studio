@@ -1,0 +1,109 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:HmiEditor.App.Views"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             x:Class="HmiEditor.App.Views.AssetManagerView">
+    <Border Background="{StaticResource HmiBgDarkBrush}" Padding="8">
+        <Grid RowDefinitions="Auto,*,Auto">
+            <!-- 顶部工具条：导入按钮 + 资源预算概览 -->
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="4">
+                    <Button x:Name="BtnImportImage" Content="{res:Loc asset.import.img}" FontSize="12"
+                            Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" Padding="10,4"
+                            Click="OnImportImage"/>
+                    <Button x:Name="BtnImportSvg" Content="{res:Loc asset.import.svg}" FontSize="12"
+                            Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" Padding="10,4"
+                            Click="OnImportSvg"/>
+                    <Button x:Name="BtnImportFont" Content="{res:Loc asset.import.font}" FontSize="12"
+                            Background="{StaticResource HmiBgElevatedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" Padding="10,4"
+                            Click="OnImportFont"/>
+                    <Button x:Name="BtnAiIcon" Content="{res:Loc asset.ai.generate}" FontSize="12"
+                            Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiAccentBrush}"
+                            BorderThickness="0" Padding="10,4"
+                            ToolTip.Tip="{res:Loc asset.tt.ai.svg}"
+                            Click="OnAiIconClicked"/>
+                    <Button x:Name="BtnRefresh" Content="{res:Loc asset.refresh}" FontSize="12"
+                            Background="{StaticResource HmiBgElevatedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                            BorderThickness="0" Padding="10,4"
+                            Click="OnRefreshClick"/>
+                </StackPanel>
+                <Border Grid.Column="1" Background="{StaticResource HmiBgElevatedBrush}" CornerRadius="4"
+                        Padding="10,4" VerticalAlignment="Center">
+                    <TextBlock x:Name="BudgetText" Text=""
+                               Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"/>
+                </Border>
+            </Grid>
+
+            <!-- 主体：资源列表（按 AssetType 分组） -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgPanelBrush}" CornerRadius="6">
+                <ListBox x:Name="AssetList"
+                         Background="Transparent" BorderThickness="0"
+                         SelectionChanged="OnSelectionChanged">
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="Padding" Value="6,2"/>
+                            <Setter Property="Margin" Value="0,1"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                        <Style Selector="ListBoxItem:pointerover">
+                            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                        </Style>
+                        <Style Selector="ListBoxItem:selected">
+                            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource HmiLinkBrush}"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                        </Style>
+                    </ListBox.Styles>
+                    <ListBox.DataTemplates>
+                        <!-- 分组标题 -->
+                        <DataTemplate DataType="local:AssetGroupHeader">
+                            <Border Background="{StaticResource HmiBgDarkBrush}" Padding="8,3" Margin="2,6,2,2">
+                                <TextBlock Text="{Binding Title}"
+                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11"
+                                           FontWeight="Bold"/>
+                            </Border>
+                        </DataTemplate>
+                        <!-- 资源行 -->
+                        <DataTemplate DataType="local:AssetRow">
+                            <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto"
+                                  Margin="4,3">
+                                <TextBlock Grid.Column="0" Text="{Binding Name}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                           VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="{Binding DimsDisplay}"
+                                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                                           FontFamily="Consolas, monospace"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"/>
+                                <TextBlock Grid.Column="2" Text="{Binding DepthDisplay}"
+                                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                                           FontFamily="Consolas, monospace"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"/>
+                                <TextBlock Grid.Column="3" Text="{Binding SizeDisplay}"
+                                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                                           FontFamily="Consolas, monospace"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"/>
+                                <TextBlock Grid.Column="4" Text="{Binding RefDisplay}"
+                                           Foreground="{Binding RefBrush}"
+                                           FontSize="11" FontWeight="SemiBold"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </Border>
+
+            <!-- 底部状态栏 -->
+            <TextBlock x:Name="StatusText" Grid.Row="2"
+                       Text="{res:Loc asset.ready}" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                       Margin="0,4,0,0"/>
+        </Grid>
+    </Border>
+</UserControl>

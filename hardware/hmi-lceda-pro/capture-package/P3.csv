@@ -1,0 +1,5 @@
+page,block,component,signal_or_pin,net,value_or_note,status
+P3,STORAGE,U7,CS/SCK/DI/DO,NAND_CS/NAND_CLK/NAND_DI/NAND_DO,W25N01GV,verify mux
+P3,STORAGE,U7,WP/HOLD,NAND_WP/NAND_HOLD,10k pull-up to VCC3V3,required
+P3,STORAGE,J2,SDIO,SD_CMD/SD_CLK/SD_D0..SD_D3,TF card,required
+P3,STORAGE,J2,CD,SD_DET,Card detect,optional

@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "screen": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "width": { "type": "integer" },
+        "height": { "type": "integer" },
+        "bgColor": { "type": "string" },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": {control_type_enum}
+              },
+              "name": { "type": "string" },
+              "x": { "type": "integer" },
+              "y": { "type": "integer" },
+              "width": { "type": "integer" },
+              "height": { "type": "integer" },
+              "text": { "type": "string" },
+              "bgColor": { "type": "string" },
+              "textColor": { "type": "string" },
+              "radius": { "type": "integer" },
+              "variableBindingId": { "type": "string" }
+            },
+            "required": ["type", "name", "x", "y", "width", "height", "text", "bgColor", "textColor", "radius", "variableBindingId"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["name", "width", "height", "bgColor", "controls"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["screen"],
+  "additionalProperties": false
+}

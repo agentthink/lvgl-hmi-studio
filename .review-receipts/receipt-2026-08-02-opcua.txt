@@ -1,0 +1,57 @@
+═══════════════════════════════════════════════════════════════════
+  PR Review Receipt — I7 OPC UA Client
+  Date: 2026-08-02
+  Commit: (pending)
+  Files: 13 changed
+═══════════════════════════════════════════════════════════════════
+
+Review anchors:
+  - src/Hmi.Communication.Builtin/OpcUa/OpcUaBinaryWriter.cs:88 (Null NodeId encoding)
+  - src/Hmi.Communication.Builtin/OpcUa/OpcUaMessageLayer.cs:52 (ReadFrame)
+  - src/Hmi.Communication.Builtin/OpcUaRuntimeDriver.cs:90 (Connect handshake)
+  - src/Hmi.Communication.Contracts/IStringAddressRuntimeDriver.cs:16 (string-address channel)
+
+Intent verification:
+  Close I7 (OPC UA client) without breaking the zero-dependency / NativeAOT
+  toolchain positioning: self-contained OPC UA binary protocol subset
+  (HEL/ACK, OpenSecureChannel None-policy, Read/Write services, NodeId
+  parsing), design-time driver + runtime driver + string-address value
+  source channel wired into preview mode. Diff matches intent.
+
+Verdict: READY
+  - Build: 0 errors, 0 new warnings (all xUnit1031/CS0618/xUnit2000 from this
+    and previous wave cleaned)
+  - Tests: 824 passed / 0 failed (17 new OPC UA tests: codec round-trips,
+    NodeId forms, Read/Write service codec, endpoint parsing, and real-TCP
+    end-to-end against an in-memory fake server)
+  - No debug residue, no TODO/FIXME
+
+Failure-mode pass:
+  - Found & fixed during development: Null NodeId was encoded as single
+    0x00 byte; OPC UA spec requires TwoByte form 0x00 0x00. Caught by
+    handshake step logging, fixed in OpcUaBinaryWriter, verified end-to-end.
+  - ReadResponse/WriteResponse layout corrected: results[] and
+    diagnosticInfos[] are separate arrays (initial version interleaved them).
+  - Silent assumptions: security None only (documented); diagnostic
+    non-empty throws explicit exception rather than silently desyncing.
+  - Hallucinated APIs: none — all against real protocol structures.
+  - Scope creep: none.
+
+Behavior verification:
+  - FakeOpcUaServer (in-memory TCP server implementing the same subset)
+    drives end-to-end tests: handshake, connect count, read known/unknown
+    nodes, write-then-read-back, batch read, string-address contract.
+  - Codec tests cover scalar/array variants, DateTime FILETIME conversion,
+    NodeId binary encodings, and service-body self-parseability.
+
+Architecture notes:
+  - IStringAddressRuntimeDriver keeps OPC UA decoupled from the Modbus
+    semantics of IRuntimeCommunicationDriver; ModbusRuntimeSource now
+    detects and forwards string addresses transparently.
+  - No OPCFoundation dependency: preserves rd.xml NativeAOT constraints and
+    embedded-toolchain positioning. Documented limitations (no encryption/
+    subscription/browse) are acceptable for editor-time debugging and
+    data-collection scenarios.
+
+Risk: none outstanding. Override posture: proceed autonomously.
+═══════════════════════════════════════════════════════════════════

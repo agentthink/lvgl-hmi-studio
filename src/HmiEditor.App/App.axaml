@@ -1,0 +1,905 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:fa="using:FluentAvalonia.UI.Controls"
+             xmlns:faStyling="using:FluentAvalonia.Styling"
+             xmlns:dock="using:Dock.Avalonia.Controls"
+             xmlns:dockTheme="using:Dock.Avalonia.Themes.Fluent"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             xmlns:local="using:HmiEditor.App"
+             x:Class="HmiEditor.App.App"
+             RequestedThemeVariant="Dark">
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Dock IDE 预设：提供 DockControl / ToolChrome / Document 等控件模板与主题画刷 -->
+                <ResourceInclude Source="avares://Dock.Avalonia.Themes.Fluent/Presets/Ide/Default.axaml" />
+                <!-- 应用图标资源字典：收纳 MainWindow 顶栏/绘图工具栏/Toolbox 全部 60+ 几何图标
+                     （使用 {StaticResource IconXxx} 引用，避免在 XAML 中散落手写 Path 字符串） -->
+                <ResourceInclude Source="avares://HmiEditor.App/Assets/Icons.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- ControlRecycling 已移除以解决 Dock 拖拽后空白问题 -->
+            <!-- 之前启用 ControlRecycling 会导致在 Dock 重组时，我们通过 RecreateVisualTree -->
+            <!-- 重建的视觉树被 ControlRecycling 的时序竞争机制破坏，产生内容空白。 -->
+            <!-- 移除后，DockControl 将不再回收和重建视觉树，从根本上解决空白问题。 -->
+
+            <Color x:Key="HmiBgDark">#0f1925</Color>
+            <Color x:Key="HmiBgPanel">#1a2332</Color>
+            <Color x:Key="HmiBgPanelAlt">#111827</Color>
+            <Color x:Key="HmiBorder">#2a3a55</Color>
+            <Color x:Key="HmiAccent">#3b82f6</Color>
+            <Color x:Key="HmiAccentHover">#2563eb</Color>
+            <Color x:Key="HmiTextPrimary">#e2e8f0</Color>
+            <Color x:Key="HmiTextSecondary">#94a3b8</Color>
+            <Color x:Key="HmiTextMuted">#64748b</Color>
+            <Color x:Key="HmiSuccess">#22c55e</Color>
+            <Color x:Key="HmiWarning">#f59e0b</Color>
+            <Color x:Key="HmiDanger">#ef4444</Color>
+
+            <!-- ═══ 项目内高频复用色（此前散落硬编码）收拢为语义 token ═══ -->
+            <Color x:Key="HmiBgWindow">#131c31</Color>          <!-- 对话框/窗口底色 -->
+            <Color x:Key="HmiBgDeep">#0f172a</Color>            <!-- 更深的底色(输入/树) -->
+            <Color x:Key="HmiBgInput">#151e30</Color>           <!-- 输入框/内层面板底色 -->
+            <Color x:Key="HmiBgCard">#1e2c42</Color>            <!-- 卡片/属性分组背景，比面板亮一档以区分层次 -->
+            <Color x:Key="HmiBgElevated">#1e293b</Color>        <!-- 列表项/悬停底色 -->
+            <Color x:Key="HmiBgSelected">#1e3a5f</Color>        <!-- 选中项底色 -->
+            <Color x:Key="HmiInputBorder">#334155</Color>       <!-- 输入框边框 -->
+            <Color x:Key="HmiTextHint">#7c8aa0</Color>          <!-- 占位/空态/辅助提示灰 -->
+            <Color x:Key="HmiTextPrimarySoft">#cbd5e1</Color>   <!-- 略弱于 primary 的正文色 -->
+            <Color x:Key="HmiLink">#38bdf8</Color>              <!-- 链接/变量ID/跳转高亮 -->
+            <!-- 按钮状态色（深底）: 用于成功/中性/危险动作按钮，确保与文字色高对比 -->
+            <Color x:Key="HmiSuccessDeep">#065f46</Color>       <!-- 成功动作按钮背景 -->
+            <Color x:Key="HmiNeutralDeep">#4b5563</Color>       <!-- 中性/取消按钮背景 -->
+            <Color x:Key="HmiDangerDeep">#4a1c1c</Color>        <!-- 危险动作按钮背景 -->
+            <Color x:Key="HmiWarningDeep">#92400e</Color>       <!-- 警告动作按钮背景（amber-800：与 HmiTextPrimaryBrush 对比度 5.8:1） -->
+            <!-- ═══ AI 助手界面图形样式规范派生四态色（docs/ai-chat-ui-style-guide.md v1.0）
+                 仅在此处定义派生色，界面样式一律引用 token，禁止裸 hex。
+                 命名规律：HmiBtn<语义><状态>，默认态复用既有 Deep/Selected/AccentHover token。 -->
+            <Color x:Key="HmiBtnAccentPressed">#1d4ed8</Color>      <!-- 主按钮按下（默认#2563eb/悬停#3b82f6） -->
+            <Color x:Key="HmiBtnSuccessHover">#047857</Color>      <!-- 成功按钮悬停 -->
+            <Color x:Key="HmiBtnSuccessPressed">#064e3b</Color>    <!-- 成功按钮按下 -->
+            <Color x:Key="HmiBtnNeutralHover">#6b7280</Color>      <!-- 中性按钮悬停 -->
+            <Color x:Key="HmiBtnNeutralPressed">#374151</Color>    <!-- 中性按钮按下 -->
+            <Color x:Key="HmiBtnDangerHover">#7f1d1d</Color>       <!-- 危险按钮悬停 -->
+            <Color x:Key="HmiBtnDangerPressed">#450a0a</Color>     <!-- 危险按钮按下 -->
+            <Color x:Key="HmiBtnSecondaryHover">#24487a</Color>    <!-- 次级按钮悬停 -->
+            <Color x:Key="HmiBtnSecondaryPressed">#18304e</Color>  <!-- 次级按钮按下 -->
+            <Color x:Key="HmiCheckOff">#1e283c</Color>             <!-- 复选框未勾选框底（=PaletteDefaults.CheckBoxOff） -->
+            <Color x:Key="HmiInputBorderHover">#4b5e82</Color>     <!-- 输入框/下拉悬停边框 -->
+            <Color x:Key="HmiTrackHover">#475569</Color>           <!-- 滑块/开关轨道悬停 -->
+            <Color x:Key="HmiKnobOff">#c8d2e1</Color>              <!-- 开关滑钮关态（=PaletteDefaults.OffKnob） -->
+            <Color x:Key="HmiKnobOn">#ffffff</Color>               <!-- 开关滑钮开态 -->
+
+
+            <SolidColorBrush x:Key="HmiBgDarkBrush" Color="{StaticResource HmiBgDark}" />
+            <SolidColorBrush x:Key="HmiBgPanelBrush" Color="{StaticResource HmiBgPanel}" />
+            <SolidColorBrush x:Key="HmiBgPanelAltBrush" Color="{StaticResource HmiBgPanelAlt}" />
+            <SolidColorBrush x:Key="HmiBorderBrush" Color="{StaticResource HmiBorder}" />
+            <SolidColorBrush x:Key="HmiAccentBrush" Color="{StaticResource HmiAccent}" />
+            <SolidColorBrush x:Key="HmiAccentHoverBrush" Color="{StaticResource HmiAccentHover}" />
+            <SolidColorBrush x:Key="HmiTextPrimaryBrush" Color="{StaticResource HmiTextPrimary}" />
+            <SolidColorBrush x:Key="HmiTextSecondaryBrush" Color="{StaticResource HmiTextSecondary}" />
+            <SolidColorBrush x:Key="HmiTextMutedBrush" Color="{StaticResource HmiTextMuted}" />
+            <SolidColorBrush x:Key="HmiSuccessBrush" Color="{StaticResource HmiSuccess}" />
+            <SolidColorBrush x:Key="HmiWarningBrush" Color="{StaticResource HmiWarning}" />
+            <SolidColorBrush x:Key="HmiDangerBrush" Color="{StaticResource HmiDanger}" />
+            <SolidColorBrush x:Key="HmiBgWindowBrush" Color="{StaticResource HmiBgWindow}" />
+            <SolidColorBrush x:Key="HmiBgDeepBrush" Color="{StaticResource HmiBgDeep}" />
+            <SolidColorBrush x:Key="HmiBgInputBrush" Color="{StaticResource HmiBgInput}" />
+            <SolidColorBrush x:Key="HmiBgCardBrush" Color="{StaticResource HmiBgCard}" />
+            <SolidColorBrush x:Key="HmiBgElevatedBrush" Color="{StaticResource HmiBgElevated}" />
+            <SolidColorBrush x:Key="HmiBgSelectedBrush" Color="{StaticResource HmiBgSelected}" />
+            <SolidColorBrush x:Key="HmiInputBorderBrush" Color="{StaticResource HmiInputBorder}" />
+            <SolidColorBrush x:Key="HmiTextHintBrush" Color="{StaticResource HmiTextHint}" />
+            <SolidColorBrush x:Key="HmiTextPrimarySoftBrush" Color="{StaticResource HmiTextPrimarySoft}" />
+            <SolidColorBrush x:Key="HmiLinkBrush" Color="{StaticResource HmiLink}" />
+            <SolidColorBrush x:Key="HmiSuccessDeepBrush" Color="{StaticResource HmiSuccessDeep}" />
+            <SolidColorBrush x:Key="HmiNeutralDeepBrush" Color="{StaticResource HmiNeutralDeep}" />
+            <SolidColorBrush x:Key="HmiDangerDeepBrush" Color="{StaticResource HmiDangerDeep}" />
+            <SolidColorBrush x:Key="HmiWarningDeepBrush" Color="{StaticResource HmiWarningDeep}" />
+            <!-- 派生四态色画刷（AI 助手界面样式规范） -->
+            <SolidColorBrush x:Key="HmiBtnAccentPressedBrush" Color="{StaticResource HmiBtnAccentPressed}" />
+            <SolidColorBrush x:Key="HmiBtnSuccessHoverBrush" Color="{StaticResource HmiBtnSuccessHover}" />
+            <SolidColorBrush x:Key="HmiBtnSuccessPressedBrush" Color="{StaticResource HmiBtnSuccessPressed}" />
+            <SolidColorBrush x:Key="HmiBtnNeutralHoverBrush" Color="{StaticResource HmiBtnNeutralHover}" />
+            <SolidColorBrush x:Key="HmiBtnNeutralPressedBrush" Color="{StaticResource HmiBtnNeutralPressed}" />
+            <SolidColorBrush x:Key="HmiBtnDangerHoverBrush" Color="{StaticResource HmiBtnDangerHover}" />
+            <SolidColorBrush x:Key="HmiBtnDangerPressedBrush" Color="{StaticResource HmiBtnDangerPressed}" />
+            <SolidColorBrush x:Key="HmiBtnSecondaryHoverBrush" Color="{StaticResource HmiBtnSecondaryHover}" />
+            <SolidColorBrush x:Key="HmiBtnSecondaryPressedBrush" Color="{StaticResource HmiBtnSecondaryPressed}" />
+            <SolidColorBrush x:Key="HmiCheckOffBrush" Color="{StaticResource HmiCheckOff}" />
+            <SolidColorBrush x:Key="HmiInputBorderHoverBrush" Color="{StaticResource HmiInputBorderHover}" />
+            <SolidColorBrush x:Key="HmiTrackHoverBrush" Color="{StaticResource HmiTrackHover}" />
+            <SolidColorBrush x:Key="HmiKnobOffBrush" Color="{StaticResource HmiKnobOff}" />
+            <SolidColorBrush x:Key="HmiKnobOnBrush" Color="{StaticResource HmiKnobOn}" />
+
+            <!-- ═══ 模板分类语义色（用于 FaceplateLibrary 卡片视觉区分）═══ -->
+            <Color x:Key="HmiCatIndustrial">#f59e0b</Color>      <!-- 工业控制：琥珀 -->
+            <Color x:Key="HmiCatPiping">#06b6d4</Color>          <!-- 管道：青色 -->
+            <Color x:Key="HmiCatInstrument">#8b5cf6</Color>      <!-- 仪表：紫色 -->
+            <Color x:Key="HmiCatSafety">#ef4444</Color>           <!-- 安全：红色 -->
+            <Color x:Key="HmiCatGeneral">#64748b</Color>         <!-- 通用：灰色 -->
+            <SolidColorBrush x:Key="HmiCatIndustrialBrush" Color="{StaticResource HmiCatIndustrial}" />
+            <SolidColorBrush x:Key="HmiCatPipingBrush" Color="{StaticResource HmiCatPiping}" />
+            <SolidColorBrush x:Key="HmiCatInstrumentBrush" Color="{StaticResource HmiCatInstrument}" />
+            <SolidColorBrush x:Key="HmiCatSafetyBrush" Color="{StaticResource HmiCatSafety}" />
+            <SolidColorBrush x:Key="HmiCatGeneralBrush" Color="{StaticResource HmiCatGeneral}" />
+            <!-- ═══ 子窗口边框/标题栏 token（无边框+圆角窗口的统一设计规范）═══
+                 HmiWindowBorder       —— 窗口轮廓边框，须与 HmiBgWindow 形成高对比，清晰标识窗口边界
+                 HmiWindowTitleBg      —— 自定义标题栏底色（略亮于窗口底，区分标题区与内容区）
+                 HmiWindowCornerRadius —— 统一圆角半径，所有子窗口一致 -->
+            <Color x:Key="HmiWindowBorder">#4b5e82</Color>
+            <Color x:Key="HmiWindowTitleBg">#182238</Color>
+            <SolidColorBrush x:Key="HmiWindowBorderBrush" Color="{StaticResource HmiWindowBorder}" />
+            <SolidColorBrush x:Key="HmiWindowTitleBgBrush" Color="{StaticResource HmiWindowTitleBg}" />
+            <CornerRadius x:Key="HmiWindowCornerRadius">10</CornerRadius>
+            <Thickness x:Key="HmiWindowBorderThickness">1.5</Thickness>
+            <!-- ═══ 子窗口标题栏关闭按钮矢量图标（跨字体可靠渲染，不依赖字体字形）═══ -->
+            <StreamGeometry x:Key="HmiCloseGlyph">M5,5 L19,19 M19,5 L5,19</StreamGeometry>
+            <!-- Dock 图标颜色覆盖（默认 #474747 在深底上几乎不可见，提升到 Secondary） -->
+            <SolidColorBrush x:Key="DockToolChromeIconBrush" Color="{StaticResource HmiTextSecondary}"/>
+
+            <!-- ═══ Avalonia 系统级菜单资源（主字典定义，供 AppThemeService 运行时更新）═══ -->
+            <!-- 这些资源被 FluentTheme 内部模板（MenuBase/ContextMenu/Popup）使用，
+                 必须在主字典中定义以确保 ApplyPalette 能找到并更新它们 -->
+            <Color x:Key="SystemControlMenuBackground">#1a2332</Color>
+            <Color x:Key="SystemControlPopupBackground">#1a2332</Color>
+            <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource HmiBgPanel}"/>
+            <SolidColorBrush x:Key="MenuBorderBrush" Color="{StaticResource HmiBorder}"/>
+            <SolidColorBrush x:Key="MenuItemForegroundBrush" Color="{StaticResource HmiTextPrimary}"/>
+            <SolidColorBrush x:Key="MenuItemBackgroundBrush" Color="{StaticResource HmiBgPanel}"/>
+            <SolidColorBrush x:Key="MenuItemPointerOverForegroundBrush" Color="{StaticResource HmiTextPrimary}"/>
+            <SolidColorBrush x:Key="MenuItemPointerOverBackgroundBrush" Color="{StaticResource HmiBgSelected}"/>
+            <SolidColorBrush x:Key="MenuItemSelectedForegroundBrush" Color="{StaticResource HmiTextPrimary}"/>
+            <SolidColorBrush x:Key="MenuItemSelectedBackgroundBrush" Color="{StaticResource HmiBgSelected}"/>
+            <SolidColorBrush x:Key="MenuItemDisabledForegroundBrush" Color="{StaticResource HmiTextMuted}"/>
+            <SolidColorBrush x:Key="ContextMenuBackgroundBrush" Color="{StaticResource HmiBgPanel}"/>
+            <SolidColorBrush x:Key="ContextMenuBorderBrush" Color="{StaticResource HmiBorder}"/>
+            <SolidColorBrush x:Key="ContextMenuForegroundBrush" Color="{StaticResource HmiTextPrimary}"/>
+            <SolidColorBrush x:Key="SystemControlMenuBackgroundBrush" Color="{StaticResource HmiBgPanel}"/>
+            <SolidColorBrush x:Key="SystemControlPopupBackgroundBrush" Color="{StaticResource HmiBgPanel}"/>
+            
+            <!-- ═══ 主题字典：Dock 面板主题资源（菜单资源已迁移至主字典，由 AppThemeService 统一管理）═══ -->
+            <ResourceDictionary.ThemeDictionaries>
+                <!-- Light 主题专用资源 -->
+                <ResourceDictionary x:Key="Light">
+                    <!-- ═══ Dock 面板边框资源（浅色主题）═══ -->
+                    <!-- 为 Dock 面板添加明显的边框 -->
+                    <SolidColorBrush x:Key="ToolChromeBorderBrush" Color="#d9e0e8"/>
+                    <SolidColorBrush x:Key="DocumentChromeBorderBrush" Color="#d9e0e8"/>
+                    <SolidColorBrush x:Key="ToolContentBorderBrush" Color="#d9e0e8"/>
+                    <SolidColorBrush x:Key="DocumentContentBorderBrush" Color="#d9e0e8"/>
+                    
+                    <!-- Dock 面板背景 -->
+                    <SolidColorBrush x:Key="ToolChromeBackgroundBrush" Color="#edf1f5"/>
+                    <SolidColorBrush x:Key="DocumentChromeBackgroundBrush" Color="#edf1f5"/>
+                </ResourceDictionary>
+                
+                <!-- Dark 主题专用资源 -->
+                <ResourceDictionary x:Key="Dark">
+                    <!-- ═══ Dock 面板边框资源（深色主题）═══ -->
+                    <SolidColorBrush x:Key="ToolChromeBorderBrush" Color="#2a3a55"/>
+                    <SolidColorBrush x:Key="DocumentChromeBorderBrush" Color="#2a3a55"/>
+                    <SolidColorBrush x:Key="ToolContentBorderBrush" Color="#2a3a55"/>
+                    <SolidColorBrush x:Key="DocumentContentBorderBrush" Color="#2a3a55"/>
+                    
+                    <SolidColorBrush x:Key="ToolChromeBackgroundBrush" Color="#1a2332"/>
+                    <SolidColorBrush x:Key="DocumentChromeBackgroundBrush" Color="#1a2332"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    <Application.Styles>
+        <!-- Avalonia FluentTheme 提供 CommandBar 等原生控件的标准布局模板 -->
+        <FluentTheme />
+        <!-- FluentAvaloniaTheme 提供 FANumberBox 等 FluentAvalonia 控件的样式 -->
+        <faStyling:FluentAvaloniaTheme />
+        <!-- DockFluentTheme 必须最后加载，以便 Dock 控件模板覆盖前面的主题样式 -->
+        <dockTheme:DockFluentTheme DensityStyle="Normal" />
+
+        <!-- Dock 主容器切换过渡：布局重组/面板激活时平滑淡入 -->
+        <Style Selector="dock|DockControl">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.25"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <!-- ═══ CommandBar 主题样式（Topbar 反馈增强 P0-2）═══
+             CommandBar 按钮悬停 / 按下 / 禁用状态有背景渐变过渡与图标微缩放反馈。 -->
+        <!-- CommandBarButton 基础样式 -->
+        <Style Selector="CommandBarButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <!-- 悬停态：浅色面板底，亮起图标 -->
+        <Style Selector="CommandBarButton:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiLinkBrush}"/>
+        </Style>
+        <!-- 按下态：选中蓝底，按下时缩放至 0.95 模拟物理按键反馈 -->
+        <Style Selector="CommandBarButton:pressed">
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+            <Setter Property="RenderTransform" Value="scale(0.95)"/>
+        </Style>
+        <!-- 禁用态：降低透明度，移除交互反馈 -->
+        <Style Selector="CommandBarButton:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+        <!-- CommandBarButton 内的 PathIcon 同步过渡颜色 -->
+        <Style Selector="CommandBarButton PathIcon">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <!-- 解决：1) 页面选择状态缺乏视觉提示 2) 窗口线框无圆角 -->
+        
+        <!-- 工具面板标签页 -->
+        <Style Selector="ToolTabStripItem">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="CornerRadius" Value="6,6,0,0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="ToolTabStripItem:selected">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgCardBrush}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style Selector="ToolTabStripItem:pointerover">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimarySoftBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+        </Style>
+        
+        <!-- 文档/画布标签页 -->
+        <Style Selector="DocumentTabStripItem">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="CornerRadius" Value="6,6,0,0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="DocumentTabStripItem:selected">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgCardBrush}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style Selector="DocumentTabStripItem:pointerover">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimarySoftBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+        </Style>
+        
+        <!-- ═══ Dock 面板标题栏（ToolWindow 工具窗口）═══ -->
+        
+        <!-- 工具窗口标题栏容器 -->
+        <Style Selector="dock|ToolChromeControl">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgPanelAltBrush}"/>
+        </Style>
+        
+        <!-- 工具窗口标题栏悬停态 -->
+        <Style Selector="dock|ToolChromeControl:pointerover">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimarySoftBrush}"/>
+        </Style>
+        
+        <!-- 工具窗口标题栏激活态 -->
+        <Style Selector="dock|ToolChromeControl:active">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgCardBrush}"/>
+        </Style>
+        
+        <!-- 工具窗口标题栏边框 -->
+        <Style Selector="dock|ToolChromeControl Border">
+            <Setter Property="BorderBrush" Value="{DynamicResource ToolChromeBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        </Style>
+        
+        <!-- 工具窗口标题栏关闭按钮 -->
+        <Style Selector="dock|ToolChromeControl RepeatButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.1"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="dock|ToolChromeControl RepeatButton:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        <!-- 关闭按钮悬停时红色 -->
+        <Style Selector="dock|ToolChromeControl RepeatButton.close:pointerover">
+            <Setter Property="Background" Value="#e81123"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        
+        <!-- 工具窗口标题文字 -->
+        <Style Selector="dock|ToolChromeControl TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        
+
+
+        <!-- ═══ 全局交互反馈优化（UI 重构）═══ -->
+        <!-- 按钮基础形状：圆角 4、无边框、标准字号/内边距（规范 §1.3）；
+             背景/边框平滑过渡，消除悬停/按下时的生硬跳变。
+             语义配色由类样式 Button.primary/.success/.neutral/.danger/.secondary 提供（见下方"AI 界面样式规范"），
+             未加类的按钮保持主题默认背景。 -->
+        <Style Selector="Button">
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="MinHeight" Value="28"/>
+            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <!-- 输入控件焦点态：聚焦时边框亮起品牌色，增强可发现性与反馈（规范 §5：默认/悬停/聚焦/禁用四态） -->
+        <Style Selector="TextBox">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+            <Setter Property="PlaceholderForeground" Value="{StaticResource HmiTextHintBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgInputBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="MinHeight" Value="28"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <!-- 覆盖 Fluent 主题内置英文右键菜单（Undo/Cut/Copy/Paste/Select All）：改用本地化文本，
+                 命令仍绑定到宿主 TextBox 本身（$parent[TextBox]），语言切换时自动刷新 -->
+            <Setter Property="ContextFlyout">
+                <MenuFlyout>
+                    <MenuItem Header="{res:Loc ctx.undo}"
+                              Command="{Binding $parent[TextBox].Undo}"
+                              IsEnabled="{Binding $parent[TextBox].CanUndo}"
+                              InputGesture="Ctrl+Z"/>
+                    <MenuItem Header="{res:Loc ctx.redo}"
+                              Command="{Binding $parent[TextBox].Redo}"
+                              IsEnabled="{Binding $parent[TextBox].CanRedo}"
+                              InputGesture="Ctrl+Y"/>
+                    <Separator/>
+                    <MenuItem Header="{res:Loc ctx.cut}"
+                              Command="{Binding $parent[TextBox].Cut}"
+                              IsEnabled="{Binding $parent[TextBox].CanCut}"
+                              InputGesture="{x:Static TextBox.CutGesture}"/>
+                    <MenuItem Header="{res:Loc ctx.copy}"
+                              Command="{Binding $parent[TextBox].Copy}"
+                              IsEnabled="{Binding $parent[TextBox].CanCopy}"
+                              InputGesture="{x:Static TextBox.CopyGesture}"/>
+                    <MenuItem Header="{res:Loc ctx.paste}"
+                              Command="{Binding $parent[TextBox].Paste}"
+                              IsEnabled="{Binding $parent[TextBox].CanPaste}"
+                              InputGesture="{x:Static TextBox.PasteGesture}"/>
+                    <Separator/>
+                    <MenuItem Header="{res:Loc ctx.select.all}"
+                              Command="{Binding $parent[TextBox].SelectAll}"
+                              InputGesture="Ctrl+A"/>
+                </MenuFlyout>
+            </Setter>
+        </Style>
+        <Style Selector="TextBox:pointerover">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderHoverBrush}"/>
+        </Style>
+        <Style Selector="TextBox:focus">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentBrush}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+            <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="MinHeight" Value="28"/>
+            <Setter Property="Padding" Value="8,4"/>
+        </Style>
+        <Style Selector="ComboBox:pointerover">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderHoverBrush}"/>
+        </Style>
+        <Style Selector="ComboBox:focus">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentBrush}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+        </Style>
+
+        <!-- ToolTip：圆角 + 主题化配色，与整体设计语言一致 -->
+        <Style Selector="ToolTip">
+            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+        <!-- SelectableTextBlock：可选中/复制文本（对话、日志、步骤轨迹等）的暗色主题选中高亮 -->
+        <Style Selector="SelectableTextBlock">
+            <Setter Property="SelectionBrush" Value="#4D3b82f6"/>
+            <Setter Property="SelectionForegroundBrush" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <!-- 覆盖 Fluent 主题内置英文右键菜单（Copy）：改用本地化文本，语言切换自动刷新 -->
+            <Setter Property="ContextFlyout">
+                <MenuFlyout>
+                    <MenuItem Header="{res:Loc ctx.copy}"
+                              Command="{Binding $parent[SelectableTextBlock].Copy}"
+                              IsEnabled="{Binding $parent[SelectableTextBlock].CanCopy}"
+                              InputGesture="{x:Static TextBox.CopyGesture}"/>
+                </MenuFlyout>
+            </Setter>
+        </Style>
+
+        <!-- 滚动条：细窄圆角 thumb，暗色环境更协调 -->
+        <Style Selector="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="ScrollBar Thumb">
+            <Setter Property="Background" Value="{StaticResource HmiTextMutedBrush}"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <Style Selector="ScrollBar Thumb:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiTextSecondaryBrush}"/>
+        </Style>
+
+        <!-- ScrollViewer：列表控件滚动条使用 Overlay 模式（浮动在内容上方而非占据布局空间），
+             避免内部窗口出现滚动条时挡住列表内容 -->
+        <Style Selector="ScrollViewer">
+            <Setter Property="ScrollViewer.AllowAutoHide" Value="True"/>
+        </Style>
+        <!-- Dock 面板内嵌 ListBox 的 ScrollViewer 滚动条宽度收窄，减少遮挡 -->
+        <Style Selector="ScrollBar:vertical">
+            <Setter Property="Width" Value="10"/>
+        </Style>
+        <Style Selector="ScrollBar:horizontal">
+            <Setter Property="Height" Value="10"/>
+        </Style>
+
+        <!-- ═══ SplashWindow 引导页面卡片交互 ═══ -->
+        <Style Selector="Border#CardNewProject, Border#CardOpenProject">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border#CardNewProject:pointerover, Border#CardOpenProject:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentBrush}"/>
+        </Style>
+
+        <!-- ═══ 菜单与弹出控件主题化 ═══ -->
+        <!-- 修复浅色主题下菜单弹出背景使用深色默认值的问题 -->
+        
+        <!-- Menu 菜单栏容器 -->
+        <Style Selector="Menu">
+            <Setter Property="Background" Value="{StaticResource HmiBgPanelAltBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        
+        <!-- MenuItem 顶级菜单项 -->
+        <Style Selector="MenuItem">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="10,4"/>
+        </Style>
+        
+        <!-- MenuItem 悬停状态 -->
+        <Style Selector="MenuItem:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+        </Style>
+        
+        <!-- ContextMenu 右键菜单 -->
+        <Style Selector="ContextMenu">
+            <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="4"/>
+        </Style>
+        
+        <!-- ContextMenu 内部 Border（弹出容器） -->
+        <Style Selector="ContextMenu Border">
+            <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        
+        <!-- MenuBase 弹出容器（菜单栏的下拉弹出） -->
+        <Style Selector="MenuBase">
+            <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="4"/>
+        </Style>
+
+        <!-- MenuBase 内部 Border（关键：覆盖 FluentTheme 模板中 MenuBackgroundBrush 的硬编码背景） -->
+        <Style Selector="MenuBase Border">
+            <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        
+        <!-- Separator 分隔线 -->
+        <Style Selector="Separator">
+            <Setter Property="Background" Value="{StaticResource HmiBorderBrush}"/>
+            <Setter Property="Margin" Value="4,2"/>
+        </Style>
+        
+        <!-- MenuItem 子项样式 -->
+        <Style Selector="MenuItem MenuItem">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="16,6"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        
+        <!-- MenuItem 子项悬停 -->
+        <Style Selector="MenuItem MenuItem:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        
+        <!-- MenuItem 子项选中/勾选 -->
+        <Style Selector="MenuItem MenuItem:selected">
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        
+        <!-- MenuItem 子项禁用 -->
+        <Style Selector="MenuItem MenuItem:disabled">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextMutedBrush}"/>
+        </Style>
+
+        <!-- ═══ Expander 全局主题化 ═══ -->
+        <!-- 确保所有 Expander 控件在浅色主题下文字对比度充足 -->
+        <Style Selector="Expander">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+        </Style>
+
+        <!-- ═══ RepeatButton / NumberBox 箭头主题化 ═══ -->
+        <!-- 优化上下箭头的可见性和辨识度 -->
+        <Style Selector="RepeatButton">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.1"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.1"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="RepeatButton:pointerover">
+            <Setter Property="Foreground" Value="{StaticResource HmiAccentBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+        </Style>
+        <Style Selector="RepeatButton:pressed">
+            <Setter Property="Foreground" Value="{StaticResource HmiAccentHoverBrush}"/>
+        </Style>
+        <Style Selector="RepeatButton:disabled">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextMutedBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgPanelAltBrush}"/>
+        </Style>
+
+        <!-- FANumberBox / NumberBox 主题化 -->
+        <Style Selector="fa|FANumberBox">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgInputBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="6,3"/>
+            <Setter Property="MinHeight" Value="26"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             AI 助手界面基础图形样式规范落地（docs/ai-chat-ui-style-guide.md v1.0）
+             适用范围：AI 助手面板 / AiIconDialog / 后续 AI 相关界面。
+             全部色值引用 App.axaml token（含上方派生四态色），禁止裸 hex。
+             通用约定：四态过渡 0.15s；禁用态 = Opacity 0.4 + 文字 #64748b（HmiTextMuted）。
+             ═══════════════════════════════════════════════════════════════ -->
+
+        <!-- ── 普通按钮：五档语义 × 四态（规范 §1.2）──
+             用法：<Button Classes="primary"/> 或 Classes="success|neutral|danger|secondary"。
+             默认态复用既有 Deep/Selected/AccentHover token，悬停提亮、按下加深。 -->
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{StaticResource HmiAccentHoverBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.primary:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiAccentBrush}"/>
+        </Style>
+        <Style Selector="Button.primary:pressed">
+            <Setter Property="Background" Value="{StaticResource HmiBtnAccentPressedBrush}"/>
+        </Style>
+        <Style Selector="Button.primary:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextMutedBrush}"/>
+        </Style>
+        <Style Selector="Button.success">
+            <Setter Property="Background" Value="{StaticResource HmiSuccessDeepBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.success:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBtnSuccessHoverBrush}"/>
+        </Style>
+        <Style Selector="Button.success:pressed">
+            <Setter Property="Background" Value="{StaticResource HmiBtnSuccessPressedBrush}"/>
+        </Style>
+        <Style Selector="Button.success:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextMutedBrush}"/>
+        </Style>
+        <Style Selector="Button.neutral">
+            <Setter Property="Background" Value="{StaticResource HmiNeutralDeepBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.neutral:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBtnNeutralHoverBrush}"/>
+        </Style>
+        <Style Selector="Button.neutral:pressed">
+            <Setter Property="Background" Value="{StaticResource HmiBtnNeutralPressedBrush}"/>
+        </Style>
+        <Style Selector="Button.neutral:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextMutedBrush}"/>
+        </Style>
+        <Style Selector="Button.danger">
+            <Setter Property="Background" Value="{StaticResource HmiDangerDeepBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.danger:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBtnDangerHoverBrush}"/>
+        </Style>
+        <Style Selector="Button.danger:pressed">
+            <Setter Property="Background" Value="{StaticResource HmiBtnDangerPressedBrush}"/>
+        </Style>
+        <Style Selector="Button.danger:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextMutedBrush}"/>
+        </Style>
+        <Style Selector="Button.secondary">
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.secondary:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBtnSecondaryHoverBrush}"/>
+        </Style>
+        <Style Selector="Button.secondary:pressed">
+            <Setter Property="Background" Value="{StaticResource HmiBtnSecondaryPressedBrush}"/>
+        </Style>
+        <Style Selector="Button.secondary:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextMutedBrush}"/>
+        </Style>
+
+        <!-- ── 开关按钮 · 段选择 ToggleButton（规范 §2.1）──
+             未选中 #1e293b 灰底 / 选中 #1e3a5f 蓝底，色相+文字亮度双重对比。
+             注意：AiIconDialog 模式按钮由 code-behind 显式设背景（本地值优先），此样式作为其余 ToggleButton 的默认。 -->
+        <Style Selector="ToggleButton">
+            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="MinHeight" Value="28"/>
+            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="ToggleButton:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBtnSecondaryHoverBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton:pressed">
+            <Setter Property="Background" Value="{StaticResource HmiBtnSecondaryPressedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton:checked">
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style Selector="ToggleButton:checked:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiBtnSecondaryHoverBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextMutedBrush}"/>
+        </Style>
+
+        <!-- ── 开关按钮 · 滑动开关 ToggleSwitch（规范 §2.2/§2.3）──
+             Avalonia Fluent 模板中 Background=轨道、Foreground=滑钮，正好对应两态背景图方案：
+             关：轨道 #334155 + 滑钮 #c8d2e1（贴左）；开：轨道 #2563eb + 滑钮 #ffffff（贴右）；
+             切换差异 = 色相(灰→蓝) + 滑钮平移 + 滑钮提亮，0.15s 过渡。 -->
+        <Style Selector="ToggleSwitch">
+            <Setter Property="Background" Value="{StaticResource HmiInputBorderBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiKnobOffBrush}"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="ToggleSwitch:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiTrackHoverBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiKnobOnBrush}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:checked">
+            <Setter Property="Background" Value="{StaticResource HmiAccentHoverBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiKnobOnBrush}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:checked:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiAccentBrush}"/>
+        </Style>
+        <Style Selector="ToggleSwitch:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+
+        <!-- ── 复选框 CheckBox（规范 §3）──
+             选框 16×16 圆角 4：未勾 = 深底 #1e283c + 描边 #334155；勾选 = 品牌蓝 #2563eb 实底 + 白对勾；
+             悬停仅描边亮起（蓝），按下加深反馈。 -->
+        <Style Selector="CheckBox">
+            <Setter Property="Background" Value="{StaticResource HmiCheckOffBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="CheckBox:pointerover">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentBrush}"/>
+        </Style>
+        <Style Selector="CheckBox:pressed">
+            <Setter Property="Background" Value="{StaticResource HmiBtnAccentPressedBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+        </Style>
+        <Style Selector="CheckBox:checked">
+            <Setter Property="Background" Value="{StaticResource HmiAccentHoverBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+        </Style>
+        <Style Selector="CheckBox:checked:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiAccentBrush}"/>
+        </Style>
+        <Style Selector="CheckBox:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+
+        <!-- ── 单选 RadioButton（规范 §4）──
+             外圈描边式：默认 #334155 空心 → 选中蓝圈 #2563eb + 亮心 #e2e8f0（Foreground）；悬停描边亮起。 -->
+        <Style Selector="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiInputBorderBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="RadioButton:pointerover">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentBrush}"/>
+        </Style>
+        <Style Selector="RadioButton:pressed">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiBtnAccentPressedBrush}"/>
+        </Style>
+        <Style Selector="RadioButton:checked">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+        </Style>
+        <Style Selector="RadioButton:checked:pointerover">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentBrush}"/>
+        </Style>
+        <Style Selector="RadioButton:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+
+        <!-- ── 滑块 Slider（规范 §6）──
+             轨道 = Background(#334155，悬停 #475569)；填充段 + 滑钮 = Foreground(品牌蓝，悬停提亮)；
+             指示色即主色，与 LVGL 目标运行时一致。 -->
+        <Style Selector="Slider">
+            <Setter Property="Background" Value="{StaticResource HmiInputBorderBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiAccentHoverBrush}"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Slider:pointerover">
+            <Setter Property="Background" Value="{StaticResource HmiTrackHoverBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiAccentBrush}"/>
+        </Style>
+        <Style Selector="Slider:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+
+        <!-- ── 下拉菜单项 ComboBoxItem（规范 §7）──
+             选项行高 28、圆角 4、内边距 10,5；悬停/选中行背景 #1e3a5f。弹出面板由上方 MenuBase 样式统一。 -->
+        <Style Selector="ComboBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="MinHeight" Value="28"/>
+            <Setter Property="Padding" Value="10,5"/>
+        </Style>
+        <Style Selector="ComboBoxItem:pointerover, ComboBoxItem:selected">
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+        </Style>
+        <Style Selector="ComboBoxItem:disabled">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextMutedBrush}"/>
+        </Style>
+    </Application.Styles>
+</Application>

@@ -1,0 +1,456 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:core="clr-namespace:HmiEditor.Core.Models;assembly=HmiEditor.Core"
+        xmlns:views="using:HmiEditor.App.Views"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.CommunicationConfigView"
+        Title="{res:Loc comm.config.title}"
+        Width="1200"
+        Height="720"
+        MinWidth="900"
+        MinHeight="540"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*,Auto">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc comm.config.title}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <TextBlock Text="✕" FontSize="12" FontFamily="Segoe UI Symbol, Noto Sans CJK SC"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容 -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgWindowBrush}" Padding="12">
+        <Grid ColumnDefinitions="300,4,*">
+            <!-- ═══ 左列：连接 + 子设备 树形导航 ═══ -->
+            <Border CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="10">
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <!-- 顶栏：标题 + 添加连接 -->
+                    <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,0,0,8">
+                        <TextBlock Text="{res:Loc comm.conn.list}"
+                                   Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="15" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <Button x:Name="BtnAddConnection" Content="＋"
+                                Grid.Column="1"
+                                Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Width="26" Height="24" Padding="0" FontSize="14"
+                                Margin="0,0,4,0"
+                                ToolTip.Tip="{res:Loc comm.add}"/>
+                        <Button x:Name="BtnAddSlave" Content="＋"
+                                Grid.Column="2"
+                                Background="{StaticResource HmiWarningDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Width="26" Height="24" Padding="0" FontSize="14"
+                                ToolTip.Tip="{res:Loc comm.slave.add}"/>
+                    </Grid>
+
+                    <!-- 树形导航：连接为父节点，子设备为子节点 -->
+                    <TreeView x:Name="CommTree"
+                              Grid.Row="1"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              SelectionMode="Single">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding Children}" DataType="views:CommTreeNode">
+                                <TextBlock Text="{Binding Display}" FontSize="12"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                           VerticalAlignment="Center"/>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                        <TreeView.ContextMenu>
+                            <ContextMenu x:Name="CommTreeContextMenu">
+                                <MenuItem x:Name="CtxAddConnection" Header="{res:Loc comm.add}"/>
+                                <MenuItem x:Name="CtxAddSlave" Header="{res:Loc comm.slave.add}"/>
+                                <Separator/>
+                                <MenuItem x:Name="CtxDelete" Header="{res:Loc comm.delete.selection}"/>
+                            </ContextMenu>
+                        </TreeView.ContextMenu>
+                        <TreeView.Styles>
+                            <Style Selector="TreeViewItem">
+                                <Setter Property="Padding" Value="4,3"/>
+                                <Setter Property="Margin" Value="0,1"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="CornerRadius" Value="4"/>
+                                <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                            </Style>
+                            <Style Selector="TreeViewItem:selected">
+                                <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                            </Style>
+                        </TreeView.Styles>
+                    </TreeView>
+
+                    <!-- 删除：固定底部 -->
+                    <Button x:Name="BtnDeleteSelection" Content="{res:Loc comm.delete.selection}"
+                            Grid.Row="2" Margin="0,8,0,0" VerticalAlignment="Bottom"
+                            Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                            BorderThickness="0" Padding="10,6" FontSize="12"/>
+                </Grid>
+            </Border>
+
+            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch"
+                          Background="{StaticResource HmiBgElevatedBrush}"
+                          ResizeBehavior="PreviousAndNext" ShowsPreview="False"/>
+
+            <!-- ═══ 右列：连接/子设备参数 + 变量 ═══ -->
+            <Border Grid.Column="2" CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="14">
+                <Grid RowDefinitions="Auto,*">
+                    <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0"
+                                Foreground="{StaticResource HmiTextPrimaryBrush}">
+                        <TabControl.Styles>
+                            <Style Selector="TabControl > TabStrip > TabStripItem">
+                                <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+                                <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+                                <Setter Property="FontSize" Value="13"/>
+                                <Setter Property="Padding" Value="12,6"/>
+                            </Style>
+                            <Style Selector="TabControl > TabStrip > TabStripItem:selected">
+                                <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                            </Style>
+                        </TabControl.Styles>
+
+                        <!-- Tab 1: 连接参数 -->
+                        <TabItem Header="{res:Loc comm.config}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="12,16,12,12">
+                                <StackPanel Spacing="10">
+                                    <TextBlock Text="{res:Loc comm.basic.info}"
+                                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="13" FontWeight="SemiBold"
+                                               Margin="0,4,0,0"/>
+
+                                    <Grid ColumnDefinitions="90,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+                                        <TextBlock Text="{res:Loc comm.conn.name}"
+                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="TxtConnName" Grid.Column="1"
+                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                                 CornerRadius="4" Padding="8,5" FontSize="13"/>
+
+                                        <TextBlock Grid.Row="1" Text="{res:Loc comm.driver.type}"
+                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="CboDriverType" Grid.Row="1" Grid.Column="1"
+                                                  Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                  BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                                  CornerRadius="4" Padding="8,4" FontSize="13"/>
+
+                                        <TextBlock Grid.Row="2" Text="{res:Loc comm.enabled}"
+                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                        <CheckBox x:Name="ChkConnEnabled" Grid.Row="2" Grid.Column="1"
+                                                  Foreground="{StaticResource HmiTextPrimaryBrush}" IsChecked="True"/>
+                                    </Grid>
+
+                                    <TextBlock x:Name="TxtDriverDesc"
+                                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                                               TextWrapping="Wrap"/>
+
+                                    <Rectangle Fill="{StaticResource HmiInputBorderBrush}" Height="1" Margin="0,8,0,8"/>
+
+                                    <TextBlock Text="{res:Loc comm.conn.params}"
+                                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="13" FontWeight="SemiBold"
+                                               Margin="0,4,0,0"/>
+
+                                    <StackPanel x:Name="ParamPanel" Spacing="8"/>
+
+                                    <Button x:Name="BtnTestConnection" Content="{res:Loc comm.test}"
+                                            HorizontalAlignment="Left"
+                                            Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="12,5" FontSize="12"
+                                            IsVisible="False"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </TabItem>
+
+                        <!-- Tab 2: 子设备设置 -->
+                        <TabItem Header="{res:Loc comm.slave.config}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="12,16,12,12">
+                                <StackPanel Spacing="10">
+                                    <TextBlock x:Name="SlaveEditHint"
+                                               Text="{res:Loc comm.slave.select.hint}"
+                                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="13"
+                                               TextWrapping="Wrap"
+                                               Margin="0,4,0,0"/>
+
+                                    <Grid ColumnDefinitions="90,*" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="8">
+                                        <TextBlock Text="{res:Loc comm.slave.name}"
+                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="TxtSlaveName" Grid.Column="1"
+                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                                 CornerRadius="4" Padding="8,5" FontSize="13"/>
+
+                                        <TextBlock Grid.Row="1" Text="{res:Loc comm.slave.address}"
+                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="TxtSlaveAddress" Grid.Row="1" Grid.Column="1"
+                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                                 CornerRadius="4" Padding="8,5" FontSize="13" Text="1"/>
+
+                                        <TextBlock Grid.Row="2" Text="{res:Loc comm.enabled}"
+                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                        <CheckBox x:Name="ChkSlaveEnabled" Grid.Row="2" Grid.Column="1"
+                                                  Foreground="{StaticResource HmiTextPrimaryBrush}" IsChecked="True"/>
+
+                                        <TextBlock Grid.Row="3" Text="{res:Loc comm.slave.desc}"
+                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="TxtSlaveDesc" Grid.Row="3" Grid.Column="1"
+                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                                 CornerRadius="4" Padding="8,5" FontSize="13"/>
+                                    </Grid>
+
+                                    <Button x:Name="BtnSaveSlave" Content="{res:Loc comm.slave.save}"
+                                            HorizontalAlignment="Left"
+                                            Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="12,5" FontSize="12"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </TabItem>
+
+                        <!-- Tab 3: 子设备变量 -->
+                        <TabItem Header="{res:Loc comm.slave.vars}">
+                            <Grid RowDefinitions="Auto,*" RowSpacing="6">
+                                <!-- 工具条：导入/导出 CSV -->
+                                <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,0,0,2">
+                                    <TextBlock x:Name="SlaveVarsHint"
+                                               Text="{res:Loc comm.slave.vars.hint}"
+                                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                                               TextWrapping="Wrap"
+                                               VerticalAlignment="Center"/>
+                                    <Button x:Name="BtnExportSlaveVars" Grid.Column="1"
+                                            Content="{res:Loc comm.slave.var.export}"
+                                            Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="8,4" FontSize="11" Margin="0,0,4,0"/>
+                                    <Button x:Name="BtnImportSlaveVars" Grid.Column="2"
+                                            Content="{res:Loc comm.slave.var.import}"
+                                            Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="8,4" FontSize="11" Margin="0,0,4,0"/>
+                                    <Button x:Name="BtnBatchAddSlaveVars" Grid.Column="3"
+                                            Content="{res:Loc comm.slave.var.batch}"
+                                            Background="{StaticResource HmiWarningDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="8,4" FontSize="11"/>
+                                </Grid>
+
+                                <!-- 主体：左列变量列表 | 右列属性/批量添加 -->
+                                <Grid Grid.Row="1" ColumnDefinitions="*,4,320" MinHeight="0">
+                                    <!-- 左列：变量列表 -->
+                                    <ListBox x:Name="SlaveVarList"
+                                             Background="Transparent" BorderThickness="0"
+                                             MinHeight="0"
+                                             VerticalAlignment="Stretch"
+                                             ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate DataType="core:Variable">
+                                                <Grid ColumnDefinitions="*,110,90" Margin="0,1">
+                                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                                               Margin="8,4,4,4"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding DataType}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11"
+                                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                                    <TextBlock Grid.Column="2" Text="{Binding Address}" Foreground="{StaticResource HmiLinkBrush}" FontSize="11"
+                                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                                               HorizontalAlignment="Right" Margin="4,4,8,4"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                        <ListBox.Styles>
+                                            <Style Selector="ListBoxItem">
+                                                <Setter Property="Padding" Value="0"/>
+                                                <Setter Property="Margin" Value="0,1"/>
+                                                <Setter Property="Background" Value="{StaticResource HmiBgInputBrush}"/>
+                                                <Setter Property="CornerRadius" Value="4"/>
+                                            </Style>
+                                            <Style Selector="ListBoxItem:selected">
+                                                <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                            </Style>
+                                        </ListBox.Styles>
+                                    </ListBox>
+
+                                    <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch"
+                                                  Background="{StaticResource HmiBgElevatedBrush}"
+                                                  ResizeBehavior="PreviousAndNext" ShowsPreview="False"/>
+
+                                    <!-- 右列：添加/编辑变量 + 批量添加（内部可滚动） -->
+                                    <Border Grid.Column="2" Background="{StaticResource HmiBgPanelAltBrush}" CornerRadius="4" Padding="8">
+                                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <StackPanel Spacing="6">
+                                            <!-- 标题 -->
+                                            <TextBlock Text="{res:Loc comm.slave.var.edit.title}"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="13" FontWeight="SemiBold"/>
+
+                                            <!-- 变量名称 -->
+                                            <Grid ColumnDefinitions="70,*" RowSpacing="4">
+                                                <TextBlock Text="{res:Loc comm.slave.var.name}"
+                                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="TxtSlaveVarName" Grid.Column="1"
+                                                         Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                         BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,5" FontSize="12"
+                                                         PlaceholderText="{res:Loc comm.slave.var.name.hint}"/>
+                                            </Grid>
+
+                                            <!-- 数据类型 -->
+                                            <Grid ColumnDefinitions="70,*">
+                                                <TextBlock Text="{res:Loc comm.slave.var.type}"
+                                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                <ComboBox x:Name="CboSlaveVarType" Grid.Column="1"
+                                                          Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                          BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="12"/>
+                                            </Grid>
+
+                                            <!-- 寄存器类型 -->
+                                            <Grid ColumnDefinitions="70,*">
+                                                <TextBlock Text="{res:Loc comm.slave.var.reg.type}"
+                                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                <ComboBox x:Name="CboSlaveVarRegType" Grid.Column="1"
+                                                          Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                          BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="12"/>
+                                            </Grid>
+
+                                            <!-- 通讯地址 -->
+                                            <Grid ColumnDefinitions="70,*">
+                                                <TextBlock Text="{res:Loc comm.slave.var.address}"
+                                                           Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="TxtSlaveVarAddress" Grid.Column="1"
+                                                         Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                         BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,5" FontSize="12"
+                                                         PlaceholderText="{res:Loc comm.slave.var.address.hint}"/>
+                                            </Grid>
+
+                                            <!-- 地址格式提示（随寄存器类型变化） -->
+                                            <TextBlock x:Name="TxtSlaveVarAddressHint"
+                                                       Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                                                       TextWrapping="Wrap"
+                                                       Margin="70,0,0,0"
+                                                       Text="{res:Loc comm.slave.var.reg.hint.default}"/>
+
+                                            <!-- 操作按钮 -->
+                                            <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="4">
+                                                <Button x:Name="BtnDeleteSlaveVar"
+                                                        Content="{res:Loc comm.slave.var.delete}"
+                                                        Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                                        BorderThickness="0" Padding="8,5" FontSize="12"/>
+                                                <Button x:Name="BtnSaveEditSlaveVar" Grid.Column="1"
+                                                        Content="{res:Loc comm.slave.var.edit.save}"
+                                                        Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderThickness="0" Padding="8,5" FontSize="12"/>
+                                                <Button x:Name="BtnAddSlaveVar" Grid.Column="2"
+                                                        Content="{res:Loc comm.slave.var.add}"
+                                                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                        BorderThickness="0" Padding="8,5" FontSize="12"/>
+                                            </Grid>
+
+                                            <Rectangle Fill="{StaticResource HmiInputBorderBrush}" Height="1" Margin="0,4,0,4"/>
+
+                                            <!-- 批量添加区（默认折叠，点"批量添加"展开） -->
+                                            <Border x:Name="BatchAddPanel" Background="{StaticResource HmiBgPanelBrush}"
+                                                    CornerRadius="4" Padding="8" IsVisible="False">
+                                                <StackPanel Spacing="5">
+                                                    <TextBlock Text="{res:Loc comm.slave.var.batch.hint2}"
+                                                               Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                                               TextWrapping="Wrap"/>
+
+                                                    <!-- 行1: 名称前缀 + 起始序号 -->
+                                                    <Grid ColumnDefinitions="Auto,*,Auto,90" ColumnSpacing="5">
+                                                        <TextBlock Text="{res:Loc comm.slave.var.batch.name.prefix}"
+                                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                        <TextBox x:Name="TxtBatchNamePrefix" Grid.Column="1"
+                                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="12"
+                                                                 PlaceholderText="{res:Loc comm.slave.var.batch.name.prefix.hint}"/>
+                                                        <TextBlock Grid.Column="2" Text="{res:Loc comm.slave.var.batch.start.index}"
+                                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                        <TextBox x:Name="TxtBatchStartIndex" Grid.Column="3"
+                                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="12" Text="1"/>
+                                                    </Grid>
+
+                                                    <!-- 行2: 起始地址 + 数量 -->
+                                                    <Grid ColumnDefinitions="Auto,*,Auto,90" ColumnSpacing="5">
+                                                        <TextBlock Text="{res:Loc comm.slave.var.batch.start.addr}"
+                                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                        <TextBox x:Name="TxtBatchStartAddr" Grid.Column="1"
+                                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="12"
+                                                                 PlaceholderText="{res:Loc comm.slave.var.batch.start.addr.hint}"/>
+                                                        <TextBlock Grid.Column="2" Text="{res:Loc comm.slave.var.batch.count}"
+                                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                        <TextBox x:Name="TxtBatchCount" Grid.Column="3"
+                                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="12" Text="10"/>
+                                                    </Grid>
+
+                                                    <!-- 行3: 数据类型 + 寄存器类型 -->
+                                                    <Grid ColumnDefinitions="Auto,*,Auto,*" ColumnSpacing="5">
+                                                        <TextBlock Text="{res:Loc comm.slave.var.type}"
+                                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                        <ComboBox x:Name="CboBatchVarType" Grid.Column="1"
+                                                                  Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                                  BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="12"/>
+                                                        <TextBlock Grid.Column="2" Text="{res:Loc comm.slave.var.reg.type}"
+                                                                   Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                                        <ComboBox x:Name="CboBatchVarRegType" Grid.Column="3"
+                                                                  Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                                  BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="12"/>
+                                                    </Grid>
+
+                                                    <!-- 预览 -->
+                                                    <TextBlock x:Name="TxtBatchPreview"
+                                                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                                                               TextWrapping="Wrap"/>
+
+                                                    <Button x:Name="BtnApplyBatchVars"
+                                                            Content="{res:Loc comm.slave.var.batch.apply}"
+                                                            Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                            BorderThickness="0" Padding="10,4" FontSize="12"
+                                                            HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+
+            <!-- 底部状态栏（外层 Grid Row 2） -->
+            <Border Grid.Row="2" Padding="12,4,12,8">
+                <TextBlock x:Name="StatusText"
+                           Text="" Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                           TextWrapping="Wrap"/>
+            </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

@@ -1,0 +1,40 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AvaloniaVersion>12.1.0</AvaloniaVersion>
+    <!-- ⚠ 编译绑定：**显式声明**，不要删（2026-09-22，阶段 69）。
+
+         不写下面这一行时，「全仓 XAML 里 {Binding} 走不走编译期校验」取决于 Avalonia
+         包内**两个互相矛盾**的默认值 —— 都在「未设置时才生效」的条件下写成相反的值：
+
+           build/Avalonia.props:8              -> true    （.props 先导入 ⇒ 目前实际生效）
+           build/AvaloniaBuildTasks.targets:5  -> false   （.targets 后导入，条件已不满足）
+
+         即：今天之所以是 true，靠的是**导入顺序**这一个巧合。包一升级改了任一处，
+         校验就没了 —— 而且**失去的方式是静默的**：XAML 里的 {Binding} 退回反射绑定，
+         编译期 0 警告，运行期的失败出口 Avalonia.Logging.Logger.Sink 全仓又无人接
+         （`grep ILogSink src/ tests/` 零命中），绑定路径写错会一路静默到界面上。
+
+         实测（2026-09-22，`.workbuddy/tmp/exp-cb.py` 注入台）：
+         · 显式设 false 后，UserManagerView.axaml 里一个绑到**不存在属性**的
+           {Binding}（DataTemplate 内，DataType 明确）从 `error AVLN2000` 变成
+           **build 成功 / 0 警告 0 错误**；MSBuild 落盘的证词同步从 true 变 false。
+         · 显式声明 + 值 true 时，同一个注入是 build-fail；产物里 {Binding} 编译成
+           CompiledBindingExtension 而非 ReflectionBindingExtension。
+
+         另有两个「编译绑定**管不着**」的面（别指望这条能兜住）：
+         ① `Background="{StaticResource X}"` 这类**资源键**解析 —— 键缺失仍是运行期
+            `KeyNotFoundException`，由 XamlResourceKeyClosureTests 的静态面守；
+         ② `{Binding $self.X}` / 元素名字 / RelativeSource 等无法编译的绑定会**退回**
+            反射绑定，是合法用法，不受本开关影响。
+
+         守卫：tests/HmiEditor.App.UiTests/XamlCompiledBindingGuardTests.cs
+         （声明必须在 + 值必须为 true + MSBuild 证词必须一致 + 不许有覆盖者）。 -->
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <!-- 包版本统一由仓库根 Directory.Packages.props 管理（CPM）。
+         此处不再声明 ManagePackageVersionsCentrally，避免与根配置冲突。 -->
+  </PropertyGroup>
+</Project>

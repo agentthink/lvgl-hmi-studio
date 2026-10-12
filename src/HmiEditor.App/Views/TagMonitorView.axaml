@@ -1,0 +1,160 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:HmiEditor.App.Views"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.TagMonitorView"
+        Title="{res:Loc win.tag.monitor}"
+        Width="820"
+        Height="560"
+        MinWidth="615"
+        MinHeight="420"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc win.tag.monitor}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容 -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgWindowBrush}" Padding="12">
+        <Grid RowDefinitions="Auto,*,Auto">
+            <!-- 顶部工具栏 -->
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,0,0,8">
+                <TextBlock x:Name="SummaryText" Text="{res:Loc tag.monitor.title}"
+                           Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                           VerticalAlignment="Center"/>
+                <ComboBox x:Name="CmbDirectionFilter" SelectedIndex="0"
+                          Grid.Column="1" Margin="8,0,0,0"
+                          Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                          BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                          Padding="8,4" FontSize="12" Width="110">
+                    <ComboBoxItem Content="{res:Loc tag.monitor.all.dir}" />
+                    <ComboBoxItem Content="{res:Loc tag.monitor.read.only}" />
+                    <ComboBoxItem Content="{res:Loc tag.monitor.read.write}" />
+                </ComboBox>
+                <Button x:Name="BtnRefresh" Content="{res:Loc tag.monitor.refresh}"
+                        Grid.Column="2" Margin="8,0,0,0"
+                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="14,6"
+                        FontSize="13"/>
+                <Button x:Name="BtnRebuild" Content="{res:Loc tag.monitor.rebuild}"
+                        Grid.Column="3" Margin="8,0,0,0"
+                        Background="{StaticResource HmiBgElevatedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                        Padding="14,6" FontSize="13"/>
+            </Grid>
+
+            <!-- 标签表区域 -->
+            <Grid RowDefinitions="Auto,*" Grid.Row="1">
+                <!-- 表头 -->
+                <Border Background="{StaticResource HmiBgPanelBrush}" CornerRadius="4" Padding="8,6" Margin="0,0,0,2">
+                    <Grid ColumnDefinitions="120,90,110,70,*,90,80">
+                        <TextBlock Text="{res:Loc tag.monitor.var}" Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc tag.monitor.addr}" Grid.Column="1" Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc tag.monitor.conn}" Grid.Column="2" Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc tag.monitor.dir}" Grid.Column="3" Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc tag.monitor.control}" Grid.Column="4" Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc tag.monitor.cur.val}" Grid.Column="5" Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" VerticalAlignment="Center"/>
+                        <TextBlock Text="{res:Loc tag.monitor.status}" Grid.Column="6" Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- 标签列表 -->
+                <ListBox Grid.Row="1" Background="{StaticResource HmiBgDeepBrush}"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         x:Name="TagList"
+                         BorderThickness="0"
+                         Padding="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="views:TagRowModel">
+                            <Border Background="{StaticResource HmiBgInputBrush}" CornerRadius="4"
+                                    Padding="8,5" Margin="0,0,0,2">
+                                <Grid ColumnDefinitions="120,90,110,70,*,90,80">
+                                    <TextBlock Text="{Binding VariableId}" Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="11"
+                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding Address}" Grid.Column="1"
+                                               Foreground="{StaticResource HmiLinkBrush}" FontSize="11" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding ConnectionName}" Grid.Column="2"
+                                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="11" VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding DirectionLabel}" Grid.Column="3"
+                                               Foreground="{Binding DirectionColor}" FontSize="11"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding ControlRef}" Grid.Column="4"
+                                               Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="11" VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding CurrentValueText}" Grid.Column="5"
+                                               Foreground="{StaticResource HmiSuccessBrush}" FontSize="11" FontWeight="Medium"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding StatusText}" Grid.Column="6"
+                                               Foreground="{Binding StatusColor}" FontSize="11"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <!-- 底部手动写入区 -->
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto" Grid.Row="2" Margin="0,8,0,0">
+                <TextBlock Text="{res:Loc tag.monitor.manual.write}" Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                           VerticalAlignment="Center"/>
+                <ComboBox x:Name="CmbWriteTarget" Grid.Column="1" Margin="8,0,0,0"
+                          Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                          BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                          Padding="8,4" FontSize="12" Width="200"
+                          PlaceholderText="{res:Loc tag.monitor.select.writable}"/>
+                <TextBox x:Name="TxtWriteValue" Grid.Column="2" Margin="8,0,0,0"
+                         Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                         BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                         Padding="8,4" FontSize="12" Width="100"
+                         PlaceholderText="{res:Loc tag.monitor.value.hint}"/>
+                <Button x:Name="BtnWrite" Content="{res:Loc tag.monitor.write}" Grid.Column="3" Margin="8,0,0,0"
+                        Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="14,6" FontSize="13"/>
+            </Grid>
+        </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

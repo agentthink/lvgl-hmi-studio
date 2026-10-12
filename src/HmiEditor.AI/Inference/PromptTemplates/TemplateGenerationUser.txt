@@ -1,0 +1,12 @@
+请根据以下描述创建 Faceplate 模板：
+
+【用户需求】
+{user_input}
+
+【项目已有变量列表】（用于 VariableId 类型参数的参考变量名）
+{variable_list}
+
+【当前项目主题信息】（用于 bgColor/textColor 参考）
+{theme_info}
+
+请生成模板定义 JSON。

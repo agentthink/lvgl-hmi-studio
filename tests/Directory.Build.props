@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 所有测试程序集统一重定向应用数据根（HMI_APP_DATA_ROOT → 仓库内 .hmi-test-tmp/appdata），
+         避免被测产品代码（AppPaths）往开发者真实的配置目录写中间产物。
+         见 tests/_shared/TestAppDataRootSetup.cs 的说明。
+
+         排除 TestSupport：它是被测项目引用的**辅助库**，不是测试程序集，
+         没必要也带上模块初始化器（且会触发 CA2255 —— 该分析器只在测试/应用项目里放行）。 -->
+    <Compile Include="$(MSBuildThisFileDirectory)_shared/TestAppDataRootSetup.cs"
+             Link="TestAppDataRootSetup.cs"
+             Condition="'$(MSBuildProjectName)' != 'HmiEditor.TestSupport'" />
+  </ItemGroup>
+</Project>

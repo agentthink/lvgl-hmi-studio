@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="using:HmiEditor.Core.Models.User"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             x:Class="HmiEditor.App.Views.AuditLogView">
+    <DockPanel Background="{StaticResource HmiBgDarkBrush}">
+        <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+            <TextBox x:Name="FilterBox"
+                     PlaceholderText="{res:Loc audit.filter.hint}"
+                     Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                     BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"
+                     Padding="8,4"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6" Margin="6,0,0,0">
+                <Button x:Name="ExportReportBtn"
+                        Content="{res:Loc audit.report.btn}"
+                        Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" FontSize="12"
+                        Padding="12,4"/>
+                <Button x:Name="ExportBundleBtn"
+                        Content="{res:Loc report.bundle.btn}"
+                        Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" FontSize="12"
+                        Padding="12,4"/>
+                <Button x:Name="DesignerBtn"
+                        Content="{res:Loc report.designer.btn}"
+                        Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" FontSize="12"
+                        Padding="12,4"/>
+                <Button x:Name="RefreshBtn"
+                        Content="{res:Loc audit.refresh}"
+                        Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" FontSize="12"
+                        Padding="12,4"/>
+            </StackPanel>
+        </Grid>
+        <ListBox x:Name="AuditList"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="models:AuditLogEntry">
+                    <Border Background="{StaticResource HmiBgInputBrush}" CornerRadius="4"
+                            BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                            Margin="0,2">
+                        <StackPanel Margin="8,6" Spacing="2">
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}'}"
+                                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Username}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" FontWeight="SemiBold"
+                                           Margin="8,0"/>
+                                <TextBlock Grid.Column="2"
+                                           Text="{Binding Action}"
+                                           Foreground="{StaticResource HmiLinkBrush}" FontSize="11"/>
+                            </Grid>
+                            <TextBlock Text="{Binding Detail}"
+                                       Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="12"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</UserControl>

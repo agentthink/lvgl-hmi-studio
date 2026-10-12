@@ -1,0 +1,41 @@
+/* ── HMI Editor Phase R2 — Faceplate Editor Design Tokens ── */
+/* Dark industrial engineering theme, single primary hue */
+
+:root {
+  /* Background layers */
+  --hmi-background: #0D0E12;
+  --hmi-foreground: #E4E6EB;
+
+  --hmi-card: #16181F;
+  --hmi-card-foreground: #E4E6EB;
+
+  --hmi-popover: #1A1C24;
+  --hmi-popover-foreground: #E4E6EB;
+
+  /* Brand primary — custom indigo-blue */
+  --hmi-primary: #3B71F5;
+  --hmi-primary-foreground: #FFFFFF;
+
+  /* Muted / secondary surfaces */
+  --hmi-muted: #1E2029;
+  --hmi-muted-foreground: #9BA1AE;
+
+  /* Structural */
+  --hmi-border: #2A2D38;
+  --hmi-input: #2A2D38;
+  --hmi-ring: #3B71F5;
+
+  /* Radius scale */
+  --hmi-radius-sm: 4px;
+  --hmi-radius-md: 8px;
+  --hmi-radius-lg: 12px;
+
+  /* Typography */
+  --hmi-font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --hmi-font-mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace, monospace;
+}
+
+/* Dark mode root */
+html {
+  color-scheme: dark;
+}

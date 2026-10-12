@@ -1,0 +1,75 @@
+diff --git a/src/libs/bmp/lv_bmp.c b/src/libs/bmp/lv_bmp.c
+index aeb9dad..266eba6 100644
+--- a/src/libs/bmp/lv_bmp.c
++++ b/src/libs/bmp/lv_bmp.c
+@@ -178,8 +178,69 @@ static lv_result_t decoder_open(lv_image_decoder_t * decoder, lv_image_decoder_d
+ 
+         dsc->user_data = lv_malloc(sizeof(bmp_dsc_t));
+         LV_ASSERT_MALLOC(dsc->user_data);
+-        if(dsc->user_data == NULL) return LV_RESULT_INVALID;
++        if(dsc->user_data == NULL) { lv_fs_close(&b.f); return LV_RESULT_INVALID; }
+         lv_memcpy(dsc->user_data, &b, sizeof(b));
++
++        /* FIX: 完整解码图像至 dsc->decoded, 避免 partial decode 路径在 STRETCH/缩放
++         * 场景下只解码 1 行导致 src_w/src_h=1, 软件变换器无法正确缩放。
++         * 原版 LVGL 依赖 decoder_get_area() 逐行 partial decode, 丢失源尺寸信息。*/
++        if(dsc->header.cf != LV_COLOR_FORMAT_UNKNOWN && dsc->header.cf != LV_COLOR_FORMAT_RAW) {
++            uint32_t full_stride = lv_draw_buf_width_to_stride(b.px_width, dsc->header.cf);
++            /* 使用默认 handlers (不经过 image cache), 避免大图被 cache 拒绝 */
++            lv_draw_buf_t * full_buf = lv_draw_buf_create(b.px_width, b.px_height, dsc->header.cf, LV_STRIDE_AUTO);
++            if(full_buf != NULL) {
++                uint8_t * row_buf = lv_malloc(b.row_size_bytes);
++                if(row_buf != NULL) {
++                    bool ok = true;
++                    for(int32_t y = 0; y < (int32_t)b.px_height; y++) {
++                        int32_t src_y = (b.px_height - 1) - y; /* BMP 自下而上存储 */
++                        uint32_t pos = b.px_offset + b.row_size_bytes * src_y;
++                        lv_fs_seek(&b.f, pos, LV_FS_SEEK_SET);
++                        uint32_t br;
++                        lv_fs_res_t rres = lv_fs_read(&b.f, row_buf, b.row_size_bytes, &br);
++                        if(rres != LV_FS_RES_OK || br != b.row_size_bytes) {
++                            ok = false;
++                            break;
++                        }
++
++                        uint8_t * dst = full_buf->data + y * full_stride;
++                        if(b.bpp == 24 && dsc->header.cf == LV_COLOR_FORMAT_ARGB8888) {
++                            /* RGB888 → ARGB8888: 添加 alpha=0xFF */
++                            for(uint32_t x = 0; x < b.px_width; x++) {
++                                dst[x*4 + 0] = row_buf[x*3 + 0]; /* B */
++                                dst[x*4 + 1] = row_buf[x*3 + 1]; /* G */
++                                dst[x*4 + 2] = row_buf[x*3 + 2]; /* R */
++                                dst[x*4 + 3] = 0xFF;             /* A */
++                            }
++                        }
++                        else if(b.bpp == 32 && dsc->header.cf == LV_COLOR_FORMAT_ARGB8888) {
++                            /* XRGB8888 → ARGB8888: BMP 默认 BGRA 字节序 */
++                            for(uint32_t x = 0; x < b.px_width; x++) {
++                                dst[x*4 + 0] = row_buf[x*4 + 0]; /* B */
++                                dst[x*4 + 1] = row_buf[x*4 + 1]; /* G */
++                                dst[x*4 + 2] = row_buf[x*4 + 2]; /* R */
++                                dst[x*4 + 3] = row_buf[x*4 + 3]; /* A */
++                            }
++                        }
++                        else {
++                            /* 其他格式: 直接拷贝 (假设字节布局兼容) */
++                            lv_memcpy(dst, row_buf, b.row_size_bytes);
++                        }
++                    }
++                    lv_free(row_buf);
++                    if(ok) {
++                        dsc->decoded = full_buf;
++                    }
++                    else {
++                        lv_draw_buf_destroy(full_buf);
++                    }
++                }
++                else {
++                    lv_draw_buf_destroy(full_buf);
++                }
++            }
++        }
++
+         return LV_RESULT_OK;
+     }
+     /* BMP file as data not supported for simplicity.

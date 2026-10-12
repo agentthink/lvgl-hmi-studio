@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ReleasePackager</RootNamespace>
+    <AssemblyName>ReleasePackager</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\HmiEditor.Device\HmiEditor.Device.csproj" />
+    <ProjectReference Include="..\..\src\Hmi.Hardware.Builtin\Hmi.Hardware.Builtin.csproj" />
+  </ItemGroup>
+
+</Project>

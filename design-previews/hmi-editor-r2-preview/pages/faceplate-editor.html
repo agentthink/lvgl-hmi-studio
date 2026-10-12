@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faceplate 编辑器</title>
+    <style id="theme-vars">
+/* ── HMI Editor Phase R2 — Faceplate Editor Design Tokens ── */
+/* Dark industrial engineering theme, single primary hue */
+
+:root {
+  /* Background layers */
+  --hmi-background: #0D0E12;
+  --hmi-foreground: #E4E6EB;
+
+  --hmi-card: #16181F;
+  --hmi-card-foreground: #E4E6EB;
+
+  --hmi-popover: #1A1C24;
+  --hmi-popover-foreground: #E4E6EB;
+
+  /* Brand primary — custom indigo-blue */
+  --hmi-primary: #3B71F5;
+  --hmi-primary-foreground: #FFFFFF;
+
+  /* Muted / secondary surfaces */
+  --hmi-muted: #1E2029;
+  --hmi-muted-foreground: #9BA1AE;
+
+  /* Structural */
+  --hmi-border: #2A2D38;
+  --hmi-input: #2A2D38;
+  --hmi-ring: #3B71F5;
+
+  /* Radius scale */
+  --hmi-radius-sm: 4px;
+  --hmi-radius-md: 8px;
+  --hmi-radius-lg: 12px;
+
+  /* Typography */
+  --hmi-font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --hmi-font-mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace, monospace;
+}
+
+/* Dark mode root */
+html {
+  color-scheme: dark;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--hmi-background);
+    --color-foreground: var(--hmi-foreground);
+    --color-card: var(--hmi-card);
+    --color-card-foreground: var(--hmi-card-foreground);
+    --color-popover: var(--hmi-popover);
+    --color-popover-foreground: var(--hmi-popover-foreground);
+    --color-primary: var(--hmi-primary);
+    --color-primary-foreground: var(--hmi-primary-foreground);
+    --color-muted: var(--hmi-muted);
+    --color-muted-foreground: var(--hmi-muted-foreground);
+    --color-border: var(--hmi-border);
+    --color-input: var(--hmi-input);
+    --color-ring: var(--hmi-ring);
+    --radius-sm: var(--hmi-radius-sm);
+    --radius-md: var(--hmi-radius-md);
+    --radius-lg: var(--hmi-radius-lg);
+  }
+  @layer base {
+    body { background: var(--hmi-background); color: var(--hmi-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--hmi-background); }
+      .text-background { color: var(--hmi-background); }
+      .border-background { border-color: var(--hmi-background); }
+      .ring-background { --tw-ring-color: var(--hmi-background); }
+      .bg-foreground { background-color: var(--hmi-foreground); }
+      .text-foreground { color: var(--hmi-foreground); }
+      .border-foreground { border-color: var(--hmi-foreground); }
+      .ring-foreground { --tw-ring-color: var(--hmi-foreground); }
+      .bg-card { background-color: var(--hmi-card); }
+      .text-card { color: var(--hmi-card); }
+      .border-card { border-color: var(--hmi-card); }
+      .ring-card { --tw-ring-color: var(--hmi-card); }
+      .bg-card-foreground { background-color: var(--hmi-card-foreground); }
+      .text-card-foreground { color: var(--hmi-card-foreground); }
+      .border-card-foreground { border-color: var(--hmi-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--hmi-card-foreground); }
+      .bg-popover { background-color: var(--hmi-popover); }
+      .text-popover { color: var(--hmi-popover); }
+      .border-popover { border-color: var(--hmi-popover); }
+      .ring-popover { --tw-ring-color: var(--hmi-popover); }
+      .bg-popover-foreground { background-color: var(--hmi-popover-foreground); }
+      .text-popover-foreground { color: var(--hmi-popover-foreground); }
+      .border-popover-foreground { border-color: var(--hmi-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--hmi-popover-foreground); }
+      .bg-primary { background-color: var(--hmi-primary); }
+      .text-primary { color: var(--hmi-primary); }
+      .border-primary { border-color: var(--hmi-primary); }
+      .ring-primary { --tw-ring-color: var(--hmi-primary); }
+      .bg-primary-foreground { background-color: var(--hmi-primary-foreground); }
+      .text-primary-foreground { color: var(--hmi-primary-foreground); }
+      .border-primary-foreground { border-color: var(--hmi-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--hmi-primary-foreground); }
+      .bg-muted { background-color: var(--hmi-muted); }
+      .text-muted { color: var(--hmi-muted); }
+      .border-muted { border-color: var(--hmi-muted); }
+      .ring-muted { --tw-ring-color: var(--hmi-muted); }
+      .bg-muted-foreground { background-color: var(--hmi-muted-foreground); }
+      .text-muted-foreground { color: var(--hmi-muted-foreground); }
+      .border-muted-foreground { border-color: var(--hmi-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--hmi-muted-foreground); }
+      .bg-border { background-color: var(--hmi-border); }
+      .text-border { color: var(--hmi-border); }
+      .border-border { border-color: var(--hmi-border); }
+      .ring-border { --tw-ring-color: var(--hmi-border); }
+      .bg-input { background-color: var(--hmi-input); }
+      .text-input { color: var(--hmi-input); }
+      .border-input { border-color: var(--hmi-input); }
+      .ring-input { --tw-ring-color: var(--hmi-input); }
+      .bg-ring { background-color: var(--hmi-ring); }
+      .text-ring { color: var(--hmi-ring); }
+      .border-ring { border-color: var(--hmi-ring); }
+      .ring-ring { --tw-ring-color: var(--hmi-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <style id="critical-layout">
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; height: 100vh; width: 100vw; overflow: hidden; }
+
+      .app-shell {
+        display: grid;
+        grid-template-rows: 48px 1fr 32px;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        background: var(--hmi-background);
+        color: var(--hmi-foreground);
+        font-family: var(--hmi-font-sans);
+        font-size: 13px;
+        user-select: none;
+      }
+
+      .app-command-bar {
+        display: flex;
+        align-items: center;
+        height: 48px;
+        background: var(--hmi-card);
+        border-bottom: 1px solid var(--hmi-border);
+        padding: 0 12px;
+        gap: 8px;
+      }
+
+      .app-main {
+        display: grid;
+        grid-template-columns: 260px 1fr 320px;
+        overflow: hidden;
+        min-height: 0;
+      }
+
+      .app-panel-left {
+        display: flex;
+        flex-direction: column;
+        background: var(--hmi-card);
+        border-right: 1px solid var(--hmi-border);
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .app-panel-right {
+        display: flex;
+        flex-direction: column;
+        background: var(--hmi-card);
+        border-left: 1px solid var(--hmi-border);
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .app-panel-center {
+        display: flex;
+        flex-direction: column;
+        background: var(--hmi-background);
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .panel-scroll {
+        overflow-y: auto;
+        overflow-x: hidden;
+        min-height: 0;
+        flex: 1;
+        user-select: text;
+      }
+
+      .app-status-bar {
+        display: flex;
+        align-items: center;
+        height: 32px;
+        background: var(--hmi-card);
+        border-top: 1px solid var(--hmi-border);
+        padding: 0 12px;
+        gap: 12px;
+        font-size: 11px;
+        color: var(--hmi-muted-foreground);
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 12px;
+        height: 36px;
+        border-bottom: 1px solid var(--hmi-border);
+        flex-shrink: 0;
+      }
+
+      .panel-title {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--hmi-foreground);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      svg.lucide { width: 16px; height: 16px; stroke-width: 1.75; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+      svg.lucide.icon-sm { width: 13px; height: 13px; }
+      svg.lucide.icon-lg { width: 18px; height: 18px; }
+      svg.lucide.icon-xs { width: 11px; height: 11px; }
+
+      .menu-item {
+        padding: 4px 10px;
+        font-size: 12px;
+        color: var(--hmi-muted-foreground);
+        border-radius: var(--hmi-radius-sm);
+        cursor: pointer;
+        transition: color 0.15s, background 0.15s;
+      }
+      .menu-item:hover {
+        color: var(--hmi-foreground);
+        background: var(--hmi-muted);
+      }
+
+      .tool-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: var(--hmi-radius-sm);
+        color: var(--hmi-muted-foreground);
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all 0.15s;
+      }
+      .tool-btn:hover {
+        color: var(--hmi-foreground);
+        background: var(--hmi-muted);
+        border-color: var(--hmi-border);
+      }
+      .tool-btn.primary { color: var(--hmi-primary); }
+      .tool-btn.primary:hover { background: rgba(59,113,245,0.12); border-color: var(--hmi-primary); }
+
+      .icon-btn-sm {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border-radius: var(--hmi-radius-sm);
+        color: var(--hmi-muted-foreground);
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .icon-btn-sm:hover { color: var(--hmi-foreground); background: var(--hmi-muted); }
+
+      .toolbar-divider {
+        width: 1px;
+        height: 16px;
+        background: var(--hmi-border);
+        flex-shrink: 0;
+      }
+
+      .canvas-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 32px;
+        padding: 0 12px;
+        border-bottom: 1px solid var(--hmi-border);
+        background: var(--hmi-card);
+        flex-shrink: 0;
+        font-size: 11px;
+        color: var(--hmi-muted-foreground);
+      }
+
+      .canvas-viewport {
+        flex: 1;
+        overflow: auto;
+        min-height: 0;
+        background-color: var(--hmi-background);
+        background-image: radial-gradient(circle, var(--hmi-border) 1px, transparent 1px);
+        background-size: 16px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+      }
+
+      .hmi-screen {
+        width: 800px;
+        height: 480px;
+        background: var(--hmi-popover);
+        border: 1px solid var(--hmi-border);
+        border-radius: var(--hmi-radius-sm);
+        position: relative;
+        flex-shrink: 0;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      }
+
+      .screen-label {
+        position: absolute;
+        top: -22px;
+        left: 0;
+        font-size: 10px;
+        color: var(--hmi-muted-foreground);
+        font-family: var(--hmi-font-mono);
+      }
+
+      .fp-instance {
+        position: absolute;
+        border-radius: var(--hmi-radius-sm);
+        font-size: 11px;
+      }
+      .fp-instance.selected {
+        border: 2px dashed var(--hmi-primary);
+        background: rgba(59,113,245,0.06);
+      }
+      .fp-instance.unselected {
+        border: 1px solid var(--hmi-border);
+        background: var(--hmi-muted);
+      }
+      .fp-instance-header {
+        padding: 4px 8px;
+        font-weight: 600;
+        font-size: 11px;
+        border-bottom: 1px solid var(--hmi-border);
+      }
+      .fp-instance.selected .fp-instance-header {
+        border-bottom: 1px dashed var(--hmi-primary);
+        color: var(--hmi-primary);
+      }
+      .fp-instance.unselected .fp-instance-header {
+        color: var(--hmi-muted-foreground);
+      }
+      .fp-instance-body {
+        padding: 6px 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .fp-sub-ctrl {
+        font-size: 11px;
+        color: var(--hmi-foreground);
+        padding: 3px 6px;
+        background: var(--hmi-background);
+        border-radius: var(--hmi-radius-sm);
+        border: 1px solid var(--hmi-border);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .fp-sub-ctrl .ctrl-type {
+        font-size: 9px;
+        color: var(--hmi-muted-foreground);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .fp-param-badge {
+        position: absolute;
+        top: -10px;
+        right: 8px;
+        font-size: 10px;
+        padding: 1px 6px;
+        border-radius: var(--hmi-radius-sm);
+        background: var(--hmi-primary);
+        color: var(--hmi-primary-foreground);
+        white-space: nowrap;
+        font-family: var(--hmi-font-mono);
+      }
+      .fp-instance.unselected .fp-param-badge {
+        background: var(--hmi-muted-foreground);
+      }
+      .resize-handle {
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        background: var(--hmi-primary);
+        border: 1px solid var(--hmi-background);
+        border-radius: 1px;
+        z-index: 10;
+      }
+
+      .standalone-ctrl {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--hmi-muted);
+        border: 1px solid var(--hmi-border);
+        border-radius: var(--hmi-radius-sm);
+        font-size: 13px;
+        color: var(--hmi-foreground);
+      }
+
+      .template-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: var(--hmi-radius-sm);
+        cursor: pointer;
+        border-left: 3px solid transparent;
+        transition: background 0.15s;
+        margin: 2px 8px;
+      }
+      .template-card:hover { background: var(--hmi-muted); }
+      .template-card.selected {
+        background: var(--hmi-muted);
+        border-left-color: var(--hmi-primary);
+      }
+      .template-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--hmi-radius-sm);
+        background: var(--hmi-background);
+        border: 1px solid var(--hmi-border);
+        color: var(--hmi-muted-foreground);
+        flex-shrink: 0;
+      }
+      .template-card.selected .template-icon {
+        color: var(--hmi-primary);
+        border-color: var(--hmi-primary);
+      }
+      .template-info { flex: 1; min-width: 0; }
+      .template-name { font-size: 12px; font-weight: 600; color: var(--hmi-foreground); }
+      .template-meta { font-size: 10px; color: var(--hmi-muted-foreground); margin-top: 1px; }
+      .param-badge {
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: var(--hmi-radius-sm);
+        background: var(--hmi-border);
+        color: var(--hmi-muted-foreground);
+        flex-shrink: 0;
+        font-family: var(--hmi-font-mono);
+      }
+
+      .field-input {
+        background: var(--hmi-input);
+        border: 1px solid var(--hmi-border);
+        border-radius: var(--hmi-radius-sm);
+        padding: 4px 8px;
+        font-size: 12px;
+        color: var(--hmi-foreground);
+        font-family: var(--hmi-font-sans);
+        outline: none;
+        width: 100%;
+      }
+      .field-input:focus { border-color: var(--hmi-primary); }
+      .field-input.mono { font-family: var(--hmi-font-mono); font-size: 11px; }
+
+      .badge {
+        display: inline-block;
+        font-size: 10px;
+        padding: 1px 6px;
+        border-radius: var(--hmi-radius-sm);
+        background: var(--hmi-border);
+        color: var(--hmi-muted-foreground);
+        font-weight: 500;
+        line-height: 1.5;
+      }
+      .badge-primary { background: var(--hmi-primary); color: var(--hmi-primary-foreground); }
+
+      .section-tab {
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--hmi-muted-foreground);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        transition: color 0.15s;
+      }
+      .section-tab:hover { color: var(--hmi-foreground); }
+      .section-tab.active {
+        color: var(--hmi-foreground);
+        border-bottom-color: var(--hmi-primary);
+      }
+
+      .prop-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 0;
+      }
+      .prop-label {
+        font-size: 11px;
+        color: var(--hmi-muted-foreground);
+        width: 48px;
+        flex-shrink: 0;
+      }
+
+      .binding-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11px;
+      }
+      .binding-table th {
+        text-align: left;
+        padding: 6px 8px;
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--hmi-muted-foreground);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        border-bottom: 1px solid var(--hmi-border);
+        background: var(--hmi-background);
+      }
+      .binding-table td {
+        padding: 6px 8px;
+        border-bottom: 1px solid var(--hmi-border);
+        vertical-align: middle;
+      }
+      .binding-table tr:last-child td { border-bottom: none; }
+
+      .code-preview {
+        background: var(--hmi-background);
+        border: 1px solid var(--hmi-border);
+        border-radius: var(--hmi-radius-sm);
+        padding: 10px 12px;
+        font-family: var(--hmi-font-mono);
+        font-size: 11px;
+        line-height: 1.6;
+        color: var(--hmi-muted-foreground);
+        overflow-x: auto;
+        white-space: pre;
+      }
+      .code-preview .kw { color: var(--hmi-primary); }
+      .code-preview .str { color: #7DD3FC; }
+      .code-preview .cmt { color: var(--hmi-muted-foreground); font-style: italic; }
+
+      .progress-bar {
+        width: 56px;
+        height: 4px;
+        background: var(--hmi-border);
+        border-radius: 2px;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .progress-fill {
+        height: 100%;
+        background: var(--hmi-primary);
+        border-radius: 2px;
+      }
+
+      .status-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .status-dot.success { background: var(--hmi-state-success); }
+
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 6px 12px;
+        font-size: 12px;
+        color: var(--hmi-foreground);
+        background: transparent;
+        border: 1px solid var(--hmi-border);
+        border-radius: var(--hmi-radius-sm);
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.15s;
+        font-family: var(--hmi-font-sans);
+      }
+      .btn-outline:hover { border-color: var(--hmi-primary); color: var(--hmi-primary); }
+
+      .collapsible-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 0;
+        cursor: pointer;
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--hmi-muted-foreground);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        border-top: 1px solid var(--hmi-border);
+      }
+      .collapsible-header:hover { color: var(--hmi-foreground); }
+
+      .panel-scroll::-webkit-scrollbar, .canvas-viewport::-webkit-scrollbar { width: 6px; height: 6px; }
+      .panel-scroll::-webkit-scrollbar-track, .canvas-viewport::-webkit-scrollbar-track { background: transparent; }
+      .panel-scroll::-webkit-scrollbar-thumb, .canvas-viewport::-webkit-scrollbar-thumb { background: var(--hmi-border); border-radius: 3px; }
+      .panel-scroll::-webkit-scrollbar-thumb:hover, .canvas-viewport::-webkit-scrollbar-thumb:hover { background: var(--hmi-muted-foreground); }
+
+      :root {
+        --hmi-state-success: #22C55E;
+        --hmi-state-warning: #F59E0B;
+        --hmi-state-error: #EF4444;
+      }
+    </style>
+    <main>
+      <div class="app-shell" data-viewport-mode="app-shell">
+        <!-- ===== Section 1: Top Command Bar (48px) ===== -->
+        <header class="app-command-bar">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="factory" class="icon-lg" style="color: var(--hmi-primary);"></i>
+            <span style="font-size: 13px; font-weight: 600; color: var(--hmi-foreground);">智数HMI Editor</span>
+          </div>
+          <div class="toolbar-divider" style="margin: 0 4px;"></div>
+          <nav style="display: flex; align-items: center; gap: 2px;">
+            <span class="menu-item">文件</span>
+            <span class="menu-item">编辑</span>
+            <span class="menu-item">视图</span>
+            <span class="menu-item" style="color: var(--hmi-primary);">面板</span>
+            <span class="menu-item">工具</span>
+            <span class="menu-item">帮助</span>
+          </nav>
+          <div style="flex: 1;"></div>
+          <div style="display: flex; align-items: center; gap: 4px;">
+            <div class="tool-btn primary" title="运行模拟"><i data-lucide="play"></i></div>
+            <div class="tool-btn" title="停止"><i data-lucide="square"></i></div>
+            <div class="toolbar-divider" style="margin: 0 2px;"></div>
+            <div class="tool-btn" title="生成代码"><i data-lucide="code"></i></div>
+            <div class="tool-btn" title="保存"><i data-lucide="save"></i></div>
+          </div>
+          <div class="toolbar-divider" style="margin: 0 4px;"></div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="file-code" class="icon-sm" style="color: var(--hmi-muted-foreground);"></i>
+            <span style="font-size: 12px; color: var(--hmi-foreground); font-family: var(--hmi-font-mono);">注塑机控制界面.hmi</span>
+            <span style="display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: var(--hmi-radius-sm); background: var(--hmi-muted);">
+              <span class="status-dot success"></span>
+              <span style="font-size: 10px; color: var(--hmi-muted-foreground);">已连接</span>
+            </span>
+          </div>
+        </header>
+
+        <!-- ===== Main Content: 3 Columns ===== -->
+        <div class="app-main">
+
+          <!-- ===== Section 2: Left Panel — Template Library (260px) ===== -->
+          <aside class="app-panel-left">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i data-lucide="layers" class="icon-sm" style="color: var(--hmi-primary);"></i>
+                <span>模板库</span>
+              </div>
+              <div class="icon-btn-sm" title="新建模板"><i data-lucide="plus" class="icon-sm"></i></div>
+            </div>
+            <div class="panel-scroll overflow-y-auto" data-scroll-region="primary" style="padding: 6px 0;">
+              <div class="template-card selected">
+                <div class="template-icon"><i data-lucide="gauge" class="icon-sm"></i></div>
+                <div class="template-info">
+                  <div class="template-name">电机面板</div>
+                  <div class="template-meta">通用 · v3</div>
+                </div>
+                <div class="param-badge">2P</div>
+              </div>
+              <div class="template-card">
+                <div class="template-icon"><i data-lucide="git-commit-horizontal" class="icon-sm"></i></div>
+                <div class="template-info">
+                  <div class="template-name">阀门控制器</div>
+                  <div class="template-meta">管道 · v2</div>
+                </div>
+                <div class="param-badge">3P</div>
+              </div>
+              <div class="template-card">
+                <div class="template-icon"><i data-lucide="thermometer" class="icon-sm"></i></div>
+                <div class="template-info">
+                  <div class="template-name">温度仪表</div>
+                  <div class="template-meta">仪表 · v5</div>
+                </div>
+                <div class="param-badge">4P</div>
+              </div>
+              <div class="template-card">
+                <div class="template-icon"><i data-lucide="activity" class="icon-sm"></i></div>
+                <div class="template-info">
+                  <div class="template-name">液位监控</div>
+                  <div class="template-meta">通用 · v1</div>
+                </div>
+                <div class="param-badge">2P</div>
+              </div>
+              <div class="template-card">
+                <div class="template-icon"><i data-lucide="bell" class="icon-sm"></i></div>
+                <div class="template-info">
+                  <div class="template-name">报警指示器</div>
+                  <div class="template-meta">安全 · v2</div>
+                </div>
+                <div class="param-badge">1P</div>
+              </div>
+            </div>
+            <div style="padding: 8px; border-top: 1px solid var(--hmi-border); flex-shrink: 0;">
+              <button class="btn-outline">
+                <i data-lucide="plus" class="icon-sm"></i>
+                <span>新建模板</span>
+              </button>
+            </div>
+          </aside>
+
+          <!-- ===== Section 3: Center Panel — Design Canvas ===== -->
+          <section class="app-panel-center">
+            <div class="canvas-toolbar">
+              <div style="display: flex; align-items: center; gap: 2px;">
+                <div class="icon-btn-sm" title="缩小"><i data-lucide="zoom-out" class="icon-sm"></i></div>
+                <span style="font-size: 11px; color: var(--hmi-foreground); min-width: 36px; text-align: center; font-family: var(--hmi-font-mono);">100%</span>
+                <div class="icon-btn-sm" title="放大"><i data-lucide="zoom-in" class="icon-sm"></i></div>
+              </div>
+              <div class="toolbar-divider"></div>
+              <div class="icon-btn-sm" title="网格"><i data-lucide="grid-3x3" class="icon-sm"></i></div>
+              <div class="icon-btn-sm" title="对齐"><i data-lucide="align-horizontal-justify-center" class="icon-sm"></i></div>
+              <div class="toolbar-divider"></div>
+              <div style="display: flex; align-items: center; gap: 4px;">
+                <i data-lucide="monitor" class="icon-xs"></i>
+                <span style="font-size: 11px;">Screen: 主界面 (800×480)</span>
+              </div>
+              <div style="flex: 1;"></div>
+              <div style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--hmi-muted-foreground);">
+                <i data-lucide="mouse-pointer-2" class="icon-xs"></i>
+                <span>点击选择 · 拖拽移动</span>
+              </div>
+            </div>
+            <div class="canvas-viewport overflow-y-auto" data-scroll-region="primary">
+              <div class="hmi-screen">
+                <div class="screen-label">主界面 — 800 × 480</div>
+
+                <!-- Instance 1: 电机面板 #1 (selected) -->
+                <div class="fp-instance selected" style="left: 80px; top: 80px; width: 200px; height: 120px;">
+                  <div class="fp-instance-header">电机面板 #1</div>
+                  <div class="fp-instance-body">
+                    <div class="fp-sub-ctrl">
+                      <i data-lucide="tag" class="icon-xs" style="color: var(--hmi-muted-foreground);"></i>
+                      <span class="ctrl-type">Label</span>
+                      <span>电机 A</span>
+                    </div>
+                    <div class="fp-sub-ctrl">
+                      <i data-lucide="tag" class="icon-xs" style="color: var(--hmi-muted-foreground);"></i>
+                      <span class="ctrl-type">Label</span>
+                      <span>运行中</span>
+                    </div>
+                  </div>
+                  <div class="fp-param-badge">Title=电机 A</div>
+                  <div class="resize-handle" style="top: -4px; left: -4px;"></div>
+                  <div class="resize-handle" style="top: -4px; right: -4px;"></div>
+                  <div class="resize-handle" style="bottom: -4px; left: -4px;"></div>
+                  <div class="resize-handle" style="bottom: -4px; right: -4px;"></div>
+                </div>
+
+                <!-- Instance 2: 电机面板 #2 (not selected) -->
+                <div class="fp-instance unselected" style="left: 340px; top: 80px; width: 200px; height: 120px;">
+                  <div class="fp-instance-header">电机面板 #2</div>
+                  <div class="fp-instance-body">
+                    <div class="fp-sub-ctrl">
+                      <i data-lucide="tag" class="icon-xs" style="color: var(--hmi-muted-foreground);"></i>
+                      <span class="ctrl-type">Label</span>
+                      <span>电机 B</span>
+                    </div>
+                    <div class="fp-sub-ctrl">
+                      <i data-lucide="tag" class="icon-xs" style="color: var(--hmi-muted-foreground);"></i>
+                      <span class="ctrl-type">Label</span>
+                      <span>待机</span>
+                    </div>
+                  </div>
+                  <div class="fp-param-badge">Title=电机 B</div>
+                </div>
+
+                <!-- Standalone Button: 启动 -->
+                <div class="standalone-ctrl" style="left: 80px; top: 280px; width: 180px; height: 40px;">
+                  <i data-lucide="play" class="icon-sm" style="margin-right: 6px; color: var(--hmi-state-success);"></i>
+                  启动
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== Section 4: Right Panel — Properties / Parameter Binding (320px) ===== -->
+          <aside class="app-panel-right">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i data-lucide="settings-2" class="icon-sm" style="color: var(--hmi-primary);"></i>
+                <span>属性</span>
+              </div>
+              <div class="icon-btn-sm" title="重置"><i data-lucide="rotate-ccw" class="icon-sm"></i></div>
+            </div>
+            <div style="display: flex; border-bottom: 1px solid var(--hmi-border); flex-shrink: 0;">
+              <div class="section-tab">控件属性</div>
+              <div class="section-tab active">参数绑定</div>
+            </div>
+            <div class="panel-scroll overflow-y-auto" data-scroll-region="primary" style="padding: 12px;">
+
+              <!-- Control Properties -->
+              <div style="margin-bottom: 16px;">
+                <div style="font-size: 10px; font-weight: 600; color: var(--hmi-muted-foreground); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">控件属性</div>
+                <div class="prop-row">
+                  <span class="prop-label">名称</span>
+                  <input class="field-input" type="text" value="电机面板 #1">
+                </div>
+                <div class="prop-row">
+                  <span class="prop-label">类型</span>
+                  <span class="badge badge-primary">Faceplate 实例</span>
+                </div>
+                <div class="prop-row">
+                  <span class="prop-label">模板</span>
+                  <div style="display: flex; align-items: center; gap: 4px; flex: 1;">
+                    <i data-lucide="link" class="icon-xs" style="color: var(--hmi-primary);"></i>
+                    <span style="font-size: 12px; color: var(--hmi-foreground);">电机面板 v3</span>
+                  </div>
+                </div>
+                <div class="prop-row">
+                  <span class="prop-label">位置</span>
+                  <div style="display: flex; align-items: center; gap: 6px; flex: 1;">
+                    <span style="font-size: 10px; color: var(--hmi-muted-foreground);">X</span>
+                    <input class="field-input mono" type="text" value="80" style="width: 48px; text-align: center; padding: 3px 4px;">
+                    <span style="font-size: 10px; color: var(--hmi-muted-foreground);">Y</span>
+                    <input class="field-input mono" type="text" value="80" style="width: 48px; text-align: center; padding: 3px 4px;">
+                  </div>
+                </div>
+                <div class="prop-row">
+                  <span class="prop-label">尺寸</span>
+                  <div style="display: flex; align-items: center; gap: 6px; flex: 1;">
+                    <span style="font-size: 10px; color: var(--hmi-muted-foreground);">W</span>
+                    <input class="field-input mono" type="text" value="200" style="width: 48px; text-align: center; padding: 3px 4px;">
+                    <span style="font-size: 10px; color: var(--hmi-muted-foreground);">H</span>
+                    <input class="field-input mono" type="text" value="120" style="width: 48px; text-align: center; padding: 3px 4px;">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Parameter Binding -->
+              <div style="margin-bottom: 16px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <div style="font-size: 10px; font-weight: 600; color: var(--hmi-muted-foreground); text-transform: uppercase; letter-spacing: 0.06em;">参数绑定</div>
+                  <span class="badge">2 / 2</span>
+                </div>
+                <table class="binding-table">
+                  <thead>
+                    <tr>
+                      <th>参数名</th>
+                      <th>类型</th>
+                      <th>方向</th>
+                      <th>绑定值</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="font-weight: 600; color: var(--hmi-foreground);">Title</td>
+                      <td><span class="badge">String</span></td>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: 3px;">
+                          <i data-lucide="arrow-right" class="icon-xs" style="color: var(--hmi-muted-foreground);"></i>
+                          <span style="font-size: 10px; color: var(--hmi-muted-foreground);">In</span>
+                        </div>
+                      </td>
+                      <td><input class="field-input" type="text" value="电机 A" style="padding: 3px 6px; font-size: 11px;"></td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 600; color: var(--hmi-foreground);">StatusVar</td>
+                      <td><span class="badge">VarId</span></td>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: 3px;">
+                          <i data-lucide="arrow-right" class="icon-xs" style="color: var(--hmi-muted-foreground);"></i>
+                          <span style="font-size: 10px; color: var(--hmi-muted-foreground);">In</span>
+                        </div>
+                      </td>
+                      <td><input class="field-input mono" type="text" value="var_motor_a_status" style="padding: 3px 6px; font-size: 10px;"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="margin-top: 8px;">
+                  <button class="btn-outline">
+                    <i data-lucide="plus" class="icon-sm"></i>
+                    <span>添加绑定</span>
+                  </button>
+                </div>
+                <div style="display: flex; align-items: flex-start; gap: 6px; margin-top: 8px; padding: 6px 8px; border-radius: var(--hmi-radius-sm); background: var(--hmi-muted);">
+                  <i data-lucide="info" class="icon-xs" style="color: var(--hmi-muted-foreground); margin-top: 1px;"></i>
+                  <span style="font-size: 10px; color: var(--hmi-muted-foreground); line-height: 1.5;">未绑定的参数将使用模板默认值</span>
+                </div>
+              </div>
+
+              <!-- Expansion Preview -->
+              <div>
+                <div class="collapsible-header">
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <i data-lucide="chevron-down" class="icon-xs"></i>
+                    <span>展开预览</span>
+                  </div>
+                  <span class="badge">2 原子控件</span>
+                </div>
+                <div style="padding: 8px 0 0 0;">
+                  <div class="code-preview"><span class="cmt">// 展开后: 2 个原子控件</span>
+<span class="kw">lv_obj_t</span>* lbl_title = lv_label_create(screen);
+lv_label_set_text(lbl_title, <span class="str">"电机 A"</span>);
+lv_obj_set_pos(lbl_title, <span class="str">80</span>, <span class="str">80</span>);
+
+<span class="kw">lv_obj_t</span>* lbl_status = lv_label_create(screen);
+lv_label_set_text(lbl_status, <span class="str">"运行中"</span>);
+lv_obj_set_pos(lbl_status, <span class="str">80</span>, <span class="str">104</span>);</div>
+                </div>
+              </div>
+
+            </div>
+          </aside>
+
+        </div>
+
+        <!-- ===== Section 5: Bottom Status Bar (32px) ===== -->
+        <footer class="app-status-bar">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="status-dot success"></span>
+            <span style="color: var(--hmi-foreground);">就绪</span>
+          </div>
+          <div class="toolbar-divider"></div>
+          <div style="display: flex; align-items: center; gap: 12px; font-family: var(--hmi-font-mono);">
+            <span>X: <span style="color: var(--hmi-foreground);">80</span></span>
+            <span>Y: <span style="color: var(--hmi-foreground);">80</span></span>
+            <span>W: <span style="color: var(--hmi-foreground);">200</span></span>
+            <span>H: <span style="color: var(--hmi-foreground);">120</span></span>
+          </div>
+          <div style="flex: 1;"></div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <i data-lucide="hard-drive" class="icon-xs"></i>
+            <span>Flash: <span style="color: var(--hmi-foreground);">142KB</span> / 512KB</span>
+            <div class="progress-bar"><div class="progress-fill" style="width: 28%;"></div></div>
+            <span style="color: var(--hmi-foreground);">28%</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <i data-lucide="cpu" class="icon-xs"></i>
+            <span>RAM: <span style="color: var(--hmi-foreground);">18KB</span> / 64KB</span>
+            <div class="progress-bar"><div class="progress-fill" style="width: 28%;"></div></div>
+            <span style="color: var(--hmi-foreground);">28%</span>
+          </div>
+          <div class="toolbar-divider"></div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <i data-lucide="circuit-board" class="icon-xs"></i>
+            <span>LVGL 9.2</span>
+            <span style="color: var(--hmi-border);">|</span>
+            <span>目标: <span style="color: var(--hmi-foreground); font-family: var(--hmi-font-mono);">STM32F429IG</span></span>
+          </div>
+        </footer>
+      </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "assets": [
+    {
+      "id": "asset_banner",
+      "name": "顶部Banner(中文渐变)",
+      "type": "image",
+      "filePath": "assets/asset_banner.bmp",
+      "sizeBytes": 640054,
+      "width": 800,
+      "height": 200,
+      "colorDepth": 32,
+      "referenceCount": 1,
+      "importedAt": "2026-08-17T07:54:05.1698687Z"
+    },
+    {
+      "id": "asset_logo",
+      "name": "芯片Logo",
+      "type": "image",
+      "filePath": "assets/asset_logo.bmp",
+      "sizeBytes": 360054,
+      "width": 300,
+      "height": 300,
+      "colorDepth": 32,
+      "referenceCount": 1,
+      "importedAt": "2026-08-17T07:54:05.1703668Z"
+    },
+    {
+      "id": "asset_bg",
+      "name": "工业面板背景",
+      "type": "image",
+      "filePath": "assets/asset_bg.bmp",
+      "sizeBytes": 2457654,
+      "width": 1024,
+      "height": 600,
+      "colorDepth": 32,
+      "referenceCount": 2,
+      "importedAt": "2026-08-17T07:54:05.1703838Z"
+    },
+    {
+      "id": "asset_center",
+      "name": "右侧大图(同背景)",
+      "type": "image",
+      "filePath": "assets/asset_center.bmp",
+      "sizeBytes": 2457654,
+      "width": 1024,
+      "height": 600,
+      "colorDepth": 32,
+      "referenceCount": 1,
+      "importedAt": "2026-08-17T07:54:05.1703949Z"
+    },
+    {
+      "id": "asset_font_cjk",
+      "name": "Noto Sans CJK 全字形中文字体",
+      "type": "font",
+      "filePath": "assets/asset_font_cjk.ttc",
+      "sizeBytes": 19484784,
+      "width": 0,
+      "height": 20,
+      "colorDepth": 0,
+      "referenceCount": 1,
+      "importedAt": "2026-08-17T07:54:05.1810094Z"
+    }
+  ]
+}

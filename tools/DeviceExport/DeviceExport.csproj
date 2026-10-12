@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>DeviceExport</RootNamespace>
+    <AssemblyName>device-export</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/HmiEditor.Core/HmiEditor.Core.csproj" />
+    <ProjectReference Include="../../src/HmiEditor.CodeGen/HmiEditor.CodeGen.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,77 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="using:HmiEditor.Core.Models"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             xmlns:ctrl="using:HmiEditor.App.Controls"
+             x:Class="HmiEditor.App.Views.LayerPanelView">
+    <Border Background="{StaticResource HmiBgPanelBrush}" Padding="6">
+        <Grid RowDefinitions="Auto,*,Auto">
+            <!-- 标题栏 -->
+            <Border Grid.Row="0" Background="{StaticResource HmiBgInputBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,0,4">
+                <TextBlock Text="{res:Loc layer.title}" Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="14" FontWeight="Bold"/>
+            </Border>
+
+            <!-- 控件列表 -->
+            <ListBox Grid.Row="1" x:Name="LayerList"
+                     Background="{StaticResource HmiBgDeepBrush}" BorderBrush="{StaticResource HmiInputBorderBrush}"
+                     SelectionChanged="OnSelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="models:HmiControl">
+                        <Grid ColumnDefinitions="24,24,*,Auto" Margin="0,2">
+                            <!-- 可见性切换 -->
+                            <Button Grid.Column="0" Width="20" Height="20"
+                                    Background="Transparent" BorderThickness="0"
+                                    Padding="0" Cursor="Hand"
+                                    Click="OnToggleVisible"
+                                    Tag="{Binding Id}"
+                                    ToolTip.Tip="{res:Loc layer.eye}"
+                                    AutomationProperties.Name="{res:Loc layer.eye}">
+                                <TextBlock FontSize="14" Text="{Binding IsVisible, Converter={x:Static ctrl:VisibilityGlyphConverter.Instance}}"/>
+                            </Button>
+                            <!-- 锁定切换 -->
+                            <Button Grid.Column="1" Width="20" Height="20"
+                                    Background="Transparent" BorderThickness="0"
+                                    Padding="0" Cursor="Hand"
+                                    Click="OnToggleLock"
+                                    Tag="{Binding Id}"
+                                    ToolTip.Tip="{res:Loc layer.lock}"
+                                    AutomationProperties.Name="{res:Loc layer.lock}">
+                                <TextBlock FontSize="14" Text="{Binding IsLocked, Converter={x:Static ctrl:LockGlyphConverter.Instance}}"/>
+                            </Button>
+                            <!-- 控件名称 -->
+                            <TextBlock Grid.Column="2" Text="{Binding Name}"
+                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"
+                                       Margin="4,0"/>
+                            <!-- 层索引 -->
+                            <TextBlock Grid.Column="3" Text="{Binding LayerIndex}"
+                                       Foreground="{StaticResource HmiTextMutedBrush}" FontSize="10"
+                                       FontFamily="Consolas, monospace"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- 底部操作栏 -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="4" Margin="0,4,0,0">
+                <Button x:Name="BtnMoveUp" Content="{res:Loc layer.up}" FontSize="11"
+                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="8,3"
+                        Click="OnMoveUp"/>
+                <Button x:Name="BtnMoveDown" Content="{res:Loc layer.down}" FontSize="11"
+                        Background="{StaticResource HmiInputBorderBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="8,3"
+                        Click="OnMoveDown"/>
+                <Button x:Name="BtnLockAll" Content="{res:Loc layer.lock.all}" FontSize="11"
+                        Background="{StaticResource HmiInputBorderBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="8,3"
+                        Click="OnLockAll"/>
+                <Button x:Name="BtnUnlockAll" Content="{res:Loc layer.unlock.all}" FontSize="11"
+                        Background="{StaticResource HmiInputBorderBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="8,3"
+                        Click="OnUnlockAll"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

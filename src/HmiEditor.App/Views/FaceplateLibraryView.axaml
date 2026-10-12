@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             x:Class="HmiEditor.App.Views.FaceplateLibraryView">
+    <Border Background="{StaticResource HmiBgPanelBrush}" Padding="8">
+        <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+            <!-- 搜索框 -->
+            <TextBox x:Name="SearchBox"
+                     PlaceholderText="{res:Loc faceplate.search.hint}"
+                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                     BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                     CornerRadius="4" Padding="8,6" FontSize="13"
+                     TextChanged="OnSearchTextChanged" />
+
+            <!-- 标题栏 -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,6,0,2">
+                <TextBlock Text="{res:Loc faceplate.template}" Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                           VerticalAlignment="Center" Margin="4,0,0,0"/>
+                <Button x:Name="BtnAiTemplate" Grid.Column="1"
+                        Content="AI" ToolTip.Tip="{res:Loc faceplate.tt.ai.gen}"
+                        Background="Transparent" Foreground="{StaticResource HmiLinkBrush}" BorderBrush="{StaticResource HmiInputBorderBrush}"
+                        Padding="8,2" FontSize="11" Margin="0,0,2,0"
+                        Click="OnAiTemplateClicked" />
+                <Button x:Name="BtnEditTemplate" Grid.Column="2"
+                        Content="{res:Loc faceplate.edit}" ToolTip.Tip="{res:Loc faceplate.tt.edit}"
+                        Background="Transparent" Foreground="{StaticResource HmiTextSecondaryBrush}" BorderBrush="{StaticResource HmiInputBorderBrush}"
+                        Padding="8,2" FontSize="11" Margin="0,0,2,0"
+                        Click="OnEditTemplateClicked" />
+                <Button x:Name="BtnDeleteTemplate" Grid.Column="3"
+                        Content="{res:Loc faceplate.delete}" ToolTip.Tip="{res:Loc faceplate.tt.del}"
+                        Background="Transparent" Foreground="{StaticResource HmiDangerBrush}" BorderBrush="{StaticResource HmiInputBorderBrush}"
+                        Padding="8,2" FontSize="11"
+                        Click="OnDeleteTemplateClicked" />
+            </Grid>
+
+            <!-- 模板卡片列表 -->
+            <ListBox Grid.Row="2" x:Name="TemplateListBox"
+                     Background="Transparent" BorderThickness="0"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     Padding="0,0,0,2"
+                     SelectionChanged="OnTemplateSelectionChanged">
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="2,1"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                    </Style>
+                    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                        <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource HmiLinkBrush}"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                </ListBox.Styles>
+            </ListBox>
+
+            <!-- 新建模板按钮 -->
+            <Button x:Name="BtnNewTemplate" Grid.Row="3"
+                    Content="{res:Loc faceplate.new}" ToolTip.Tip="{res:Loc faceplate.tt.create.from.ctrl}"
+                    Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}" BorderBrush="{StaticResource HmiLinkBrush}"
+                    Padding="10,6" FontSize="12" Margin="0,4,0,0"
+                    Click="OnNewTemplateClicked" />
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,43 @@
+reference,pages,nets,status,footprint,footprint_status,notes
+D1,P1,VIN24_F,select,SMCJ24A-SMC,select,TVS SMCJ24A; LCSC C19077604 (R+O, 有货); Confirm standoff and surge rating
+D_PROT,P8,RS485_A/RS485_B,required,SOT-23,required,SM712; LCSC C3647085 (MSKSEMI，有货)
+D_ESD0/D_ESD1,P7,USB0_DP/USB0_DM;USB1_DP/USB1_DM,required,SOT-23-6,required,USBLC6-2SC6; LCSC C7519 (ST，有货)
+F1,P1,VIN24_RAW,required,SMD,required,3A PTC TRB300; LCSC C262070，有货
+J1,P1,GND;VIN24_RAW,confirmed,TERM-2P-5.08,required,DC_INPUT: screw terminal KF129-5.08-2P; LCSC C475092 (~¥0.17, 有货); confirm current rating
+J10,P9,UART1_TXD/UART1_RXD/VCC3V3/GND,required,HDR-1x4-2.54,required,HDR_1x4: Debug UART header; LCSC C492403 (~¥0.088, 有货)
+J11,P9,EXP_GPIO/I2C/UART/CAN/VCC/GND,verify mux,HDR-2x12-2.54,select,HDR_2x12: Expansion header; LCSC C2883562 (XKB X5521WV-2x12 ~¥2.8, 有货); confirm pin mux
+J2,P3,SD_CMD/SD_CLK/SD_D0..SD_D3;SD_DET,optional;required,MICROSD-SMD,required,TF_SOCKET: push-push TF-015-N; LCSC C41426932 (JXTCONN, 有货); confirm footprint
+J3,P4,GND;LCD_B7..LCD_B0;LCD_DCLK;LCD_DE/LCD_VSYNC/LCD_HSYNC;LCD_DITH;LCD_DVDD;LCD_G7..LCD_G0;LCD_MODE;LCD_R7..LCD_R0;LCD_RESET;LCD_SHLR/LCD_UPDN;LCD_VCOM;LCD_VGH/LCD_VGL/LCD_AVDD;NC;VLED_A;VLED_K,confirmed,FPC-SMD-50P-0.5mm,required,FPC50: BOOMELE 0.5-50P; LCSC C190666 (~¥0.82, 有货); top/bottom contact direction must match panel FPC
+J4,P6,TCH_XN;TCH_XP;TCH_YN;TCH_YP,confirmed from pasted image,CONN-FPC-TBD,blocked,RTP_FPC: Electrical pinout fixed as 1=Y1; 2=X1; 3=Y2; 4=X2; need mechanical drawing/contact side
+J7,P7,GND;USB0_DP/USB0_DM,confirmed;required,USB-C-SMD-16P,required,USB-C TYPE-C-31-M-12; LCSC C165948 (韩荣，约171070件库存)
+J8,P7,USB1_DP/USB1_DM,required,USB-A-SMD,required,USB-A HYCW236-USBA04-289B; LCSC C3034183 (HOAUC，有货); 下单前确认机械尺寸
+J9,P8,ETH_TXP/TXN/RXP/RXN,required,HR911105A-or-equivalent,select,HR911105A; LCSC C12074 (~¥1.32, 5000+ 有货); confirm PHY magnetics compatibility
+LED1/2,P9,STATUS_RED/STATUS_GREEN,required,0603,required,LED1 red C84265 (NATIONSTAR NCD0603W1); LED2 green C72043 (EVERLIGHT); R905/R907=1k C21190 (UNI-ROYAL, ¥0.0065)
+Q1,P1,VIN24_F,select,SO-8,select,AOD4184A; LCSC C99124 (AOS, 有货量少); Confirm P-MOS reverse protection orientation and SOA
+R401..R404,P6,TCH_XP/XN/YP/YN,required,0603,required,0R debug jumpers; LCSC C166918 RALEC RTT0360R0FTP，有货
+RCS1,P5,LCD_BL_FB,select,0805,select,0.56R 1%; LCSC C2174717 (VISHAY RCWE0805R560FKEA ¥0.20, 有货; 或YAGEO RL0805FR-070R56L ~¥0.05)
+C_BL_OUT,P5,VLED_A,required,0805,required,22uF CL21A226MAQNNNE; LCSC C45783 (Samsung，有货)
+L_BL,P5,LCD_BL_SW,required,SMD,required,22uH ZENR2016T220M; LCSC C44447583 (ZE，有货)
+R_RGB,P4,LCD_RGB,optional,0603,select,22Ω CQ03WAF2202T5E; LCSC C2759746 (UNI-ROYAL，有货)
+R_TERM,P8,RS485_A/RS485_B,optional,0603,select,120Ω 0603WAF1200T5E; LCSC C22787 (UNI-ROYAL，有货)
+U6,P2,SOC_CORE,required,LQFP-128,required,T113-S3 Allwinner; LCSC C5197687，有货
+SW1/2/3,P9,RESET_N/FEL_N/USER_KEY,required,TACT-6x6,required,6x6 tactile switch TS-1187A-C-A-B; LCSC C480267 (XKB，有货)
+TP1,P1,VIN24_F,required,TP-1.0,required,Test point; LCSC C238124 (Keystone 5003, 有货)
+TP2,P1,VCC5V,required,TP-1.0,required,Test point; LCSC C238124 (Keystone 5003, 有货)
+TP3,P1,VCC3V3,required,TP-1.0,required,Test point; LCSC C238124 (Keystone 5003, 有货)
+U1,P1,VCC5V,select,TO-263-5,select,XL4015E1; LCSC C51661 (XLSEMI, 有货); 8-36V→5V (generator uses XL4015E1)
+U10,P8,UART2_TXD/UART2_RXD,verify mux,SOIC-16,select,MAX3232ESE+T; LCSC C15846 (MAXIM, 有货; 廉价替代 lingxingic C41430944); RS232 level shifter
+U11,P8,RMII_TXD0/TXD1/TXEN/RXD0/RXD1/CRS_DV,select,QFN-32_L5.0-W5.0-P0.5,select,IP101GRI; LCSC C910373 (WIZNET, ¥6.4/1512有货; IC Plus原厂 C703537 更便宜); confirm RMII pinout
+U12,P5,LCD_AVDD/LCD_VGH/LCD_VGL/LCD_VCOM,confirmed,TSSOP-24,select,TPS65100PWPR; LCSC C181650 (TI, 有货); panel bias regulator values must follow datasheet
+U13,P5,LCD_BL_PWM/LCD_BL_EN;VLED_A/VLED_K,confirmed;required,TSOT-23-6,select,MT9284-28J; LCSC C181780 (西安航天民芯, ¥0.23/47513有货); backlight boost; RCS1=0.56R
+U15,P7,USB1_VBUS,select,SOT-23-5,select,SY6280AAAC; LCSC C207620 (Silergy, 有货); 1A limit (R703=6.8k)
+U16,P8,RS485_A/RS485_B;RS485_DE,required,SOIC-8,select,MAX3485ESA+T; LCSC C18148 (MAXIM ~¥7.5; 廉价替代 UMW C668204 ~¥0.4, 有货); isolated RS485 transceiver (matches schematic U16)
+U2,P1,VCC3V3,select,TSOT-23-5,select,SY8089A1AAC; LCSC C479074 (Silergy, 有货); 5V→3.3V 2A
+U3,P1,VCC1V8,select,SOT-23-5,select,RT9193-18GB-MS; LCSC C7528821 (MSKSEMI, ¥0.16, 有货); 3.3V→1.8V LDO
+U4,P1,VDD0V9,select,TSOT-23-5,select,SY8089A1AAC; LCSC C479074 (Silergy, 有货); 0.9V rail
+U5,P1,VCC1V5,select,TSOT-23-5,select,SY8089A1AAC; LCSC C479074 (Silergy, 有货); 1.5V DRAM rail
+U7,P3,NAND_CS/NAND_CLK/NAND_DI/NAND_DO;NAND_WP/NAND_HOLD,required;verify mux,WSON-8_L6.0-W5.0-P1.27,verify,W25N01GVZEIG; LCSC C907680 (Winbond ~¥27 偏贵; 降本替代 GD5F1GQ4UBYIGR C492071 ~¥7.9 需固件验证); confirm exact NAND package
+U9,P8,RS485_A/RS485_B;UART3_TXD/UART3_RXD,required,SOIC-8,select,ADUM1201ARZ-RL7; LCSC C9669 (ADI, 有货; 国产替代 JSMSEMI C30587325 便宜); isolated data (matches schematic U9)
+X1,P2,X24M_IN/X24M_OUT,required,XTAL-SMD-3225,select,24MHz passive crystal LIMING 3225-24-12-10-10/4B; LCSC C7424728，有货
+X2,P2,X32K_IN/X32K_OUT,required,XTAL-SMD-3215,select,32.768kHz crystal; LCSC C32346 (EPSON Q13FC13500004 ¥1.26/49万有货); confirm load capacitance
+X3,P8,EPHY_25M,required,XTAL-SMD-3225,select,25MHz crystal SL322525M20P; LCSC C5155479 (Slkor，有货); confirm PHY load capacitance

@@ -1,0 +1,1649 @@
+(kicad_sch (version 20241122) (generator "gen_sch")
+  (uuid "hmi000005be-0000-0000-0000-0000000005be")
+  (paper "A3")
+  (title_block (title "IO: LED/KEY/Expansion/VIN sense") (date "2026-08-19") (rev "1.0") (company "zhishu-hmi"))
+  (lib_symbols
+(symbol "hmi:C"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "C"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "C"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "C_1_1"
+			(polyline
+				(pts
+					(xy -0.635 1.27) (xy 0.635 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.635 -1.27) (xy 0.635 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 0 0)
+				(length 1.905)
+				(name "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 0 180)
+				(length 1.905)
+				(name "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:GND"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#PWR"
+			(at 0 -3.175 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 0 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "GND_1_1"
+			(polyline
+				(pts
+					(xy -1.016 0) (xy 1.016 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.8 0) (xy 0.8 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin power_in line
+				(at 0 0 270)
+				(length 0)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:HDR_1x4"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "HDR_1x4"
+			(at 0 -7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "HDR_1x4_1_1"
+			(polyline
+				(pts
+					(xy -2.54 5.08) (xy 2.54 5.08) (xy 2.54 -5.08) (xy -2.54 -5.08)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 3.81 0)
+				(length 1.905)
+				(name "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 1.27 0)
+				(length 1.905)
+				(name "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -1.27 0)
+				(length 1.905)
+				(name "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -3.81 0)
+				(length 1.905)
+				(name "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:HDR_2x12"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 33.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "HDR_2x12"
+			(at 0 -33.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "HDR_2x12_1_1"
+			(polyline
+				(pts
+					(xy -2.54 30.48) (xy 2.54 30.48) (xy 2.54 -30.48) (xy -2.54 -30.48)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 29.21 0)
+				(length 1.905)
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 26.67 0)
+				(length 1.905)
+				(name "3V3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 24.13 0)
+				(length 1.905)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 21.59 0)
+				(length 1.905)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 19.05 0)
+				(length 1.905)
+				(name "I2C2_SCK"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 16.51 0)
+				(length 1.905)
+				(name "I2C2_SDA"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 13.97 0)
+				(length 1.905)
+				(name "UART0_TXD"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 11.43 0)
+				(length 1.905)
+				(name "UART0_RXD"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 8.89 0)
+				(length 1.905)
+				(name "CAN1_TX"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 6.35 0)
+				(length 1.905)
+				(name "CAN1_RX"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 3.81 0)
+				(length 1.905)
+				(name "PE0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 1.27 0)
+				(length 1.905)
+				(name "PE1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -1.27 0)
+				(length 1.905)
+				(name "PE4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -3.81 0)
+				(length 1.905)
+				(name "PE5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -6.35 0)
+				(length 1.905)
+				(name "PE6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -8.89 0)
+				(length 1.905)
+				(name "PE7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -11.43 0)
+				(length 1.905)
+				(name "PE10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -13.97 0)
+				(length 1.905)
+				(name "PE11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -16.51 0)
+				(length 1.905)
+				(name "PG8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -19.05 0)
+				(length 1.905)
+				(name "VIN_SENSE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -21.59 0)
+				(length 1.905)
+				(name "GPIO_PG6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -24.13 0)
+				(length 1.905)
+				(name "GPIO_PG7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -26.67 0)
+				(length 1.905)
+				(name "GPIO_PG8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -29.21 0)
+				(length 1.905)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:LED"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "LED"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "LED_1_1"
+			(polyline
+				(pts
+					(xy -0.635 1.27) (xy 0.635 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.635 -1.27) (xy -0.635 -0.2) (xy 0.3 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.635 -1.27) (xy -0.635 1.27) (xy 0.635 1.27) (xy 0.635 -1.27) (xy -0.635 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.635 -1.27) (xy 0.635 -0.2) (xy -0.3 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 0 0)
+				(length 1.905)
+				(name "A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 0 180)
+				(length 1.905)
+				(name "K"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:R"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "R"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "R"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "R_1_1"
+			(rectangle
+				(start -0.635 -1.27)
+				(end 0.635 1.27)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 0 0)
+				(length 1.905)
+				(name "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 0 180)
+				(length 1.905)
+				(name "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:SW"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "SW"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "SW_1_1"
+			(polyline
+				(pts
+					(xy -2.54 1.27) (xy 2.54 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.27 1.27) (xy 1.27 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 0 0)
+				(length 1.905)
+				(name "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 0 180)
+				(length 1.905)
+				(name "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:VCC3V3"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#PWR"
+			(at 0 -3.175 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "VCC3V3"
+			(at 0 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "VCC3V3_1_1"
+			(polyline
+				(pts
+					(xy 0 0) (xy 0 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin power_in line
+				(at 0 0 270)
+				(length 0)
+				(name "VCC3V3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:VCC5V"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#PWR"
+			(at 0 -3.175 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "VCC5V"
+			(at 0 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "VCC5V_1_1"
+			(polyline
+				(pts
+					(xy 0 0) (xy 0 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin power_in line
+				(at 0 0 270)
+				(length 0)
+				(name "VCC5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+  )
+  (text "LED_USER=PG15, KEY_USER=PG14, I2C2=PE12/PE13, CAN1=PB4/PB5, VIN_SENSE=GPADC0" (exclude_from_sim no) (at 20.00 300.00 0)
+    (effects (font (size 2.00 2.00)) (justify left bottom)) (uuid "hmi00000560-0000-0000-0000-000000000560"))
+  (symbol (lib_id "hmi:R") (at 59.69 260.35 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/R41" (reference "R41") (value "1K") (footprint ""))))
+    (uuid "hmi00000561-0000-0000-0000-000000000561"))
+  (wire (pts (xy 57.15 260.35) (xy 54.61 260.35)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000562-0000-0000-0000-000000000562"))
+  (global_label "LED_USER" (shape passive) (at 54.61 260.35 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000563-0000-0000-0000-000000000563"))
+  (wire (pts (xy 62.23 260.35) (xy 64.77 260.35)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000564-0000-0000-0000-000000000564"))
+  (global_label "LED_A" (shape passive) (at 64.77 260.35 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000565-0000-0000-0000-000000000565"))
+  (symbol (lib_id "hmi:LED") (at 74.93 260.35 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/D7" (reference "D7") (value "LED_RED") (footprint ""))))
+    (uuid "hmi00000566-0000-0000-0000-000000000566"))
+  (wire (pts (xy 72.39 260.35) (xy 69.85 260.35)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000567-0000-0000-0000-000000000567"))
+  (global_label "LED_A" (shape passive) (at 69.85 260.35 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000568-0000-0000-0000-000000000568"))
+  (wire (pts (xy 77.47 260.35) (xy 80.01 260.35)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000569-0000-0000-0000-000000000569"))
+  (symbol (lib_id "hmi:GND") (at 80.01 260.35 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND127" (reference "#PWRGND127") (value "GND") (footprint ""))))
+    (uuid "hmi0000056a-0000-0000-0000-00000000056a"))
+  (symbol (lib_id "hmi:R") (at 59.69 245.11 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/R42" (reference "R42") (value "10K") (footprint ""))))
+    (uuid "hmi0000056b-0000-0000-0000-00000000056b"))
+  (wire (pts (xy 57.15 245.11) (xy 54.61 245.11)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000056c-0000-0000-0000-00000000056c"))
+  (symbol (lib_id "hmi:VCC3V3") (at 54.61 245.11 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V349" (reference "#PWRVCC3V349") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi0000056d-0000-0000-0000-00000000056d"))
+  (wire (pts (xy 62.23 245.11) (xy 64.77 245.11)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000056e-0000-0000-0000-00000000056e"))
+  (global_label "KEY_USER" (shape passive) (at 64.77 245.11 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000056f-0000-0000-0000-00000000056f"))
+  (symbol (lib_id "hmi:SW") (at 74.93 245.11 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/SW2" (reference "SW2") (value "KEY_USER") (footprint ""))))
+    (uuid "hmi00000570-0000-0000-0000-000000000570"))
+  (wire (pts (xy 72.39 245.11) (xy 69.85 245.11)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000571-0000-0000-0000-000000000571"))
+  (global_label "KEY_USER" (shape passive) (at 69.85 245.11 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000572-0000-0000-0000-000000000572"))
+  (wire (pts (xy 77.47 245.11) (xy 80.01 245.11)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000573-0000-0000-0000-000000000573"))
+  (symbol (lib_id "hmi:GND") (at 80.01 245.11 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND128" (reference "#PWRGND128") (value "GND") (footprint ""))))
+    (uuid "hmi00000574-0000-0000-0000-000000000574"))
+  (symbol (lib_id "hmi:R") (at 59.69 229.87 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/R43" (reference "R43") (value "150K") (footprint ""))))
+    (uuid "hmi00000575-0000-0000-0000-000000000575"))
+  (wire (pts (xy 57.15 229.87) (xy 54.61 229.87)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000576-0000-0000-0000-000000000576"))
+  (global_label "VIN24" (shape passive) (at 54.61 229.87 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000577-0000-0000-0000-000000000577"))
+  (wire (pts (xy 62.23 229.87) (xy 64.77 229.87)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000578-0000-0000-0000-000000000578"))
+  (global_label "VIN_SENSE" (shape passive) (at 64.77 229.87 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000579-0000-0000-0000-000000000579"))
+  (symbol (lib_id "hmi:R") (at 59.69 223.52 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/R44" (reference "R44") (value "10K") (footprint ""))))
+    (uuid "hmi0000057a-0000-0000-0000-00000000057a"))
+  (wire (pts (xy 57.15 223.52) (xy 54.61 223.52)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000057b-0000-0000-0000-00000000057b"))
+  (global_label "VIN_SENSE" (shape passive) (at 54.61 223.52 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000057c-0000-0000-0000-00000000057c"))
+  (wire (pts (xy 62.23 223.52) (xy 64.77 223.52)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000057d-0000-0000-0000-00000000057d"))
+  (symbol (lib_id "hmi:GND") (at 64.77 223.52 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND129" (reference "#PWRGND129") (value "GND") (footprint ""))))
+    (uuid "hmi0000057e-0000-0000-0000-00000000057e"))
+  (symbol (lib_id "hmi:C") (at 69.85 223.52 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/C60" (reference "C60") (value "100nF") (footprint ""))))
+    (uuid "hmi0000057f-0000-0000-0000-00000000057f"))
+  (wire (pts (xy 67.31 223.52) (xy 64.77 223.52)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000580-0000-0000-0000-000000000580"))
+  (global_label "VIN_SENSE" (shape passive) (at 64.77 223.52 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000581-0000-0000-0000-000000000581"))
+  (wire (pts (xy 72.39 223.52) (xy 74.93 223.52)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000582-0000-0000-0000-000000000582"))
+  (symbol (lib_id "hmi:GND") (at 74.93 223.52 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND130" (reference "#PWRGND130") (value "GND") (footprint ""))))
+    (uuid "hmi00000583-0000-0000-0000-000000000583"))
+  (symbol (lib_id "hmi:HDR_2x12") (at 119.38 250.19 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/J13" (reference "J13") (value "EXP_2x12") (footprint ""))))
+    (uuid "hmi00000584-0000-0000-0000-000000000584"))
+  (wire (pts (xy 116.84 279.40) (xy 114.30 279.40)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000585-0000-0000-0000-000000000585"))
+  (symbol (lib_id "hmi:GND") (at 114.30 279.40 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND131" (reference "#PWRGND131") (value "GND") (footprint ""))))
+    (uuid "hmi00000586-0000-0000-0000-000000000586"))
+  (wire (pts (xy 116.84 276.86) (xy 114.30 276.86)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000587-0000-0000-0000-000000000587"))
+  (global_label "GPIO_PG8" (shape passive) (at 114.30 276.86 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000588-0000-0000-0000-000000000588"))
+  (wire (pts (xy 116.84 274.32) (xy 114.30 274.32)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000589-0000-0000-0000-000000000589"))
+  (global_label "GPIO_PG7" (shape passive) (at 114.30 274.32 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000058a-0000-0000-0000-00000000058a"))
+  (wire (pts (xy 116.84 271.78) (xy 114.30 271.78)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000058b-0000-0000-0000-00000000058b"))
+  (global_label "GPIO_PG6" (shape passive) (at 114.30 271.78 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000058c-0000-0000-0000-00000000058c"))
+  (wire (pts (xy 116.84 269.24) (xy 114.30 269.24)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000058d-0000-0000-0000-00000000058d"))
+  (global_label "VIN_SENSE" (shape passive) (at 114.30 269.24 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000058e-0000-0000-0000-00000000058e"))
+  (wire (pts (xy 116.84 266.70) (xy 114.30 266.70)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000058f-0000-0000-0000-00000000058f"))
+  (global_label "GPIO_PG10" (shape passive) (at 114.30 266.70 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000590-0000-0000-0000-000000000590"))
+  (wire (pts (xy 116.84 264.16) (xy 114.30 264.16)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000591-0000-0000-0000-000000000591"))
+  (global_label "GPIO_PE11" (shape passive) (at 114.30 264.16 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000592-0000-0000-0000-000000000592"))
+  (wire (pts (xy 116.84 261.62) (xy 114.30 261.62)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000593-0000-0000-0000-000000000593"))
+  (global_label "GPIO_PE10" (shape passive) (at 114.30 261.62 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000594-0000-0000-0000-000000000594"))
+  (wire (pts (xy 116.84 259.08) (xy 114.30 259.08)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000595-0000-0000-0000-000000000595"))
+  (global_label "GPIO_PE7" (shape passive) (at 114.30 259.08 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000596-0000-0000-0000-000000000596"))
+  (wire (pts (xy 116.84 256.54) (xy 114.30 256.54)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000597-0000-0000-0000-000000000597"))
+  (global_label "GPIO_PE6" (shape passive) (at 114.30 256.54 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000598-0000-0000-0000-000000000598"))
+  (wire (pts (xy 116.84 254.00) (xy 114.30 254.00)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000599-0000-0000-0000-000000000599"))
+  (global_label "GPIO_PE5" (shape passive) (at 114.30 254.00 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000059a-0000-0000-0000-00000000059a"))
+  (wire (pts (xy 116.84 251.46) (xy 114.30 251.46)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000059b-0000-0000-0000-00000000059b"))
+  (global_label "GPIO_PE4" (shape passive) (at 114.30 251.46 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000059c-0000-0000-0000-00000000059c"))
+  (wire (pts (xy 116.84 248.92) (xy 114.30 248.92)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000059d-0000-0000-0000-00000000059d"))
+  (global_label "GPIO_PE1" (shape passive) (at 114.30 248.92 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000059e-0000-0000-0000-00000000059e"))
+  (wire (pts (xy 116.84 246.38) (xy 114.30 246.38)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000059f-0000-0000-0000-00000000059f"))
+  (global_label "GPIO_PE0" (shape passive) (at 114.30 246.38 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000005a0-0000-0000-0000-0000000005a0"))
+  (wire (pts (xy 116.84 243.84) (xy 114.30 243.84)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005a1-0000-0000-0000-0000000005a1"))
+  (global_label "CAN1_RX" (shape passive) (at 114.30 243.84 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000005a2-0000-0000-0000-0000000005a2"))
+  (wire (pts (xy 116.84 241.30) (xy 114.30 241.30)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005a3-0000-0000-0000-0000000005a3"))
+  (global_label "CAN1_TX" (shape passive) (at 114.30 241.30 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000005a4-0000-0000-0000-0000000005a4"))
+  (wire (pts (xy 116.84 238.76) (xy 114.30 238.76)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005a5-0000-0000-0000-0000000005a5"))
+  (global_label "UART0_RXD" (shape passive) (at 114.30 238.76 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000005a6-0000-0000-0000-0000000005a6"))
+  (wire (pts (xy 116.84 236.22) (xy 114.30 236.22)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005a7-0000-0000-0000-0000000005a7"))
+  (global_label "UART0_TXD" (shape passive) (at 114.30 236.22 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000005a8-0000-0000-0000-0000000005a8"))
+  (wire (pts (xy 116.84 233.68) (xy 114.30 233.68)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005a9-0000-0000-0000-0000000005a9"))
+  (global_label "I2C2_SDA" (shape passive) (at 114.30 233.68 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000005aa-0000-0000-0000-0000000005aa"))
+  (wire (pts (xy 116.84 231.14) (xy 114.30 231.14)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005ab-0000-0000-0000-0000000005ab"))
+  (global_label "I2C2_SCK" (shape passive) (at 114.30 231.14 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000005ac-0000-0000-0000-0000000005ac"))
+  (wire (pts (xy 116.84 228.60) (xy 114.30 228.60)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005ad-0000-0000-0000-0000000005ad"))
+  (symbol (lib_id "hmi:GND") (at 114.30 228.60 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND132" (reference "#PWRGND132") (value "GND") (footprint ""))))
+    (uuid "hmi000005ae-0000-0000-0000-0000000005ae"))
+  (wire (pts (xy 116.84 226.06) (xy 114.30 226.06)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005af-0000-0000-0000-0000000005af"))
+  (symbol (lib_id "hmi:GND") (at 114.30 226.06 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND133" (reference "#PWRGND133") (value "GND") (footprint ""))))
+    (uuid "hmi000005b0-0000-0000-0000-0000000005b0"))
+  (wire (pts (xy 116.84 223.52) (xy 114.30 223.52)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005b1-0000-0000-0000-0000000005b1"))
+  (symbol (lib_id "hmi:VCC3V3") (at 114.30 223.52 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V350" (reference "#PWRVCC3V350") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi000005b2-0000-0000-0000-0000000005b2"))
+  (wire (pts (xy 116.84 220.98) (xy 114.30 220.98)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005b3-0000-0000-0000-0000000005b3"))
+  (symbol (lib_id "hmi:VCC5V") (at 114.30 220.98 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC5V27" (reference "#PWRVCC5V27") (value "VCC5V") (footprint ""))))
+    (uuid "hmi000005b4-0000-0000-0000-0000000005b4"))
+  (symbol (lib_id "hmi:HDR_1x4") (at 180.34 279.40 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/J14" (reference "J14") (value "DEBUG_4P") (footprint ""))))
+    (uuid "hmi000005b5-0000-0000-0000-0000000005b5"))
+  (wire (pts (xy 177.80 283.21) (xy 175.26 283.21)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005b6-0000-0000-0000-0000000005b6"))
+  (symbol (lib_id "hmi:GND") (at 175.26 283.21 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND134" (reference "#PWRGND134") (value "GND") (footprint ""))))
+    (uuid "hmi000005b7-0000-0000-0000-0000000005b7"))
+  (wire (pts (xy 177.80 280.67) (xy 175.26 280.67)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005b8-0000-0000-0000-0000000005b8"))
+  (global_label "UART3_RXD" (shape passive) (at 175.26 280.67 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000005b9-0000-0000-0000-0000000005b9"))
+  (wire (pts (xy 177.80 278.13) (xy 175.26 278.13)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005ba-0000-0000-0000-0000000005ba"))
+  (global_label "UART3_TXD" (shape passive) (at 175.26 278.13 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000005bb-0000-0000-0000-0000000005bb"))
+  (wire (pts (xy 177.80 275.59) (xy 175.26 275.59)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000005bc-0000-0000-0000-0000000005bc"))
+  (symbol (lib_id "hmi:VCC3V3") (at 175.26 275.59 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V351" (reference "#PWRVCC3V351") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi000005bd-0000-0000-0000-0000000005bd"))
+)

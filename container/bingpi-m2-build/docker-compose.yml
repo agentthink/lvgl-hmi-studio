@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  tina-builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tina-bingpi-m2-builder
+    volumes:
+      # 挂载 Tina SDK 源码
+      - ./Tina:/workspace/Tina:ro
+      # 挂载构建输出目录
+      - ./out:/workspace/out
+      # 挂载自定义补丁
+      - ./patches:/workspace/patches:ro
+      # 挂载配置文件
+      - ./configs:/workspace/configs:ro
+      # 挂载工具链（可选）
+      - /dev/bus/usb:/dev/bus/usb
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+      - TZ=Asia/Shanghai
+    network_mode: host  # 用于 ADB 访问
+    privileged: true    # 用于 USB 设备访问
+    stdin_open: true
+    tty: true
+
+# 使用方法：
+# 1. 在当前目录放置 Tina SDK 到 ./Tina
+# 2. 运行: docker-compose run --rm tina-builder bash
+# 3. 在容器内执行:
+#    cd /workspace
+#    source /workspace/Tina/build/envsetup.sh
+#    lunch t113_bingpi_m2-tina
+#    make -j$(nproc)

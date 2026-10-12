@@ -1,0 +1,34 @@
+lib_id,lc_eda_footprint,status,notes
+T113_S3,LQFP-128_L14.0-W14.0-P0.4,verify,立创在售(item 5881165 全志T113-S3); Confirm vendor package and exposed pad treatment
+W25N01GV,WSON-8_L6.0-W5.0-P1.27,verify,LCSC C907680 (Winbond ~¥27); 降本替代 GD5F1GQ4UBYIGR C492071 ~¥7.9 需固件验证
+FPC50,FPC-SMD-50P-0.5mm,required,LCSC C190666 (BOOMELE 0.5-50P ~¥0.82); Top/bottom contact direction must match panel FPC
+RTP_FPC,CONN-FPC-TBD,blocked,Electrical pinout fixed as 1=Y1; 2=X1; 3=Y2; 4=X2; need mechanical drawing/contact side
+XL4015E1,TO-263-5,select,LCSC C51661 (XLSEMI); 8-36V input buck selected for 12-24V input
+SY6280AAAC,SOT-23-5,select,LCSC C207620; pinout 1=OUT/2=GND/3=ISET/4=EN/5=IN
+TPS65100PWPR,TSSOP-24,select,LCSC C181650 (TI); panel bias regulator must follow datasheet
+MT9284,TSOT-23-6,select,LCSC C181780 (西安航天民芯 MT9284-28J ¥0.23); backlight boost; verify current rating
+IP101GRI,QFN-32_L5.0-W5.0-P0.5,select,LCSC C910373 (WIZNET ¥6.4; 原厂 IC Plus C703537 更便宜); confirm PHY package and RMII pinout
+MAX3485,SOIC-8,select,LCSC C18148 (MAXIM ~¥7.5; 廉价 UMW C668204 ~¥0.4); use isolated-side transceiver
+ADUM1201,SOIC-8,select,LCSC C9669 (ADI; 国产 JSMSEMI C30587325 便宜); digital isolator
+B0505S-1W,DIP-4/SMD-4,select,LCSC C512032 (RLT ~¥4; HI-LINK C39142807 备选); isolation power module; keep ISO_GND separate
+MAX3232,SOIC-16,select,LCSC C15846 (MAXIM; 廉价 lingxingic C41430944); RS232 level shifter
+
+USB-C,USB-C-SMD-16P,required,TYPE-C-31-M-12; LCSC C165948 (韩荣，约171070件库存)
+USB-A,USB-A-SMD,required,HYCW236-USBA04-289B; LCSC C3034183 (HOAUC，有货); 下单前确认机械尺寸
+RJ45-MAG,HR911105A-or-equivalent,select,LCSC C12074 (HR911105A ~¥1.32 5000+有货); confirm PHY magnetics compatibility
+TF_SOCKET,MICROSD-SMD,required,LCSC C41426932 (TF-015-N push-push); confirm footprint
+X32K,XTAL-SMD-3215,select,LCSC C32346 (EPSON Q13FC13500004 ¥1.26/49万有货); confirm 32.768kHz crystal load capacitance
+OSC24M,XTAL-SMD-3225,select,LCSC C7424728 (LIMING 3225-24-12-10-10/4B，有货); 24MHz/12pF
+OSC25M,XTAL-SMD-3225,select,LCSC C5155479 (Slkor SL322525M20P，有货); 25MHz/20pF，按PHY参考设计确认
+AOD4184,SO-8,select,LCSC C99124 (AOD4184A AOS); Confirm P-MOS reverse protection orientation and SOA
+DC_INPUT,TERM-2P-5.08,required,LCSC C475092 (KF129-5.08-2P ~¥0.17); Confirm screw terminal pitch and current rating
+HDR_1x4,HDR-1x4-2.54,required,LCSC C492403 (~¥0.088); Debug UART header
+HDR_2x12,HDR-2x12-2.54,select,LCSC C2883562 (XKB X5521WV-2x12 ~¥2.8); Expansion header; confirm pin mux
+TVS,SMCJ24A-SMC,select,LCSC C19077604 (R+O SMCJ24A); Confirm standoff and surge rating
+SM712,SOT-23,select,LCSC C3647085 (MSKSEMI，有货); RS485 protection
+USBLC6-2SC6,SOT-23-6,select,LCSC C7519 (ST，有货); USB data ESD
+0R-0603,0603,select,LCSC C166918 (RALEC RTT0360R0FTP，有货); debug/selection jumper
+SS34,SMA,select,LCSC C8678 (MDD SS34，有货); backlight rectifier
+3A-PTC,SMD,select,LCSC C262070 (TLC TRB300，有货); input resettable fuse
+22uH-BL,SMD,select,LCSC C44447583 (ZE ZENR2016T220M，有货); backlight boost inductor
+22uF-BL,0805,select,LCSC C45783 (Samsung CL21A226MAQNNNE，有货); backlight output capacitor

@@ -1,0 +1,17 @@
+page,block,component,signal_or_pin,net,value_or_note,status
+P4,LCD_RGB888,J3,1/2,VLED_A,Backlight anode,confirmed
+P4,LCD_RGB888,J3,3/4,VLED_K,Backlight cathode,confirmed
+P4,LCD_RGB888,J3,5/36/38/48,GND,Panel ground,confirmed
+P4,LCD_RGB888,J3,6/46,LCD_VCOM,3.15V typical,confirmed
+P4,LCD_RGB888,J3,7,LCD_DVDD,3.3V typical,confirmed
+P4,LCD_RGB888,J3,8,LCD_MODE,Pull high for DE,confirmed
+P4,LCD_RGB888,J3,9/10/11,LCD_DE/LCD_VSYNC/LCD_HSYNC,RGB control,confirmed
+P4,LCD_RGB888,J3,12..19,LCD_B7..LCD_B0,Blue data,confirmed
+P4,LCD_RGB888,J3,20..27,LCD_G7..LCD_G0,Green data,confirmed
+P4,LCD_RGB888,J3,28..35,LCD_R7..LCD_R0,Red data,confirmed
+P4,LCD_RGB888,J3,37,LCD_DCLK,Falling-edge latch,confirmed
+P4,LCD_RGB888,J3,39/40,LCD_SHLR/LCD_UPDN,0R scan selectors,confirmed
+P4,LCD_RGB888,J3,41/42/43,LCD_VGH/LCD_VGL/LCD_AVDD,18/-6/9V typical,confirmed
+P4,LCD_RGB888,J3,44,LCD_RESET,Low-active RC reset,confirmed
+P4,LCD_RGB888,J3,47,LCD_DITH,10k pull-down,confirmed
+P4,LCD_RGB888,J3,45/49/50,NC,No connection,confirmed

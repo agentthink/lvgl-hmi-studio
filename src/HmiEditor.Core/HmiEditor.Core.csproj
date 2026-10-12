@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>HmiEditor.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Lua 语法校验用（LuaSyntaxValidator：只 LoadString 解析、不执行）。
+         版本在 Directory.Packages.props 集中声明。
+         从 HmiEditor.Scripting 迁移而来 —— 该程序集因此下架，
+         见 docs/2026-09-20-lua-syntax-validation.md。 -->
+    <PackageReference Include="MoonSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Strings.zh-CN.json">
+      <WithCulture>false</WithCulture>
+      <LogicalName>HmiEditor.Core.Resources.Strings.zh-CN.json</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.en-US.json">
+      <WithCulture>false</WithCulture>
+      <LogicalName>HmiEditor.Core.Resources.Strings.en-US.json</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

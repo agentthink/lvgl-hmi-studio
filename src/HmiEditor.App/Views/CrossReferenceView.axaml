@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="using:HmiEditor.Core.Models"
+             xmlns:svc="using:HmiEditor.Core.Services"
+             xmlns:views="using:HmiEditor.App.Views"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             x:Class="HmiEditor.App.Views.CrossReferenceView">
+    <DockPanel Background="{StaticResource HmiBgDarkBrush}">
+        <!-- 顶部：类型选择 + 搜索 -->
+        <Grid DockPanel.Dock="Top" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,6">
+            <ComboBox x:Name="TargetTypeCombo"
+                      Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                      BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"
+                      Padding="8,4" Margin="0,0,6,0"
+                      SelectedIndex="0">
+                <ComboBoxItem Content="{res:Loc cross.ref.var}" Tag="Variable"/>
+                <ComboBoxItem Content="{res:Loc cross.ref.screen}" Tag="Screen"/>
+                <ComboBoxItem Content="{res:Loc cross.ref.script}" Tag="Script"/>
+            </ComboBox>
+            <TextBox x:Name="SearchBox" Grid.Column="1"
+                     PlaceholderText="{res:Loc cross.ref.search.hint}"
+                     Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                     BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"
+                     Padding="8,4"/>
+            <Button x:Name="FindBtn" Grid.Column="2"
+                    Content="{res:Loc cross.ref.find}" Margin="6,0,0,0"
+                    Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                    BorderThickness="0" FontSize="12"
+                    Padding="14,4"/>
+        </Grid>
+
+        <!-- 结果列表 -->
+        <ListBox x:Name="ResultList"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <!-- x:DataType 于阶段 94（登记 #61m）从 svc:ReferenceLocation 改成 views:ReferenceRow：
+                     行类型自带 App 侧渲染点，模板里五个绑定逐字未动。
+                     阶段 95（登记 #61n）起 Description 的分派**只有一处** —— ReferenceRow 转发给
+                     Services/ReferenceTextKeys.Describe（按 DescriptionKind 选模板），
+                     本文件因此不再是"直显 Core 中文"的那一层。 -->
+                <DataTemplate x:DataType="views:ReferenceRow">
+                    <Border Background="{StaticResource HmiBgInputBrush}" CornerRadius="4"
+                            BorderBrush="{StaticResource HmiBorderBrush}" BorderThickness="1"
+                            Margin="0,2">
+                        <StackPanel Margin="8,6" Spacing="2">
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <TextBlock Text="{Binding ReferenceType}"
+                                           Foreground="{StaticResource HmiLinkBrush}" FontSize="10"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding ControlName}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Margin="8,0"
+                                           VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2"
+                                           Text="{Binding ControlType}"
+                                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="10"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                            <TextBlock Text="{Binding Description}"
+                                       Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="11"
+                                       TextWrapping="Wrap"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{res:Loc cross.ref.screen}"
+                                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="10"/>
+                                <TextBlock Text="{Binding ScreenName, StringFormat=': {0}'}"
+                                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="10" Margin="2,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</UserControl>

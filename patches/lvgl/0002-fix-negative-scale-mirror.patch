@@ -1,0 +1,89 @@
+diff --git a/src/core/lv_refr.c b/src/core/lv_refr.c
+index e34dd83..88a8a6d 100644
+--- a/src/core/lv_refr.c
++++ b/src/core/lv_refr.c
+@@ -1228,8 +1228,8 @@ static bool obj_get_matrix(lv_obj_t * obj, lv_matrix_t * matrix)
+     int32_t skew_x = lv_obj_get_style_transform_skew_x(obj, LV_PART_MAIN);
+     int32_t skew_y = lv_obj_get_style_transform_skew_y(obj, LV_PART_MAIN);
+ 
+-    if(scale_x <= 0 || scale_y <= 0) {
+-        /* NOT draw if scale is negative or zero */
++    if(scale_x == 0 || scale_y == 0) {
++        /* NOT draw if scale is zero (negative scale = mirror, supported) */
+         return false;
+     }
+ 
+diff --git a/src/draw/lv_draw_image.c b/src/draw/lv_draw_image.c
+index e5f33d4..3b51e17 100644
+--- a/src/draw/lv_draw_image.c
++++ b/src/draw/lv_draw_image.c
+@@ -66,8 +66,8 @@ lv_draw_image_dsc_t * lv_draw_task_get_image_dsc(lv_draw_task_t * task)
+ 
+ void lv_draw_layer(lv_layer_t * layer, const lv_draw_image_dsc_t * dsc, const lv_area_t * coords)
+ {
+-    if(dsc->scale_x <= 0 || dsc->scale_y <= 0) {
+-        /* NOT draw if scale is negative or zero */
++    if(dsc->scale_x == 0 || dsc->scale_y == 0) {
++        /* NOT draw if scale is zero (negative scale = mirror, supported) */
+         return;
+     }
+ 
+@@ -103,8 +103,8 @@ void lv_draw_image(lv_layer_t * layer, const lv_draw_image_dsc_t * dsc, const lv
+     }
+     if(dsc->opa <= LV_OPA_MIN) return;
+ 
+-    if(dsc->scale_x <= 0 || dsc->scale_y <= 0) {
+-        /* NOT draw if scale is negative or zero */
++    if(dsc->scale_x == 0 || dsc->scale_y == 0) {
++        /* NOT draw if scale is zero (negative scale = mirror, supported) */
+         return;
+     }
+ 
+@@ -315,7 +315,7 @@ void lv_draw_image_tiled_helper(lv_draw_task_t * t, const lv_draw_image_dsc_t *
+ }
+ 
+ void lv_image_buf_get_transformed_area(lv_area_t * res, int32_t w, int32_t h, int32_t angle,
+-                                       uint16_t scale_x, uint16_t scale_y, const lv_point_t * pivot)
++                                       int32_t scale_x, int32_t scale_y, const lv_point_t * pivot)
+ {
+     if(angle == 0 && scale_x == LV_SCALE_NONE && scale_y == LV_SCALE_NONE) {
+         res->x1 = 0;
+diff --git a/src/draw/lv_draw_image_private.h b/src/draw/lv_draw_image_private.h
+index 694c5c1..35f3d9c 100644
+--- a/src/draw/lv_draw_image_private.h
++++ b/src/draw/lv_draw_image_private.h
+@@ -71,12 +71,12 @@ void lv_draw_image_tiled_helper(lv_draw_task_t * t, const lv_draw_image_dsc_t *
+  * @param w width of the rectangle to transform
+  * @param h height of the rectangle to transform
+  * @param angle angle of rotation
+- * @param scale_x zoom in x direction, (256 no zoom)
+- * @param scale_y zoom in y direction, (256 no zoom)
++ * @param scale_x zoom in x direction, (256 no zoom, negative = mirror)
++ * @param scale_y zoom in y direction, (256 no zoom, negative = mirror)
+  * @param pivot x,y pivot coordinates of rotation
+  */
+ void lv_image_buf_get_transformed_area(lv_area_t * res, int32_t w, int32_t h, int32_t angle,
+-                                       uint16_t scale_x, uint16_t scale_y, const lv_point_t * pivot);
++                                       int32_t scale_x, int32_t scale_y, const lv_point_t * pivot);
+ 
+ /**********************
+  *      MACROS
+diff --git a/src/draw/sw/lv_draw_sw_transform.c b/src/draw/sw/lv_draw_sw_transform.c
+index 674e54d..7209ca4 100644
+--- a/src/draw/sw/lv_draw_sw_transform.c
++++ b/src/draw/sw/lv_draw_sw_transform.c
+@@ -191,8 +191,12 @@ void lv_draw_sw_transform(const lv_area_t * dest_area, const void * src_buf,
+     if(is_rotated == false) {
+         int32_t xs1_ups, ys1_ups, xs2_ups, ys2_ups;
+ 
+-        int32_t x_max = (((src_w - 1 - draw_dsc->pivot.x) * draw_dsc->scale_x) >> 8) + draw_dsc->pivot.x;
+-        int32_t y_max = (((src_h - 1 - draw_dsc->pivot.y) * draw_dsc->scale_y) >> 8) + draw_dsc->pivot.y;
++        /*FIX(neg-scale): negative scale (mirror) maps the source rightmost pixel to the
++         *left side of the pivot, so x_max/y_max must use the absolute scale to compute the
++         *positive bounding edge; otherwise the destination area gets clamped to ~0 width
++         *and the mirrored object is not drawn.*/
++        int32_t x_max = (((src_w - 1 - draw_dsc->pivot.x) * LV_ABS(draw_dsc->scale_x)) >> 8) + draw_dsc->pivot.x;
++        int32_t y_max = (((src_h - 1 - draw_dsc->pivot.y) * LV_ABS(draw_dsc->scale_y)) >> 8) + draw_dsc->pivot.y;
+ 
+         lv_area_t dest_area_limited;
+         dest_area_limited.x1 = dest_area->x1 > x_max ? x_max : dest_area->x1;

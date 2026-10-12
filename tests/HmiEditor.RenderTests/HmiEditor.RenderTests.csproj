@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>HmiEditor.RenderTests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <!--
+    独立的**真光栅化**测试程序集。
+
+    为什么要单开一个而不是塞进 HmiEditor.App.UiTests：
+      Avalonia.Headless 的渲染循环（DefaultRenderLoop）是**进程级静态单例**、绑死在第一个
+      会话的 UI 线程上；同一进程里开不出第二套平台配置（实测抛
+      "The calling thread cannot access this object"）。而把 App.UiTests 整个切到
+      Skia 又会让既有用例暴露在新失败模式下（线程亲和 + 默认字体缺失），
+      实测 257 条里立刻红、且执行被中断。
+
+      VSTest 为每个测试程序集起**独立 testhost 进程** ⇒ 单开一个程序集天然拿到隔离的
+      DefaultRenderLoop，可以自己选 Skia 后端（UseHeadlessDrawing = false）从而真正产生像素。
+
+    ⚠ 本程序集只放**确定性**的像素/光栅化判据，不要放时序敏感或需要窗口输入的用例。
+  -->
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Avalonia.Headless" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\HmiEditor.App\HmiEditor.App.csproj" />
+  </ItemGroup>
+</Project>

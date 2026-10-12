@@ -1,0 +1,423 @@
+(kicad_sch
+  (version 20200904)
+  (generator "eeschema")
+  (generator_version "5.1.9")
+  (uuid "1958873d-bdaa-405c-9ead-96d7f80f5bc8")
+  (paper "A1")
+  (title_block
+    (title "HMI_T113_SZCLX070H_R1")
+    (company "zhishu-hmi")
+  )
+  (lib_symbols)
+  (sheet
+    (at 20.0 20.0)
+    (size 200.0 120.0)
+    (fields_autoplaced)
+    (stroke
+      (width 0.1524)
+      (type solid)
+    )
+    (fill
+      (color 0 0 0 0.0)
+      (type none)
+    )
+    (uuid "863de0f5-1146-4025-ad1f-255cf1d46bb9")
+    (property
+      "Sheetname"
+      "P1_POWER"
+      (at 20.0 18.73 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (property
+      "Sheetfile"
+      "P1_POWER.kicad_sch"
+      (at 20.0 141.26999999999998 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (instances
+      (project
+        "HMI_T113_SZCLX070H_R1"
+        (path
+          "/1958873d-bdaa-405c-9ead-96d7f80f5bc8"
+          (page "2")
+        )
+      )
+    )
+  )
+  (sheet
+    (at 240.0 20.0)
+    (size 200.0 120.0)
+    (fields_autoplaced)
+    (stroke
+      (width 0.1524)
+      (type solid)
+    )
+    (fill
+      (color 0 0 0 0.0)
+      (type none)
+    )
+    (uuid "509ae268-6211-4f48-8a2d-e558d063c516")
+    (property
+      "Sheetname"
+      "P2_SOC_CORE"
+      (at 240.0 18.73 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (property
+      "Sheetfile"
+      "P2_SOC_CORE.kicad_sch"
+      (at 240.0 141.26999999999998 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (instances
+      (project
+        "HMI_T113_SZCLX070H_R1"
+        (path
+          "/1958873d-bdaa-405c-9ead-96d7f80f5bc8"
+          (page "3")
+        )
+      )
+    )
+  )
+  (sheet
+    (at 460.0 20.0)
+    (size 200.0 120.0)
+    (fields_autoplaced)
+    (stroke
+      (width 0.1524)
+      (type solid)
+    )
+    (fill
+      (color 0 0 0 0.0)
+      (type none)
+    )
+    (uuid "2900cc72-3b81-4335-bfae-aea95fd4cf88")
+    (property
+      "Sheetname"
+      "P3_STORAGE"
+      (at 460.0 18.73 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (property
+      "Sheetfile"
+      "P3_STORAGE.kicad_sch"
+      (at 460.0 141.26999999999998 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (instances
+      (project
+        "HMI_T113_SZCLX070H_R1"
+        (path
+          "/1958873d-bdaa-405c-9ead-96d7f80f5bc8"
+          (page "4")
+        )
+      )
+    )
+  )
+  (sheet
+    (at 20.0 160.0)
+    (size 200.0 120.0)
+    (fields_autoplaced)
+    (stroke
+      (width 0.1524)
+      (type solid)
+    )
+    (fill
+      (color 0 0 0 0.0)
+      (type none)
+    )
+    (uuid "a0422d68-cad8-464c-b698-1f6bd0c29a1d")
+    (property
+      "Sheetname"
+      "P4_LCD_RGB888"
+      (at 20.0 158.73 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (property
+      "Sheetfile"
+      "P4_LCD_RGB888.kicad_sch"
+      (at 20.0 281.27 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (instances
+      (project
+        "HMI_T113_SZCLX070H_R1"
+        (path
+          "/1958873d-bdaa-405c-9ead-96d7f80f5bc8"
+          (page "5")
+        )
+      )
+    )
+  )
+  (sheet
+    (at 240.0 160.0)
+    (size 200.0 120.0)
+    (fields_autoplaced)
+    (stroke
+      (width 0.1524)
+      (type solid)
+    )
+    (fill
+      (color 0 0 0 0.0)
+      (type none)
+    )
+    (uuid "c2614cd6-e73b-48ce-8511-c02985845987")
+    (property
+      "Sheetname"
+      "P5_LCD_POWER_BACKLIGHT"
+      (at 240.0 158.73 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (property
+      "Sheetfile"
+      "P5_LCD_POWER_BACKLIGHT.kicad_sch"
+      (at 240.0 281.27 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (instances
+      (project
+        "HMI_T113_SZCLX070H_R1"
+        (path
+          "/1958873d-bdaa-405c-9ead-96d7f80f5bc8"
+          (page "6")
+        )
+      )
+    )
+  )
+  (sheet
+    (at 460.0 160.0)
+    (size 200.0 120.0)
+    (fields_autoplaced)
+    (stroke
+      (width 0.1524)
+      (type solid)
+    )
+    (fill
+      (color 0 0 0 0.0)
+      (type none)
+    )
+    (uuid "d4c3d0c4-d9c6-4b09-b026-28305b31603c")
+    (property
+      "Sheetname"
+      "P6_RTP_TOUCH"
+      (at 460.0 158.73 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (property
+      "Sheetfile"
+      "P6_RTP_TOUCH.kicad_sch"
+      (at 460.0 281.27 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (instances
+      (project
+        "HMI_T113_SZCLX070H_R1"
+        (path
+          "/1958873d-bdaa-405c-9ead-96d7f80f5bc8"
+          (page "7")
+        )
+      )
+    )
+  )
+  (sheet
+    (at 20.0 300.0)
+    (size 200.0 120.0)
+    (fields_autoplaced)
+    (stroke
+      (width 0.1524)
+      (type solid)
+    )
+    (fill
+      (color 0 0 0 0.0)
+      (type none)
+    )
+    (uuid "8ad54472-82fe-4484-9fa9-29de3a868bea")
+    (property
+      "Sheetname"
+      "P7_USB"
+      (at 20.0 298.73 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (property
+      "Sheetfile"
+      "P7_USB.kicad_sch"
+      (at 20.0 421.27 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (instances
+      (project
+        "HMI_T113_SZCLX070H_R1"
+        (path
+          "/1958873d-bdaa-405c-9ead-96d7f80f5bc8"
+          (page "8")
+        )
+      )
+    )
+  )
+  (sheet
+    (at 240.0 300.0)
+    (size 200.0 120.0)
+    (fields_autoplaced)
+    (stroke
+      (width 0.1524)
+      (type solid)
+    )
+    (fill
+      (color 0 0 0 0.0)
+      (type none)
+    )
+    (uuid "7d5361ad-c5d5-46fe-92ca-42bf8116d46a")
+    (property
+      "Sheetname"
+      "P8_COMM"
+      (at 240.0 298.73 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (property
+      "Sheetfile"
+      "P8_COMM.kicad_sch"
+      (at 240.0 421.27 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (instances
+      (project
+        "HMI_T113_SZCLX070H_R1"
+        (path
+          "/1958873d-bdaa-405c-9ead-96d7f80f5bc8"
+          (page "9")
+        )
+      )
+    )
+  )
+  (sheet
+    (at 460.0 300.0)
+    (size 200.0 120.0)
+    (fields_autoplaced)
+    (stroke
+      (width 0.1524)
+      (type solid)
+    )
+    (fill
+      (color 0 0 0 0.0)
+      (type none)
+    )
+    (uuid "d90efef1-7af7-435b-b60c-ed9e350cfeb1")
+    (property
+      "Sheetname"
+      "P9_IO_EXPANSION"
+      (at 460.0 298.73 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (property
+      "Sheetfile"
+      "P9_IO_EXPANSION.kicad_sch"
+      (at 460.0 421.27 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (justify left top)
+      )
+    )
+    (instances
+      (project
+        "HMI_T113_SZCLX070H_R1"
+        (path
+          "/1958873d-bdaa-405c-9ead-96d7f80f5bc8"
+          (page "10")
+        )
+      )
+    )
+  )
+  (sheet_instances
+    (path
+      "/"
+      (page "1")
+    )
+  )
+)

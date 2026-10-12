@@ -1,0 +1,522 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.VariableManagerView"
+        Title="{res:Loc win.variable.manager}"
+        Width="1100"
+        Height="720"
+        MinWidth="760"
+        MinHeight="540"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc win.variable.manager}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容整体放入此处 -->
+            <Border Grid.Row="1" Padding="12">
+        <Grid ColumnDefinitions="220,4,*">
+            <!-- 左侧：变量组列表 -->
+            <Border CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="10">
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,8">
+                        <TextBlock Text="{res:Loc var.group.title}" Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="Bold"/>
+                        <Button x:Name="BtnAddGroup" Content="{res:Loc var.add.group}"
+                                Grid.Column="1"
+                                Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="10,4" FontSize="12"/>
+                    </Grid>
+                    <ListBox x:Name="GroupList" Grid.Row="1" Background="Transparent" BorderThickness="0">
+                        <ListBox.Styles>
+                            <Style Selector="ListBoxItem">
+                                <Setter Property="Padding" Value="8,6"/>
+                                <Setter Property="Margin" Value="0,2"/>
+                                <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                                <Setter Property="CornerRadius" Value="4"/>
+                                <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                            </Style>
+                            <Style Selector="ListBoxItem:selected">
+                                <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                            </Style>
+                        </ListBox.Styles>
+                    </ListBox>
+                    <Button x:Name="BtnDeleteGroup" Content="{res:Loc var.delete.group}"
+                            Grid.Row="2" Margin="0,8,0,0"
+                            Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                            BorderThickness="0" Padding="10,6" FontSize="12"/>
+                </Grid>
+            </Border>
+
+            <!-- 分隔条：可拖拽调整左侧分组面板宽度 -->
+            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch"
+                          Background="{StaticResource HmiBgElevatedBrush}"
+                          ResizeBehavior="PreviousAndNext"
+                          ShowsPreview="False"/>
+
+            <!-- 右侧：变量 / UDT 类型 -->
+            <TabControl Grid.Column="2" Background="Transparent" BorderThickness="0"
+                        Foreground="{StaticResource HmiTextPrimaryBrush}">
+                <TabControl.Styles>
+                    <Style Selector="TabControl > TabStrip > TabStripItem">
+                        <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+                        <Setter Property="Foreground" Value="{StaticResource HmiTextSecondaryBrush}"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="Padding" Value="14,7"/>
+                    </Style>
+                    <Style Selector="TabControl > TabStrip > TabStripItem:selected">
+                        <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                        <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                    </Style>
+                    <Style Selector="TabControl > TabStrip > TabStripItem:pointerover">
+                        <Setter Property="Background" Value="{StaticResource HmiBgPanelAltBrush}"/>
+                    </Style>
+                </TabControl.Styles>
+                <!-- ═══ 变量管理页签 ═══ -->
+                <TabItem Header="{res:Loc var.tab.variable}">
+                    <Border CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="10">
+                        <Grid RowDefinitions="Auto,*,Auto"
+                              ColumnDefinitions="*,4,320" RowSpacing="8">
+                            <!-- 工具条：标题 + 按钮（横跨全宽） -->
+                            <Grid Grid.Row="0" Grid.ColumnSpan="3" ColumnDefinitions="*,Auto,Auto,Auto">
+                                <TextBlock x:Name="LblTitle" Text="{res:Loc var.list.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="Bold"/>
+                                <Button x:Name="BtnAddVariable" Content="{res:Loc var.add}"
+                                        Grid.Column="1" Margin="0,0,4,0"
+                                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                        BorderThickness="0" Padding="10,4" FontSize="12"/>
+                                <Button x:Name="BtnDeleteVariable" Content="{res:Loc var.delete}"
+                                        Grid.Column="2" Margin="0,0,4,0"
+                                        Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                        BorderThickness="0" Padding="10,4" FontSize="12"/>
+                                <Button x:Name="BtnDuplicateVariable" Content="{res:Loc var.copy}"
+                                        Grid.Column="3"
+                                        Background="{StaticResource HmiNeutralDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                        BorderThickness="0" Padding="10,4" FontSize="12"/>
+                            </Grid>
+
+                            <!-- 第 1 列：变量列表 -->
+                            <ListBox x:Name="VariableList" Grid.Row="1" Grid.Column="0"
+                                     Background="Transparent" BorderThickness="0">
+                                <ListBox.Styles>
+                                    <Style Selector="ListBoxItem">
+                                        <Setter Property="Padding" Value="8,4"/>
+                                        <Setter Property="Margin" Value="0,1"/>
+                                        <Setter Property="Background" Value="{StaticResource HmiBgInputBrush}"/>
+                                        <Setter Property="CornerRadius" Value="4"/>
+                                    </Style>
+                                </ListBox.Styles>
+                            </ListBox>
+
+                            <!-- 分隔条：可拖拽调整列表/属性宽度 -->
+                            <GridSplitter Grid.Row="1" Grid.Column="1" Width="4" HorizontalAlignment="Stretch"
+                                          Background="{StaticResource HmiBgElevatedBrush}"
+                                          ResizeBehavior="PreviousAndNext"
+                                          ShowsPreview="False"/>
+
+                            <!-- 第 3 列：变量属性编辑区（最右侧） -->
+                            <Border Grid.Row="1" Grid.Column="2" Background="{StaticResource HmiBgPanelAltBrush}" CornerRadius="6"
+                                    Padding="12">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <StackPanel Spacing="6">
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                                      ColumnDefinitions="80,*" RowSpacing="6">
+                                    <TextBlock Text="{res:Loc var.name}" Grid.Row="0" Grid.Column="0"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtVarName" Grid.Row="0" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="13"/>
+
+                                    <TextBlock Text="{res:Loc var.data.type}" Grid.Row="1" Grid.Column="0"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CboDataType" Grid.Row="1" Grid.Column="1"
+                                              Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="13"/>
+
+                                    <TextBlock Text="{res:Loc var.address}" Grid.Row="2" Grid.Column="0"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtVarAddress" Grid.Row="2" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="13"
+                                             PlaceholderText="{res:Loc var.address.hint}"/>
+
+                                    <TextBlock Text="{res:Loc var.connection}" Grid.Row="3" Grid.Column="0"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CboConnectionId" Grid.Row="3" Grid.Column="1"
+                                              Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="13">
+                                        <ComboBoxItem Content="{res:Loc var.unassigned}" Tag=""/>
+                                    </ComboBox>
+
+                                    <TextBlock Text="{res:Loc var.slave}" Grid.Row="4" Grid.Column="0"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CboSlaveId" Grid.Row="4" Grid.Column="1"
+                                              Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="13">
+                                        <ComboBoxItem Content="{res:Loc var.unassigned}" Tag=""/>
+                                    </ComboBox>
+
+                                    <TextBlock Text="{res:Loc var.unit}" Grid.Row="5" Grid.Column="0"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtVarUnit" Grid.Row="5" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="13"/>
+
+                                    <TextBlock Text="{res:Loc var.scale}" Grid.Row="6" Grid.Column="0"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtVarScale" Grid.Row="6" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="13" Text="1.0"/>
+
+                                    <TextBlock Text="{res:Loc var.poll.rate}" Grid.Row="7" Grid.Column="0"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtVarPollRate" Grid.Row="7" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="13" Text="500"/>
+
+                                    <TextBlock Text="{res:Loc var.sim.value}" Grid.Row="8" Grid.Column="0"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="TxtVarSimValue" Grid.Row="8" Grid.Column="1"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="8,4" FontSize="13"
+                                             PlaceholderText="{res:Loc var.sim.value.hint}"/>
+
+                                    <Button x:Name="BtnSaveVar" Content="{res:Loc var.save}"
+                                            Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2"
+                                            HorizontalAlignment="Right"
+                                            Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="14,6" FontSize="13"
+                                            Margin="0,4,0,0"/>
+                                </Grid>
+
+                                <!-- ═══ 变量报警设置（参考主流 HMI 软件） ═══ -->
+                                <Border Background="{StaticResource HmiBgPanelBrush}" CornerRadius="6" Padding="10"
+                                        Margin="0,8,0,0">
+                                    <StackPanel Spacing="6">
+                                        <!-- 标题 + 添加报警 -->
+                                        <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,2">
+                                            <TextBlock Text="{res:Loc var.alarm.title}"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="14" FontWeight="Bold"
+                                                       VerticalAlignment="Center"/>
+                                            <Button x:Name="BtnAddAlarm" Content="{res:Loc var.alarm.add}"
+                                                    Grid.Column="1"
+                                                    Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                    BorderThickness="0" Padding="10,4" FontSize="12"/>
+                                        </Grid>
+
+                                        <!-- 报警列表 -->
+                                        <ListBox x:Name="AlarmList" MinHeight="80" MaxHeight="140"
+                                                 Background="Transparent" BorderThickness="0">
+                                            <ListBox.Styles>
+                                                <Style Selector="ListBoxItem">
+                                                    <Setter Property="Padding" Value="6,4"/>
+                                                    <Setter Property="Margin" Value="0,1"/>
+                                                    <Setter Property="Background" Value="{StaticResource HmiBgInputBrush}"/>
+                                                    <Setter Property="CornerRadius" Value="3"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                                                </Style>
+                                                <Style Selector="ListBoxItem:selected">
+                                                    <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                                </Style>
+                                            </ListBox.Styles>
+                                        </ListBox>
+
+                                        <!-- 报警编辑区 -->
+                                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                                              ColumnDefinitions="64,*,64,*" RowSpacing="5">
+                                            <TextBlock Text="{res:Loc var.alarm.name}"
+                                                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            <TextBox x:Name="TxtAlarmName" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+                                                     Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                     BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12"/>
+
+                                            <TextBlock Text="{res:Loc var.alarm.type}"
+                                                       Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="CboAlarmType" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                                      Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                      BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"/>
+
+                                            <TextBlock Text="{res:Loc var.alarm.threshold}"
+                                                       Grid.Row="2" Grid.Column="0"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            <TextBox x:Name="TxtAlarmThreshold" Grid.Row="2" Grid.Column="1"
+                                                     Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                     BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12" Text="0"/>
+                                            <TextBlock Text="{res:Loc var.alarm.deadband}"
+                                                       Grid.Row="2" Grid.Column="2"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            <TextBox x:Name="TxtAlarmDeadband" Grid.Row="2" Grid.Column="3"
+                                                     Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                     BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12" Text="0"/>
+
+                                            <TextBlock Text="{res:Loc var.alarm.delay}"
+                                                       Grid.Row="3" Grid.Column="0"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            <TextBox x:Name="TxtAlarmDelay" Grid.Row="3" Grid.Column="1"
+                                                     Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                     BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12" Text="0"/>
+                                            <TextBlock Text="{res:Loc var.alarm.bitoffset}"
+                                                       Grid.Row="3" Grid.Column="2"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            <TextBox x:Name="TxtAlarmBitOffset" Grid.Row="3" Grid.Column="3"
+                                                     Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                     BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12" Text="0"/>
+
+                                            <TextBlock Text="{res:Loc var.alarm.expected}"
+                                                       Grid.Row="4" Grid.Column="0"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            <TextBox x:Name="TxtAlarmExpected" Grid.Row="4" Grid.Column="1"
+                                                     Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                     BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12" Text="0"/>
+                                            <TextBlock Text="{res:Loc var.alarm.severity}"
+                                                       Grid.Row="4" Grid.Column="2"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="CboAlarmSeverity" Grid.Row="4" Grid.Column="3"
+                                                      Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                      BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"/>
+
+                                            <TextBlock Text="{res:Loc var.alarm.message}"
+                                                       Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                                                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            <TextBox x:Name="TxtAlarmMessage" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"
+                                                     Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                     BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12"
+                                                     PlaceholderText="{res:Loc var.alarm.message.hint}"/>
+
+                                            <CheckBox x:Name="ChkAlarmEnabled" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                                                      Content="{res:Loc var.alarm.enabled}"
+                                                      Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" IsChecked="True"/>
+                                            <CheckBox x:Name="ChkAlarmRequiresAck" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2"
+                                                      Content="{res:Loc var.alarm.ack}"
+                                                      Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12" IsChecked="True"/>
+
+                                            <Button x:Name="BtnSaveAlarm" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"
+                                                    Content="{res:Loc var.alarm.save}"
+                                                    Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                    BorderThickness="0" Padding="10,5" FontSize="12"/>
+                                            <Button x:Name="BtnDeleteAlarm" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
+                                                    Content="{res:Loc var.alarm.delete}"
+                                                    Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                                    BorderThickness="0" Padding="10,5" FontSize="12"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                                </StackPanel>
+                                </ScrollViewer>
+                            </Border>
+
+                            <!-- 底部：校验按钮 + 状态（横跨全宽） -->
+                            <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,4,0,0" HorizontalAlignment="Right">
+                                <Button x:Name="BtnValidateIntegrity" Content="{res:Loc var.validate.fix}"
+                                        Background="{StaticResource HmiWarningDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                        BorderThickness="0" Padding="12,5" FontSize="12" Margin="0,0,8,0"/>
+                                <TextBlock x:Name="StatusText"
+                                           Text="" Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                                           VerticalAlignment="Center" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </TabItem>
+
+                <!-- ═══ UDT 类型管理页签 (I4) ═══ -->
+                <TabItem Header="{res:Loc var.udt.tab}">
+                    <Border CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="10">
+                        <Grid RowDefinitions="Auto,*,Auto,Auto">
+                            <!-- 工具条 -->
+                            <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,0,0,8">
+                                <TextBlock x:Name="LblUdtTitle" Text="{res:Loc var.udt.title}"
+                                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="Bold"/>
+                                <Button x:Name="BtnAddUdt" Content="{res:Loc var.udt.new.type}"
+                                        Grid.Column="1" Margin="0,0,4,0"
+                                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                        BorderThickness="0" Padding="10,4" FontSize="12"/>
+                                <Button x:Name="BtnDeleteUdt" Content="{res:Loc var.udt.delete}"
+                                        Grid.Column="2" Margin="0,0,4,0"
+                                        Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                        BorderThickness="0" Padding="10,4" FontSize="12"/>
+                                <Button x:Name="BtnSaveUdtName" Content="{res:Loc var.udt.save.name}"
+                                        Grid.Column="3"
+                                        Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                        BorderThickness="0" Padding="10,4" FontSize="12"/>
+                            </Grid>
+
+                            <!-- 主体：定义列表 | 字段列表 | 字段编辑 -->
+                            <Grid Grid.Row="1" ColumnDefinitions="180,4,*,4,240">
+                                <Border CornerRadius="4" Background="{StaticResource HmiBgPanelAltBrush}" Padding="6">
+                                    <Grid RowDefinitions="Auto,*">
+                                        <TextBlock Text="{res:Loc var.udt.def.list}" Foreground="{StaticResource HmiTextSecondaryBrush}"
+                                                   FontSize="11" Margin="2,0,0,4"/>
+                                        <ListBox x:Name="UdtList" Grid.Row="1"
+                                                 Background="Transparent" BorderThickness="0">
+                                            <ListBox.Styles>
+                                                <Style Selector="ListBoxItem">
+                                                    <Setter Property="Padding" Value="6,4"/>
+                                                    <Setter Property="Margin" Value="0,1"/>
+                                                    <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                                                    <Setter Property="CornerRadius" Value="3"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                                                </Style>
+                                                <Style Selector="ListBoxItem:selected">
+                                                    <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                                </Style>
+                                            </ListBox.Styles>
+                                        </ListBox>
+                                    </Grid>
+                                </Border>
+
+                                <!-- 分隔条：可拖拽调整 UDT 定义列表宽度 -->
+                                <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"
+                                              Background="{StaticResource HmiBgElevatedBrush}"
+                                              ResizeBehavior="PreviousAndNext"
+                                              ShowsPreview="False"/>
+
+                                <Border Grid.Column="2" CornerRadius="4" Background="{StaticResource HmiBgPanelAltBrush}" Padding="6">
+                                    <Grid RowDefinitions="Auto,*">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <TextBlock Text="{res:Loc var.udt.fields}" Foreground="{StaticResource HmiTextSecondaryBrush}"
+                                                       FontSize="11" Margin="2,0,0,4"
+                                                       VerticalAlignment="Center"/>
+                                            <Button x:Name="BtnAddField" Content="{res:Loc var.udt.add.field}"
+                                                    Grid.Column="1"
+                                                    Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                    BorderThickness="0" Padding="8,2" FontSize="11"/>
+                                        </Grid>
+                                        <ListBox x:Name="FieldList" Grid.Row="1"
+                                                 Background="Transparent" BorderThickness="0">
+                                            <ListBox.Styles>
+                                                <Style Selector="ListBoxItem">
+                                                    <Setter Property="Padding" Value="6,4"/>
+                                                    <Setter Property="Margin" Value="0,1"/>
+                                                    <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                                                    <Setter Property="CornerRadius" Value="3"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                                                </Style>
+                                                <Style Selector="ListBoxItem:selected">
+                                                    <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                                </Style>
+                                            </ListBox.Styles>
+                                        </ListBox>
+                                    </Grid>
+                                </Border>
+
+                                <!-- 分隔条：可拖拽调整字段列表宽度 -->
+                                <GridSplitter Grid.Column="3" Width="2" HorizontalAlignment="Stretch"
+                                              Background="{StaticResource HmiBgElevatedBrush}"
+                                              ResizeBehavior="PreviousAndNext"
+                                              ShowsPreview="False"/>
+
+                                <!-- 字段编辑 -->
+                                <Border Grid.Column="4" CornerRadius="4" Background="{StaticResource HmiBgPanelAltBrush}" Padding="8">
+                                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto,Auto"
+                                          ColumnDefinitions="*,*" RowSpacing="6">
+                                        <TextBlock Text="{res:Loc var.udt.type.name}" Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                                   Grid.ColumnSpan="2" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="TxtUdtName" Grid.Row="1" Grid.ColumnSpan="2"
+                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12"
+                                                 PlaceholderText="{res:Loc var.udt.name.hint}"/>
+
+                                        <TextBlock Grid.Row="2" Text="{res:Loc var.udt.field.name}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                   FontSize="12" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="TxtFieldName" Grid.Row="2" Grid.Column="1"
+                                                 Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                 BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12"
+                                                 PlaceholderText="{res:Loc var.udt.field.hint}"/>
+
+                                        <TextBlock Grid.Row="3" Text="{res:Loc var.udt.field.type}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                   FontSize="12" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="CboFieldType" Grid.Row="3" Grid.Column="1"
+                                                  Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                  BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12">
+                                        </ComboBox>
+
+                                        <Button x:Name="BtnCommitField" Grid.Row="5" Grid.ColumnSpan="2"
+                                                Content="{res:Loc var.udt.commit.field}"
+                                                Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                                BorderThickness="0" Padding="8,4" FontSize="12"/>
+                                        <Button x:Name="BtnDeleteField" Grid.Row="6" Grid.ColumnSpan="2"
+                                                Content="{res:Loc var.udt.delete.field}"
+                                                Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                                BorderThickness="0" Padding="8,4" FontSize="12"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <!-- 实例化区 -->
+                            <Border Grid.Row="2" Background="{StaticResource HmiBgPanelAltBrush}" CornerRadius="6"
+                                    Padding="10,8" Margin="0,8,0,0">
+                                <Grid ColumnDefinitions="Auto,*,150,*,Auto" ColumnSpacing="6">
+                                    <TextBlock Text="{res:Loc var.udt.instance.label}" Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                               VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="CboUdtInstanceType" Grid.Column="1"
+                                              Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                              BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"/>
+                                    <TextBlock Text="{res:Loc var.udt.instance.name}" Grid.Column="2"
+                                               Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"/>
+                                    <TextBox x:Name="TxtInstanceName" Grid.Column="3"
+                                             Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                             BorderBrush="{StaticResource HmiInputBorderBrush}" Padding="6,3" FontSize="12"
+                                             PlaceholderText="{res:Loc var.udt.instance.placeholder}"/>
+                                    <Button x:Name="BtnCreateInstance" Grid.Column="4"
+                                            Content="{res:Loc var.udt.create.instance}"
+                                            Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                            BorderThickness="0" Padding="10,4" FontSize="12"/>
+                                </Grid>
+                            </Border>
+
+                            <TextBlock x:Name="UdtStatusText" Grid.Row="3"
+                                       Text="{res:Loc var.udt.instance.hint}"
+                                       Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                                       Margin="0,6,0,0" TextWrapping="Wrap"/>
+                        </Grid>
+                    </Border>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

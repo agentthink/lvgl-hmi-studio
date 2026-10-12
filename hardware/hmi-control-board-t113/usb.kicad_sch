@@ -1,0 +1,2591 @@
+(kicad_sch (version 20241122) (generator "gen_sch")
+  (uuid "hmi0000055f-0000-0000-0000-00000000055f")
+  (paper "A3")
+  (title_block (title "USB: Debug CH340E + USB0 TypeC + GL850G HUB") (date "2026-08-19") (rev "1.0") (company "zhishu-hmi"))
+  (lib_symbols
+(symbol "hmi:C"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "C"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "C"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "C_1_1"
+			(polyline
+				(pts
+					(xy -0.635 1.27) (xy 0.635 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.635 -1.27) (xy 0.635 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 0 0)
+				(length 1.905)
+				(name "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 0 180)
+				(length 1.905)
+				(name "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:CH340E"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at 0 8.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CH340E"
+			(at 0 -8.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "CH340E_1_1"
+			(rectangle
+				(start -2.54 -6.35)
+				(end 2.54 6.35)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 5.08 0)
+				(length 2.54)
+				(name "UD+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 2.54 0)
+				(length 2.54)
+				(name "UD-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at -5.08 0 0)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at -5.08 -2.54 0)
+				(length 2.54)
+				(name "RTS#"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -5.08 0)
+				(length 2.54)
+				(name "CTS#"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 5.08 5.08 180)
+				(length 2.54)
+				(name "TNOW"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 5.08 2.54 180)
+				(length 2.54)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 5.08 0 180)
+				(length 2.54)
+				(name "TXD"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 5.08 -2.54 180)
+				(length 2.54)
+				(name "RXD"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 5.08 -5.08 180)
+				(length 2.54)
+				(name "V3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:CP"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "C"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "C"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "CP_1_1"
+			(polyline
+				(pts
+					(xy -0.635 1.27) (xy 0.635 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.635 -1.27) (xy 0.635 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.381 0.762) (xy 0.381 0.762)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 0 0)
+				(length 1.905)
+				(name "+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 0 180)
+				(length 1.905)
+				(name "-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:GL850G"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at 0 20.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GL850G"
+			(at 0 -20.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "GL850G_1_1"
+			(rectangle
+				(start -2.54 -17.78)
+				(end 2.54 17.78)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin power_in line
+				(at -5.08 16.51 0)
+				(length 2.54)
+				(name "VD33"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 13.97 0)
+				(length 2.54)
+				(name "GANG#"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 11.43 0)
+				(length 2.54)
+				(name "OVCUR#"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 8.89 0)
+				(length 2.54)
+				(name "DM4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 6.35 0)
+				(length 2.54)
+				(name "DP4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 3.81 0)
+				(length 2.54)
+				(name "DM3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 1.27 0)
+				(length 2.54)
+				(name "DP3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 -1.27 0)
+				(length 2.54)
+				(name "DM2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 -3.81 0)
+				(length 2.54)
+				(name "DP2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 -6.35 0)
+				(length 2.54)
+				(name "DM1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -5.08 -8.89 0)
+				(length 2.54)
+				(name "DP1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at -5.08 -11.43 0)
+				(length 2.54)
+				(name "PGANG"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -13.97 0)
+				(length 2.54)
+				(name "OVCUR2#"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -16.51 0)
+				(length 2.54)
+				(name "REXT"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at 5.08 16.51 180)
+				(length 2.54)
+				(name "DMU"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at 5.08 13.97 180)
+				(length 2.54)
+				(name "DPU"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 5.08 11.43 180)
+				(length 2.54)
+				(name "VDD5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 5.08 8.89 180)
+				(length 2.54)
+				(name "VBUSM"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 5.08 6.35 180)
+				(length 2.54)
+				(name "VSS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 5.08 3.81 180)
+				(length 2.54)
+				(name "VDD5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 5.08 1.27 180)
+				(length 2.54)
+				(name "VD33_0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 5.08 -1.27 180)
+				(length 2.54)
+				(name "DRV"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 5.08 -3.81 180)
+				(length 2.54)
+				(name "VSS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 5.08 -6.35 180)
+				(length 2.54)
+				(name "VD33"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 5.08 -8.89 180)
+				(length 2.54)
+				(name "PWRJ"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 5.08 -11.43 180)
+				(length 2.54)
+				(name "TEST"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 5.08 -13.97 180)
+				(length 2.54)
+				(name "TEST2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "27"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 5.08 -16.51 180)
+				(length 2.54)
+				(name "VD33"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:GND"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#PWR"
+			(at 0 -3.175 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 0 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "GND_1_1"
+			(polyline
+				(pts
+					(xy -1.016 0) (xy 1.016 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.8 0) (xy 0.8 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin power_in line
+				(at 0 0 270)
+				(length 0)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:R"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "R"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "R"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "R_1_1"
+			(rectangle
+				(start -0.635 -1.27)
+				(end 0.635 1.27)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 0 0)
+				(length 1.905)
+				(name "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 0 180)
+				(length 1.905)
+				(name "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:USB_A"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "USB_A"
+			(at 0 -7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "USB_A_1_1"
+			(polyline
+				(pts
+					(xy -2.54 5.08) (xy 2.54 5.08) (xy 2.54 -5.08) (xy -2.54 -5.08)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 3.81 0)
+				(length 1.905)
+				(name "VBUS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 1.27 0)
+				(length 1.905)
+				(name "D-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -1.27 0)
+				(length 1.905)
+				(name "D+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -3.81 0)
+				(length 1.905)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:USB_C"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 22.86 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "USB_C"
+			(at 0 -22.86 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "USB_C_1_1"
+			(polyline
+				(pts
+					(xy -2.54 20.32) (xy 2.54 20.32) (xy 2.54 -20.32) (xy -2.54 -20.32)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 19.05 0)
+				(length 1.905)
+				(name "A1/GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 16.51 0)
+				(length 1.905)
+				(name "A4/VBUS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 13.97 0)
+				(length 1.905)
+				(name "A5/CC1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 11.43 0)
+				(length 1.905)
+				(name "A6/D+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 8.89 0)
+				(length 1.905)
+				(name "A7/D-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 6.35 0)
+				(length 1.905)
+				(name "A9/VBUS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 3.81 0)
+				(length 1.905)
+				(name "A12/GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 1.27 0)
+				(length 1.905)
+				(name "B1/GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -1.27 0)
+				(length 1.905)
+				(name "B4/VBUS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -3.81 0)
+				(length 1.905)
+				(name "B5/CC2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -6.35 0)
+				(length 1.905)
+				(name "B6/D+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -8.89 0)
+				(length 1.905)
+				(name "B7/D-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -11.43 0)
+				(length 1.905)
+				(name "B9/VBUS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -13.97 0)
+				(length 1.905)
+				(name "B12/GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -16.51 0)
+				(length 1.905)
+				(name "S1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -19.05 0)
+				(length 1.905)
+				(name "S2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:USB_HDR"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "USB_HDR"
+			(at 0 -7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "USB_HDR_1_1"
+			(polyline
+				(pts
+					(xy -2.54 5.08) (xy 2.54 5.08) (xy 2.54 -5.08) (xy -2.54 -5.08)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -2.54 3.81 0)
+				(length 1.905)
+				(name "VBUS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 1.27 0)
+				(length 1.905)
+				(name "D-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -1.27 0)
+				(length 1.905)
+				(name "D+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -2.54 -3.81 0)
+				(length 1.905)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:VCC3V3"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#PWR"
+			(at 0 -3.175 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "VCC3V3"
+			(at 0 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "VCC3V3_1_1"
+			(polyline
+				(pts
+					(xy 0 0) (xy 0 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin power_in line
+				(at 0 0 270)
+				(length 0)
+				(name "VCC3V3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "hmi:VCC5V"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#PWR"
+			(at 0 -3.175 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "VCC5V"
+			(at 0 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "VCC5V_1_1"
+			(polyline
+				(pts
+					(xy 0 0) (xy 0 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin power_in line
+				(at 0 0 270)
+				(length 0)
+				(name "VCC5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+  )
+  (text "CH340E debug on UART3 (PB6/PB7); USB0 device Type-C; USB1 host -> GL850G 4-port hub" (exclude_from_sim no) (at 20.00 300.00 0)
+    (effects (font (size 2.00 2.00)) (justify left bottom)) (uuid "hmi00000482-0000-0000-0000-000000000482"))
+  (text "Hub downstream: USB-A x2, WIFI/BT plug-in header, spare header. (SDIO WiFi conflicts with RMII on PG0-PG5)" (exclude_from_sim no) (at 20.00 296.00 0)
+    (effects (font (size 2.00 2.00)) (justify left bottom)) (uuid "hmi00000483-0000-0000-0000-000000000483"))
+  (symbol (lib_id "hmi:CH340E") (at 59.69 260.35 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/U13" (reference "U13") (value "CH340E") (footprint ""))))
+    (uuid "hmi00000484-0000-0000-0000-000000000484"))
+  (wire (pts (xy 54.61 265.43) (xy 52.07 265.43)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000485-0000-0000-0000-000000000485"))
+  (global_label "DBG_DP" (shape passive) (at 52.07 265.43 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000486-0000-0000-0000-000000000486"))
+  (wire (pts (xy 54.61 262.89) (xy 52.07 262.89)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000487-0000-0000-0000-000000000487"))
+  (global_label "DBG_DM" (shape passive) (at 52.07 262.89 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000488-0000-0000-0000-000000000488"))
+  (wire (pts (xy 54.61 260.35) (xy 52.07 260.35)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000489-0000-0000-0000-000000000489"))
+  (symbol (lib_id "hmi:GND") (at 52.07 260.35 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND96" (reference "#PWRGND96") (value "GND") (footprint ""))))
+    (uuid "hmi0000048a-0000-0000-0000-00000000048a"))
+  (no_connect (at 54.61 257.81) (uuid "hmi0000048b-0000-0000-0000-00000000048b"))
+  (no_connect (at 54.61 255.27) (uuid "hmi0000048c-0000-0000-0000-00000000048c"))
+  (no_connect (at 64.77 265.43) (uuid "hmi0000048d-0000-0000-0000-00000000048d"))
+  (wire (pts (xy 64.77 262.89) (xy 67.31 262.89)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000048e-0000-0000-0000-00000000048e"))
+  (symbol (lib_id "hmi:VCC3V3") (at 67.31 262.89 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V339" (reference "#PWRVCC3V339") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi0000048f-0000-0000-0000-00000000048f"))
+  (wire (pts (xy 64.77 260.35) (xy 67.31 260.35)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000490-0000-0000-0000-000000000490"))
+  (global_label "UART3_TXD" (shape passive) (at 67.31 260.35 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000491-0000-0000-0000-000000000491"))
+  (wire (pts (xy 64.77 257.81) (xy 67.31 257.81)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000492-0000-0000-0000-000000000492"))
+  (global_label "UART3_RXD" (shape passive) (at 67.31 257.81 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000493-0000-0000-0000-000000000493"))
+  (wire (pts (xy 64.77 255.27) (xy 67.31 255.27)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000494-0000-0000-0000-000000000494"))
+  (global_label "CH340_V3" (shape passive) (at 67.31 255.27 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000495-0000-0000-0000-000000000495"))
+  (symbol (lib_id "hmi:C") (at 64.77 251.46 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/C54" (reference "C54") (value "100nF") (footprint ""))))
+    (uuid "hmi00000496-0000-0000-0000-000000000496"))
+  (wire (pts (xy 62.23 251.46) (xy 59.69 251.46)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000497-0000-0000-0000-000000000497"))
+  (symbol (lib_id "hmi:VCC3V3") (at 59.69 251.46 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V340" (reference "#PWRVCC3V340") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi00000498-0000-0000-0000-000000000498"))
+  (wire (pts (xy 67.31 251.46) (xy 69.85 251.46)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000499-0000-0000-0000-000000000499"))
+  (symbol (lib_id "hmi:GND") (at 69.85 251.46 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND97" (reference "#PWRGND97") (value "GND") (footprint ""))))
+    (uuid "hmi0000049a-0000-0000-0000-00000000049a"))
+  (symbol (lib_id "hmi:C") (at 49.53 275.59 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/C55" (reference "C55") (value "100nF") (footprint ""))))
+    (uuid "hmi0000049b-0000-0000-0000-00000000049b"))
+  (wire (pts (xy 46.99 275.59) (xy 44.45 275.59)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000049c-0000-0000-0000-00000000049c"))
+  (global_label "CH340_V3" (shape passive) (at 44.45 275.59 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000049d-0000-0000-0000-00000000049d"))
+  (wire (pts (xy 52.07 275.59) (xy 54.61 275.59)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000049e-0000-0000-0000-00000000049e"))
+  (symbol (lib_id "hmi:GND") (at 54.61 275.59 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND98" (reference "#PWRGND98") (value "GND") (footprint ""))))
+    (uuid "hmi0000049f-0000-0000-0000-00000000049f"))
+  (symbol (lib_id "hmi:USB_C") (at 95.25 261.62 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/J7" (reference "J7") (value "USB_C_DBG") (footprint ""))))
+    (uuid "hmi000004a0-0000-0000-0000-0000000004a0"))
+  (wire (pts (xy 92.71 280.67) (xy 90.17 280.67)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004a1-0000-0000-0000-0000000004a1"))
+  (symbol (lib_id "hmi:GND") (at 90.17 280.67 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND99" (reference "#PWRGND99") (value "GND") (footprint ""))))
+    (uuid "hmi000004a2-0000-0000-0000-0000000004a2"))
+  (wire (pts (xy 92.71 278.13) (xy 90.17 278.13)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004a3-0000-0000-0000-0000000004a3"))
+  (symbol (lib_id "hmi:GND") (at 90.17 278.13 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND100" (reference "#PWRGND100") (value "GND") (footprint ""))))
+    (uuid "hmi000004a4-0000-0000-0000-0000000004a4"))
+  (wire (pts (xy 92.71 275.59) (xy 90.17 275.59)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004a5-0000-0000-0000-0000000004a5"))
+  (symbol (lib_id "hmi:GND") (at 90.17 275.59 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND101" (reference "#PWRGND101") (value "GND") (footprint ""))))
+    (uuid "hmi000004a6-0000-0000-0000-0000000004a6"))
+  (no_connect (at 92.71 273.05) (uuid "hmi000004a7-0000-0000-0000-0000000004a7"))
+  (wire (pts (xy 92.71 270.51) (xy 90.17 270.51)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004a8-0000-0000-0000-0000000004a8"))
+  (global_label "DBG_DM" (shape passive) (at 90.17 270.51 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004a9-0000-0000-0000-0000000004a9"))
+  (wire (pts (xy 92.71 267.97) (xy 90.17 267.97)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004aa-0000-0000-0000-0000000004aa"))
+  (global_label "DBG_DP" (shape passive) (at 90.17 267.97 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004ab-0000-0000-0000-0000000004ab"))
+  (no_connect (at 92.71 265.43) (uuid "hmi000004ac-0000-0000-0000-0000000004ac"))
+  (no_connect (at 92.71 262.89) (uuid "hmi000004ad-0000-0000-0000-0000000004ad"))
+  (wire (pts (xy 92.71 260.35) (xy 90.17 260.35)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004ae-0000-0000-0000-0000000004ae"))
+  (symbol (lib_id "hmi:GND") (at 90.17 260.35 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND102" (reference "#PWRGND102") (value "GND") (footprint ""))))
+    (uuid "hmi000004af-0000-0000-0000-0000000004af"))
+  (wire (pts (xy 92.71 257.81) (xy 90.17 257.81)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004b0-0000-0000-0000-0000000004b0"))
+  (symbol (lib_id "hmi:GND") (at 90.17 257.81 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND103" (reference "#PWRGND103") (value "GND") (footprint ""))))
+    (uuid "hmi000004b1-0000-0000-0000-0000000004b1"))
+  (no_connect (at 92.71 255.27) (uuid "hmi000004b2-0000-0000-0000-0000000004b2"))
+  (wire (pts (xy 92.71 252.73) (xy 90.17 252.73)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004b3-0000-0000-0000-0000000004b3"))
+  (global_label "DBG_DM" (shape passive) (at 90.17 252.73 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004b4-0000-0000-0000-0000000004b4"))
+  (wire (pts (xy 92.71 250.19) (xy 90.17 250.19)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004b5-0000-0000-0000-0000000004b5"))
+  (global_label "DBG_DP" (shape passive) (at 90.17 250.19 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004b6-0000-0000-0000-0000000004b6"))
+  (no_connect (at 92.71 247.65) (uuid "hmi000004b7-0000-0000-0000-0000000004b7"))
+  (no_connect (at 92.71 245.11) (uuid "hmi000004b8-0000-0000-0000-0000000004b8"))
+  (wire (pts (xy 92.71 242.57) (xy 90.17 242.57)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004b9-0000-0000-0000-0000000004b9"))
+  (symbol (lib_id "hmi:GND") (at 90.17 242.57 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND104" (reference "#PWRGND104") (value "GND") (footprint ""))))
+    (uuid "hmi000004ba-0000-0000-0000-0000000004ba"))
+  (symbol (lib_id "hmi:USB_C") (at 59.69 190.50 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/J8" (reference "J8") (value "USB_C_OTG") (footprint ""))))
+    (uuid "hmi000004bb-0000-0000-0000-0000000004bb"))
+  (wire (pts (xy 57.15 209.55) (xy 54.61 209.55)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004bc-0000-0000-0000-0000000004bc"))
+  (symbol (lib_id "hmi:GND") (at 54.61 209.55 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND105" (reference "#PWRGND105") (value "GND") (footprint ""))))
+    (uuid "hmi000004bd-0000-0000-0000-0000000004bd"))
+  (wire (pts (xy 57.15 207.01) (xy 54.61 207.01)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004be-0000-0000-0000-0000000004be"))
+  (symbol (lib_id "hmi:GND") (at 54.61 207.01 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND106" (reference "#PWRGND106") (value "GND") (footprint ""))))
+    (uuid "hmi000004bf-0000-0000-0000-0000000004bf"))
+  (wire (pts (xy 57.15 204.47) (xy 54.61 204.47)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004c0-0000-0000-0000-0000000004c0"))
+  (symbol (lib_id "hmi:GND") (at 54.61 204.47 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND107" (reference "#PWRGND107") (value "GND") (footprint ""))))
+    (uuid "hmi000004c1-0000-0000-0000-0000000004c1"))
+  (wire (pts (xy 57.15 201.93) (xy 54.61 201.93)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004c2-0000-0000-0000-0000000004c2"))
+  (global_label "VBUS_SENSE" (shape passive) (at 54.61 201.93 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004c3-0000-0000-0000-0000000004c3"))
+  (wire (pts (xy 57.15 199.39) (xy 54.61 199.39)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004c4-0000-0000-0000-0000000004c4"))
+  (global_label "USB0_DM" (shape passive) (at 54.61 199.39 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004c5-0000-0000-0000-0000000004c5"))
+  (wire (pts (xy 57.15 196.85) (xy 54.61 196.85)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004c6-0000-0000-0000-0000000004c6"))
+  (global_label "USB0_DP" (shape passive) (at 54.61 196.85 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004c7-0000-0000-0000-0000000004c7"))
+  (wire (pts (xy 57.15 194.31) (xy 54.61 194.31)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004c8-0000-0000-0000-0000000004c8"))
+  (global_label "CC2" (shape passive) (at 54.61 194.31 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004c9-0000-0000-0000-0000000004c9"))
+  (wire (pts (xy 57.15 191.77) (xy 54.61 191.77)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004ca-0000-0000-0000-0000000004ca"))
+  (global_label "VBUS_SENSE" (shape passive) (at 54.61 191.77 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004cb-0000-0000-0000-0000000004cb"))
+  (wire (pts (xy 57.15 189.23) (xy 54.61 189.23)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004cc-0000-0000-0000-0000000004cc"))
+  (symbol (lib_id "hmi:GND") (at 54.61 189.23 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND108" (reference "#PWRGND108") (value "GND") (footprint ""))))
+    (uuid "hmi000004cd-0000-0000-0000-0000000004cd"))
+  (wire (pts (xy 57.15 186.69) (xy 54.61 186.69)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004ce-0000-0000-0000-0000000004ce"))
+  (symbol (lib_id "hmi:GND") (at 54.61 186.69 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND109" (reference "#PWRGND109") (value "GND") (footprint ""))))
+    (uuid "hmi000004cf-0000-0000-0000-0000000004cf"))
+  (wire (pts (xy 57.15 184.15) (xy 54.61 184.15)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004d0-0000-0000-0000-0000000004d0"))
+  (global_label "VBUS_SENSE" (shape passive) (at 54.61 184.15 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004d1-0000-0000-0000-0000000004d1"))
+  (wire (pts (xy 57.15 181.61) (xy 54.61 181.61)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004d2-0000-0000-0000-0000000004d2"))
+  (global_label "USB0_DM" (shape passive) (at 54.61 181.61 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004d3-0000-0000-0000-0000000004d3"))
+  (wire (pts (xy 57.15 179.07) (xy 54.61 179.07)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004d4-0000-0000-0000-0000000004d4"))
+  (global_label "USB0_DP" (shape passive) (at 54.61 179.07 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004d5-0000-0000-0000-0000000004d5"))
+  (wire (pts (xy 57.15 176.53) (xy 54.61 176.53)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004d6-0000-0000-0000-0000000004d6"))
+  (global_label "CC1" (shape passive) (at 54.61 176.53 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004d7-0000-0000-0000-0000000004d7"))
+  (wire (pts (xy 57.15 173.99) (xy 54.61 173.99)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004d8-0000-0000-0000-0000000004d8"))
+  (global_label "VBUS_SENSE" (shape passive) (at 54.61 173.99 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004d9-0000-0000-0000-0000000004d9"))
+  (wire (pts (xy 57.15 171.45) (xy 54.61 171.45)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004da-0000-0000-0000-0000000004da"))
+  (symbol (lib_id "hmi:GND") (at 54.61 171.45 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND110" (reference "#PWRGND110") (value "GND") (footprint ""))))
+    (uuid "hmi000004db-0000-0000-0000-0000000004db"))
+  (symbol (lib_id "hmi:R") (at 49.53 203.20 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/R37" (reference "R37") (value "5.1K") (footprint ""))))
+    (uuid "hmi000004dc-0000-0000-0000-0000000004dc"))
+  (wire (pts (xy 46.99 203.20) (xy 44.45 203.20)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004dd-0000-0000-0000-0000000004dd"))
+  (global_label "CC1" (shape passive) (at 44.45 203.20 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004de-0000-0000-0000-0000000004de"))
+  (wire (pts (xy 52.07 203.20) (xy 54.61 203.20)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004df-0000-0000-0000-0000000004df"))
+  (symbol (lib_id "hmi:GND") (at 54.61 203.20 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND111" (reference "#PWRGND111") (value "GND") (footprint ""))))
+    (uuid "hmi000004e0-0000-0000-0000-0000000004e0"))
+  (symbol (lib_id "hmi:R") (at 49.53 195.58 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/R38" (reference "R38") (value "5.1K") (footprint ""))))
+    (uuid "hmi000004e1-0000-0000-0000-0000000004e1"))
+  (wire (pts (xy 46.99 195.58) (xy 44.45 195.58)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004e2-0000-0000-0000-0000000004e2"))
+  (global_label "CC2" (shape passive) (at 44.45 195.58 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004e3-0000-0000-0000-0000000004e3"))
+  (wire (pts (xy 52.07 195.58) (xy 54.61 195.58)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004e4-0000-0000-0000-0000000004e4"))
+  (symbol (lib_id "hmi:GND") (at 54.61 195.58 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND112" (reference "#PWRGND112") (value "GND") (footprint ""))))
+    (uuid "hmi000004e5-0000-0000-0000-0000000004e5"))
+  (symbol (lib_id "hmi:GL850G") (at 190.50 240.03 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/U14" (reference "U14") (value "GL850G") (footprint ""))))
+    (uuid "hmi000004e6-0000-0000-0000-0000000004e6"))
+  (wire (pts (xy 185.42 256.54) (xy 182.88 256.54)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004e7-0000-0000-0000-0000000004e7"))
+  (symbol (lib_id "hmi:VCC3V3") (at 182.88 256.54 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V341" (reference "#PWRVCC3V341") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi000004e8-0000-0000-0000-0000000004e8"))
+  (wire (pts (xy 185.42 254.00) (xy 182.88 254.00)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004e9-0000-0000-0000-0000000004e9"))
+  (symbol (lib_id "hmi:GND") (at 182.88 254.00 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND113" (reference "#PWRGND113") (value "GND") (footprint ""))))
+    (uuid "hmi000004ea-0000-0000-0000-0000000004ea"))
+  (wire (pts (xy 185.42 251.46) (xy 182.88 251.46)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004eb-0000-0000-0000-0000000004eb"))
+  (symbol (lib_id "hmi:VCC3V3") (at 182.88 251.46 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V342" (reference "#PWRVCC3V342") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi000004ec-0000-0000-0000-0000000004ec"))
+  (wire (pts (xy 185.42 248.92) (xy 182.88 248.92)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004ed-0000-0000-0000-0000000004ed"))
+  (global_label "HUB4_DM" (shape passive) (at 182.88 248.92 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004ee-0000-0000-0000-0000000004ee"))
+  (wire (pts (xy 185.42 246.38) (xy 182.88 246.38)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004ef-0000-0000-0000-0000000004ef"))
+  (global_label "HUB4_DP" (shape passive) (at 182.88 246.38 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004f0-0000-0000-0000-0000000004f0"))
+  (wire (pts (xy 185.42 243.84) (xy 182.88 243.84)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004f1-0000-0000-0000-0000000004f1"))
+  (global_label "HUB3_DM" (shape passive) (at 182.88 243.84 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004f2-0000-0000-0000-0000000004f2"))
+  (wire (pts (xy 185.42 241.30) (xy 182.88 241.30)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004f3-0000-0000-0000-0000000004f3"))
+  (global_label "HUB3_DP" (shape passive) (at 182.88 241.30 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004f4-0000-0000-0000-0000000004f4"))
+  (wire (pts (xy 185.42 238.76) (xy 182.88 238.76)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004f5-0000-0000-0000-0000000004f5"))
+  (global_label "HUB2_DM" (shape passive) (at 182.88 238.76 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004f6-0000-0000-0000-0000000004f6"))
+  (wire (pts (xy 185.42 236.22) (xy 182.88 236.22)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004f7-0000-0000-0000-0000000004f7"))
+  (global_label "HUB2_DP" (shape passive) (at 182.88 236.22 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004f8-0000-0000-0000-0000000004f8"))
+  (wire (pts (xy 185.42 233.68) (xy 182.88 233.68)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004f9-0000-0000-0000-0000000004f9"))
+  (global_label "HUB1_DM" (shape passive) (at 182.88 233.68 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004fa-0000-0000-0000-0000000004fa"))
+  (wire (pts (xy 185.42 231.14) (xy 182.88 231.14)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004fb-0000-0000-0000-0000000004fb"))
+  (global_label "HUB1_DP" (shape passive) (at 182.88 231.14 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi000004fc-0000-0000-0000-0000000004fc"))
+  (no_connect (at 185.42 228.60) (uuid "hmi000004fd-0000-0000-0000-0000000004fd"))
+  (wire (pts (xy 185.42 226.06) (xy 182.88 226.06)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi000004fe-0000-0000-0000-0000000004fe"))
+  (symbol (lib_id "hmi:VCC3V3") (at 182.88 226.06 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V343" (reference "#PWRVCC3V343") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi000004ff-0000-0000-0000-0000000004ff"))
+  (wire (pts (xy 185.42 223.52) (xy 182.88 223.52)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000500-0000-0000-0000-000000000500"))
+  (global_label "HUB_REXT" (shape passive) (at 182.88 223.52 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000501-0000-0000-0000-000000000501"))
+  (wire (pts (xy 195.58 256.54) (xy 198.12 256.54)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000502-0000-0000-0000-000000000502"))
+  (global_label "HUB_DM" (shape passive) (at 198.12 256.54 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000503-0000-0000-0000-000000000503"))
+  (wire (pts (xy 195.58 254.00) (xy 198.12 254.00)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000504-0000-0000-0000-000000000504"))
+  (global_label "HUB_DP" (shape passive) (at 198.12 254.00 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000505-0000-0000-0000-000000000505"))
+  (wire (pts (xy 195.58 251.46) (xy 198.12 251.46)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000506-0000-0000-0000-000000000506"))
+  (symbol (lib_id "hmi:VCC5V") (at 198.12 251.46 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC5V19" (reference "#PWRVCC5V19") (value "VCC5V") (footprint ""))))
+    (uuid "hmi00000507-0000-0000-0000-000000000507"))
+  (wire (pts (xy 195.58 248.92) (xy 198.12 248.92)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000508-0000-0000-0000-000000000508"))
+  (global_label "VBUSM" (shape passive) (at 198.12 248.92 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000509-0000-0000-0000-000000000509"))
+  (wire (pts (xy 195.58 246.38) (xy 198.12 246.38)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000050a-0000-0000-0000-00000000050a"))
+  (symbol (lib_id "hmi:GND") (at 198.12 246.38 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND114" (reference "#PWRGND114") (value "GND") (footprint ""))))
+    (uuid "hmi0000050b-0000-0000-0000-00000000050b"))
+  (wire (pts (xy 195.58 243.84) (xy 198.12 243.84)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000050c-0000-0000-0000-00000000050c"))
+  (symbol (lib_id "hmi:VCC5V") (at 198.12 243.84 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC5V20" (reference "#PWRVCC5V20") (value "VCC5V") (footprint ""))))
+    (uuid "hmi0000050d-0000-0000-0000-00000000050d"))
+  (wire (pts (xy 195.58 241.30) (xy 198.12 241.30)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000050e-0000-0000-0000-00000000050e"))
+  (symbol (lib_id "hmi:VCC3V3") (at 198.12 241.30 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V344" (reference "#PWRVCC3V344") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi0000050f-0000-0000-0000-00000000050f"))
+  (wire (pts (xy 195.58 238.76) (xy 198.12 238.76)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000510-0000-0000-0000-000000000510"))
+  (global_label "HUB_DRV" (shape passive) (at 198.12 238.76 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000511-0000-0000-0000-000000000511"))
+  (wire (pts (xy 195.58 236.22) (xy 198.12 236.22)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000512-0000-0000-0000-000000000512"))
+  (symbol (lib_id "hmi:GND") (at 198.12 236.22 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND115" (reference "#PWRGND115") (value "GND") (footprint ""))))
+    (uuid "hmi00000513-0000-0000-0000-000000000513"))
+  (wire (pts (xy 195.58 233.68) (xy 198.12 233.68)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000514-0000-0000-0000-000000000514"))
+  (symbol (lib_id "hmi:VCC3V3") (at 198.12 233.68 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V345" (reference "#PWRVCC3V345") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi00000515-0000-0000-0000-000000000515"))
+  (no_connect (at 195.58 231.14) (uuid "hmi00000516-0000-0000-0000-000000000516"))
+  (wire (pts (xy 195.58 228.60) (xy 198.12 228.60)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000517-0000-0000-0000-000000000517"))
+  (symbol (lib_id "hmi:GND") (at 198.12 228.60 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND116" (reference "#PWRGND116") (value "GND") (footprint ""))))
+    (uuid "hmi00000518-0000-0000-0000-000000000518"))
+  (wire (pts (xy 195.58 226.06) (xy 198.12 226.06)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000519-0000-0000-0000-000000000519"))
+  (symbol (lib_id "hmi:GND") (at 198.12 226.06 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND117" (reference "#PWRGND117") (value "GND") (footprint ""))))
+    (uuid "hmi0000051a-0000-0000-0000-00000000051a"))
+  (wire (pts (xy 195.58 223.52) (xy 198.12 223.52)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000051b-0000-0000-0000-00000000051b"))
+  (symbol (lib_id "hmi:VCC3V3") (at 198.12 223.52 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V346" (reference "#PWRVCC3V346") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi0000051c-0000-0000-0000-00000000051c"))
+  (symbol (lib_id "hmi:R") (at 180.34 232.41 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/R39" (reference "R39") (value "12K") (footprint ""))))
+    (uuid "hmi0000051d-0000-0000-0000-00000000051d"))
+  (wire (pts (xy 177.80 232.41) (xy 175.26 232.41)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000051e-0000-0000-0000-00000000051e"))
+  (global_label "HUB_REXT" (shape passive) (at 175.26 232.41 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000051f-0000-0000-0000-00000000051f"))
+  (wire (pts (xy 182.88 232.41) (xy 185.42 232.41)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000520-0000-0000-0000-000000000520"))
+  (symbol (lib_id "hmi:GND") (at 185.42 232.41 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND118" (reference "#PWRGND118") (value "GND") (footprint ""))))
+    (uuid "hmi00000521-0000-0000-0000-000000000521"))
+  (symbol (lib_id "hmi:C") (at 180.34 226.06 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/C56" (reference "C56") (value "1uF") (footprint ""))))
+    (uuid "hmi00000522-0000-0000-0000-000000000522"))
+  (wire (pts (xy 177.80 226.06) (xy 175.26 226.06)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000523-0000-0000-0000-000000000523"))
+  (global_label "HUB_DRV" (shape passive) (at 175.26 226.06 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000524-0000-0000-0000-000000000524"))
+  (wire (pts (xy 182.88 226.06) (xy 185.42 226.06)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000525-0000-0000-0000-000000000525"))
+  (symbol (lib_id "hmi:GND") (at 185.42 226.06 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND119" (reference "#PWRGND119") (value "GND") (footprint ""))))
+    (uuid "hmi00000526-0000-0000-0000-000000000526"))
+  (symbol (lib_id "hmi:R") (at 199.39 243.84 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/R40" (reference "R40") (value "10K") (footprint ""))))
+    (uuid "hmi00000527-0000-0000-0000-000000000527"))
+  (wire (pts (xy 196.85 243.84) (xy 194.31 243.84)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000528-0000-0000-0000-000000000528"))
+  (global_label "VBUSM" (shape passive) (at 194.31 243.84 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000529-0000-0000-0000-000000000529"))
+  (wire (pts (xy 201.93 243.84) (xy 204.47 243.84)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000052a-0000-0000-0000-00000000052a"))
+  (symbol (lib_id "hmi:VCC5V") (at 204.47 243.84 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC5V21" (reference "#PWRVCC5V21") (value "VCC5V") (footprint ""))))
+    (uuid "hmi0000052b-0000-0000-0000-00000000052b"))
+  (symbol (lib_id "hmi:C") (at 195.58 257.81 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/C57" (reference "C57") (value "100nF") (footprint ""))))
+    (uuid "hmi0000052c-0000-0000-0000-00000000052c"))
+  (wire (pts (xy 193.04 257.81) (xy 190.50 257.81)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000052d-0000-0000-0000-00000000052d"))
+  (symbol (lib_id "hmi:VCC3V3") (at 190.50 257.81 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V347" (reference "#PWRVCC3V347") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi0000052e-0000-0000-0000-00000000052e"))
+  (wire (pts (xy 198.12 257.81) (xy 200.66 257.81)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000052f-0000-0000-0000-00000000052f"))
+  (symbol (lib_id "hmi:GND") (at 200.66 257.81 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND120" (reference "#PWRGND120") (value "GND") (footprint ""))))
+    (uuid "hmi00000530-0000-0000-0000-000000000530"))
+  (symbol (lib_id "hmi:C") (at 195.58 251.46 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/C58" (reference "C58") (value "100nF") (footprint ""))))
+    (uuid "hmi00000531-0000-0000-0000-000000000531"))
+  (wire (pts (xy 193.04 251.46) (xy 190.50 251.46)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000532-0000-0000-0000-000000000532"))
+  (symbol (lib_id "hmi:VCC3V3") (at 190.50 251.46 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC3V348" (reference "#PWRVCC3V348") (value "VCC3V3") (footprint ""))))
+    (uuid "hmi00000533-0000-0000-0000-000000000533"))
+  (wire (pts (xy 198.12 251.46) (xy 200.66 251.46)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000534-0000-0000-0000-000000000534"))
+  (symbol (lib_id "hmi:GND") (at 200.66 251.46 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND121" (reference "#PWRGND121") (value "GND") (footprint ""))))
+    (uuid "hmi00000535-0000-0000-0000-000000000535"))
+  (symbol (lib_id "hmi:CP") (at 195.58 222.25 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/C59" (reference "C59") (value "10uF") (footprint ""))))
+    (uuid "hmi00000536-0000-0000-0000-000000000536"))
+  (wire (pts (xy 193.04 222.25) (xy 190.50 222.25)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000537-0000-0000-0000-000000000537"))
+  (symbol (lib_id "hmi:VCC5V") (at 190.50 222.25 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC5V22" (reference "#PWRVCC5V22") (value "VCC5V") (footprint ""))))
+    (uuid "hmi00000538-0000-0000-0000-000000000538"))
+  (wire (pts (xy 198.12 222.25) (xy 200.66 222.25)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000539-0000-0000-0000-000000000539"))
+  (symbol (lib_id "hmi:GND") (at 200.66 222.25 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND122" (reference "#PWRGND122") (value "GND") (footprint ""))))
+    (uuid "hmi0000053a-0000-0000-0000-00000000053a"))
+  (symbol (lib_id "hmi:USB_A") (at 255.27 261.62 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/J9" (reference "J9") (value "USB_A1") (footprint ""))))
+    (uuid "hmi0000053b-0000-0000-0000-00000000053b"))
+  (wire (pts (xy 252.73 265.43) (xy 250.19 265.43)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000053c-0000-0000-0000-00000000053c"))
+  (symbol (lib_id "hmi:GND") (at 250.19 265.43 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND123" (reference "#PWRGND123") (value "GND") (footprint ""))))
+    (uuid "hmi0000053d-0000-0000-0000-00000000053d"))
+  (wire (pts (xy 252.73 262.89) (xy 250.19 262.89)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000053e-0000-0000-0000-00000000053e"))
+  (global_label "HUB1_DP" (shape passive) (at 250.19 262.89 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000053f-0000-0000-0000-00000000053f"))
+  (wire (pts (xy 252.73 260.35) (xy 250.19 260.35)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000540-0000-0000-0000-000000000540"))
+  (global_label "HUB1_DM" (shape passive) (at 250.19 260.35 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000541-0000-0000-0000-000000000541"))
+  (wire (pts (xy 252.73 257.81) (xy 250.19 257.81)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000542-0000-0000-0000-000000000542"))
+  (symbol (lib_id "hmi:VCC5V") (at 250.19 257.81 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC5V23" (reference "#PWRVCC5V23") (value "VCC5V") (footprint ""))))
+    (uuid "hmi00000543-0000-0000-0000-000000000543"))
+  (symbol (lib_id "hmi:USB_A") (at 255.27 243.84 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/J10" (reference "J10") (value "USB_A2") (footprint ""))))
+    (uuid "hmi00000544-0000-0000-0000-000000000544"))
+  (wire (pts (xy 252.73 247.65) (xy 250.19 247.65)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000545-0000-0000-0000-000000000545"))
+  (symbol (lib_id "hmi:GND") (at 250.19 247.65 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND124" (reference "#PWRGND124") (value "GND") (footprint ""))))
+    (uuid "hmi00000546-0000-0000-0000-000000000546"))
+  (wire (pts (xy 252.73 245.11) (xy 250.19 245.11)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000547-0000-0000-0000-000000000547"))
+  (global_label "HUB2_DP" (shape passive) (at 250.19 245.11 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000548-0000-0000-0000-000000000548"))
+  (wire (pts (xy 252.73 242.57) (xy 250.19 242.57)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000549-0000-0000-0000-000000000549"))
+  (global_label "HUB2_DM" (shape passive) (at 250.19 242.57 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000054a-0000-0000-0000-00000000054a"))
+  (wire (pts (xy 252.73 240.03) (xy 250.19 240.03)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000054b-0000-0000-0000-00000000054b"))
+  (symbol (lib_id "hmi:VCC5V") (at 250.19 240.03 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC5V24" (reference "#PWRVCC5V24") (value "VCC5V") (footprint ""))))
+    (uuid "hmi0000054c-0000-0000-0000-00000000054c"))
+  (symbol (lib_id "hmi:USB_HDR") (at 255.27 226.06 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/J11" (reference "J11") (value "WIFI_BT_PLUG") (footprint ""))))
+    (uuid "hmi0000054d-0000-0000-0000-00000000054d"))
+  (wire (pts (xy 252.73 229.87) (xy 250.19 229.87)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000054e-0000-0000-0000-00000000054e"))
+  (symbol (lib_id "hmi:GND") (at 250.19 229.87 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND125" (reference "#PWRGND125") (value "GND") (footprint ""))))
+    (uuid "hmi0000054f-0000-0000-0000-00000000054f"))
+  (wire (pts (xy 252.73 227.33) (xy 250.19 227.33)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000550-0000-0000-0000-000000000550"))
+  (global_label "HUB3_DP" (shape passive) (at 250.19 227.33 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000551-0000-0000-0000-000000000551"))
+  (wire (pts (xy 252.73 224.79) (xy 250.19 224.79)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000552-0000-0000-0000-000000000552"))
+  (global_label "HUB3_DM" (shape passive) (at 250.19 224.79 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi00000553-0000-0000-0000-000000000553"))
+  (wire (pts (xy 252.73 222.25) (xy 250.19 222.25)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000554-0000-0000-0000-000000000554"))
+  (symbol (lib_id "hmi:VCC5V") (at 250.19 222.25 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC5V25" (reference "#PWRVCC5V25") (value "VCC5V") (footprint ""))))
+    (uuid "hmi00000555-0000-0000-0000-000000000555"))
+  (symbol (lib_id "hmi:USB_HDR") (at 255.27 208.28 0) (unit 1) (in_bom yes) (on_board yes)
+    (instances (project "hmi-board" (path "/J12" (reference "J12") (value "USB_HDR") (footprint ""))))
+    (uuid "hmi00000556-0000-0000-0000-000000000556"))
+  (wire (pts (xy 252.73 212.09) (xy 250.19 212.09)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000557-0000-0000-0000-000000000557"))
+  (symbol (lib_id "hmi:GND") (at 250.19 212.09 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRGND126" (reference "#PWRGND126") (value "GND") (footprint ""))))
+    (uuid "hmi00000558-0000-0000-0000-000000000558"))
+  (wire (pts (xy 252.73 209.55) (xy 250.19 209.55)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi00000559-0000-0000-0000-000000000559"))
+  (global_label "HUB4_DP" (shape passive) (at 250.19 209.55 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000055a-0000-0000-0000-00000000055a"))
+  (wire (pts (xy 252.73 207.01) (xy 250.19 207.01)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000055b-0000-0000-0000-00000000055b"))
+  (global_label "HUB4_DM" (shape passive) (at 250.19 207.01 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27))) (uuid "hmi0000055c-0000-0000-0000-00000000055c"))
+  (wire (pts (xy 252.73 204.47) (xy 250.19 204.47)) (stroke (width 0) (type default) (color 0 0 0 0)) (uuid "hmi0000055d-0000-0000-0000-00000000055d"))
+  (symbol (lib_id "hmi:VCC5V") (at 250.19 204.47 0) (unit 1) (in_bom no) (on_board no)
+    (instances (project "hmi-board" (path "/#PWRVCC5V26" (reference "#PWRVCC5V26") (value "VCC5V") (footprint ""))))
+    (uuid "hmi0000055e-0000-0000-0000-00000000055e"))
+)

@@ -1,0 +1,53 @@
+═══════════════════════════════════════════════════════════════════
+  PR Review Receipt — FF5/FF6 Acceptance Tests
+  Date: 2026-07-31
+  Commit: ee937fe
+  Files: 7 changed, +737, -14
+═══════════════════════════════════════════════════════════════════
+
+Review anchors:
+  - src/HmiEditor.Core/Design/CoordinateTransform.cs:25 (ScreenToModel)
+  - src/HmiEditor.Core/Design/PropertyValidator.cs:40 (ClampPosition)
+  - src/HmiEditor.App/Controls/DesignCanvas.cs:958 (HandleDrop delegation)
+  - src/HmiEditor.App/Views/PropertyPanelView.axaml.cs:580 (SaveProperties validation)
+
+Intent verification:
+  FF5: Extract coordinate transformation into testable pure functions,
+       verify <5px precision across 0.25x/1x/2x/4x zoom + pan scenarios.
+  FF6: Extract property validation into testable pure functions,
+       verify 100% illegal value interception (NaN, negative, out-of-range,
+       invalid color format).
+
+Failure-mode pass:
+  - No hallucinated APIs: CoordinateTransform and PropertyValidator are
+    self-contained static classes using only System and System.Text.RegularExpressions.
+  - No deleted-but-used code: HandleDrop still produces the same (modelX, modelY)
+    tuple; SaveProperties still assigns all 12 properties.
+  - No scope creep: only the two acceptance criteria were implemented.
+  - Edge cases covered: zero/negative zoom (MinZoom fallback), NaN/Infinity
+    inputs, color format validation (#RGB/#RRGGBB/#RRGGBBAA), name length limits.
+
+Behavior verification:
+  - 83 new tests (CoordinateTransformTests + PropertyValidatorTests)
+  - All 83 pass, 0 fail
+  - Full suite: 393 passed, 0 failed (no regression)
+  - Tests would fail without the change: FF6_AllIllegalValues_Intercepted
+    asserts ClampSize(NaN) returns MinControlSize (was: direct assignment of NaN)
+
+Code-quality dimensions:
+  Design:   OK — pure functions extracted from Avalonia-dependent UI code
+  Function: OK — all FF5/FF6 scenarios covered with test matrix
+  Complexity: OK — simple arithmetic and clamping logic
+  Tests:    OK — 83 tests, Theory+InlineData for matrix coverage
+  Naming:   OK — ClampPosition/ClampSize/SanitizeColor are self-documenting
+  Comments: OK — XML docs on all public methods
+  Style:    OK — matches existing project conventions
+
+Risk classification:
+  - No blockers
+  - No must-fix-before-merge
+  - Follow-up: F1 runtime UI verification (Dock rendering, cross-panel drag,
+    VariablePicker popup) — requires manual app launch
+
+Verdict: PASS — safe to merge
+═══════════════════════════════════════════════════════════════════

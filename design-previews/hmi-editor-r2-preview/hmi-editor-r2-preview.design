@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "id": "page-faceplate-editor",
+      "title": "Faceplate 编辑器",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1785394800000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 900,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-a3b24ddc",
+          "measuredAt": 1785395329717
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/faceplate-editor.html",
+        "interactions": []
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "HMI Editor Phase R2 Faceplate 编辑器"
+  }
+}

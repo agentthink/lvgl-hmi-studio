@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             x:Class="HmiEditor.App.Views.ProjectExplorerView">
+    <UserControl.Styles>
+        <!-- 项目浏览器右键增强菜单主题样式（符合整体 HMI 风格） -->
+        <Style Selector="MenuItem">
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="MenuItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+        </Style>
+        <Style Selector="MenuItem:disabled">
+            <Setter Property="Foreground" Value="{StaticResource HmiTextHintBrush}"/>
+        </Style>
+        <Style Selector="MenuItem.danger">
+            <Setter Property="Foreground" Value="{StaticResource HmiDangerBrush}"/>
+        </Style>
+        <Style Selector="Separator">
+            <Setter Property="Background" Value="{StaticResource HmiBorderBrush}"/>
+        </Style>
+    </UserControl.Styles>
+    <Border Background="{StaticResource HmiBgWindowBrush}" Padding="8">
+        <Grid RowDefinitions="Auto,Auto,*">
+            <Grid ColumnDefinitions="*,Auto" Margin="4,0,0,4">
+                <TextBlock Text="{res:Loc project.resources}" Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="18"
+                           FontWeight="Bold"/>
+                <Button x:Name="BtnDelete" Content="🗑"
+                        Click="OnDeleteClick"
+                        ToolTip.Tip="{res:Loc project.tt.del}"
+                        Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                        BorderThickness="0" Padding="6,2"
+                        IsVisible="False" />
+            </Grid>
+
+            <!-- 操作状态提示（右键菜单动作反馈） -->
+            <TextBlock x:Name="StatusText"
+                       Grid.Row="1"
+                       Foreground="{StaticResource HmiTextHintBrush}"
+                       FontSize="11"
+                       TextWrapping="Wrap"
+                       IsVisible="False"
+                       Margin="4,0,4,4"/>
+
+            <TreeView x:Name="ProjectTree"
+                      Grid.Row="2"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      SelectionChanged="OnSelectionChanged"
+                      KeyDown="OnTreeKeyDown">
+                <TreeView.Styles>
+                    <Style Selector="TreeViewItem">
+                        <Setter Property="Foreground" Value="{StaticResource HmiTextPrimaryBrush}"/>
+                        <Setter Property="FontSize" Value="13"/>
+                    </Style>
+                    <Style Selector="TreeViewItem:selected">
+                        <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+                    </Style>
+                    <Style Selector="TreeViewItem:pointerover">
+                        <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                    </Style>
+                </TreeView.Styles>
+            </TreeView>
+        </Grid>
+    </Border>
+</UserControl>

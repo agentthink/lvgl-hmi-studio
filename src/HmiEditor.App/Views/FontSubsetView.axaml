@@ -1,0 +1,149 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.FontSubsetView"
+        Title="{res:Loc win.font.subset}"
+        Width="620"
+        Height="540"
+        MinWidth="470"
+        MinHeight="410"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc win.font.subset}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容整体放入此处 -->
+            <Border Grid.Row="1" Padding="14">
+        <Grid RowDefinitions="Auto,Auto,*,Auto">
+            <!-- 标题 -->
+            <TextBlock Text="{res:Loc font.subset.title}"
+                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="18" FontWeight="Bold"
+                       Margin="0,0,0,10"/>
+
+            <!-- 字符统计卡片 -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" ColumnSpacing="8" Margin="0,0,0,10">
+                <Border Background="{StaticResource HmiBgPanelBrush}" CornerRadius="6" Padding="10,8">
+                    <StackPanel>
+                        <TextBlock x:Name="TotalCharsText" Text="0" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                   FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="{res:Loc font.raw.chars}" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Background="{StaticResource HmiBgPanelBrush}" CornerRadius="6" Padding="10,8">
+                    <StackPanel>
+                        <TextBlock x:Name="UniqueCharsText" Text="0" Foreground="{StaticResource HmiLinkBrush}"
+                                   FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="{res:Loc font.unique.chars}" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Background="{StaticResource HmiBgPanelBrush}" CornerRadius="6" Padding="10,8">
+                    <StackPanel>
+                        <TextBlock x:Name="AsciiCharsText" Text="0" Foreground="{StaticResource HmiSuccessBrush}"
+                                   FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="ASCII" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="3" Background="{StaticResource HmiBgPanelBrush}" CornerRadius="6" Padding="10,8">
+                    <StackPanel>
+                        <TextBlock x:Name="CjkCharsText" Text="0" Foreground="{StaticResource HmiWarningBrush}"
+                                   FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="{res:Loc font.cjk}" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- 预算对比 -->
+            <Border Grid.Row="2" Background="{StaticResource HmiBgSelectedBrush}" CornerRadius="6" Padding="12,10">
+                <StackPanel Spacing="4">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <TextBlock Text="{res:Loc font.after.subset}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"/>
+                        <TextBlock x:Name="SubsetSizeText" Grid.Column="1" Text="—"
+                                   Foreground="{StaticResource HmiLinkBrush}" FontSize="14" FontWeight="Bold"
+                                   HorizontalAlignment="Right"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto,*">
+                        <TextBlock Text="{res:Loc font.full.cjk}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"/>
+                        <TextBlock x:Name="FullSizeText" Grid.Column="1" Text="—"
+                                   Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="13"
+                                   HorizontalAlignment="Right"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto,*">
+                        <TextBlock Text="{res:Loc font.saved}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"/>
+                        <TextBlock x:Name="SavingsText" Grid.Column="1" Text="—"
+                                   Foreground="{StaticResource HmiSuccessBrush}" FontSize="15" FontWeight="Bold"
+                                   HorizontalAlignment="Right"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- 字符预览 -->
+            <Border Grid.Row="3" Background="{StaticResource HmiBgDarkBrush}" CornerRadius="6" Padding="10,8"
+                    Margin="0,10,0,0">
+                <Grid RowDefinitions="Auto,*">
+                    <TextBlock Text="{res:Loc font.subset.actual.charset}" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11"
+                               Margin="0,0,0,6"/>
+                    <TextBlock x:Name="CharsPreviewText" Grid.Row="1" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" TextWrapping="Wrap"
+                               Text="{res:Loc font.subset.no.text}"/>
+                </Grid>
+            </Border>
+
+            <!-- 操作栏 -->
+            <Grid Grid.Row="4" ColumnDefinitions="*,Auto,Auto" Margin="0,12,0,0">
+                <TextBlock x:Name="ExportHintText" Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                           VerticalAlignment="Center"/>
+                <Button x:Name="BtnExportCharset" Content="{res:Loc font.subset.export}"
+                        Grid.Column="1" Margin="0,0,8,0"
+                        Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="12,6" FontSize="12"/>
+                <Button x:Name="BtnClose" Content="{res:Loc gen.close}"
+                        Grid.Column="2"
+                        Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                        BorderThickness="0" Padding="12,6" FontSize="12"/>
+            </Grid>
+        </Grid>
+    </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

@@ -1,0 +1,20 @@
+# 代码助手开发套件 · Git 忽略规则
+
+# 虚拟环境
+.venv/
+
+# 运行时数据（构建产物 / 部署记录 / 日志）
+.runtime/
+
+# 本地配置（模板见 .env.example / config/config.yaml.example）
+.env
+config/config.yaml
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# 演示项目编译缓存（构建时会生成）
+examples/demo_project/src/**/__pycache__/

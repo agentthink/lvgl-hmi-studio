@@ -1,0 +1,29 @@
+{
+  "skillProvenance": {
+    "name": "solo-design",
+    "version": "2026.07.22.00.00.00",
+    "version_source": "skill-release-manifest.json",
+    "runtime_skill_dir": "c:\\Users\\23491\\.trae-cn\\builtin\\design\\default\\skills\\solo-design",
+    "recorded_at": "2026-07-30T15:05:00+08:00"
+  },
+  "operation": "free-exploration-page",
+  "lane": "free_exploration",
+  "pageCount": 1,
+  "pages": [
+    {
+      "nodeId": "page-faceplate-editor",
+      "htmlSrc": "pages/faceplate-editor.html",
+      "title": "Faceplate 编辑器",
+      "deliverableType": "desktop application UI mockup",
+      "viewportMode": "app-shell",
+      "deviceType": "desktop",
+      "status": "validated"
+    }
+  ],
+  "validationResult": {
+    "success": true,
+    "renderBlockingErrorCount": 0,
+    "softWarningCount": 6,
+    "finishReadinessPassed": true
+  }
+}

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Hmi.Hardware.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Hmi.Hardware.Contracts\Hmi.Hardware.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Hmi.Hardware.Loader\Hmi.Hardware.Loader.csproj" />
+    <ProjectReference Include="..\..\src\Hmi.Hardware.Builtin\Hmi.Hardware.Builtin.csproj" />
+    <ProjectReference Include="..\..\src\HmiEditor.Core\HmiEditor.Core.csproj" />
+    <!-- 版本标记的跨边界守卫要读编辑器"认得的 LVGL 版本清单"（LvglApiCompatChecker），
+         那是版本兼容知识所在层；仅测试工程引用，产品侧不因此多一条依赖。 -->
+    <ProjectReference Include="..\..\src\HmiEditor.CodeGen\HmiEditor.CodeGen.csproj" />
+    <ProjectReference Include="..\HmiEditor.TestSupport\HmiEditor.TestSupport.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- 临时目录统一走 TestTempDir（探测 + 回退），不要在测试里直接 Path.GetTempPath()。 -->
+    <Using Include="HmiEditor.TestSupport" />
+  </ItemGroup>
+</Project>

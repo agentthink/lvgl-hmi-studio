@@ -1,0 +1,1944 @@
+ERC report (2026-08-19T19:05:47, Encoding UTF8)
+Report includes: Errors, Warnings
+
+***** Sheet /
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 184.15 mm): 符号 C47 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 199.39 mm): 符号 C46 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 215.90 mm): 符号 C45 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 184.15 mm): 符号 #PWRGND78 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 190.50 mm): 符号 #PWRVCC3V331 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 199.39 mm): 符号 U11 [SP3232]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 251.46 mm): 符号 #PWRVCC3V329 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 260.35 mm): 符号 U10 [SP3485]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(64.77 mm, 190.50 mm): 符号 C44 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(64.77 mm, 251.46 mm): 符号 C43 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(67.31 mm, 190.50 mm): 符号 #PWRVCC3V330 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(67.31 mm, 193.04 mm): 符号 #PWRGND76 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(67.31 mm, 256.54 mm): 符号 #PWRVCC3V328 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(67.31 mm, 264.16 mm): 符号 #PWRGND72 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(69.85 mm, 190.50 mm): 符号 #PWRGND77 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(69.85 mm, 251.46 mm): 符号 #PWRGND73 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(74.93 mm, 184.15 mm): 符号 C48 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(80.01 mm, 184.15 mm): 符号 #PWRGND79 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(95.25 mm, 256.54 mm): 符号 R26 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(95.25 mm, 262.89 mm): 符号 J4 [HDR_1x2]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(100.33 mm, 199.39 mm): 符号 #PWRGND80 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(100.33 mm, 256.54 mm): 符号 #PWRGND74 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(105.41 mm, 199.39 mm): 符号 J5 [DB9]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(105.41 mm, 256.54 mm): 符号 D5 [TVS]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(107.95 mm, 256.54 mm): 符号 #PWRGND75 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(113.03 mm, 256.54 mm): 符号 D6 [TVS]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(194.31 mm, 267.97 mm): 符号 #PWRVCC3V336 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(199.39 mm, 240.03 mm): 符号 #PWRVCC3V335 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(199.39 mm, 267.97 mm): 符号 R30 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(199.39 mm, 283.21 mm): 符号 R27 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(204.47 mm, 240.03 mm): 符号 R29 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(204.47 mm, 246.38 mm): 符号 C49 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(204.47 mm, 254.00 mm): 符号 R28 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(209.55 mm, 246.38 mm): 符号 #PWRGND85 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(209.55 mm, 254.00 mm): 符号 #PWRGND84 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(212.09 mm, 278.13 mm): 符号 #PWRGND81 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(212.09 mm, 280.67 mm): 符号 #PWRVCC3V332 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(219.71 mm, 270.51 mm): 符号 U12 [RTL8201F]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(224.79 mm, 259.08 mm): 符号 #PWRVCC3V337 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(224.79 mm, 265.43 mm): 符号 #PWRVCC3V338 [VCC3V3]
+[unconnected_wire_endpoint]: 未连接的连线端点
+    ; warning
+    @(224.79 mm, 290.83 mm): 水平线, 长度 2.54 mm
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(227.33 mm, 252.73 mm): 符号 #PWRGND83 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(227.33 mm, 257.81 mm): 符号 #PWRVCC3V334 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(227.33 mm, 275.59 mm): 符号 #PWRGND82 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(227.33 mm, 278.13 mm): 符号 #PWRVCC3V333 [VCC3V3]
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(227.33 mm, 290.83 mm): 全局标签 'RMII_RXER'
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(229.87 mm, 259.08 mm): 符号 C50 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(229.87 mm, 265.43 mm): 符号 C51 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(234.95 mm, 259.08 mm): 符号 #PWRGND86 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(234.95 mm, 265.43 mm): 符号 #PWRGND87 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(260.35 mm, 238.76 mm): 符号 R34 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(260.35 mm, 246.38 mm): 符号 R33 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(260.35 mm, 256.54 mm): 符号 R32 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(260.35 mm, 262.89 mm): 符号 R31 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(270.51 mm, 214.63 mm): 符号 C53 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(270.51 mm, 219.71 mm): 符号 C52 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(270.51 mm, 226.06 mm): 符号 R36 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(270.51 mm, 232.41 mm): 符号 R35 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(275.59 mm, 214.63 mm): 符号 #PWRGND95 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(275.59 mm, 219.71 mm): 符号 #PWRGND94 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(275.59 mm, 226.06 mm): 符号 #PWRGND93 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(275.59 mm, 232.41 mm): 符号 #PWRGND92 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(289.56 mm, 256.54 mm): 符号 #PWRGND91 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(289.56 mm, 261.62 mm): 符号 #PWRGND90 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(289.56 mm, 264.16 mm): 符号 #PWRGND89 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(289.56 mm, 266.70 mm): 符号 #PWRGND88 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(294.64 mm, 250.19 mm): 符号 J6 [RJ45]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(31.75 mm, 73.66 mm): 符号 #PWRGND19 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(31.75 mm, 96.52 mm): 符号 #PWRGND15 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(31.75 mm, 118.11 mm): 符号 #PWRGND11 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(34.29 mm, 67.31 mm): 符号 #PWRVCC5V13 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(34.29 mm, 82.55 mm): 符号 #PWRVCC5V12 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(34.29 mm, 88.90 mm): 符号 #PWRVCC5V10 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(34.29 mm, 104.14 mm): 符号 #PWRVCC5V09 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(34.29 mm, 110.49 mm): 符号 #PWRVCC5V07 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(34.29 mm, 125.73 mm): 符号 #PWRVCC5V06 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(36.83 mm, 139.70 mm): 符号 #PWRGND01 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 67.31 mm): 符号 R11 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 73.66 mm): 符号 U4 [SY8089]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 82.55 mm): 符号 C10 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 88.90 mm): 符号 R8 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 96.52 mm): 符号 U3 [SY8089]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 104.14 mm): 符号 C8 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 110.49 mm): 符号 R5 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 118.11 mm): 符号 U2 [SY8089]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 125.73 mm): 符号 C6 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(41.91 mm, 138.43 mm): 符号 J1 [CONN_2]
+[unconnected_wire_endpoint]: 未连接的连线端点
+    ; warning
+    @(44.45 mm, 76.20 mm): 水平线, 长度 2.54 mm
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 82.55 mm): 符号 #PWRGND20 [GND]
+[unconnected_wire_endpoint]: 未连接的连线端点
+    ; warning
+    @(44.45 mm, 99.06 mm): 水平线, 长度 2.54 mm
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 104.14 mm): 符号 #PWRGND16 [GND]
+[unconnected_wire_endpoint]: 未连接的连线端点
+    ; warning
+    @(44.45 mm, 120.65 mm): 水平线, 长度 2.54 mm
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 125.73 mm): 符号 #PWRGND12 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(46.99 mm, 76.20 mm): 符号 #PWRVCC5V11 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(46.99 mm, 99.06 mm): 符号 #PWRVCC5V08 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(46.99 mm, 120.65 mm): 符号 #PWRVCC5V05 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 73.66 mm): 符号 L4 [L]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 96.52 mm): 符号 L3 [L]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 118.11 mm): 符号 L2 [L]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(64.77 mm, 138.43 mm): 符号 F1 [F]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(80.01 mm, 138.43 mm): 符号 #PWRGND02 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 73.66 mm): 符号 C11 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 82.55 mm): 符号 R12 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 88.90 mm): 符号 R13 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 96.52 mm): 符号 C9 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 105.41 mm): 符号 R9 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 110.49 mm): 符号 R10 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 118.11 mm): 符号 C7 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 127.00 mm): 符号 R6 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 133.35 mm): 符号 R7 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(85.09 mm, 138.43 mm): 符号 D1 [TVS]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(87.63 mm, 73.66 mm): 符号 #PWRGND21 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(87.63 mm, 88.90 mm): 符号 #PWRGND22 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(87.63 mm, 96.52 mm): 符号 #PWRGND17 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(87.63 mm, 110.49 mm): 符号 #PWRGND18 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(87.63 mm, 118.11 mm): 符号 #PWRGND13 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(87.63 mm, 133.35 mm): 符号 #PWRGND14 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(105.41 mm, 138.43 mm): 符号 C1 [CP]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(110.49 mm, 138.43 mm): 符号 #PWRGND03 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(115.57 mm, 138.43 mm): 符号 C2 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(120.65 mm, 138.43 mm): 符号 #PWRGND04 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(132.08 mm, 72.39 mm): 符号 #PWRVCC1V801 [VCC1V8]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(132.08 mm, 74.93 mm): 符号 #PWRGND23 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(134.62 mm, 83.82 mm): 符号 #PWRVCC3V302 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(139.70 mm, 73.66 mm): 符号 U5 [XC6206]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(139.70 mm, 83.82 mm): 符号 C12 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(143.51 mm, 73.66 mm): 符号 #PWRVCC1V802 [VCC1V8]
+[unconnected_wire_endpoint]: 未连接的连线端点
+    ; warning
+    @(144.78 mm, 74.93 mm): 水平线, 长度 2.54 mm
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(144.78 mm, 83.82 mm): 符号 #PWRGND24 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(144.78 mm, 138.43 mm): 符号 U1 [TPS5430]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(147.32 mm, 74.93 mm): 符号 #PWRVCC3V301 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(148.59 mm, 73.66 mm): 符号 C13 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(149.86 mm, 149.86 mm): 符号 C3 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(152.40 mm, 139.70 mm): 符号 #PWRGND05 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(153.67 mm, 73.66 mm): 符号 #PWRGND25 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(157.48 mm, 146.05 mm): 符号 R2 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(157.48 mm, 152.40 mm): 符号 R1 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(162.56 mm, 128.27 mm): 符号 #PWRGND07 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(162.56 mm, 146.05 mm): 符号 #PWRGND06 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(167.64 mm, 128.27 mm): 符号 D2 [D]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(175.26 mm, 59.69 mm): 符号 #PWRVCC5V14 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(180.34 mm, 59.69 mm): 符号 R14 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(185.42 mm, 138.43 mm): 符号 L1 [L]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(190.50 mm, 138.43 mm): 符号 #PWRVCC5V01 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(195.58 mm, 59.69 mm): 符号 D3 [LED]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(199.39 mm, 138.43 mm): 符号 #PWRVCC5V02 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(199.39 mm, 148.59 mm): 符号 #PWRVCC5V04 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(200.66 mm, 59.69 mm): 符号 #PWRGND26 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(204.47 mm, 138.43 mm): 符号 C4 [CP]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(204.47 mm, 148.59 mm): 符号 R3 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(204.47 mm, 153.67 mm): 符号 R4 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(209.55 mm, 138.43 mm): 符号 #PWRGND08 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(209.55 mm, 138.43 mm): 符号 #PWRVCC5V03 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(209.55 mm, 153.67 mm): 符号 #PWRGND10 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(214.63 mm, 138.43 mm): 符号 C5 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(219.71 mm, 138.43 mm): 符号 #PWRGND09 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(240.03 mm, 1.27 mm): 符号 #PWRVCC1V803 [VCC1V8]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(240.03 mm, 8.89 mm): 符号 #PWRVDD0V901 [VDD0V9]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(240.03 mm, 16.51 mm): 符号 #PWRVCC1V501 [VCC1V5]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(240.03 mm, 24.13 mm): 符号 #PWRVCC3V303 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(240.03 mm, 31.75 mm): 符号 #PWRVCC5V15 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(240.03 mm, 39.37 mm): 符号 #PWRVIN2401 [VIN24]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(242.57 mm, 1.27 mm): 符号 #FLG06 [PWR_FLAG]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(242.57 mm, 8.89 mm): 符号 #FLG05 [PWR_FLAG]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(242.57 mm, 16.51 mm): 符号 #FLG04 [PWR_FLAG]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(242.57 mm, 24.13 mm): 符号 #FLG03 [PWR_FLAG]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(242.57 mm, 31.75 mm): 符号 #FLG02 [PWR_FLAG]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(242.57 mm, 39.37 mm): 符号 #FLG01 [PWR_FLAG]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 195.58 mm): 符号 R38 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 203.20 mm): 符号 R37 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 275.59 mm): 符号 C55 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(52.07 mm, 260.35 mm): 符号 #PWRGND96 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 171.45 mm): 符号 #PWRGND110 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 186.69 mm): 符号 #PWRGND109 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 189.23 mm): 符号 #PWRGND108 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 195.58 mm): 符号 #PWRGND112 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 203.20 mm): 符号 #PWRGND111 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 204.47 mm): 符号 #PWRGND107 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 207.01 mm): 符号 #PWRGND106 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 209.55 mm): 符号 #PWRGND105 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 275.59 mm): 符号 #PWRGND98 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 190.50 mm): 符号 J8 [USB_C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 251.46 mm): 符号 #PWRVCC3V340 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 260.35 mm): 符号 U13 [CH340E]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(64.77 mm, 251.46 mm): 符号 C54 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(67.31 mm, 262.89 mm): 符号 #PWRVCC3V339 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(69.85 mm, 251.46 mm): 符号 #PWRGND97 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(90.17 mm, 242.57 mm): 符号 #PWRGND104 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(90.17 mm, 257.81 mm): 符号 #PWRGND103 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(90.17 mm, 260.35 mm): 符号 #PWRGND102 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(90.17 mm, 275.59 mm): 符号 #PWRGND101 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(90.17 mm, 278.13 mm): 符号 #PWRGND100 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(90.17 mm, 280.67 mm): 符号 #PWRGND99 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(95.25 mm, 261.62 mm): 符号 J7 [USB_C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(180.34 mm, 226.06 mm): 符号 C56 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(180.34 mm, 232.41 mm): 符号 R39 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(182.88 mm, 226.06 mm): 符号 #PWRVCC3V343 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(182.88 mm, 251.46 mm): 符号 #PWRVCC3V342 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(182.88 mm, 254.00 mm): 符号 #PWRGND113 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(182.88 mm, 256.54 mm): 符号 #PWRVCC3V341 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(185.42 mm, 226.06 mm): 符号 #PWRGND119 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(185.42 mm, 232.41 mm): 符号 #PWRGND118 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(190.50 mm, 222.25 mm): 符号 #PWRVCC5V22 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(190.50 mm, 240.03 mm): 符号 U14 [GL850G]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(190.50 mm, 251.46 mm): 符号 #PWRVCC3V348 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(190.50 mm, 257.81 mm): 符号 #PWRVCC3V347 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(195.58 mm, 222.25 mm): 符号 C59 [CP]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(195.58 mm, 251.46 mm): 符号 C58 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(195.58 mm, 257.81 mm): 符号 C57 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(198.12 mm, 223.52 mm): 符号 #PWRVCC3V346 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(198.12 mm, 226.06 mm): 符号 #PWRGND117 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(198.12 mm, 228.60 mm): 符号 #PWRGND116 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(198.12 mm, 233.68 mm): 符号 #PWRVCC3V345 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(198.12 mm, 236.22 mm): 符号 #PWRGND115 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(198.12 mm, 241.30 mm): 符号 #PWRVCC3V344 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(198.12 mm, 243.84 mm): 符号 #PWRVCC5V20 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(198.12 mm, 246.38 mm): 符号 #PWRGND114 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(198.12 mm, 251.46 mm): 符号 #PWRVCC5V19 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(199.39 mm, 243.84 mm): 符号 R40 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(200.66 mm, 222.25 mm): 符号 #PWRGND122 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(200.66 mm, 251.46 mm): 符号 #PWRGND121 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(200.66 mm, 257.81 mm): 符号 #PWRGND120 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(204.47 mm, 243.84 mm): 符号 #PWRVCC5V21 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 204.47 mm): 符号 #PWRVCC5V26 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 212.09 mm): 符号 #PWRGND126 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 222.25 mm): 符号 #PWRVCC5V25 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 229.87 mm): 符号 #PWRGND125 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 240.03 mm): 符号 #PWRVCC5V24 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 247.65 mm): 符号 #PWRGND124 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 257.81 mm): 符号 #PWRVCC5V23 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 265.43 mm): 符号 #PWRGND123 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(255.27 mm, 208.28 mm): 符号 J12 [USB_HDR]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(255.27 mm, 226.06 mm): 符号 J11 [USB_HDR]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(255.27 mm, 243.84 mm): 符号 J10 [USB_A]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(255.27 mm, 261.62 mm): 符号 J9 [USB_A]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(36.83 mm, 156.21 mm): 符号 #PWRGND44 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(36.83 mm, 254.00 mm): 符号 #PWRGND36 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(36.83 mm, 256.54 mm): 符号 #PWRVCC3V315 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(38.10 mm, 234.95 mm): 符号 C24 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 214.63 mm): 符号 #PWRVCC1V810 [VCC1V8]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(39.37 mm, 261.62 mm): 符号 #PWRVCC3V317 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(43.18 mm, 234.95 mm): 符号 #PWRGND38 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 138.43 mm): 符号 #PWRVCC3V322 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 146.05 mm): 符号 #PWRVCC3V321 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 153.67 mm): 符号 #PWRVCC3V320 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 160.02 mm): 符号 U8 [W25N01GV]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 186.69 mm): 符号 R18 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 195.58 mm): 符号 R17 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 204.47 mm): 符号 R16 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 214.63 mm): 符号 R15 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 234.95 mm): 符号 Y1 [X2]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 255.27 mm): 符号 U7 [OSC24M]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 261.62 mm): 符号 C22 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 138.43 mm): 符号 R20 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 146.05 mm): 符号 R19 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 153.67 mm): 符号 C27 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 186.69 mm): 符号 #PWRVCC3V318 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 195.58 mm): 符号 #PWRGND43 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 204.47 mm): 符号 #PWRGND42 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 261.62 mm): 符号 #PWRGND37 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(52.07 mm, 156.21 mm): 符号 #PWRVCC3V319 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(52.07 mm, 234.95 mm): 符号 C25 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(52.07 mm, 254.00 mm): 符号 #PWRVCC3V316 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 153.67 mm): 符号 #PWRGND45 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(57.15 mm, 39.37 mm): 符号 #PWRVCC3V312 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(57.15 mm, 234.95 mm): 符号 #PWRGND39 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 214.63 mm): 符号 SW1 [SW]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 254.00 mm): 符号 C23 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(62.23 mm, 39.37 mm): 符号 C14 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(62.23 mm, 59.69 mm): 符号 C29 [CP]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(64.77 mm, 39.37 mm): 符号 #PWRVCC3V313 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(64.77 mm, 214.63 mm): 符号 #PWRGND40 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(67.31 mm, 39.37 mm): 符号 #PWRGND28 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(67.31 mm, 59.69 mm): 符号 #PWRGND49 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(69.85 mm, 39.37 mm): 符号 C15 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(69.85 mm, 59.69 mm): 符号 C30 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(69.85 mm, 214.63 mm): 符号 C26 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(72.39 mm, 39.37 mm): 符号 #PWRVCC3V314 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(74.93 mm, 39.37 mm): 符号 #PWRGND29 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(74.93 mm, 59.69 mm): 符号 #PWRGND50 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(74.93 mm, 214.63 mm): 符号 #PWRGND41 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(77.47 mm, 39.37 mm): 符号 C16 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(77.47 mm, 59.69 mm): 符号 C31 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(81.28 mm, 39.37 mm): 符号 #PWRVCC1V808 [VCC1V8]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 39.37 mm): 符号 #PWRGND30 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(82.55 mm, 59.69 mm): 符号 #PWRGND51 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(86.36 mm, 39.37 mm): 符号 C17 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(86.36 mm, 59.69 mm): 符号 C32 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(88.90 mm, 39.37 mm): 符号 #PWRVCC1V809 [VCC1V8]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(91.44 mm, 39.37 mm): 符号 #PWRGND31 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(91.44 mm, 59.69 mm): 符号 #PWRGND52 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(93.98 mm, 39.37 mm): 符号 C18 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(93.98 mm, 59.69 mm): 符号 C33 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(96.52 mm, 39.37 mm): 符号 #PWRVDD0V907 [VDD0V9]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(99.06 mm, 39.37 mm): 符号 #PWRGND32 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(99.06 mm, 59.69 mm): 符号 #PWRGND53 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(101.60 mm, 39.37 mm): 符号 C19 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(101.60 mm, 59.69 mm): 符号 C34 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(105.41 mm, 39.37 mm): 符号 #PWRVDD0V908 [VDD0V9]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(106.68 mm, 39.37 mm): 符号 #PWRGND33 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(106.68 mm, 59.69 mm): 符号 #PWRGND54 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(110.49 mm, 39.37 mm): 符号 C20 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(110.49 mm, 59.69 mm): 符号 C35 [CP]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(113.03 mm, 39.37 mm): 符号 #PWRVCC1V504 [VCC1V5]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(115.57 mm, 39.37 mm): 符号 #PWRGND34 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(115.57 mm, 59.69 mm): 符号 #PWRGND55 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(118.11 mm, 39.37 mm): 符号 C21 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(121.92 mm, 133.35 mm): 符号 #PWRVCC1V804 [VCC1V8]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(121.92 mm, 148.59 mm): 符号 #PWRVCC1V805 [VCC1V8]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(121.92 mm, 156.21 mm): 符号 #PWRVCC3V304 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(121.92 mm, 168.91 mm): 符号 #PWRVCC3V305 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(121.92 mm, 199.39 mm): 符号 #PWRVDD0V902 [VDD0V9]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(121.92 mm, 204.47 mm): 符号 #PWRVCC1V502 [VCC1V5]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(121.92 mm, 207.01 mm): 符号 #PWRVCC1V503 [VCC1V5]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(121.92 mm, 209.55 mm): 符号 #PWRVCC1V806 [VCC1V8]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(121.92 mm, 212.09 mm): 符号 #PWRVDD0V903 [VDD0V9]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(123.19 mm, 39.37 mm): 符号 #PWRGND35 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(129.54 mm, 165.10 mm): 符号 U6 [T113_S3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 85.09 mm): 符号 #PWRVCC3V306 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 87.63 mm): 符号 #PWRVCC3V307 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 115.57 mm): 符号 #PWRVCC3V308 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 125.73 mm): 符号 #PWRVDD0V904 [VDD0V9]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 130.81 mm): 符号 #PWRVCC3V309 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 151.13 mm): 符号 #PWRGND27 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 166.37 mm): 符号 #PWRVCC1V807 [VCC1V8]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 191.77 mm): 符号 #PWRVCC3V310 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 214.63 mm): 符号 #PWRVDD0V905 [VDD0V9]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 217.17 mm): 符号 #PWRVDD0V906 [VDD0V9]
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(137.16 mm, 237.49 mm): 全局标签 'RMII_RXER'
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(137.16 mm, 245.11 mm): 符号 #PWRVCC3V311 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(240.03 mm, 246.38 mm): 符号 #PWRVCC3V323 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(240.03 mm, 251.46 mm): 符号 #PWRGND47 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(240.03 mm, 261.62 mm): 符号 #PWRGND46 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(245.11 mm, 250.19 mm): 符号 J2 [TF]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 220.98 mm): 符号 #PWRVCC3V326 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 228.60 mm): 符号 #PWRVCC3V325 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(250.19 mm, 234.95 mm): 符号 #PWRVCC3V324 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(255.27 mm, 220.98 mm): 符号 C28 [CP]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(255.27 mm, 228.60 mm): 符号 R22 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(255.27 mm, 234.95 mm): 符号 R21 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(260.35 mm, 220.98 mm): 符号 #PWRGND48 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(54.61 mm, 245.11 mm): 符号 #PWRVCC3V349 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 223.52 mm): 符号 R44 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 229.87 mm): 符号 R43 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 245.11 mm): 符号 R42 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(59.69 mm, 260.35 mm): 符号 R41 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(64.77 mm, 223.52 mm): 符号 #PWRGND129 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(69.85 mm, 223.52 mm): 符号 C60 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(74.93 mm, 223.52 mm): 符号 #PWRGND130 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(74.93 mm, 245.11 mm): 符号 SW2 [SW]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(74.93 mm, 260.35 mm): 符号 D7 [LED]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(80.01 mm, 245.11 mm): 符号 #PWRGND128 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(80.01 mm, 260.35 mm): 符号 #PWRGND127 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(114.30 mm, 220.98 mm): 符号 #PWRVCC5V27 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(114.30 mm, 223.52 mm): 符号 #PWRVCC3V350 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(114.30 mm, 226.06 mm): 符号 #PWRGND133 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(114.30 mm, 228.60 mm): 符号 #PWRGND132 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(114.30 mm, 279.40 mm): 符号 #PWRGND131 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(119.38 mm, 250.19 mm): 符号 J13 [HDR_2x12]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(175.26 mm, 275.59 mm): 符号 #PWRVCC3V351 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(175.26 mm, 283.21 mm): 符号 #PWRGND134 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(180.34 mm, 279.40 mm): 符号 J14 [HDR_1x4]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 128.27 mm): 符号 #PWRGND63 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 130.81 mm): 符号 #PWRGND62 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 148.59 mm): 符号 #PWRGND61 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 151.13 mm): 符号 #PWRGND60 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 168.91 mm): 符号 #PWRGND59 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 171.45 mm): 符号 #PWRGND58 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 173.99 mm): 符号 #PWRVCC3V327 [VCC3V3]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 214.63 mm): 符号 #PWRGND57 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(44.45 mm, 227.33 mm): 符号 #PWRGND56 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(49.53 mm, 165.10 mm): 符号 J3 [FPC50]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(90.17 mm, 119.38 mm): 符号 C39 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(95.25 mm, 119.38 mm): 符号 #PWRGND68 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(97.79 mm, 119.38 mm): 符号 C40 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(102.87 mm, 119.38 mm): 符号 #PWRGND69 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(105.41 mm, 119.38 mm): 符号 C41 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(110.49 mm, 119.38 mm): 符号 #PWRGND70 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(111.76 mm, 279.40 mm): 符号 #PWRGND64 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(114.30 mm, 119.38 mm): 符号 C42 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(114.30 mm, 288.29 mm): 符号 #PWRVCC5V17 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(114.30 mm, 293.37 mm): 符号 #PWRVCC5V18 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(119.38 mm, 119.38 mm): 符号 #PWRGND71 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(119.38 mm, 279.40 mm): 符号 U9 [MSK4010]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(119.38 mm, 288.29 mm): 符号 C36 [CP]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(119.38 mm, 293.37 mm): 符号 C37 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(124.46 mm, 288.29 mm): 符号 #PWRGND65 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(124.46 mm, 293.37 mm): 符号 #PWRGND66 [GND]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(127.00 mm, 276.86 mm): 符号 #PWRVCC5V16 [VCC5V]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(132.08 mm, 274.32 mm): 符号 R23 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(139.70 mm, 261.62 mm): 符号 R24 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(139.70 mm, 279.40 mm): 符号 L5 [L]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(148.59 mm, 267.97 mm): 符号 D4 [D]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(152.40 mm, 261.62 mm): 符号 R25 [R]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(152.40 mm, 288.29 mm): 符号 C38 [C]
+[lib_symbol_issues]: 在 '/home/chen/Git/zhishu-hmi/hardware/hmi-control-board-t113/hmi_lib.kicad_sym' 中找不到符号库 'hmi'
+    ; warning
+    @(157.48 mm, 288.29 mm): 符号 #PWRGND67 [GND]
+
+***** Sheet /COMM/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 184.15 mm): Symbol #PWRGND78 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(59.69 mm, 190.50 mm): Symbol #PWRVCC3V331 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(59.69 mm, 251.46 mm): Symbol #PWRVCC3V329 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(67.31 mm, 193.04 mm): Symbol #PWRGND76 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(67.31 mm, 256.54 mm): Symbol #PWRVCC3V328 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(67.31 mm, 264.16 mm): Symbol #PWRGND72 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(69.85 mm, 190.50 mm): Symbol #PWRGND77 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(69.85 mm, 251.46 mm): Symbol #PWRGND73 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(80.01 mm, 184.15 mm): Symbol #PWRGND79 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(100.33 mm, 199.39 mm): Symbol #PWRGND80 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(100.33 mm, 256.54 mm): Symbol #PWRGND74 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(107.95 mm, 256.54 mm): Symbol #PWRGND75 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(194.31 mm, 267.97 mm): Symbol #PWRVCC3V336 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(199.39 mm, 240.03 mm): Symbol #PWRVCC3V335 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(209.55 mm, 246.38 mm): Symbol #PWRGND85 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(209.55 mm, 254.00 mm): Symbol #PWRGND84 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(212.09 mm, 278.13 mm): Symbol #PWRGND81 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(212.09 mm, 280.67 mm): Symbol #PWRVCC3V332 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(214.63 mm, 260.35 mm): Symbol U12 引脚 5 [VDD33, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(214.63 mm, 262.89 mm): Symbol U12 引脚 6 [GND, 电源输入, 图线]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(224.79 mm, 250.19 mm): Symbol U12 引脚 18 [RXER/INTR_32, 输出, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(224.79 mm, 259.08 mm): Symbol #PWRVCC3V337 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(224.79 mm, 262.89 mm): Symbol U12 引脚 23 [DVDD33, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(224.79 mm, 265.43 mm): Symbol #PWRVCC3V338 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(224.79 mm, 283.21 mm): Symbol U12 引脚 31 [AVDD33, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(224.79 mm, 288.29 mm): Symbol U12 引脚 33 [EPAD, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(227.33 mm, 252.73 mm): Symbol #PWRGND83 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(227.33 mm, 257.81 mm): Symbol #PWRVCC3V334 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(227.33 mm, 275.59 mm): Symbol #PWRGND82 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(227.33 mm, 278.13 mm): Symbol #PWRVCC3V333 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(234.95 mm, 259.08 mm): Symbol #PWRGND86 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(234.95 mm, 265.43 mm): Symbol #PWRGND87 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(275.59 mm, 214.63 mm): Symbol #PWRGND95 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(275.59 mm, 219.71 mm): Symbol #PWRGND94 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(275.59 mm, 226.06 mm): Symbol #PWRGND93 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(275.59 mm, 232.41 mm): Symbol #PWRGND92 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(289.56 mm, 256.54 mm): Symbol #PWRGND91 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(289.56 mm, 261.62 mm): Symbol #PWRGND90 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(289.56 mm, 264.16 mm): Symbol #PWRGND89 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(289.56 mm, 266.70 mm): Symbol #PWRGND88 引脚 1 [GND, 电源输入, 图线]
+
+***** Sheet /Power/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(31.75 mm, 73.66 mm): Symbol #PWRGND19 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(31.75 mm, 96.52 mm): Symbol #PWRGND15 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(31.75 mm, 118.11 mm): Symbol #PWRGND11 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(34.29 mm, 67.31 mm): Symbol #PWRVCC5V13 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(34.29 mm, 82.55 mm): Symbol #PWRVCC5V12 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(34.29 mm, 88.90 mm): Symbol #PWRVCC5V10 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(34.29 mm, 104.14 mm): Symbol #PWRVCC5V09 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(34.29 mm, 110.49 mm): Symbol #PWRVCC5V07 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(34.29 mm, 125.73 mm): Symbol #PWRVCC5V06 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(36.83 mm, 139.70 mm): Symbol #PWRGND01 引脚 1 [GND, 电源输入, 图线]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(44.45 mm, 71.12 mm): Symbol U4 引脚 4 [IN, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 71.12 mm): Symbol U4 引脚 4 [IN, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 82.55 mm): Symbol #PWRGND20 引脚 1 [GND, 电源输入, 图线]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(44.45 mm, 93.98 mm): Symbol U3 引脚 4 [IN, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 93.98 mm): Symbol U3 引脚 4 [IN, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 104.14 mm): Symbol #PWRGND16 引脚 1 [GND, 电源输入, 图线]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(44.45 mm, 115.57 mm): Symbol U2 引脚 4 [IN, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 115.57 mm): Symbol U2 引脚 4 [IN, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 125.73 mm): Symbol #PWRGND12 引脚 1 [GND, 电源输入, 图线]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(46.99 mm, 76.20 mm): Symbol #PWRVCC5V11 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(46.99 mm, 76.20 mm): Symbol #PWRVCC5V11 引脚 1 [VCC5V, 电源输入, 图线]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(46.99 mm, 99.06 mm): Symbol #PWRVCC5V08 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(46.99 mm, 99.06 mm): Symbol #PWRVCC5V08 引脚 1 [VCC5V, 电源输入, 图线]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(46.99 mm, 120.65 mm): Symbol #PWRVCC5V05 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(46.99 mm, 120.65 mm): Symbol #PWRVCC5V05 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(80.01 mm, 138.43 mm): Symbol #PWRGND02 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(87.63 mm, 73.66 mm): Symbol #PWRGND21 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(87.63 mm, 88.90 mm): Symbol #PWRGND22 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(87.63 mm, 96.52 mm): Symbol #PWRGND17 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(87.63 mm, 110.49 mm): Symbol #PWRGND18 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(87.63 mm, 118.11 mm): Symbol #PWRGND13 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(87.63 mm, 133.35 mm): Symbol #PWRGND14 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(110.49 mm, 138.43 mm): Symbol #PWRGND03 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(120.65 mm, 138.43 mm): Symbol #PWRGND04 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(132.08 mm, 72.39 mm): Symbol #PWRVCC1V801 引脚 1 [VCC1V8, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(134.62 mm, 83.82 mm): Symbol #PWRVCC3V302 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(143.51 mm, 73.66 mm): Symbol #PWRVCC1V802 引脚 1 [VCC1V8, 电源输入, 图线]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(144.78 mm, 72.39 mm): Symbol U5 引脚 3 [IN, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(144.78 mm, 72.39 mm): Symbol U5 引脚 3 [IN, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(144.78 mm, 83.82 mm): Symbol #PWRGND24 引脚 1 [GND, 电源输入, 图线]
+[pin_not_connected]: Pin not connected
+    ; error
+    @(147.32 mm, 74.93 mm): Symbol #PWRVCC3V301 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(147.32 mm, 74.93 mm): Symbol #PWRVCC3V301 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(152.40 mm, 139.70 mm): Symbol #PWRGND05 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(153.67 mm, 73.66 mm): Symbol #PWRGND25 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(162.56 mm, 128.27 mm): Symbol #PWRGND07 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(162.56 mm, 146.05 mm): Symbol #PWRGND06 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(175.26 mm, 59.69 mm): Symbol #PWRVCC5V14 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 138.43 mm): Symbol #PWRVCC5V01 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(199.39 mm, 138.43 mm): Symbol #PWRVCC5V02 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(199.39 mm, 148.59 mm): Symbol #PWRVCC5V04 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(200.66 mm, 59.69 mm): Symbol #PWRGND26 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(209.55 mm, 138.43 mm): Symbol #PWRGND08 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(209.55 mm, 153.67 mm): Symbol #PWRGND10 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(219.71 mm, 138.43 mm): Symbol #PWRGND09 引脚 1 [GND, 电源输入, 图线]
+
+***** Sheet /USB/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(52.07 mm, 260.35 mm): Symbol #PWRGND96 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 171.45 mm): Symbol #PWRGND110 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 186.69 mm): Symbol #PWRGND109 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 189.23 mm): Symbol #PWRGND108 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 195.58 mm): Symbol #PWRGND112 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 203.20 mm): Symbol #PWRGND111 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 204.47 mm): Symbol #PWRGND107 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 207.01 mm): Symbol #PWRGND106 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 209.55 mm): Symbol #PWRGND105 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 275.59 mm): Symbol #PWRGND98 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(59.69 mm, 251.46 mm): Symbol #PWRVCC3V340 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(64.77 mm, 257.81 mm): Symbol U13 引脚 7 [VCC, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(67.31 mm, 262.89 mm): Symbol #PWRVCC3V339 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(69.85 mm, 251.46 mm): Symbol #PWRGND97 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(90.17 mm, 242.57 mm): Symbol #PWRGND104 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(90.17 mm, 257.81 mm): Symbol #PWRGND103 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(90.17 mm, 260.35 mm): Symbol #PWRGND102 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(90.17 mm, 275.59 mm): Symbol #PWRGND101 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(90.17 mm, 278.13 mm): Symbol #PWRGND100 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(90.17 mm, 280.67 mm): Symbol #PWRGND99 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(182.88 mm, 251.46 mm): Symbol #PWRVCC3V342 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(182.88 mm, 254.00 mm): Symbol #PWRGND113 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(182.88 mm, 256.54 mm): Symbol #PWRVCC3V341 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(185.42 mm, 223.52 mm): Symbol U14 引脚 1 [VD33, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(185.42 mm, 226.06 mm): Symbol #PWRGND119 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(185.42 mm, 232.41 mm): Symbol #PWRGND118 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 222.25 mm): Symbol #PWRVCC5V22 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 251.46 mm): Symbol #PWRVCC3V348 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(190.50 mm, 257.81 mm): Symbol #PWRVCC3V347 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(195.58 mm, 238.76 mm): Symbol U14 引脚 21 [VD33_0, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(195.58 mm, 256.54 mm): Symbol U14 引脚 28 [VD33, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(198.12 mm, 223.52 mm): Symbol #PWRVCC3V346 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(198.12 mm, 226.06 mm): Symbol #PWRGND117 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(198.12 mm, 228.60 mm): Symbol #PWRGND116 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(198.12 mm, 233.68 mm): Symbol #PWRVCC3V345 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(198.12 mm, 236.22 mm): Symbol #PWRGND115 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(198.12 mm, 241.30 mm): Symbol #PWRVCC3V344 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(198.12 mm, 243.84 mm): Symbol #PWRVCC5V20 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(198.12 mm, 246.38 mm): Symbol #PWRGND114 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(200.66 mm, 222.25 mm): Symbol #PWRGND122 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(200.66 mm, 251.46 mm): Symbol #PWRGND121 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(200.66 mm, 257.81 mm): Symbol #PWRGND120 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(204.47 mm, 243.84 mm): Symbol #PWRVCC5V21 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 204.47 mm): Symbol #PWRVCC5V26 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 212.09 mm): Symbol #PWRGND126 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 222.25 mm): Symbol #PWRVCC5V25 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 229.87 mm): Symbol #PWRGND125 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 240.03 mm): Symbol #PWRVCC5V24 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 247.65 mm): Symbol #PWRGND124 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 257.81 mm): Symbol #PWRVCC5V23 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 265.43 mm): Symbol #PWRGND123 引脚 1 [GND, 电源输入, 图线]
+
+***** Sheet /Core/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(36.83 mm, 156.21 mm): Symbol #PWRGND44 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(36.83 mm, 254.00 mm): Symbol #PWRGND36 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(36.83 mm, 256.54 mm): Symbol #PWRVCC3V315 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(39.37 mm, 163.83 mm): Symbol U8 引脚 4 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(39.37 mm, 214.63 mm): Symbol #PWRVCC1V810 引脚 1 [VCC1V8, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(39.37 mm, 261.62 mm): Symbol #PWRVCC3V317 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 234.95 mm): Symbol #PWRGND38 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 138.43 mm): Symbol #PWRVCC3V322 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 146.05 mm): Symbol #PWRVCC3V321 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 153.67 mm): Symbol #PWRVCC3V320 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(49.53 mm, 163.83 mm): Symbol U8 引脚 8 [VCC, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(49.53 mm, 186.69 mm): Symbol #PWRVCC3V318 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(49.53 mm, 195.58 mm): Symbol #PWRGND43 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(49.53 mm, 204.47 mm): Symbol #PWRGND42 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(49.53 mm, 256.54 mm): Symbol U7 引脚 4 [VCC, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(49.53 mm, 261.62 mm): Symbol #PWRGND37 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(52.07 mm, 156.21 mm): Symbol #PWRVCC3V319 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(52.07 mm, 254.00 mm): Symbol #PWRVCC3V316 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 153.67 mm): Symbol #PWRGND45 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(57.15 mm, 39.37 mm): Symbol #PWRVCC3V312 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(57.15 mm, 234.95 mm): Symbol #PWRGND39 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(64.77 mm, 214.63 mm): Symbol #PWRGND40 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(67.31 mm, 39.37 mm): Symbol #PWRGND28 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(74.93 mm, 39.37 mm): Symbol #PWRGND29 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(74.93 mm, 59.69 mm): Symbol #PWRGND50 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(74.93 mm, 214.63 mm): Symbol #PWRGND41 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(81.28 mm, 39.37 mm): Symbol #PWRVCC1V808 引脚 1 [VCC1V8, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(82.55 mm, 39.37 mm): Symbol #PWRGND30 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(82.55 mm, 59.69 mm): Symbol #PWRGND51 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(91.44 mm, 39.37 mm): Symbol #PWRGND31 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(91.44 mm, 59.69 mm): Symbol #PWRGND52 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(99.06 mm, 39.37 mm): Symbol #PWRGND32 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(99.06 mm, 59.69 mm): Symbol #PWRGND53 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(105.41 mm, 39.37 mm): Symbol #PWRVDD0V908 引脚 1 [VDD0V9, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(106.68 mm, 39.37 mm): Symbol #PWRGND33 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(106.68 mm, 59.69 mm): Symbol #PWRGND54 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(115.57 mm, 39.37 mm): Symbol #PWRGND34 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(115.57 mm, 59.69 mm): Symbol #PWRGND55 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(121.92 mm, 133.35 mm): Symbol #PWRVCC1V804 引脚 1 [VCC1V8, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(121.92 mm, 148.59 mm): Symbol #PWRVCC1V805 引脚 1 [VCC1V8, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(121.92 mm, 156.21 mm): Symbol #PWRVCC3V304 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(121.92 mm, 168.91 mm): Symbol #PWRVCC3V305 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(121.92 mm, 199.39 mm): Symbol #PWRVDD0V902 引脚 1 [VDD0V9, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(121.92 mm, 204.47 mm): Symbol #PWRVCC1V502 引脚 1 [VCC1V5, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(121.92 mm, 207.01 mm): Symbol #PWRVCC1V503 引脚 1 [VCC1V5, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(121.92 mm, 209.55 mm): Symbol #PWRVCC1V806 引脚 1 [VCC1V8, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(121.92 mm, 212.09 mm): Symbol #PWRVDD0V903 引脚 1 [VDD0V9, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(123.19 mm, 39.37 mm): Symbol #PWRGND35 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 85.09 mm): Symbol #PWRVCC3V306 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 87.63 mm): Symbol #PWRVCC3V307 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 115.57 mm): Symbol #PWRVCC3V308 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 125.73 mm): Symbol #PWRVDD0V904 引脚 1 [VDD0V9, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 130.81 mm): Symbol #PWRVCC3V309 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 151.13 mm): Symbol #PWRGND27 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 166.37 mm): Symbol #PWRVCC1V807 引脚 1 [VCC1V8, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 191.77 mm): Symbol #PWRVCC3V310 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 214.63 mm): Symbol #PWRVDD0V905 引脚 1 [VDD0V9, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 217.17 mm): Symbol #PWRVDD0V906 引脚 1 [VDD0V9, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(137.16 mm, 245.11 mm): Symbol #PWRVCC3V311 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(240.03 mm, 246.38 mm): Symbol #PWRVCC3V323 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(240.03 mm, 251.46 mm): Symbol #PWRGND47 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(240.03 mm, 261.62 mm): Symbol #PWRGND46 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 220.98 mm): Symbol #PWRVCC3V326 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 228.60 mm): Symbol #PWRVCC3V325 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(250.19 mm, 234.95 mm): Symbol #PWRVCC3V324 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(260.35 mm, 220.98 mm): Symbol #PWRGND48 引脚 1 [GND, 电源输入, 图线]
+
+***** Sheet /IO/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(54.61 mm, 245.11 mm): Symbol #PWRVCC3V349 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(64.77 mm, 223.52 mm): Symbol #PWRGND129 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(74.93 mm, 223.52 mm): Symbol #PWRGND130 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(80.01 mm, 245.11 mm): Symbol #PWRGND128 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(80.01 mm, 260.35 mm): Symbol #PWRGND127 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(114.30 mm, 220.98 mm): Symbol #PWRVCC5V27 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(114.30 mm, 223.52 mm): Symbol #PWRVCC3V350 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(114.30 mm, 226.06 mm): Symbol #PWRGND133 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(114.30 mm, 228.60 mm): Symbol #PWRGND132 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(114.30 mm, 279.40 mm): Symbol #PWRGND131 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(175.26 mm, 275.59 mm): Symbol #PWRVCC3V351 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(175.26 mm, 283.21 mm): Symbol #PWRGND134 引脚 1 [GND, 电源输入, 图线]
+
+***** Sheet /Display/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 128.27 mm): Symbol #PWRGND63 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 130.81 mm): Symbol #PWRGND62 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 148.59 mm): Symbol #PWRGND61 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 151.13 mm): Symbol #PWRGND60 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 168.91 mm): Symbol #PWRGND59 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 171.45 mm): Symbol #PWRGND58 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 173.99 mm): Symbol #PWRVCC3V327 引脚 1 [VCC3V3, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 214.63 mm): Symbol #PWRGND57 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(44.45 mm, 227.33 mm): Symbol #PWRGND56 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(95.25 mm, 119.38 mm): Symbol #PWRGND68 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(102.87 mm, 119.38 mm): Symbol #PWRGND69 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(110.49 mm, 119.38 mm): Symbol #PWRGND70 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(111.76 mm, 279.40 mm): Symbol #PWRGND64 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(114.30 mm, 288.29 mm): Symbol #PWRVCC5V17 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(114.30 mm, 293.37 mm): Symbol #PWRVCC5V18 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(119.38 mm, 119.38 mm): Symbol #PWRGND71 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(124.46 mm, 281.94 mm): Symbol U9 引脚 6 [VIN, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(124.46 mm, 288.29 mm): Symbol #PWRGND65 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(124.46 mm, 293.37 mm): Symbol #PWRGND66 引脚 1 [GND, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(127.00 mm, 276.86 mm): Symbol #PWRVCC5V16 引脚 1 [VCC5V, 电源输入, 图线]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(157.48 mm, 288.29 mm): Symbol #PWRGND67 引脚 1 [GND, 电源输入, 图线]
+
+ ** ERC messages: 640  Errors 244  Warnings 396
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters

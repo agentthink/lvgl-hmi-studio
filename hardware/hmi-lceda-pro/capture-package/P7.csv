@@ -1,0 +1,5 @@
+page,block,component,signal_or_pin,net,value_or_note,status
+P7,USB,J7,CC1/CC2,GND,5.1k pulldowns UFP,confirmed
+P7,USB,J7,DP/DM,USB0_DP/USB0_DM,USB0 Type-C,required
+P7,USB,J8,DP/DM,USB1_DP/USB1_DM,USB1 Host,required
+P7,USB,U15,OUT,USB1_VBUS,Current-limited host power,select

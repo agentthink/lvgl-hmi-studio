@@ -1,0 +1,5 @@
+[project]
+name = "demo-add"
+version = "0.1.0"
+description = "演示项目：两数相加与序列拼接工具（供构建/部署演示）"
+requires-python = ">=3.10"

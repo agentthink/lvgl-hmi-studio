@@ -1,0 +1,285 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.ScriptEditorView"
+        Title="{res:Loc script.title}"
+        Width="900"
+        Height="650"
+        MinWidth="680"
+        MinHeight="500"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc script.title}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <TextBlock Text="✕" FontSize="12" FontFamily="Segoe UI Symbol, Noto Sans CJK SC"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容 -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgWindowBrush}" Padding="12">
+        <Grid ColumnDefinitions="280,4,*">
+            <!-- ═══ 左侧：脚本列表 ═══ -->
+            <Border CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="12">
+                <Grid RowDefinitions="Auto,Auto,*,Auto">
+                    <!-- 顶栏：标题 + 操作按钮 -->
+                    <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,0,0,8">
+                        <TextBlock Text="{res:Loc script.list}"
+                                   Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="16" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <Button x:Name="BtnNewScript" Content="{res:Loc script.add}"
+                                Grid.Column="1"
+                                Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                BorderThickness="0" Padding="8,4" FontSize="12"
+                                Margin="0,0,4,0"/>
+                        <Button x:Name="BtnDeleteScript" Content="{res:Loc menu.edit.delete}"
+                                Grid.Column="2"
+                                Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                BorderThickness="0" Padding="8,4" FontSize="12"/>
+                    </Grid>
+
+                    <!-- 筛选 ComboBox -->
+                    <ComboBox x:Name="CmbCategoryFilter"
+                              Grid.Row="1"
+                              Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                              BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                              CornerRadius="4" Padding="8,4" FontSize="12"
+                              Margin="0,0,0,8"/>
+
+                    <!-- 脚本列表 -->
+                    <ListBox x:Name="ScriptList"
+                             Grid.Row="2"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.Styles>
+                            <Style Selector="ListBoxItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,2"/>
+                                <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                                <Setter Property="CornerRadius" Value="4"/>
+                            </Style>
+                            <Style Selector="ListBoxItem:selected">
+                                <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                            </Style>
+                            <Style Selector="ListBoxItem:pointerover">
+                                <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+                            </Style>
+                        </ListBox.Styles>
+                    </ListBox>
+
+                    <!-- 底部状态 -->
+                    <TextBlock x:Name="ListStatusText"
+                               Grid.Row="3"
+                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                               Margin="0,6,0,0"/>
+                </Grid>
+            </Border>
+
+            <!-- 分隔条 -->
+            <Rectangle Grid.Column="1" Fill="{StaticResource HmiBgElevatedBrush}" Width="4"/>
+
+            <!-- ═══ 右侧：脚本编辑区域 ═══ -->
+            <Border Grid.Column="2" CornerRadius="6" Background="{StaticResource HmiBgPanelBrush}" Padding="12">
+                <Grid RowDefinitions="Auto,*,Auto,Auto">
+                    <!-- 空状态提示 -->
+                    <TextBlock x:Name="EmptyHint"
+                               Text="{res:Loc script.select.hint}"
+                               Foreground="{StaticResource HmiTextHintBrush}" FontSize="14"
+                               Grid.Row="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"/>
+
+                    <!-- 编辑面板 -->
+                    <Grid x:Name="EditPanel" Grid.Row="0" RowDefinitions="Auto,Auto,Auto,Auto"
+                          IsVisible="False">
+                        <!-- 脚本基本信息 -->
+                        <Grid ColumnDefinitions="70,*,70,Auto,70,Auto" Margin="0,0,0,6">
+                            <TextBlock Text="{res:Loc script.name}"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtScriptName" Grid.Column="1"
+                                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                     CornerRadius="4" Padding="8,5" FontSize="13"/>
+
+                            <TextBlock Grid.Column="2" Text="{res:Loc script.category}"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"
+                                       Margin="8,0,0,0"/>
+                            <ComboBox x:Name="CboCategory" Grid.Column="3"
+                                      Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                      BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                      CornerRadius="4" Padding="8,4" FontSize="12"/>
+
+                            <TextBlock Grid.Column="4" Text="{res:Loc script.enabled}"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"
+                                       Margin="8,0,0,0"/>
+                            <CheckBox x:Name="ChkEnabled" Grid.Column="5"
+                                      Foreground="{StaticResource HmiTextPrimarySoftBrush}" FontSize="13"
+                                      VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- 描述 -->
+                        <Grid Grid.Row="1" ColumnDefinitions="70,*" Margin="0,0,0,6">
+                            <TextBlock Text="{res:Loc script.desc}"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtDescription" Grid.Column="1"
+                                     Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                     CornerRadius="4" Padding="8,5" FontSize="12"
+                                     PlaceholderText="{res:Loc script.desc.hint}"/>
+                        </Grid>
+
+                        <!-- ── 分隔线 ── -->
+                        <Rectangle Grid.Row="2" Fill="{StaticResource HmiInputBorderBrush}" Height="1" Margin="0,2,0,6"/>
+                    </Grid>
+
+                    <!-- 代码编辑器区域 -->
+                    <Grid x:Name="CodeEditorPanel" Grid.Row="1" IsVisible="False"
+                          RowDefinitions="Auto,*,Auto">
+                        <!-- 代码编辑器 -->
+                        <TextBox x:Name="TxtCodeEditor"
+                                 Grid.Row="1"
+                                 Background="{StaticResource HmiBgDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                                 BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                                 CornerRadius="4"
+                                 FontFamily="Consolas, Courier New, monospace"
+                                 FontSize="13"
+                                 AcceptsReturn="True"
+                                 AcceptsTab="True"
+                                 TextWrapping="NoWrap"
+                                 PlaceholderText="{res:Loc script.code.hint}"
+                                 Padding="10,8"/>
+
+                        <!-- 模板提示按钮 -->
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,6" Spacing="6">
+                            <TextBlock Text="{res:Loc script.insert.template}"
+                                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="11"
+                                       VerticalAlignment="Center"/>
+                            <Button x:Name="BtnTemplateOnClick" Content="{res:Loc script.on.click}"
+                                    Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiLinkBrush}"
+                                    BorderThickness="0" Padding="8,2" FontSize="11"/>
+                            <Button x:Name="BtnTemplateOnValueChanged" Content="{res:Loc script.on.value.changed}"
+                                    Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiSuccessBrush}"
+                                    BorderThickness="0" Padding="8,2" FontSize="11"/>
+                            <Button x:Name="BtnTemplateTimer" Content="{res:Loc script.timer}"
+                                    Background="{StaticResource HmiWarningBrush}" Foreground="{StaticResource HmiWarningBrush}"
+                                    BorderThickness="0" Padding="8,2" FontSize="11"/>
+                            <Button x:Name="BtnTemplateAlarm" Content="{res:Loc script.alarm}"
+                                    Background="{StaticResource HmiDangerDeepBrush}" Foreground="{StaticResource HmiDangerBrush}"
+                                    BorderThickness="0" Padding="8,2" FontSize="11"/>
+                            <Button x:Name="BtnAiGenerate" Content="{res:Loc script.ai.gen}"
+                                    Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiAccentBrush}"
+                                    BorderThickness="0" Padding="8,2" FontSize="11"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- 底部：校验信息 + 操作按钮 -->
+                    <Border Grid.Row="2" CornerRadius="6" Background="{StaticResource HmiBgInputBrush}"
+                            Padding="10,8" Margin="0,6,0,0"
+                            IsVisible="False">
+                        <Grid x:Name="BottomPanel" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto">
+                            <!-- 校验状态 -->
+                            <Ellipse x:Name="ValidationDot"
+                                     Width="8" Height="8"
+                                     Fill="{StaticResource HmiTextHintBrush}"
+                                     VerticalAlignment="Center"
+                                     Margin="0,0,6,0"/>
+                            <TextBlock x:Name="TxtValidationStatus"
+                                       Grid.Column="1"
+                                       Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                                       VerticalAlignment="Center"
+                                       Text="{res:Loc script.ready}"/>
+
+                            <!-- 操作按钮 -->
+                            <Button x:Name="BtnValidate" Content="{res:Loc script.validate}"
+                                    Grid.Column="2"
+                                    Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiLinkBrush}"
+                                    BorderThickness="0" Padding="10,4" FontSize="12"
+                                    Margin="4,0"/>
+                            <Button x:Name="BtnInsertTemplate" Content="{res:Loc script.insert.tpl}"
+                                    Grid.Column="3"
+                                    Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiSuccessBrush}"
+                                    BorderThickness="0" Padding="10,4" FontSize="12"
+                                    Margin="4,0"/>
+                            <Button x:Name="BtnDebugRun" Content="{res:Loc script.debug.run}"
+                                    Grid.Column="4"
+                                    Background="{StaticResource HmiBgSelectedBrush}" Foreground="{StaticResource HmiWarningBrush}"
+                                    BorderThickness="0" Padding="10,4" FontSize="12"
+                                    Margin="4,0"/>
+                            <Button x:Name="BtnHelp" Content="{res:Loc script.lua.help}"
+                                    Grid.Column="5"
+                                    Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiAccentBrush}"
+                                    BorderThickness="0" Padding="10,4" FontSize="12"
+                                    Margin="4,0"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- I5: 调试运行输出面板 -->
+                    <Border Grid.Row="3" CornerRadius="6" Background="{StaticResource HmiBgDeepBrush}"
+                            BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                            Margin="0,6,0,0"
+                            x:Name="RunOutputPanel" IsVisible="False">
+                        <Grid RowDefinitions="Auto,*" MinHeight="140">
+                            <Grid ColumnDefinitions="*,Auto" Margin="8,6,8,4">
+                                <TextBlock Text="{res:Loc script.output}"
+                                           Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                                           VerticalAlignment="Center"/>
+                                <Button x:Name="BtnClearOutput" Grid.Column="1"
+                                        Content="{res:Loc script.clear}" Background="{StaticResource HmiBgSelectedBrush}"
+                                        Foreground="{StaticResource HmiTextPrimarySoftBrush}" BorderThickness="0"
+                                        Padding="10,2" FontSize="11"/>
+                            </Grid>
+                            <TextBox x:Name="TxtRunOutput" Grid.Row="1"
+                                     Background="Transparent" Foreground="{StaticResource HmiTextPrimarySoftBrush}"
+                                     BorderThickness="0"
+                                     FontFamily="Consolas, Courier New, monospace"
+                                     FontSize="11" TextWrapping="NoWrap"
+                                     IsReadOnly="True" AcceptsReturn="True"
+                                     Margin="8,0,8,8"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

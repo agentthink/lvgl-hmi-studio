@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:res="clr-namespace:HmiEditor.App.Resources"
+             x:Class="HmiEditor.App.Views.ResourceLibraryView">
+    <UserControl.Styles>
+        <!-- 画廊卡片样式 -->
+        <Style Selector="Border.galleryCard">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <Style Selector="Border.galleryCard:pointerover">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentBrush}"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgElevatedBrush}"/>
+        </Style>
+        <Style Selector="Border.galleryCard:selected">
+            <Setter Property="BorderBrush" Value="{StaticResource HmiAccentBrush}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Border Background="{StaticResource HmiBgPanelBrush}" Padding="8">
+        <Grid RowDefinitions="Auto,Auto,Auto,*">
+
+            <!-- 搜索框 -->
+            <TextBox x:Name="SearchBox"
+                     PlaceholderText="{res:Loc reslib.search.hint}"
+                     Background="{StaticResource HmiBgInputBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                     PlaceholderForeground="{StaticResource HmiTextHintBrush}"
+                     BorderBrush="{StaticResource HmiInputBorderBrush}" BorderThickness="1"
+                     CornerRadius="4" Padding="8,6" FontSize="13"
+                     TextChanged="OnSearchTextChanged" />
+
+            <!-- 场景筛选标签栏 -->
+            <WrapPanel Grid.Row="1" x:Name="ScenarioBar" Orientation="Horizontal" Margin="0,6,0,0" />
+
+            <!-- 类型筛选 + 资源统计 -->
+            <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="0,6,0,4">
+                <WrapPanel x:Name="TypeBar" Orientation="Horizontal" />
+                <TextBlock x:Name="CountLabel" Grid.Column="1"
+                           Foreground="{StaticResource HmiTextMutedBrush}" FontSize="11"
+                           VerticalAlignment="Center" Margin="8,0,0,0" />
+            </Grid>
+
+            <!-- 资源画廊（WrapPanel + ScrollViewer） -->
+            <ScrollViewer Grid.Row="3" HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto">
+                <WrapPanel x:Name="Gallery" />
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,13 @@
+page,block,component,signal_or_pin,net,value_or_note,status
+P1,POWER_INPUT,J1,1,VIN24_RAW,12-24V DC input,confirmed
+P1,POWER_INPUT,J1,2,GND,Power return,confirmed
+P1,POWER_INPUT,Q1,source-drain,VIN24_F,P-MOS reverse protection,select
+P1,POWER_INPUT,D1,1,VIN24_F,SMCJ24A/SMBJ24A,select
+P1,POWER_INPUT,U1,OUT,VCC5V,Wide-input buck,select
+P1,POWER_INPUT,U2,OUT,VCC3V3,3V3 rail EN_3V3,select
+P1,POWER_INPUT,U3,OUT,VCC1V8,1.8V rail,select
+P1,POWER_INPUT,U4,OUT,VDD0V9,0.9V rail EN_0V9,select
+P1,POWER_INPUT,U5,OUT,VCC1V5,1.5V DRAM rail EN_1V5,select
+P1,POWER_INPUT,TP1,1,VIN24_F,Test point,required
+P1,POWER_INPUT,TP2,1,VCC5V,Test point,required
+P1,POWER_INPUT,TP3,1,VCC3V3,Test point,required

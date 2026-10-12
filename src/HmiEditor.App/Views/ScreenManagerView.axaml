@@ -1,0 +1,193 @@
+<cw:ChromeWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:HmiEditor.App.Resources"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        xmlns:cw="using:HmiEditor.App.Controls"
+        x:Class="HmiEditor.App.Views.ScreenManagerView"
+        Title="{res:Loc win.screen.manager}"
+        Width="640"
+        Height="560"
+        MinWidth="480"
+        MinHeight="400"
+        WindowStartupLocation="CenterOwner">
+    <!-- ═══ 无边框圆角窗口外壳 ═══ -->
+    <Border CornerRadius="{StaticResource HmiWindowCornerRadius}"
+            BorderBrush="{StaticResource HmiWindowBorderBrush}"
+            BorderThickness="{StaticResource HmiWindowBorderThickness}"
+            Background="{StaticResource HmiBgWindowBrush}"
+            ClipToBounds="True">
+        <Grid RowDefinitions="36,*">
+            <!-- 标准标题栏 -->
+            <Border Grid.Row="0"
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HmiWindowTitleBgBrush}"
+                    BorderBrush="{StaticResource HmiBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    chrome:WindowDecorationProperties.ElementRole="TitleBar"
+                    PointerPressed="OnTitleBarPointerPressed">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="{res:Loc win.screen.manager}"
+                               Foreground="{StaticResource HmiTextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="16,0,8,0"
+                               TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="BtnTitleClose"
+                            Grid.Column="1"
+                            Width="40" Height="36"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="{StaticResource HmiTextSecondaryBrush}"
+                            CornerRadius="0,10,0,0"
+                            Click="OnTitleCloseClicked"
+                            chrome:WindowDecorationProperties.ElementRole="CloseButton">
+                        <Path Data="{StaticResource HmiCloseGlyph}"
+                              Width="10" Height="10"
+                              Stretch="Uniform"
+                              Stroke="{StaticResource HmiTextSecondaryBrush}"
+                              StrokeThickness="1.5"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- 原窗口内容 -->
+            <Border Grid.Row="1" Background="{StaticResource HmiBgWindowBrush}" Padding="12">
+    <Grid RowDefinitions="Auto,*,Auto,Auto,Auto,Auto,Auto,Auto">
+        <!-- 顶部：标题 + 操作按钮 -->
+        <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,0,0,12">
+            <TextBlock Text="{res:Loc screen.mgr.title}"
+                       Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="20" FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <Button x:Name="BtnAddScreen" Content="{res:Loc screen.add}"
+                    Grid.Column="1"
+                    Background="{StaticResource HmiAccentHoverBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                    BorderThickness="0" Padding="14,6"
+                    FontSize="13" Margin="0,0,8,0"/>
+            <Button x:Name="BtnSwitchScreen" Content="{res:Loc screen.switch}"
+                    Grid.Column="2"
+                    Background="{StaticResource HmiSuccessDeepBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                    BorderThickness="0" Padding="14,6"
+                    FontSize="13" />
+        </Grid>
+
+        <!-- 中间：屏幕列表 -->
+        <ListBox x:Name="ScreenList"
+                 Grid.Row="1"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 SelectionChanged="OnSelectionChanged"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0,2"/>
+                    <Setter Property="Background" Value="{StaticResource HmiBgPanelBrush}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource HmiBorderBrush}"/>
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+                <Style Selector="ListBoxItem:selected">
+                    <Setter Property="Background" Value="{StaticResource HmiBgSelectedBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource HmiAccentHoverBrush}"/>
+                </Style>
+            </ListBox.Styles>
+        </ListBox>
+
+        <!-- 空状态提示 -->
+        <TextBlock x:Name="EmptyHint"
+                   Text="{res:Loc screen.empty.hint}"
+                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="14"
+                   Grid.Row="1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   IsHitTestVisible="False"/>
+
+        <!-- 屏幕属性：宽/高 -->
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto,*,Auto" ColumnSpacing="8" Margin="0,6,0,0">
+            <TextBlock Text="{res:Loc screen.size}"
+                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                       VerticalAlignment="Center"/>
+            <NumericUpDown x:Name="NumScreenWidth" Grid.Column="1"
+                           Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                           BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"
+                           Minimum="1" Maximum="4096" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="×" Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                       VerticalAlignment="Center" Grid.Column="2"/>
+            <NumericUpDown x:Name="NumScreenHeight" Grid.Column="3"
+                           Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                           BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"
+                           Minimum="1" Maximum="4096" HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <!-- I9: 自适应模式设置 -->
+        <Grid Grid.Row="3" ColumnDefinitions="Auto,*" ColumnSpacing="8" Margin="0,6,0,0">
+            <TextBlock Text="{res:Loc screen.adaptive}"
+                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                       VerticalAlignment="Center"/>
+            <ComboBox x:Name="CboAdaptiveMode" Grid.Column="1"
+                      Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                      BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"
+                      HorizontalAlignment="Stretch">
+                <ComboBoxItem Content="{res:Loc screen.adaptive.none}" Tag="None"/>
+                <ComboBoxItem Content="{res:Loc screen.adaptive.fit}" Tag="Fit"/>
+                <ComboBoxItem Content="{res:Loc screen.adaptive.fill}" Tag="Fill"/>
+            </ComboBox>
+        </Grid>
+
+        <!-- 公共页面：多用户共享查看 + 实时同步 + 权限控制 -->
+        <Grid Grid.Row="4" ColumnDefinitions="Auto,*" ColumnSpacing="8" Margin="0,6,0,0">
+            <TextBlock Text="{res:Loc screen.public}"
+                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                       VerticalAlignment="Center"/>
+            <CheckBox x:Name="ChkPublic" Grid.Column="1"
+                      Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                      IsCheckedChanged="OnPublicChanged" HorizontalAlignment="Left">
+                <TextBlock Text="{res:Loc screen.public.hint}"
+                           TextWrapping="Wrap"
+                           Foreground="{StaticResource HmiTextPrimaryBrush}" FontSize="12"
+                           VerticalAlignment="Center"/>
+            </CheckBox>
+        </Grid>
+        <Grid Grid.Row="5" ColumnDefinitions="Auto,*" ColumnSpacing="8" Margin="0,10,0,0">
+            <TextBlock Text="{res:Loc screen.public.access}"
+                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                       VerticalAlignment="Center"/>
+            <ComboBox x:Name="CboPublicAccess" Grid.Column="1"
+                      Background="{StaticResource HmiBgPanelBrush}" Foreground="{StaticResource HmiTextPrimaryBrush}"
+                      BorderBrush="{StaticResource HmiInputBorderBrush}" FontSize="12"
+                      HorizontalAlignment="Stretch" IsEnabled="False"
+                      PlaceholderText=""
+                      SelectionChanged="OnPublicChanged">
+                <ComboBoxItem Content="{res:Loc enum.public.access.public}" Tag="Public"/>
+                <ComboBoxItem Content="{res:Loc enum.public.access.viewers}" Tag="Viewers"/>
+                <ComboBoxItem Content="{res:Loc enum.public.access.admin}" Tag="AdminOnly"/>
+            </ComboBox>
+        </Grid>
+
+        <!-- 引用图层：公共页面作为本屏幕的背景图层（被引用的公共页面不再作为独立屏幕切换） -->
+        <Grid Grid.Row="6" ColumnDefinitions="Auto,*" ColumnSpacing="8" Margin="0,10,0,0">
+            <TextBlock Text="{res:Loc screen.layer.refs}"
+                       Foreground="{StaticResource HmiTextSecondaryBrush}" FontSize="12"
+                       VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="1" x:Name="LayerRefsPanel" Orientation="Vertical" Spacing="2"
+                        HorizontalAlignment="Stretch">
+                <TextBlock x:Name="LayerRefsHint"
+                           Text="{res:Loc screen.layer.refs.hint}"
+                           Foreground="{StaticResource HmiTextHintBrush}" FontSize="11"
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- 底部状态 -->
+        <TextBlock x:Name="StatusText"
+                   Grid.Row="7"
+                   Foreground="{StaticResource HmiTextHintBrush}" FontSize="12"
+                   Margin="0,8,0,0"/>
+        </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</cw:ChromeWindow>

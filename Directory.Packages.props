@@ -1,0 +1,50 @@
+<Project>
+  <!-- ============================================================
+       中央包版本管理（CPM / Central Package Management）
+
+       所有 NuGet 依赖的版本**只在本文件声明一次**，各 .csproj 只写
+       <PackageReference Include="X" />，不再带 Version 属性。
+       MSBuild 会在 src/、tests/、tools/ 下逐级向上查找到本文件。
+
+       改一个包版本 = 改这里一行（此前 Microsoft.NET.Test.Sdk 17.12.0
+       散落在多个测试项目里，Avalonia 系列散落在 App 与 UiTests 中）。
+
+       注意：启用后若某个 csproj 仍带 Version=，构建会报 NU1008，属预期保护。
+       本文件中的 PackageVersion 必须覆盖全仓所有 PackageReference。
+       ============================================================ -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup Label="UI 框架（Avalonia / Dock / FluentAvalonia）">
+    <PackageVersion Include="Avalonia" Version="12.1.0" />
+    <PackageVersion Include="Avalonia.Desktop" Version="12.1.0" />
+    <PackageVersion Include="Avalonia.Themes.Fluent" Version="12.1.0" />
+    <PackageVersion Include="Avalonia.Fonts.Inter" Version="12.1.0" />
+    <PackageVersion Include="Avalonia.Headless" Version="12.1.0" />
+    <PackageVersion Include="Dock.Avalonia" Version="12.1.0" />
+    <PackageVersion Include="Dock.Avalonia.Themes.Fluent" Version="12.1.0" />
+    <PackageVersion Include="Dock.Model" Version="12.1.0" />
+    <PackageVersion Include="Dock.Model.Mvvm" Version="12.1.0" />
+    <PackageVersion Include="SkiaSharp" Version="3.119.4" />
+    <PackageVersion Include="FluentAvaloniaUI" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup Label="测试">
+    <!-- 覆盖率收集器：PrivateAssets=all 只在这里声明一次，CPM 会把它应用到
+         所有引用它的测试项目（各 csproj 侧因此可以写成单行）。 -->
+    <PackageVersion Include="coverlet.collector" Version="10.0.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageVersion>
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup Label="运行时与其他">
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
+    <PackageVersion Include="System.IO.Ports" Version="9.0.0" />
+    <PackageVersion Include="MoonSharp" Version="2.0.0" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+page,block,component,signal_or_pin,net,value_or_note,status
+P8,COMM,U9,TX/RX,UART3_TXD/UART3_RXD,Isolated RS485,required
+P8,COMM,U9,A/B,RS485_A/RS485_B,SM712 + 120R option,required
+P8,COMM,U10,TX/RX,UART2_TXD/UART2_RXD,RS232 DB9,verify mux
+P8,COMM,U11,RMII,RMII_TXD0/TXD1/TXEN/RXD0/RXD1/CRS_DV,IP101GRI/RTL8201F TBD,select
+P8,COMM,J9,magnetics,ETH_TXP/TXN/RXP/RXN,RJ45 with magnetics,required
